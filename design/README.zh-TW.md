@@ -1,6 +1,6 @@
 # 教學內容設計區
 
-版本：0.2.0  
+版本：0.3.0  
 狀態：規劃中  
 對應英文版本：[Instructional Design Workspace](README.en.md)
 
@@ -13,7 +13,7 @@
 1. 教育願景與問題。
 2. 利害關係人及其需求。
 3. 程式語言的完整知識空間與概念依賴。
-4. 學生完成課程後應具備的能力。
+4. 學生完成課程後應具備的能力及成熟度。
 5. 可觀察、可驗收的學習證據。
 6. 前導課程與正式課程的範圍邊界。
 7. 中文班與英文班的交付節奏。
@@ -45,6 +45,7 @@
 | 01 | [課程產品願景](01-product-vision.zh-TW.md) | 定義教育問題、產品定位、成功條件與前導／正式課程關係。 |
 | 02 | [教學需求地圖](02-requirements-map.zh-TW.md) | 定義教育需求、能力需求、橫向需求與驗收方向。 |
 | 03 | [程式語言知識圖](03-programming-language-knowledge-graph.zh-TW.md) | 定義程式轉換與執行、資料、控制、函數、記憶體、資料組織、驗證及 AI 的概念關係。 |
+| 04 | [程式設計能力地圖](04-competency-map.zh-TW.md) | 將知識節點轉換為學生可展現的能力、成熟度、先備能力與學習證據。 |
 
 英文導覽：[Instructional Design Workspace](README.en.md)
 
@@ -59,13 +60,14 @@ design/
 ├── 02-requirements-map.zh-TW.md
 ├── 02-requirements-map.en.md
 ├── 03-programming-language-knowledge-graph.zh-TW.md
-└── 03-programming-language-knowledge-graph.en.md
+├── 03-programming-language-knowledge-graph.en.md
+├── 04-competency-map.zh-TW.md
+└── 04-competency-map.en.md
 ```
 
 後續預計增加：
 
 ```text
-04-competency-map.*
 05-scope-boundary.*
 06-acceptance-model.*
 07-delivery-map.*
@@ -107,6 +109,7 @@ design/
 - 每個概念均應依「需求 → 設計目的 → 語言邏輯 → 語法 → 實作 → 驗證」展開。
 - 程式設計以資料與狀態、流程與控制、函數與抽象為基本支柱。
 - 程式轉換與執行、記憶體模型、資料組織、測試除錯與 AI 素養為必要知識面向。
+- 能力成熟度依學生可觀察行為區分為辨識、解釋、追蹤、實作、診斷與遷移。
 - 英文前導班共 5 堂，每堂 2 小時，共 10 小時。
 - 中文前導班共 4 堂，每堂 3 小時，共 12 小時。
 - 正式課程共 16 週，每週 3 小時，共 48 小時。
