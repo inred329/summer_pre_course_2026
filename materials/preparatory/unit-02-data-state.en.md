@@ -1,14 +1,16 @@
 # Preparatory Unit 2: Data, Types, and Program State
 
-Version: 0.1.0  
-Status: Teaching draft  
+Version: 0.2.0  
+Status: Official teaching material  
 Last updated: 2026-08-03  
-Major change summary: Established complete material for values, types, variables, expressions, input/output, state tracing, and requirement modification.  
+Major change summary: Removed submission, per-assignment passing, remediation, and repeated micro-oral wording; reframed activities as independent practice, formative classroom discussion, and preparation for the single final oral examination.  
 Corresponding Chinese version: [前導單元 2：資料、型別與程式狀態](unit-02-data-state.zh-TW.md)
 
 ## Document Purpose
 
 For direct use by instructors, teaching assistants, and students. The Chinese preparatory track uses it across the latter part of Session 1 and Session 2; the English preparatory track uses it in Session 2.
+
+Homework and learning records in this unit are not submitted, graded, or individually marked. Students retain their state traces, programs, tests, errors, and AI-use notes for the next classroom discussion and final one-on-one oral-examination preparation.
 
 ## Basic Information
 
@@ -16,7 +18,8 @@ For direct use by instructors, teaching assistants, and students. The Chinese pr
 - Competency IDs: `PC-D01` through `PC-D05`, `PC-V01`, `PC-V03`
 - Target maturity: L2–L4
 - Scope state: `SB-C`
-- Acceptance tasks: `AT-02`, `AT-03`, `AT-05`, `AT-06`, `AT-08`, `AT-12`
+- Formative task references: `AT-02`, `AT-03`, `AT-05`, `AT-06`, `AT-08`
+- Final oral reference: `AT-12`
 - Risk IDs: `R-02`, `R-05`, `R-09`
 - Estimated time: Chinese 150–180 minutes; English 120 minutes
 
@@ -36,13 +39,15 @@ Students can:
 - Write expected output before execution.
 - Distinguish compilation problems from incorrect results.
 
-Students who lack these capabilities complete Unit 1 remediation rather than copying a complete program.
+When these capabilities are still unstable, use Unit 1 fallback activities and formative recovery practice rather than copying a complete program.
 
 ## 3. Tools and Environment
 
 - GCC or Clang with C17 support.
 - Compile with: `gcc -std=c17 -Wall -Wextra -pedantic score.c -o score`
-- Fallback: an instructor-tested online C compiler.
+- Fallback: an instructor-tested online compiler, paper tracing, or instructor equipment.
+
+Tool failure is not non-participation or proof of missing capability.
 
 ## 4. Information Priority
 
@@ -59,6 +64,8 @@ Students who lack these capabilities complete Unit 1 remediation rather than cop
 - One input–process–output program.
 - One diagnosis of a type or expression error.
 - One requirement modification with regression testing.
+
+Students retain these records themselves; no submission is required.
 
 ### May Be Deferred
 
@@ -119,7 +126,9 @@ Expected output:
 | 2 | `score = score + 5;` | 80 | 85 | 85 |
 | 3 | `printf(...)` | 85 | 85 | 85 |
 
-Prediction question: What roles do the `score` on the right and the `score` on the left play?
+Formative classroom prompt: What roles do the `score` on the right and the `score` on the left play?
+
+This is a classroom discussion prompt, not a separate oral examination.
 
 ## 10. Input–Process–Output Example
 
@@ -164,14 +173,16 @@ Using `%d` for a `double` or `%lf` to read an `int` is incorrect. Verify with co
 
 ## 12. Guided Practice
 
-Build a “temperature plus one” program: read an integer temperature, add one, and print it. Submit:
+Build a “temperature plus one” program: read an integer temperature, add one, and print it.
+
+Students retain:
 
 1. An input–process–output table.
 2. Two expected results.
 3. The program and actual results.
 4. One sentence explaining the state change.
 
-## 13. Independent Practice
+## 13. Independent Homework
 
 ### Score Adjuster
 
@@ -180,9 +191,9 @@ Read an original score and bonus, then print the adjusted score.
 - Input: two integers.
 - Output: `Final score: <value>`.
 - Constraint: use meaningful variable names and define three tests first.
-- Required evidence: state table, program, test table, and oral explanation.
+- Student-retained records: state table, program, test table, and explanation.
 
-Alternative reasonable solutions are permitted.
+Alternative reasonable solutions are permitted. Homework is not submitted or individually graded; the next class may discuss errors, tests, or alternative solutions from this work.
 
 ## 14. Requirement Modification
 
@@ -197,34 +208,51 @@ Add this rule: “The adjusted score may not exceed 100.” Students must:
 ## 15. AI Use Rules
 
 Permitted: after completing a first version, ask AI for potentially missing tests or for help interpreting a compiler warning.  
-Prohibited: request a complete answer before producing a state table and initial approach; submit code that cannot be explained.  
+Prohibited: request a complete answer before producing a state table and initial approach; use code that cannot be explained.  
 Must retain: pre-AI approach, self-created tests, suggestion summary, verification method, and reason for accepting or rejecting it.
 
-## 16. Acceptance and Remediation
+## 16. Self-Check
 
-- Understanding evidence: `EV-TR + EV-EX`.
-- Action evidence: `EV-IM + EV-TE + EV-MO`.
-- Pass: state tracing matches the program, type selection can be explained, and the requirement change is completed.
-- Remediation: trace a new set of values live, or correct one type error and explain why.
+- I can distinguish values, types, variable names, and current values.
+- I can trace state before and after assignment.
+- I can explain why `5 / 2` differs from `5.0 / 2`.
+- I can update tests after a requirement change.
+- I can verify rather than simply trust an AI suggestion.
 
-Micro-oral questions:
+This self-check is not an assignment grade.
 
-1. What is the value of `score` before and after assignment?
-2. Why are `5 / 2` and `5.0 / 2` different?
-3. Which new test matters most after the requirement change?
+## 17. Classroom Participation Evidence
 
-## 17. Instructor and TA Guidance
+Participation may include:
+
+- Explaining a state change.
+- Proposing a test or boundary case.
+- Sharing an integer-division or type error.
+- Operating the program, writing a trace, or submitting an anonymous question.
+- Revising one's own or a peer's reasoning.
+
+Attendance or speaking frequency alone is not participation evidence.
+
+## 18. Final Oral Preparation
+
+Students should be prepared to explain, trace, modify, or diagnose an equivalent example during the one final one-on-one oral examination. This unit does not fix the oral examination's detailed format, timing, or question-selection method.
+
+## 19. Instructor and TA Guidance
 
 - Require hand calculation before execution.
 - Do not expand `scanf` address syntax into a pointer lesson.
 - When time is short, retain state tracing, the type error, and requirement modification; reduce exercise count.
-- Successful output alone does not establish L4.
+- Successful output alone does not establish capability.
+- Use formative prompts instead of per-assignment grading or repeated micro-orals.
 
-## 18. Unit Summary
+## 20. Unit Summary
 
 This unit establishes the model that program execution changes state. The next unit uses conditions and repetition to decide how state changes.
 
 ## Navigation
 
+- [Assessment precedence note](ASSESSMENT-NOTE.en.md)
+- [Instructor implementation guide](../instructor/session-guides.en.md)
+- [C17 examples and defect cases](../../examples/README.md)
 - [Materials Index](../README.en.md)
 - [繁體中文版](unit-02-data-state.zh-TW.md)
