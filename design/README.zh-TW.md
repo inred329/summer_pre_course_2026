@@ -1,6 +1,6 @@
 # 教學內容設計區
 
-版本：0.6.0  
+版本：0.7.0  
 狀態：規劃中  
 對應英文版本：[Instructional Design Workspace](README.en.md)
 
@@ -17,8 +17,8 @@
 5. 學生應具備的能力與成熟度。
 6. 前導課程與正式課程的範圍邊界。
 7. 可觀察、可驗收的學習證據。
-8. 中文班與英文班的交付節奏。
-9. 教材、活動、作業與評量。
+8. 中文班、英文班與正式課程的交付節奏。
+9. 風險、追蹤關係與後續教材設計。
 
 ## 憲法遵循
 
@@ -50,6 +50,7 @@
 | 05 | [程式設計能力地圖](05-competency-map.zh-TW.md) | 將概念與依賴轉換為學生可展現的能力、成熟度與證據。 |
 | 06 | [課程範圍邊界](06-scope-boundary.zh-TW.md) | 定義前導與正式課程的核心交付、鋪墊、延後與排除範圍。 |
 | 07 | [能力驗收模型](07-acceptance-model.zh-TW.md) | 定義成熟度最低證據、標準驗收任務、AI 邊界與通過判準。 |
+| 08 | [課程交付地圖](08-delivery-map.zh-TW.md) | 將共同能力、成熟度與驗收證據安排到兩個前導班及 16 週正式課程。 |
 
 英文導覽：[Instructional Design Workspace](README.en.md)
 
@@ -72,13 +73,14 @@ design/
 ├── 06-scope-boundary.zh-TW.md
 ├── 06-scope-boundary.en.md
 ├── 07-acceptance-model.zh-TW.md
-└── 07-acceptance-model.en.md
+├── 07-acceptance-model.en.md
+├── 08-delivery-map.zh-TW.md
+└── 08-delivery-map.en.md
 ```
 
 後續預計增加：
 
 ```text
-08-delivery-map.*
 09-risk-register.*
 10-traceability-matrix.*
 ```
@@ -105,10 +107,11 @@ design/
 - 核心能力驗收至少需要理解型與行動型兩種互補證據。
 - 英文前導班共 10 小時；中文前導班共 12 小時；正式課程共 48 小時。
 - 兩個前導班的共同核心學習成果與驗收標準一致。
+- 中文班額外 2 小時用於更多追蹤、補救、診斷與驗收，不提高核心標準。
 
 ## 下一步
 
-建立 `08-delivery-map`，把共同能力、成熟度與最低證據安排成中文前導班、英文前導班與正式課程的不同交付節奏。
+建立 `09-risk-register`，識別課程節奏、認知負荷、雙語一致性、AI 依賴、驗收執行及文件維護風險。
 
 ## 導覽
 
