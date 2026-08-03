@@ -1,52 +1,54 @@
 # Instructional Design Workspace
 
-Version: 0.4.0  
+Version: 0.5.0  
 Status: In planning  
 Corresponding Chinese version: [教學內容設計區](README.zh-TW.md)
 
 ## Document Purpose
 
-This directory is used to design the 2026 Summer C Programming Preparatory Course and the subsequent 16-week formal course using a requirements-engineering approach similar to software project design.
+This directory designs the 2026 Summer C Programming Preparatory Course and the connected 16-week formal course through a requirements-engineering and system-design approach.
 
-The course is not designed by starting with weekly schedules, slides, or textbook chapters. Instead, the design process defines the following in order:
+The design sequence is:
 
-1. The educational vision and problem to solve.
-2. Stakeholders and their needs.
-3. The complete programming-language knowledge space and concept dependencies.
-4. The capabilities and maturity levels students should possess at course completion.
-5. Scope boundaries between the preparatory and formal courses.
-6. Observable and assessable evidence of learning.
-7. Delivery pacing for the Chinese-taught and English-taught classes.
-8. Materials, activities, assignments, and assessments.
+1. Educational vision and problem.
+2. Stakeholders and requirements.
+3. Core concepts and relationships in the programming domain.
+4. Knowledge dependencies needed to understand those concepts.
+5. Student capabilities and maturity levels.
+6. Scope boundaries between preparatory and formal courses.
+7. Observable and assessable evidence.
+8. Delivery pacing for the Chinese-taught and English-taught classes.
+9. Materials, activities, assignments, and assessments.
 
 ## Constitutional Compliance
 
-Before drafting, revising, or translating any official document in this directory, the following must be reviewed:
+Before drafting, revising, or translating any official document in this directory, review:
 
 - [Course Constitution (Traditional Chinese)](../CONSTITUTION.zh-TW.md)
 - [Course Constitution (English)](../CONSTITUTION.en.md)
 
-Every document must satisfy at least the following principles:
+Every document must at least:
 
-- Promote genuine student understanding rather than mere output completion.
-- Create Chinese and English versions as synchronized, substantively equivalent pairs.
-- Give every capability clear prerequisites and acceptance criteria.
+- Promote genuine understanding rather than output completion.
+- Be created as a synchronized, substantively equivalent bilingual pair.
+- Give capabilities prerequisites and acceptance methods.
 - Control cognitive load for beginners.
-- Treat reading, modification, testing, debugging, and explanation as equally important as writing from scratch.
-- Provide appropriate visuals for concepts and relationships that benefit from visualization.
-- Use AI only to support learning, never to replace core responsibility for thinking.
-- Ensure that the preparatory and formal courses form a continuous progression rather than duplicate each other.
-- Make every official document reachable from the root README through a direct or indirect navigation path.
+- Treat reading, modification, testing, debugging, explanation, and writing from scratch as equally important.
+- Provide visuals for concepts and relationships that benefit from visualization.
+- Use AI to support learning rather than replace core thinking.
+- Make preparatory and formal courses a continuous capability progression.
+- Be reachable from the root README through direct or indirect navigation.
 
 ## Official Design Documents
 
 | Stage | Document | Purpose |
 |---|---|---|
-| 01 | [Course Product Vision](01-product-vision.en.md) | Defines the educational problem, product positioning, success conditions, and relationship between the preparatory and formal courses. |
-| 02 | [Instructional Requirements Map](02-requirements-map.en.md) | Defines educational, capability, cross-cutting, and acceptance-oriented requirements. |
-| 03 | [Programming Language Knowledge Graph](03-programming-language-knowledge-graph.en.md) | Defines the relationships among translation and execution, data, control, functions, memory, data organization, verification, and AI. |
-| 04 | [Programming Competency Map](04-competency-map.en.md) | Converts knowledge nodes into observable student capabilities, maturity levels, prerequisites, and evidence. |
-| 05 | [Course Scope Boundary](05-scope-boundary.en.md) | Defines core delivery, foundation-only, deferred implementation, later deepening, and out-of-scope content for the preparatory and formal courses. |
+| 01 | [Course Product Vision](01-product-vision.en.md) | Defines the educational problem, product position, and success conditions. |
+| 02 | [Instructional Requirements Map](02-requirements-map.en.md) | Defines educational, capability, and cross-cutting requirements. |
+| 03 | [Programming Domain Model](03-programming-domain-model.en.md) | Defines the concepts that exist in the programming domain and their relationships. |
+| 04 | [Programming Language Knowledge Dependency Graph](04-programming-language-knowledge-graph.en.md) | Defines major prerequisite knowledge and dependencies for understanding core concepts. |
+| 05 | [Programming Competency Map](05-competency-map.en.md) | Converts concepts and dependencies into observable capabilities, maturity levels, and evidence. |
+| 06 | [Course Scope Boundary](06-scope-boundary.en.md) | Defines core delivery, foundations, deferrals, and exclusions for preparatory and formal courses. |
 
 Chinese navigation: [教學內容設計區](README.zh-TW.md)
 
@@ -60,63 +62,50 @@ design/
 ├── 01-product-vision.en.md
 ├── 02-requirements-map.zh-TW.md
 ├── 02-requirements-map.en.md
-├── 03-programming-language-knowledge-graph.zh-TW.md
-├── 03-programming-language-knowledge-graph.en.md
-├── 04-competency-map.zh-TW.md
-├── 04-competency-map.en.md
-├── 05-scope-boundary.zh-TW.md
-└── 05-scope-boundary.en.md
+├── 03-programming-domain-model.zh-TW.md
+├── 03-programming-domain-model.en.md
+├── 04-programming-language-knowledge-graph.zh-TW.md
+├── 04-programming-language-knowledge-graph.en.md
+├── 05-competency-map.zh-TW.md
+├── 05-competency-map.en.md
+├── 06-scope-boundary.zh-TW.md
+└── 06-scope-boundary.en.md
 ```
 
 Planned additions:
 
 ```text
-06-acceptance-model.*
-07-delivery-map.*
-08-risk-register.*
-09-traceability-matrix.*
+07-acceptance-model.*
+08-delivery-map.*
+09-risk-register.*
+10-traceability-matrix.*
 ```
 
-## Project Analogy
+## Division of the Three Core Models
 
-| Software Project | Course Design |
+| Document | Question answered |
 |---|---|
-| Product vision | Educational vision |
-| User needs | Student and instructor needs |
-| Functional requirements | Learning outcomes and capability requirements |
-| Non-functional requirements | Fairness, bilingual quality, maintainability, and cognitive load |
-| Domain model | Programming-language knowledge graph and language logic |
-| Architecture and dependencies | Competency map and prerequisites |
-| MVP | Minimum viable preparation and its scope boundary |
-| Production release | The 16-week formal C programming course |
-| Acceptance criteria | Observable evidence of learning |
-| Test cases | Exercises, oral explanations, modification tasks, and assessments |
-| Defects | Misconceptions and learning breakdowns |
-| Traceability matrix | Alignment among goals, knowledge, capabilities, scope, materials, and assessments |
+| Domain model | What concepts exist in programming, and how are they related? |
+| Knowledge dependency graph | What usually must be understood before another concept? |
+| Competency map | What must students be able to do, and to what maturity? |
 
-## Working Sequence
-
-1. Establish the product vision and definition of success.
-2. Build the requirements map.
-3. Build the programming language knowledge graph.
-4. Transform knowledge nodes into an observable and assessable competency map.
-5. Define scope boundaries for preparatory, formal, and deferred content.
-6. Build the competency acceptance model.
-7. Assemble shared capabilities into different delivery schedules for the Chinese-taught and English-taught classes.
-8. Create lesson plans and teaching materials only after the above steps are complete.
+These must not be conflated: a domain relationship is not a learning sequence, a knowledge dependency is not a weekly schedule, and capability maturity is not the same as a topic having been introduced.
 
 ## Current Core Assumptions
 
-- C is the instructional language, while programming capability and the logic of C are the core educational goals.
-- Each concept should be developed through Need → Design Purpose → Language Logic → Syntax → Implementation → Verification.
-- Programming is organized around data and state, flow and control, and functions and abstraction.
-- Program translation and execution, the memory model, data organization, testing and debugging, and AI literacy are necessary knowledge dimensions.
-- Competency maturity is classified by observable behavior as recognize, explain, trace, implement, diagnose, and transfer.
+- C is the instructional language, while programming capability and the logic of C are the core goals.
+- Each concept develops through Need → Design Purpose → Language Logic → Syntax → Implementation → Verification.
+- Data and state, flow and control, and functions and abstraction are foundational pillars.
+- The toolchain, memory model, data organization, testing and debugging, and AI literacy are necessary dimensions.
+- Data organization currently remains at the abstraction level of sequences, records, indexing, and operations; advanced data structures are not presumed to be course core content.
+- Competency maturity is recognize, explain, trace, implement, diagnose, and transfer.
 - Scope states are core delivery, foundation only, deepen later, implement later, and out of scope.
-- The English preparatory class has five 2-hour sessions, totaling 10 hours.
-- The Chinese preparatory class has four 3-hour sessions, totaling 12 hours.
-- The formal course has 16 weeks of 3-hour sessions, totaling 48 hours.
-- Both preparatory classes must share the same core learning outcomes; the additional two hours must not create a difference in core capability expectations.
+- The English preparatory class totals 10 hours; the Chinese preparatory class totals 12 hours; the formal course totals 48 hours.
+- Both preparatory tracks share the same core outcomes and acceptance standards.
+
+## Next Step
+
+Before creating `07-acceptance-model`, confirm that the refactored domain, dependency, competency, and scope documents are mutually consistent.
 
 ## Navigation
 
