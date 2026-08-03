@@ -1,6 +1,6 @@
 # Constitution of the 2026 Summer Preparatory Course
 
-Version: 1.2.0  
+Version: 1.3.0  
 Status: Official baseline document  
 Scope: All course plans, teaching materials, handouts, slides, code examples, exercises, assignments, assessments, teacher documents, student documents, and maintenance documents in this repository
 
@@ -206,7 +206,30 @@ Teaching materials should ordinarily include:
 
 Different document types may adapt this structure to their purpose, but equivalent documents shall not change their basic organization arbitrarily.
 
-## Article 15 — Code and Explanatory Text Must Correspond
+## Article 15 — Pedagogical Writing Sequence and Student-Reading Principle
+
+Teaching materials are not merely handouts for one class meeting. They must function as long-term learning resources that students can read independently, review, consult, and use to rebuild understanding.
+
+Where appropriate, teaching materials should follow this instructional sequence:
+
+> Problem or need → student prediction → visual model → core concept → syntax and code → execution trace → error diagnosis → verification and modification → summary
+
+Pedagogical writing must follow these principles:
+
+1. Begin with a problem, need, or observable phenomenon rather than using a syntax label or definition list as the sole entry point.
+2. Establish the concept and mental model before introducing syntax; syntax must be presented as a tool for solving a problem, not isolated knowledge to memorize.
+3. Where appropriate, require students to predict a path, state, output, or error before revealing execution results.
+4. Every important concept must include at least one correct case, one representative incorrect case, and a verification process that can be reproduced, diagnosed, corrected, and checked again.
+5. Do not provide only the correct answer; explain how to judge, how to detect a mismatch, and what evidence supports a correction.
+6. AI-generated explanations, programs, or suggestions must be treated as claims requiring verification. Materials must guide students to question, test, modify, or reject them rather than treat AI output as authoritative.
+7. New concepts must connect to previously learned knowledge and explain their necessity and position in the larger programming knowledge map.
+8. Examples must increase in complexity gradually and must not introduce several unestablished concepts in one example without clear separation.
+9. Material length must be determined by what understanding requires. Necessary explanation must not be removed merely to reduce page count, fit slides, or match one class period.
+10. Materials must preserve space for student thinking; questions, predictions, and exercises must not immediately disclose complete answers in a form that cannot reasonably be skipped.
+
+When a topic cannot use the full sequence, authors may adapt it, but must preserve four core elements: a motivating problem, concept formation, practical observation, and student verification.
+
+## Article 16 — Code and Explanatory Text Must Correspond
 
 Code in official documents must:
 
@@ -218,7 +241,7 @@ Code in official documents must:
 
 The Chinese and English versions should ordinarily use identical code, data, and test cases. Only explanatory text, interface text, or comments may be translated where needed.
 
-## Article 16 — Visual-First Teaching Principle
+## Article 17 — Visual-First Teaching Principle
 
 To help students form accurate mental models, official documents must provide an appropriate visual representation whenever diagrams, flowcharts, structural diagrams, memory diagrams, sequence diagrams, relationship diagrams, concept maps, state diagrams, or other visual forms would materially improve understanding. Such content must not be presented only in prose.
 
@@ -237,7 +260,7 @@ Where appropriate, teaching materials should follow this comprehension path:
 
 > Visual model → verbal concept → code implementation → execution observation → student verification
 
-## Article 17 — Cognitive Load Must Be Controlled
+## Article 18 — Cognitive Load Must Be Controlled
 
 Documents shall not require beginners to process too many new concepts at once.
 
@@ -252,382 +275,475 @@ They should use:
 
 Visual attractiveness shall not take precedence over readability and understanding.
 
-## Article 18 — Information Priority Levels
+## Article 19 — Information Priority Levels
 
 Documents must clearly distinguish:
 
 - Must understand
 - Must complete
-- Recommended
+- Recommended practice
 - Extension exploration
-- May be skipped for now
+- May be deferred
 
-Not all information shall be presented as equally important.
-
-## Article 19 — Accuracy and Source Responsibility
-
-Technical facts, tool instructions, version information, and rules in official documents must be verified.
-
-Content likely to change over time must state its version, date, or applicable environment. External material must be traceable to an adequate source.
-
-AI-generated content shall not be presumed correct merely because it is fluent.
-
-## Article 20 — Version and Change Traceability
-
-Important documents shall preserve:
-
-- Version number or status
-- Last updated date
-- Summary of major changes
-- The corresponding version in the other language
-
-Major changes should retain their decision history through Git commits, Issues, or Pull Requests.
+Not all information should appear equally important.
 
 ---
 
-# Part III — Curriculum Content and Teaching Standards
+# Part III — Course and Material Design Principles
 
-## Article 21 — Understanding Before Completion
+## Article 20 — Competency Orientation
 
-Successful execution, passing automated tests, or producing a polished artifact does not by itself demonstrate understanding.
+Course content must correspond to observable capabilities rather than only to chapter titles or syntax lists.
 
-The course must enable students to explain:
+Every major unit should enable students to:
 
-- What problem is being solved
-- What the data means
-- How the solution is decomposed
-- How the program executes
-- Why the result is reasonable
-- How an error is located
-- How the solution changes when requirements change
-
-## Article 22 — Students Retain Responsibility for Thinking
-
-Teachers, classmates, search engines, and AI may assist, but they shall not replace students’ understanding of and responsibility for their own work.
-
-Code that a student cannot explain, modify, test, or verify shall not be treated as a completed learning outcome.
-
-## Article 23 — Think First, Implement Second, Verify Last
-
-Programming activities should ordinarily follow this sequence:
-
-1. Understand the problem.
-2. Identify input and output.
-3. Decompose the problem.
-4. Express the solution in natural language, a table, a flowchart, or pseudocode.
-5. Build the smallest executable version.
-6. Create test data.
-7. Compare expected and actual results.
-8. Correct errors.
-9. Improve program structure.
-10. Explain and reflect.
-
-“Obtain a complete answer first and infer the reasoning afterward” shall not be designed as the main learning process.
-
-## Article 24 — Progressive Learning
-
-New concepts must build on abilities that can reasonably be confirmed.
-
-Teaching shall:
-
-- Introduce a limited number of new concepts at a time
-- Begin with minimal examples
-- Teach individual concepts before integration
-- Ask students to predict before execution
-- Begin with modification before full construction from scratch
-- Address normal cases before boundaries and exceptions
-- Establish correctness before quality improvement
-
-Frameworks, abstraction layers, or libraries that students cannot yet understand shall not be introduced merely to increase project scale.
-
-## Article 25 — Examples Must Serve Concepts
-
-Every example must have a clear instructional purpose and identify:
-
-- The concept to observe
-- What is newly introduced
-- Common misunderstandings
-- Modifications that can verify understanding
-- How it can be extended into practice
-
-Entertainment or visual effects shall not obscure the core concept.
-
-## Article 26 — Reading, Modification, and Debugging Are Equal Skills
-
-The course shall not train students only to write programs from a blank file.
-
-It must provide sufficient opportunities to:
-
-- Read existing programs
-- Predict output
-- Trace variables
-- Complete missing code
-- Locate errors
+- Explain a concept
+- Predict behavior
+- Implement functionality
+- Test results
+- Diagnose problems
 - Modify requirements
-- Compare solutions
-- Design tests
-- Explain trade-offs
+- Compare approaches
+- Explain verification methods
 
-## Article 27 — Errors Are Official Teaching Materials
+## Article 21 — Concepts Before Syntax
 
-Syntax errors, type errors, runtime errors, logic errors, boundary errors, and incorrect AI responses may all be used as formal teaching materials.
+Teaching materials must first answer:
 
-Students must learn to:
+1. Why is this concept needed?
+2. What problem does it solve?
+3. How does it affect program state or control flow?
+4. How can students verify that their understanding is correct?
 
-1. Read error messages.
-2. Reproduce a problem.
-3. Narrow its scope.
-4. Form a hypothesis about its cause.
-5. Test the hypothesis.
-6. Explain the reason for the correction.
+Only after this understanding is established should syntax be introduced.
 
-## Article 28 — Testing and Verification Are Core Skills
+## Article 22 — Knowledge Dependencies Must Be Explicit
 
-Students shall not accept an answer merely because it came from a teacher, textbook, website, or AI system.
+A new concept must not depend on knowledge that has not been taught, explained, or explicitly identified as prerequisite knowledge.
 
-The course must require students to:
+Every unit should identify:
 
-- Calculate simple cases manually
-- Create normal cases
-- Create boundary cases
-- Create exceptional cases where appropriate
-- Compare expected and actual results
-- Check assumptions about input
-- Explain why the current result should be trusted
+- Prerequisite concepts
+- New concepts introduced in the unit
+- Content that may be deferred
+- Its relationship to later units
 
-## Article 29 — Multiple Reasonable Solutions Are Permitted
+## Article 23 — Learning Activities Must Include a Complete Cycle
 
-Students may use solutions different from the example when those solutions satisfy the specification, current learning scope, safety requirements, and readability expectations.
+Major learning activities should ordinarily include:
 
-Marks shall not be deducted solely because program structure, variable naming, or step order differs from a model answer.
+> Understand the requirement → establish expectations → design an approach → implement → test → debug → modify → run regression verification → explain and reflect
 
-Assessment should focus on:
+Students must not be asked only to complete a first program version without verification or modification.
 
-- Correctness
-- Understanding
-- Readability
-- Testability
-- Ability to modify
-- Ability to explain
+## Article 24 — Prediction Before Execution
 
-## Article 30 — Products Serve Learning
+Where appropriate, students should record expected results before running code, viewing an answer, or using AI.
 
-Projects and artifacts are vehicles for integrating abilities; they are not the ultimate purpose of the course.
+Predictions may include:
 
-Teachers, frameworks, libraries, or AI shall not complete core parts that students do not understand merely so that a large project can be finished.
+- Output
+- Variable state
+- Control flow
+- Function-call order
+- Error category
+- Test results
 
-Every project should be decomposable into units that students can understand, implement, test, modify, and explain.
+A prediction need not be correct initially. Its value is in allowing students to compare expectation with observed behavior.
 
-## Article 31 — The Curriculum Must Be Continuous
+## Article 25 — Errors Are Official Teaching Content
 
-Every unit should state:
+Every important concept should include controlled, reproducible, and diagnosable error cases.
 
-- Which existing abilities it uses
-- Which new abilities it adds
-- How those abilities will be used later
-- Which advanced topics are intentionally deferred
+An error case should explain at least:
 
-The curriculum shall not become a collection of disconnected activities without cumulative development.
+- The observed symptom
+- Possible causes
+- Diagnostic steps
+- Correction
+- Regression testing after correction
 
-## Article 32 — Preserve Flexibility Without Sacrificing the Core
+Materials must not provide only correct answers and final versions.
 
-Teachers may adapt the following according to student readiness, available time, and classroom response:
+## Article 26 — Example Size Must Be Minimized
 
-- Example contexts
-- Number of exercises
-- Supporting explanations
-- Activity order
-- Extension content
-- Tools used
+Examples designed to teach a new concept should use the smallest reasonable scale that demonstrates that concept.
 
-They may not arbitrarily lower common learning objectives, understanding requirements, bilingual consistency, or assessment fairness.
+When an example contains several unrelated concepts, it should be split into smaller cases or clearly identify which parts students are not yet expected to understand.
 
----
+## Article 27 — Multiple Reasonable Solutions Are Allowed
 
-# Part IV — AI Use Standards
+Unless a learning objective requires a specific technique, a single implementation must not be treated as the only correct solution.
 
-## Article 33 — Role of AI
+Materials and assessments must distinguish:
 
-AI is an aid for teaching, learning, feedback, debugging, and content maintenance. It is not a replacement for student thinking, teacher judgment, or content review.
+- Required constraints
+- Recommended practices
+- Style preferences
+- Acceptable alternatives
 
-## Article 34 — Appropriate Uses of AI
+## Article 28 — Competency Maturity
 
-AI may be used to:
+The course shall describe capabilities using maturity levels rather than only “taught” or “not taught.”
 
-- Explain concepts
-- Provide staged hints
-- Help interpret error messages
-- Generate or review test cases
-- Compare alternative solutions
-- Question student reasoning
-- Assist with translation and expression
-- Help teachers draft materials
+Maturity levels shall include at least:
 
-All results must still be understood and verified by the user.
+- L1: recognize
+- L2: complete with guidance
+- L3: independently complete familiar tasks
+- L4: complete under modified requirements or in a new context
+- L5: compare, explain, and evaluate multiple approaches
 
-## Article 35 — Learning Behaviors AI Must Not Replace
-
-AI shall not replace:
-
-- Initial comprehension of the task
-- Problem decomposition
-- Design of the core solution
-- Basic implementation
-- Tracing of execution
-- Diagnosis of error causes
-- Verification of test results
-- Explanation of learning outcomes
-
-Teachers may impose stricter limits according to the objective of a unit.
-
-## Article 36 — Transparency of AI Use
-
-When AI is permitted in an assignment, assessment, or activity, the document must state:
-
-- Permitted scope
-- Prohibited uses
-- Whether prompts or conversation records must be retained
-- How students must explain whether they accepted or rejected AI suggestions
-- How violations are determined
-
-A vague statement such as “AI may be used appropriately” is not sufficient by itself.
-
-## Article 37 — AI-Generated Content Must Be Reviewed
-
-Official material generated or translated by AI must be reviewed by a human for:
-
-- Technical correctness
-- Instructional suitability
-- Substantive equivalence between Chinese and English
-- Natural language quality
-- Difficulty and prerequisites
-- Accidental disclosure of assignment solutions
-- Unfairness or misleading content
-
-Unreviewed AI-generated content shall not be published as official course material.
+The preparatory course does not require every capability to reach the same maturity level.
 
 ---
 
-# Part V — Assessment and Fairness Standards
+# Part IV — Equivalence Between Chinese-Taught and English-Taught Classes
 
-## Article 38 — Assessment Measures Ability, Not Output Alone
+## Article 29 — Shared Core Outcomes
 
-Assessment shall not use final output or automated-test results as the sole measure of learning.
+The Chinese-taught and English-taught classes must achieve the same core capability outcomes.
 
-Major assessments must include at least one form of understanding check, such as:
+Instructional hours, pacing, and language support may differ, but the English-taught class must not reduce technical depth, remove core activities, or simplify assessment standards merely because instruction occurs in English.
 
-- Program explanation
-- Execution tracing
-- Error location
-- Requirement modification
-- Test design
-- Solution comparison
+## Article 30 — Delivery Pace May Differ
+
+The two classes may use different:
+
+- Unit segmentation
+- Time allocation
+- Language support
+- Number of examples
+- Proportion of oral activities
+
+However, a traceability matrix must demonstrate that both classes ultimately cover the same core capabilities.
+
+## Article 31 — Language Difficulty Must Not Be Misclassified as Technical Weakness
+
+English fluency must not replace programming competence in assessment.
+
+Without reducing technical expectations, the course may provide:
+
+- Terminology lists
+- Sentence frames
+- Bilingual keywords
+- Diagrams
+- Written explanation time
+- Longer reading time
+
+## Article 32 — The English-Taught Class Must Not Be a Literal Translation of the Chinese Class
+
+The English-taught class should be designed for English-medium instruction through:
+
+- Terminology scaffolding
+- Adjusted explanation pacing
+- Appropriate classroom interaction
+- Visual support
+- Written and oral communication support
+
+These adaptations must not alter the core content or capability standards.
+
+---
+
+# Part V — Principles for AI Use
+
+## Article 33 — AI Must Not Replace Student Thinking
+
+AI may support learning, but it must not replace students in:
+
+- Understanding requirements
+- Initial design
+- Output prediction
+- Test creation
+- Debugging judgment
+- Result verification
 - Oral explanation
-- Reflection record
-- Explanation of AI use
 
-## Article 39 — Substantive Equality Between the Two Classes
+## Article 34 — Students Must Retain Pre-AI Work
 
-The Chinese-taught and English-taught classes must have the same:
+Before using AI in important activities, students should preserve their own:
 
-- Learning objectives
-- Core content
-- Workload
-- Difficulty
-- Assessment methods
-- Rubrics
-- Access to resources
-- AI rules
+- Understanding
+- Predictions
+- Initial design
+- First program version
+- Test cases
+- Error hypotheses
 
-Differences in instructional language shall not result in lower expectations, fewer resources, or a disadvantage in assessment for either class.
+AI-assisted results must not erase all evidence of prior thinking.
 
-## Article 40 — Assessment Rules Must Be Public
+## Article 35 — AI Suggestions Must Be Verified
 
-Before an assessment begins, students must know:
+Before adopting an AI suggestion, students must:
 
-- Its objectives
-- Permitted resources
-- AI restrictions
-- Required submissions
-- Grading components
-- Completion criteria
-- Late and resubmission policies
-- Academic-integrity requirements
+1. Explain the suggestion.
+2. Create tests capable of determining whether it is correct.
+3. Verify it through execution or reasoning.
+4. Compare the situation before and after use.
+5. Explain why the suggestion was accepted, modified, or rejected.
 
-Hidden criteria announced only after submission shall not affect grades.
+“AI says it is correct” is not evidence.
 
-## Article 41 — Accessibility and Respect
+## Article 36 — AI Rules Must Vary by Activity
 
-Documents and activities should avoid preventing students from demonstrating genuine learning because of language, cultural background, equipment differences, or unnecessary technical barriers.
+The course must not rely on a single course-wide rule that merely says “AI allowed” or “AI prohibited.”
 
-Humiliation, public comparison, or punishment of normal mistakes shall not be used as teaching methods.
+Each activity should specify according to its learning objective:
 
-Students’ questions, mistakes, and learning records shall be treated respectfully and protected with appropriate privacy where necessary.
+- When AI may be used
+- What may be asked
+- What may not be asked
+- What must be retained
+- How verification must occur
+- How use must be disclosed
+
+## Article 37 — Author Responsibility for AI-Generated Content
+
+When AI is used to generate teaching materials, code, translations, tests, diagrams, or assessment content, the author or maintainer remains responsible for:
+
+- Accuracy
+- Consistency
+- Age and level appropriateness
+- Bilingual equivalence
+- Executability
+- Copyright and licensing
+- Avoiding untaught concepts
+
+“Generated by AI” is not a justification for unreviewed content.
 
 ---
 
-# Part VI — Maintenance, Governance, and Amendment
+# Part VI — Implementation, Testing, and Debugging
 
-## Article 42 — Materials Must Be Transferable to Other Teachers and Maintainers
+## Article 38 — Implementations Must Be Verifiable
 
-Official materials shall not depend on implicit knowledge held only by the original author.
+Every implementation activity must have observable success conditions.
 
-Important units should preserve:
+At minimum, it should provide:
 
-- Instructional purpose
-- Prerequisite abilities
-- Suggested pacing
-- Rationale for activity design
-- Common student difficulties
-- Elements that may be adapted and elements that must not be sacrificed
+- Expected input
+- Expected output or state
+- Normal cases
+- Boundary cases
+- Error or exceptional cases
+- Regression tests
 
-## Article 43 — Review Before Major Changes
+## Article 39 — Testing Is Part of Design
 
-Before adding or substantially revising a document, check at least:
+Students should create tests before or during implementation rather than entering arbitrary values only after the program is complete.
 
-1. Does it map to a clear learning objective?
-2. Does it fit students’ current level?
-3. Does it introduce too many new concepts?
-4. Does it preserve student responsibility for thinking?
-5. Can it check genuine understanding?
-6. Can students bypass learning by copying an answer?
-7. Are the AI rules explicit?
-8. Does it include testing, modification, reading, or debugging?
-9. Are the Chinese and English versions synchronized and substantively equivalent?
-10. Does it distinguish core and extension content?
-11. Does it define completion clearly?
-12. Can another teacher use and maintain it independently?
-13. Has visual content been provided where appropriate, or is there a defensible reason not to provide it?
-14. Are visuals consistent with the prose, code, data, and actual execution?
-15. Is the document linked from the root README through a direct or indirect navigation path?
-16. After adding or moving the document, have the relevant READMEs, indexes, and cross-links been updated?
+A test case should explain its purpose rather than merely provide numbers.
 
-## Article 44 — Amendment Principles
+## Article 40 — Debugging Must Be Evidence-Based
 
-This Constitution may evolve, but its protected values shall not be weakened for short-term convenience.
+The debugging process should include:
 
-Every amendment must:
+1. Reproduce the problem.
+2. Record expected and actual results.
+3. Propose a testable hypothesis.
+4. Narrow the problem scope.
+5. Modify one suspected cause.
+6. Re-run the original tests and regression tests.
 
-- Update both language versions together
-- Explain the reason for the change
-- Preserve a change record
-- Check the impact on existing materials
-- Create a migration or correction plan where necessary
+Random modification until the program passes is not an acceptable standard method.
 
-## Article 45 — Resolving Unspecified Conflicts
+## Article 41 — Requirement Modification Is Necessary
 
-When this Constitution does not explicitly resolve a situation, ask in order:
+Major programming activities should include at least one requirement change.
 
-1. Which decision better protects genuine student learning?
-2. Which decision is fairer and avoids language-based disadvantage?
-3. Which decision is more accurate, transparent, and verifiable?
-4. Which decision is easier for future teachers and students to understand?
-5. Which decision prevents AI, tools, or products from replacing core abilities?
+Students must be able to identify:
 
-## Article 46 — Supreme Test
+- Which designs are affected
+- Which code must change
+- Which original tests should continue to pass
+- Which new tests must be added
 
-Every course decision shall ultimately be tested against this question:
+## Article 42 — Versions and History Must Be Traceable
 
-> Does this design make students more capable of understanding, explaining, implementing, modifying, debugging, testing, verifying, and extending what they have learned?
+Important activities should preserve:
 
-When the answer is no, the design shall not be adopted, even when it is faster, more visually impressive, or easier to complete.
+- Initial version
+- Defective version
+- Corrected version
+- Requirement-change version
+- Differences before and after AI suggestions
+
+Version control, file copies, change logs, or other reasonable methods may be used.
+
+---
+
+# Part VII — Assignments and Assessment
+
+## Article 43 — Assessment Must Correspond to Competencies
+
+Every assessment must correspond explicitly to at least one competency and maturity level.
+
+The course must not assess only memorization, syntax transcription, or a single output merely because such evidence is easy to grade.
+
+## Article 44 — A Single Piece of Evidence Cannot Establish Full Competence
+
+The following outcomes cannot independently prove competence:
+
+- Successful compilation
+- Correct output
+- Passing an Online Judge
+- Positive AI evaluation
+- Submission of a complete program
+- Memorization of a definition
+
+They should be combined with explanation, modification, testing, debugging, tracing, or oral verification.
+
+## Article 45 — Assignments Must Permit Learning to Occur
+
+Assignments must not serve only to rank students. They must also provide:
+
+- Space for attempts
+- Error feedback
+- Opportunities to revise
+- Reflection requirements
+- Defined resource boundaries
+
+## Article 46 — Grading Criteria Must Be Published in Advance
+
+Formal assessments must provide a rubric or equivalent explanation.
+
+Criteria should distinguish:
+
+- Understanding
+- Design
+- Implementation
+- Testing
+- Debugging
+- Modification
+- Explanation
+- AI verification
+
+## Article 47 — Assessment Methods Should Be Diverse
+
+The course may use:
+
+- Programming implementation
+- Oral explanation
+- Program tracing
+- Error diagnosis
+- Test design
+- Requirement modification
+- Code review
+- Reflection records
+
+A single question type must not carry all competency judgments.
+
+## Article 48 — Remediation Must Target Capability Gaps
+
+When a student has not reached the standard, remediation should target the missing capability rather than merely require resubmission of the same answer.
+
+Remediation may include:
+
+- Tracing with new input
+- Modifying a new requirement
+- Explaining an error cause
+- Creating additional tests
+- Comparing two approaches
+- Verifying an AI suggestion
+
+---
+
+# Part VIII — Maintenance, Review, and Evolution
+
+## Article 49 — Changes Must Be Traceable
+
+Changes to official documents should record:
+
+- Version
+- Date
+- Change summary
+- Impacted scope
+- Bilingual synchronization status
+
+## Article 50 — Major Changes Require Constitutional Review
+
+The following changes require review for constitutional compliance:
+
+- Adding or removing core content
+- Changing learning objectives
+- Changing assessment methods
+- Changing AI-use rules
+- Changing equivalence between classes
+- Changing official document structure
+- Introducing a teaching tool or platform
+
+## Article 51 — The Course Must Be Cleaned Regularly
+
+Course maintenance should regularly review:
+
+- Duplicate documents
+- Broken links
+- Outdated content
+- Bilingual divergence
+- Unused materials
+- Activities that cannot be verified
+- Content outside the current scope
+
+## Article 52 — Constitutional Amendment Procedure
+
+Amending this Constitution requires:
+
+1. Explaining the reason for the amendment.
+2. Identifying affected articles.
+3. Updating both language versions synchronously.
+4. Updating the version number.
+5. Reviewing whether existing official documents require adjustment.
+6. Preserving a change record.
+
+---
+
+# Part IX — Final Provisions
+
+## Article 53 — Minimum Non-Negotiable Conditions
+
+The following conditions must not be omitted because of time limits, tool limitations, or teaching convenience:
+
+1. Official documents are complete in both languages.
+2. Core capabilities are equivalent between the Chinese-taught and English-taught classes.
+3. Major concepts establish understanding before syntax is introduced.
+4. Major activities include prediction, testing, and verification.
+5. AI suggestions are verified by students.
+6. Code and explanatory content are accurate and consistent.
+7. Assessment corresponds to capability rather than only answers.
+8. Students can explain and modify their own work.
+
+## Article 54 — Effect
+
+This Constitution takes effect upon formal publication and applies to all content created or modified afterward.
+
+All authors, instructors, teaching assistants, and maintainers must check constitutional compliance before submitting official content.
+
+---
+
+## Version History
+
+### 1.3.0
+
+- Added the pedagogical writing sequence and student-reading principle.
+- Required materials to begin from problems and needs, establish concepts and mental models before syntax, and support long-term independent reading.
+- Added requirements for prediction, error cases, AI-suggestion verification, knowledge connections, and protected thinking space.
+- Renumbered subsequent articles.
+
+### 1.2.0
+
+- Added the official-document discoverability and navigation-integrity article.
+- Required every official document to be reachable from the root README through a clear navigation chain.
+- Required indexes and cross-links to be updated when official documents are added, moved, renamed, or deleted.
+- Renumbered subsequent articles.
+
+### 1.1.0
+
+- Added the Visual-First Teaching Principle.
+- Required appropriate visual representation whenever visualization would materially improve understanding.
+- Defined consistency requirements among diagrams, code, data, tests, and bilingual versions.
+- Added the comprehension path: “Visual model → verbal concept → code implementation → execution observation → student verification.”
+
+### 1.0.0
+
+- Established the first official Course Constitution.
+- Defined requirements for bilingual documentation, course equivalence, material structure, competency orientation, AI use, testing and debugging, assessment, and maintenance.
