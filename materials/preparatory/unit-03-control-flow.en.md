@@ -1,9 +1,9 @@
 # Preparatory Unit 3: Conditions, Loops, and Control Flow
 
-Version: 0.1.0  
-Status: Teaching draft  
+Version: 0.2.0  
+Status: Official teaching material  
 Last updated: 2026-08-03  
-Major change summary: Established materials for conditions, loops, termination, boundary testing, and error diagnosis.  
+Major change summary: Removed homework submission, per-item passing, remediation, and repeated micro-oral wording; reframed the unit around student-retained records, formative classroom discussion, and final-oral preparation.  
 Corresponding Chinese version: [前導單元 3：條件、迴圈與控制流程](unit-03-control-flow.zh-TW.md)
 
 ## Document Purpose
@@ -16,7 +16,8 @@ The Chinese preparatory track uses this material across Sessions 2–3; the Engl
 - Competency IDs: `PC-C01` through `PC-C07`, `PC-V01` through `PC-V04`
 - Target maturity: L2–L4
 - Scope state: `SB-C`
-- Acceptance tasks: `AT-03`, `AT-05`, `AT-06`, `AT-07`, `AT-08`, `AT-12`
+- Formative tasks: `AT-03`, `AT-05`, `AT-06`, `AT-07`, `AT-08`
+- Final oral preparation: `AT-12`
 - Risk IDs: `R-02`, `R-05`, `R-09`
 - Estimated time: Chinese 180 minutes; English 120 minutes
 
@@ -36,6 +37,8 @@ Students can:
 - Build expressions and basic input/output.
 - State expected results before execution.
 
+When prerequisites are weak, use formative support rather than copied programs or resubmitted homework.
+
 ## 3. Tools and Environment
 
 - GCC or Clang with C17 support.
@@ -50,12 +53,14 @@ Students can:
 - A loop is repeated state update until termination, not merely repeated syntax.
 - Boundary cases often reveal control-flow defects.
 
-### Must Complete
+### Must Complete and Retain
 
 - One conditional-path trace.
 - One iteration-by-iteration loop trace.
 - One diagnosis of an off-by-one or infinite-loop defect.
 - One requirement modification with regression testing.
+
+These records are not submitted or individually graded. Students retain them for the next class discussion and final oral preparation.
 
 ### May Be Deferred
 
@@ -162,7 +167,7 @@ Remove `i = i + 1`. Diagnosis:
 
 Read an age. Print `Minor` below 18, otherwise `Adult`.
 
-Submit a condition table, expected results for `17/18/19`, the program, and actual results.
+Retain a condition table, expected results for `17/18/19`, the program, and actual results.
 
 ### Counter
 
@@ -177,7 +182,9 @@ Read a positive integer `n` and print the sum from 1 through `n`.
 - Normal case: `n = 5`.
 - Boundary case: `n = 1`.
 - Necessary exceptional case: for `n <= 0`, print `Invalid input`.
-- Required evidence: trace table, program, three test categories, and diagnostic explanation.
+- Retain: trace table, program, three test categories, and diagnostic explanation.
+
+Homework is not submitted or individually graded. The next class discusses representative errors, tests, and alternative solutions.
 
 ## 13. Requirement Modification
 
@@ -194,18 +201,35 @@ Permitted: after completing the trace table, ask AI for additional tests or cand
 Prohibited: ask AI to calculate the trace table step by step or generate the complete independent-practice answer.  
 Must retain: own four-part loop model, expected results, AI suggestion, verification, and decision.
 
-## 15. Acceptance and Remediation
+## 15. Formative Learning Evidence and Classroom Discussion
 
-- Understanding evidence: `EV-TR + EV-EX`.
-- Action evidence: `EV-IM + EV-TE + EV-DE + EV-MO`.
-- Pass: trace conditions and loops, explain termination, correct one control defect, and complete the requirement change.
-- Remediation: live-trace a new input or diagnose another off-by-one program.
+### Understanding-Oriented Evidence
 
-Micro-oral questions:
+- `EV-TR + EV-EX`
+- Trace conditions and loops iteration by iteration.
+- Explain termination and identify the first incorrect state.
+
+### Action-Oriented Evidence
+
+- `EV-IM + EV-TE + EV-DE + EV-MO`
+- Correct a control-flow defect.
+- Complete a requirement change and regression test.
+
+### Formative Prompts
 
 1. Why is `60` an important test?
 2. When does the loop stop?
 3. Which state no longer changes when the update is removed?
+
+These prompts support classroom discussion and participation observation. They are not separate oral exams or per-homework grading.
+
+### Participation Modes
+
+- Complete or revise a trace table.
+- Propose a boundary case.
+- Share a defect and diagnostic hypothesis.
+- Compare alternative loop forms.
+- Participate through writing, anonymous questions, program operation, or group records.
 
 ## 16. Instructor and TA Guidance
 
@@ -213,12 +237,25 @@ Micro-oral questions:
 - Require students to identify all four loop elements.
 - When time is short, reduce exercise count but retain tracing, boundary testing, and diagnosis.
 - Do not increase difficulty through complex nesting.
+- When tools fail, switch to paper tracing or instructor equipment; do not treat the failure as non-participation.
 
-## 17. Unit Summary
+## 17. Final Oral Preparation
+
+Students should be able to select from their own records:
+
+- One off-by-one defect.
+- One infinite-loop cause.
+- One requirement change with regression testing.
+- One AI suggestion they accepted, modified, or rejected.
+
+This unit prepares capability evidence without fixing final oral question types or procedure in advance.
+
+## 18. Unit Summary
 
 Conditions choose paths; loops repeat work through state updates. The next unit separates responsibilities with functions and integrates testing, modification, debugging, and AI verification.
 
 ## Navigation
 
 - [Materials Index](../README.en.md)
+- [Assessment Override](ASSESSMENT-NOTE.en.md)
 - [繁體中文版](unit-03-control-flow.zh-TW.md)

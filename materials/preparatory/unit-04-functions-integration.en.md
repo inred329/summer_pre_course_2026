@@ -1,9 +1,9 @@
 # Preparatory Unit 4: Functions, Integrated Development, and AI Verification
 
-Version: 0.1.0  
-Status: Teaching draft  
+Version: 0.2.0  
+Status: Official teaching material  
 Last updated: 2026-08-03  
-Major change summary: Established materials for function responsibility, decomposition, the integrated development cycle, requirement modification, regression testing, and AI verification.  
+Major change summary: Removed homework submission, per-item passing, remediation, and repeated micro-oral wording; reframed the unit around student-retained records, formative classroom discussion, and final-oral preparation.  
 Corresponding Chinese version: [前導單元 4：函數、整合開發與 AI 驗證](unit-04-functions-integration.zh-TW.md)
 
 ## Document Purpose
@@ -16,7 +16,8 @@ The Chinese preparatory track uses this material across Sessions 3–4; the Engl
 - Competency IDs: `PC-F01` through `PC-F05`, `PC-V01` through `PC-V05`, `PC-A01` through `PC-A05`, `PC-I01`
 - Target maturity: L2–L4
 - Scope state: `SB-C` / `SB-F`
-- Acceptance tasks: `AT-02`, `AT-04` through `AT-12`
+- Formative tasks: `AT-02`, `AT-04` through `AT-11`
+- Final oral preparation: `AT-12`
 - Risk IDs: `R-01`, `R-02`, `R-05`, `R-12`
 - Estimated time: Chinese 240–300 minutes; English 240 minutes
 
@@ -36,6 +37,8 @@ Students can:
 - Establish expected results and boundary cases.
 - Trace state and diagnose basic defects.
 
+When prerequisites are weak, use formative support rather than homework resubmission or copied programs.
+
 ## 3. Tools and Environment
 
 - GCC or Clang with C17 support.
@@ -51,13 +54,14 @@ Students can:
 - A completed program still requires testing, modification, diagnosis, and explanation.
 - AI suggestions require student verification.
 
-### Must Complete
+### Must Complete and Retain
 
 - One responsibility-decomposition diagram.
 - One short function with parameters and a return value.
 - One requirement modification with regression testing.
 - One AI-suggestion review record.
-- One micro-oral check.
+
+These records are not submitted or individually graded. Students retain them for classroom discussion and final oral preparation.
 
 ### May Be Deferred
 
@@ -143,14 +147,14 @@ A function that reads, computes, decides, and prints is difficult to test indepe
 
 Create `max_of_two(int a, int b)` and return the larger value.
 
-Complete first:
+Complete and retain:
 
 1. A one-sentence responsibility.
 2. Tests for `a>b`, `a<b`, and `a==b`.
 3. A call trace.
 4. The program and results.
 
-## 12. Integrated Assignment Context
+## 12. Independent Integrated Practice
 
 ### Small Score Reporter
 
@@ -170,7 +174,9 @@ Understand the requirement
 → Explain and reflect
 ```
 
-Required evidence: decomposition diagram, program, test table, defect record, modification diff, and oral responses.
+Retain: decomposition diagram, program, test table, defect record, modification diff, and reflection.
+
+This practice is not submitted or individually graded. The class discusses representative decompositions, defects, and testing strategies.
 
 ## 13. Requirement Modification
 
@@ -199,35 +205,66 @@ Students must:
 ## 15. AI Use Rules
 
 Permitted: ask AI for candidate tests, compare two decompositions, or propose debugging hypotheses.  
-Prohibited: let AI perform the core decomposition, complete the integrated assignment, or answer the oral check live.  
+Prohibited: let AI perform the core decomposition, complete the integrated practice, or answer the final oral live.  
 Must retain: pre-AI requirement understanding, initial decomposition, self-created tests, AI summary, verification, and decision.
 
-## 16. Acceptance and Remediation
+## 16. Formative Learning Evidence and Classroom Discussion
 
-- Understanding evidence: `EV-EX + EV-VI + EV-TR + EV-AI`.
-- Action evidence: `EV-IM + EV-TE + EV-DE + EV-MO`.
-- Pass: explain function responsibilities, trace calls, complete the integrated cycle, modify the requirement, and verify an AI suggestion.
-- Remediation: refactor one oversized function, trace a new call, or review another incorrect AI suggestion.
+### Understanding-Oriented Evidence
 
-Micro-oral questions:
+- `EV-EX + EV-VI + EV-TR + EV-AI`
+- Explain function responsibilities and interfaces.
+- Trace parameters, return values, and data flow.
+- Explain the risk and verification method for an AI suggestion.
+
+### Action-Oriented Evidence
+
+- `EV-IM + EV-TE + EV-DE + EV-MO`
+- Complete the integrated cycle, requirement change, and regression verification.
+- Review and correct one incorrect AI suggestion.
+
+### Formative Prompts
 
 1. Why should this work be separated into functions?
 2. Where does the return value go?
 3. Which tests should still pass after changing the threshold?
 4. How did you prove the AI suggestion correct or incorrect?
 
+These prompts support classroom discussion and participation observation. They are not separate oral exams or per-homework grading.
+
+### Participation Modes
+
+- Propose a responsibility decomposition.
+- Trace calls and return values.
+- Share a defect, test, or refactoring rationale.
+- Compare alternative function interfaces.
+- Participate through writing, anonymous questions, program operation, or group records.
+
 ## 17. Instructor and TA Guidance
 
 - Accept small, reasonable decompositions rather than demanding large architecture.
-- When code is correct but cannot be explained, use oral and requirement-change remediation.
+- When code is correct but cannot be explained, use formative prompts and a small requirement change rather than per-item remediation.
 - When time is short, retain the integrated cycle and AI review; reduce extension features.
 - Do not introduce linked lists, trees, function pointers, or frameworks.
+- When tools fail, switch to paper tracing or instructor equipment; do not treat the failure as non-participation.
 
-## 18. Unit Summary
+## 18. Final Oral Preparation
+
+Students should be able to select from their own records:
+
+- One function responsibility and interface design.
+- One parameter and return-value trace.
+- One requirement change with regression testing.
+- One AI suggestion they accepted, modified, or rejected.
+
+This unit prepares capability evidence without fixing final oral question types or procedure in advance.
+
+## 19. Unit Summary
 
 Functions establish responsibility boundaries; testing, debugging, modification, and AI verification make results trustworthy. This unit completes the minimum integrated capability of the preparatory course.
 
 ## Navigation
 
 - [Materials Index](../README.en.md)
+- [Assessment Override](ASSESSMENT-NOTE.en.md)
 - [繁體中文版](unit-04-functions-integration.zh-TW.md)
