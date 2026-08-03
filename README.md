@@ -33,56 +33,32 @@ This README is the root navigation entry for every official document in the repo
 - [教學內容設計區（繁體中文）](design/README.zh-TW.md)
 - [Instructional Design Workspace (English)](design/README.en.md)
 
-目前正式設計基準包含：
+目前正式設計基準包含 `01–12`：願景、需求、領域模型、知識依賴、能力、範圍、驗收、交付、風險、追蹤矩陣、術語表及憲法遵循審查。
 
-The official design baseline currently includes:
+The official design baseline includes stages `01–12`: vision, requirements, domain model, knowledge dependencies, competencies, scope, acceptance, delivery, risks, traceability, terminology, and constitutional review.
 
-1. 課程產品願景｜Course Product Vision
-2. 教學需求地圖｜Instructional Requirements Map
-3. 程式設計領域模型｜Programming Domain Model
-4. 程式語言知識依賴圖｜Programming Language Knowledge Dependency Graph
-5. 程式設計能力地圖｜Programming Competency Map
-6. 課程範圍邊界｜Course Scope Boundary
-7. 能力驗收模型｜Competency Acceptance Model
-8. 課程交付地圖｜Course Delivery Map
-9. 課程風險登錄表｜Course Risk Register
-10. 課程設計追蹤矩陣｜Course Design Traceability Matrix
-11. 中英文術語對照表｜Chinese–English Terminology Glossary
-12. 課程設計憲法遵循審查｜Course Design Constitution Compliance Review
-
-### 教材與活動｜Materials and Activities
+### 教材、作業與評量｜Materials, Assignments, and Assessment
 
 - [教材與活動資源（繁體中文）](materials/README.zh-TW.md)
 - [Materials and Activity Resources (English)](materials/README.en.md)
 - [單元教材模板（繁體中文）](materials/TEMPLATE.zh-TW.md)
 - [Unit Material Template (English)](materials/TEMPLATE.en.md)
 
-目前已建立第一個正式雙語前導單元：
+前導課程正式基準已包含：
 
-The first official bilingual preparatory unit is now available:
+The preparatory-course baseline now includes:
 
-- [前導單元 1：程式如何開始執行](materials/preparatory/unit-01-execution.zh-TW.md)
-- [Preparatory Unit 1: How a Program Begins to Run](materials/preparatory/unit-01-execution.en.md)
+- 四個雙語能力單元｜Four bilingual capability units
+- 四份形成性作業｜Four formative assignments
+- 一份整合作業｜One integrated assignment
+- 共用雙語評分規準｜Shared bilingual rubric
+- AI 使用紀錄模板｜AI-use log template
+- 教師與助教批改指引｜Instructor and TA grading guide
+- 教材憲法遵循審查｜Materials Constitution review
 
-所有後續教材、活動、作業、rubric 與教師文件都必須以教材模板及設計追蹤矩陣為基準。
+所有教材均要求預測、追蹤、實作、測試、除錯、修改、回歸驗證、說明與 AI 技術驗證；正確輸出、編譯成功或 OJ 通過不能單獨證明能力。
 
-All subsequent materials, activities, assignments, rubrics, and instructor documents must use the material template and design traceability matrix as their baseline.
-
-### 既有課程與執行規劃｜Existing Course and Operational Planning
-
-以下文件為較早期建立的規劃內容，尚須依憲法完成雙語化、一致性、追蹤與導覽檢查：
-
-The following files were created earlier and still require constitutional review for bilingual completion, consistency, traceability, and navigation:
-
-- `docs/course-overview.md`
-- `classes/zh/README.md`
-- `classes/en/README.md`
-- `planning/timeline.md`
-- `planning/checklist.md`
-
-完成上述要求前，這些文件視為待整理內容，而非目前正式基準。
-
-Until those requirements are satisfied, these files are treated as materials awaiting normalization rather than current official baselines.
+All materials require prediction, tracing, implementation, testing, debugging, modification, regression verification, explanation, and technical verification of AI suggestions. Correct output, successful compilation, or passing OJ cannot independently establish capability.
 
 ---
 
@@ -165,18 +141,20 @@ A single-language, unreviewed, or unnavigated document is not an officially publ
 
 Completed:
 
-- 課程憲法與 `01–10` 設計鏈
-- 中英文術語表
-- 憲法遵循審查
+- 課程憲法與完整設計鏈
+- 中英文術語與憲法遵循審查
 - 雙語教材模板與教材索引
-- 前導單元 1 雙語教材
+- 前導單元 1–4 雙語教材
+- 前導作業包、rubric、AI 紀錄與教師批改指引
+- 所有前導教材的憲法重讀與內容審查
 
-- Course Constitution and the `01–10` design chain
-- Chinese–English terminology glossary
-- Constitution compliance review
-- Bilingual material template and materials index
-- Bilingual Preparatory Unit 1 material
+- Course Constitution and complete design chain
+- Bilingual terminology and constitutional review
+- Bilingual material template and index
+- Bilingual Preparatory Units 1–4
+- Assignment pack, rubric, AI-use log, and grading guide
+- Constitutional re-read and content review of all preparatory materials
 
-下一階段是建立前導單元 2「資料、型別與程式狀態」，並延續預測、追蹤、修改、測試、AI 驗證與微型口試證據。
+發布前仍需在實際教室環境編譯範例、加入班級日期，並準備雙語等值的教師缺陷程式與錯誤 AI 建議。
 
-The next stage is to create Preparatory Unit 2, “Data, Types, and Program State,” continuing prediction, tracing, modification, testing, AI verification, and micro-oral evidence.
+Before classroom release, instructors must still compile examples in the actual environment, add class dates, and prepare bilingual-equivalent defective programs and sample incorrect AI suggestions.
