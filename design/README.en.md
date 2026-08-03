@@ -1,6 +1,6 @@
 # Instructional Design Workspace
 
-Version: 0.7.0  
+Version: 0.8.0  
 Status: In planning  
 Corresponding Chinese version: [教學內容設計區](README.zh-TW.md)
 
@@ -18,7 +18,9 @@ The design sequence is:
 6. Scope boundaries between preparatory and formal courses.
 7. Observable and assessable evidence.
 8. Delivery pacing for both preparatory tracks and the formal course.
-9. Risks, traceability, and later teaching-material design.
+9. Design and delivery risks.
+10. Traceability among requirements, competencies, scope, acceptance, delivery, and risks.
+11. Materials, activities, assignments, and assessments.
 
 ## Constitutional Compliance
 
@@ -51,6 +53,7 @@ Every document must at least:
 | 06 | [Course Scope Boundary](06-scope-boundary.en.md) | Defines core delivery, foundations, deferrals, and exclusions for preparatory and formal courses. |
 | 07 | [Competency Acceptance Model](07-acceptance-model.en.md) | Defines minimum maturity evidence, standard acceptance tasks, AI boundaries, and passing criteria. |
 | 08 | [Course Delivery Map](08-delivery-map.en.md) | Arranges shared capabilities, maturity targets, and evidence across both preparatory tracks and the 16-week formal course. |
+| 09 | [Course Risk Register](09-risk-register.en.md) | Defines risk priority, triggers, mitigation, contingency responses, and accountable roles. |
 
 Chinese navigation: [教學內容設計區](README.zh-TW.md)
 
@@ -75,13 +78,14 @@ design/
 ├── 07-acceptance-model.zh-TW.md
 ├── 07-acceptance-model.en.md
 ├── 08-delivery-map.zh-TW.md
-└── 08-delivery-map.en.md
+├── 08-delivery-map.en.md
+├── 09-risk-register.zh-TW.md
+└── 09-risk-register.en.md
 ```
 
-Planned additions:
+Planned addition:
 
 ```text
-09-risk-register.*
 10-traceability-matrix.*
 ```
 
@@ -108,10 +112,11 @@ These must not be conflated: a domain relationship is not a learning sequence, a
 - The English preparatory class totals 10 hours; the Chinese preparatory class totals 12 hours; the formal course totals 48 hours.
 - Both preparatory tracks share the same core outcomes and acceptance standards.
 - The Chinese-taught track's additional two hours support more tracing, remediation, diagnosis, and acceptance rather than a higher core standard.
+- High-priority risks must not be treated by lowering acceptance, expanding scope, or adding advanced data structures.
 
 ## Next Step
 
-Create `09-risk-register` to identify risks in pacing, cognitive load, bilingual equivalence, AI dependency, acceptance execution, and document maintenance.
+Create `10-traceability-matrix` to connect requirements, domain concepts, knowledge nodes, competencies, scope states, acceptance tasks, delivery stages, and risk IDs into an auditable chain.
 
 ## Navigation
 
