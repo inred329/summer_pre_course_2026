@@ -1,6 +1,6 @@
 # 教學內容設計區
 
-版本：0.8.0  
+版本：0.9.0  
 狀態：規劃中  
 對應英文版本：[Instructional Design Workspace](README.en.md)
 
@@ -54,6 +54,7 @@
 | 07 | [能力驗收模型](07-acceptance-model.zh-TW.md) | 定義成熟度最低證據、標準驗收任務、AI 邊界與通過判準。 |
 | 08 | [課程交付地圖](08-delivery-map.zh-TW.md) | 將共同能力、成熟度與驗收證據安排到兩個前導班及 16 週正式課程。 |
 | 09 | [課程風險登錄表](09-risk-register.zh-TW.md) | 定義風險優先級、觸發條件、緩解措施、應變與責任角色。 |
+| 10 | [課程設計追蹤矩陣](10-traceability-matrix.zh-TW.md) | 串接需求、領域概念、知識節點、能力、範圍、驗收、交付與風險。 |
 
 英文導覽：[Instructional Design Workspace](README.en.md)
 
@@ -80,13 +81,9 @@ design/
 ├── 08-delivery-map.zh-TW.md
 ├── 08-delivery-map.en.md
 ├── 09-risk-register.zh-TW.md
-└── 09-risk-register.en.md
-```
-
-後續預計增加：
-
-```text
-10-traceability-matrix.*
+├── 09-risk-register.en.md
+├── 10-traceability-matrix.zh-TW.md
+└── 10-traceability-matrix.en.md
 ```
 
 ## 三份核心模型的分工
@@ -113,10 +110,11 @@ design/
 - 兩個前導班的共同核心學習成果與驗收標準一致。
 - 中文班額外 2 小時用於更多追蹤、補救、診斷與驗收，不提高核心標準。
 - 高優先風險不得透過降低驗收、擴張範圍或加入進階資料結構處理。
+- 每項核心需求、能力、驗收與交付位置都必須能雙向追蹤。
 
 ## 下一步
 
-建立 `10-traceability-matrix`，把需求、領域概念、知識節點、能力、範圍狀態、驗收任務、交付階段與風險 ID 串成可檢查的追蹤關係。
+以 `10-traceability-matrix` 為基準，開始建立前導課程教材、活動、作業、rubric 與教師執行資源。每個新產物都必須引用需求 ID、能力 ID、目標成熟度與驗收任務。
 
 ## 導覽
 
