@@ -34,9 +34,9 @@ The Course Constitution is the highest governing document of this repository. It
 
 ### 教學設計｜Instructional Design
 
-教學內容以需求工程與系統設計方式建立，依序定義願景、需求、領域模型、知識依賴、能力、範圍、驗收與交付節奏，再建立風險、追蹤關係與教材。
+教學內容以需求工程與系統設計方式建立，依序定義願景、需求、領域模型、知識依賴、能力、範圍、驗收、交付節奏與風險，再建立追蹤關係與教材。
 
-Instructional content is designed through requirements engineering and system design: vision, requirements, the domain model, knowledge dependencies, competencies, scope, acceptance, and delivery pacing are defined before risks, traceability, and teaching materials.
+Instructional content is designed through requirements engineering and system design: vision, requirements, the domain model, knowledge dependencies, competencies, scope, acceptance, delivery pacing, and risks are defined before traceability and teaching materials.
 
 - [教學內容設計區（繁體中文）](design/README.zh-TW.md)
 - [Instructional Design Workspace (English)](design/README.en.md)
@@ -53,6 +53,7 @@ The design workspace currently provides navigation to:
 6. 課程範圍邊界｜Course Scope Boundary
 7. 能力驗收模型｜Competency Acceptance Model
 8. 課程交付地圖｜Course Delivery Map
+9. 課程風險登錄表｜Course Risk Register
 
 ### 既有課程與執行規劃｜Existing Course and Operational Planning
 
@@ -108,6 +109,10 @@ Competency acceptance requires complementary evidence; correct output, successfu
 
 The two preparatory tracks use different pacing but the same core standard; the Chinese-taught track's additional two hours support more tracing, remediation, diagnosis, and acceptance rather than additional core capabilities.
 
+高優先風險不得以降低驗收、擴張範圍、全面禁止 AI 或加入進階資料結構處理；應透過支架、互補證據、環境備援與明確應變降低風險。
+
+High-priority risks must not be treated by lowering acceptance, expanding scope, banning AI outright, or adding advanced data structures; they should be reduced through scaffolding, complementary evidence, fallback environments, and explicit contingency responses.
+
 ---
 
 ## 文件完成條件｜Document Completion Conditions
@@ -150,7 +155,8 @@ Completed:
 - 課程範圍邊界｜Course Scope Boundary
 - 能力驗收模型｜Competency Acceptance Model
 - 課程交付地圖｜Course Delivery Map
+- 課程風險登錄表｜Course Risk Register
 
-下一階段是建立風險登錄表，識別課程節奏、認知負荷、雙語一致性、AI 依賴、驗收執行與文件維護風險。
+下一階段是建立追蹤矩陣，把需求、概念、知識依賴、能力、範圍、驗收、交付與風險串成可稽核的設計鏈。
 
-The next stage is to create the risk register for pacing, cognitive load, bilingual equivalence, AI dependency, acceptance execution, and document-maintenance risks.
+The next stage is to create the traceability matrix, connecting requirements, concepts, knowledge dependencies, competencies, scope, acceptance, delivery, and risks into an auditable design chain.
