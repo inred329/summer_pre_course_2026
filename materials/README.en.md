@@ -1,23 +1,23 @@
 # Materials and Activity Resources
 
-Version: 1.0.0  
-Status: Preparatory materials baseline complete  
+Version: 1.1.0  
+Status: Preparatory materials and assessment-policy baselines complete  
 Last updated: 2026-08-03  
-Major change summary: Completed navigation for four preparatory units, the full assignment pack, rubric, AI-use log, grading guide, and constitution review.  
+Major change summary: Converted homework into unsubmitted, ungraded independent practice and added classroom participation plus one final one-on-one oral examination.  
 Corresponding Chinese version: [教材與活動資源](README.zh-TW.md)
 
 ## Document Purpose
 
-This directory provides materials, activities, exercises, assignments, acceptance resources, and instructor guidance for direct use in both preparatory tracks.
+This directory provides materials, activities, independent homework, classroom discussion, participation observation, AI-use records, and final oral-exam preparation resources for both preparatory tracks.
 
 Every official material must:
 
 - Be reachable from the root README and this index.
 - Be available in both Traditional Chinese and English.
 - Cite requirement IDs, competency IDs, maturity targets, scope states, and acceptance tasks.
-- Follow the [Unit Material Template](TEMPLATE.en.md).
-- Include reading, prediction, implementation, modification, testing, debugging, and explanation in the learning cycle.
+- Include reading, prediction, implementation, modification, testing, debugging, and explanation.
 - State specific permitted, prohibited, and retained evidence for AI use.
+- Never treat homework submission, roll call, or one successful output as capability evidence.
 
 ## Official Preparatory Materials
 
@@ -28,18 +28,27 @@ Every official material must:
 | 3 | [條件、迴圈與控制流程](preparatory/unit-03-control-flow.zh-TW.md) | [Conditions, Loops, and Control Flow](preparatory/unit-03-control-flow.en.md) | Paths, termination, boundary testing, and defect diagnosis |
 | 4 | [函數、整合開發與 AI 驗證](preparatory/unit-04-functions-integration.zh-TW.md) | [Functions, Integrated Development, and AI Verification](preparatory/unit-04-functions-integration.en.md) | Function responsibility, integrated cycle, regression, and AI review |
 
-The Chinese track delivers these four capability units across four sessions. The English track divides Unit 4 across Sessions 4 and 5. Core competencies, evidence, and passing standards are identical.
+The Chinese track delivers four sessions. The English track divides Unit 4 across Sessions 4 and 5. Core competencies, difficulty, and assessment standards are identical.
 
-## Assignments and Assessment
+## Independent Homework and Assessment Resources
 
-- [前導課程作業包](assignments/preparatory-assignments.zh-TW.md)
-- [Preparatory Course Assignment Pack](assignments/preparatory-assignments.en.md)
-- [前導課程共用評分規準](assignments/rubric.zh-TW.md)
-- [Shared Preparatory Assignment Rubric](assignments/rubric.en.md)
+- [自主作業與口試準備包](assignments/preparatory-assignments.zh-TW.md)
+- [Independent Homework and Oral Preparation Pack](assignments/preparatory-assignments.en.md)
+- [課堂參與與最終口試評分規準](assignments/rubric.zh-TW.md)
+- [Classroom Participation and Final Oral Examination Rubric](assignments/rubric.en.md)
 - [AI 使用紀錄模板](assignments/ai-use-log.zh-TW.md)
 - [AI Use Log Template](assignments/ai-use-log.en.md)
-- [教師與助教批改指引](assignments/grading-guide.zh-TW.md)
-- [Instructor and TA Grading Guide](assignments/grading-guide.en.md)
+- [作業討論與課堂參與觀察指引](assignments/grading-guide.zh-TW.md)
+- [Assignment Discussion and Participation Observation Guide](assignments/grading-guide.en.md)
+
+## Official Policy
+
+- Homework is not submitted, graded, or individually marked.
+- Each class begins with 15–25 minutes of previous-homework discussion.
+- Roll call is not graded; attendance is not participation.
+- Participation may be verbal, written, anonymous, program-based, or recorded through group work.
+- One final one-on-one oral examination is the only summative assessment.
+- Students keep homework and learning records for discussion and oral-exam preparation.
 
 ## Material Templates
 
@@ -54,11 +63,12 @@ The Chinese track delivers these four capability units across four sessions. The
 ## Remaining Pre-Release Tasks
 
 - Compile all C17 examples in the actual classroom environment.
-- Add equivalent assignment deadlines to both language versions after the class calendar is finalized.
-- Create bilingual-equivalent versions of instructor-provided defective programs and sample incorrect AI suggestions.
+- Create bilingual-equivalent defective programs and sample incorrect AI suggestions.
+- Create the formal bilingual final one-on-one oral-examination content and procedure document.
 
 ## Navigation
 
+- [Learning and Assessment Policy](../design/13-learning-assessment-policy.en.md)
 - [Back to repository home](../README.md)
 - [Instructional Design Workspace](../design/README.en.md)
 - [繁體中文版](README.zh-TW.md)
