@@ -1,6 +1,6 @@
 # Instructional Design Workspace
 
-Version: 0.6.0  
+Version: 0.7.0  
 Status: In planning  
 Corresponding Chinese version: [教學內容設計區](README.zh-TW.md)
 
@@ -17,8 +17,8 @@ The design sequence is:
 5. Student capabilities and maturity levels.
 6. Scope boundaries between preparatory and formal courses.
 7. Observable and assessable evidence.
-8. Delivery pacing for the Chinese-taught and English-taught classes.
-9. Materials, activities, assignments, and assessments.
+8. Delivery pacing for both preparatory tracks and the formal course.
+9. Risks, traceability, and later teaching-material design.
 
 ## Constitutional Compliance
 
@@ -50,6 +50,7 @@ Every document must at least:
 | 05 | [Programming Competency Map](05-competency-map.en.md) | Converts concepts and dependencies into observable capabilities, maturity levels, and evidence. |
 | 06 | [Course Scope Boundary](06-scope-boundary.en.md) | Defines core delivery, foundations, deferrals, and exclusions for preparatory and formal courses. |
 | 07 | [Competency Acceptance Model](07-acceptance-model.en.md) | Defines minimum maturity evidence, standard acceptance tasks, AI boundaries, and passing criteria. |
+| 08 | [Course Delivery Map](08-delivery-map.en.md) | Arranges shared capabilities, maturity targets, and evidence across both preparatory tracks and the 16-week formal course. |
 
 Chinese navigation: [教學內容設計區](README.zh-TW.md)
 
@@ -72,13 +73,14 @@ design/
 ├── 06-scope-boundary.zh-TW.md
 ├── 06-scope-boundary.en.md
 ├── 07-acceptance-model.zh-TW.md
-└── 07-acceptance-model.en.md
+├── 07-acceptance-model.en.md
+├── 08-delivery-map.zh-TW.md
+└── 08-delivery-map.en.md
 ```
 
 Planned additions:
 
 ```text
-08-delivery-map.*
 09-risk-register.*
 10-traceability-matrix.*
 ```
@@ -105,10 +107,11 @@ These must not be conflated: a domain relationship is not a learning sequence, a
 - Core capability acceptance requires at least one understanding-oriented and one action-oriented form of evidence.
 - The English preparatory class totals 10 hours; the Chinese preparatory class totals 12 hours; the formal course totals 48 hours.
 - Both preparatory tracks share the same core outcomes and acceptance standards.
+- The Chinese-taught track's additional two hours support more tracing, remediation, diagnosis, and acceptance rather than a higher core standard.
 
 ## Next Step
 
-Create `08-delivery-map` to arrange shared capabilities, maturity targets, and minimum evidence into different pacing for the Chinese preparatory class, English preparatory class, and formal course.
+Create `09-risk-register` to identify risks in pacing, cognitive load, bilingual equivalence, AI dependency, acceptance execution, and document maintenance.
 
 ## Navigation
 
