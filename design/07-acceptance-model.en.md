@@ -1,252 +1,133 @@
 # Competency Acceptance Model
 
-Version: 0.1.0  
-Status: Architecture draft  
+Version: 0.2.0  
+Status: Official assessment baseline  
+Last updated: 2026-08-03  
+Major change summary: Changed to unsubmitted, ungraded homework; formative classroom participation; and one final one-on-one oral examination as the only summative assessment.  
 Corresponding Chinese version: [能力驗收模型](07-acceptance-model.zh-TW.md)
 
 ## Document Purpose
 
-This document converts the [Programming Competency Map](05-competency-map.en.md) and [Course Scope Boundary](06-scope-boundary.en.md) into executable acceptance rules.
+This document converts competency maturity into observable acceptance rules and aligns with the [Learning and Assessment Policy](13-learning-assessment-policy.en.md).
 
-It answers:
+The official course grade has only two components:
 
-1. What minimum evidence is required at each maturity level?
-2. Which task forms are suitable for accepting understanding, tracing, implementation, diagnosis, and transfer?
-3. How do we avoid treating correct output alone as proof of learning?
-4. Where may AI participate, and which core evidence must be produced by the student?
-5. How can the preparatory and formal courses use the same standards while targeting different maturity levels?
+1. Classroom participation: continuous formative observation.
+2. One final one-on-one oral examination: the only summative capability verification.
 
-This document is not an item-level grading rubric and does not assign weeks. Later assignments, activities, examinations, and oral checks must derive concrete rubrics from this model.
+Homework is required practice, but it is not submitted or graded individually. Students keep their own programs, tests, traces, error records, and AI-use notes for classroom discussion and final oral-exam preparation.
 
-## Constitutional Compliance
+## 1. Acceptance Principles
 
-- Correct output is one form of evidence, not sufficient proof of capability.
-- Every core capability requires at least two complementary forms of evidence.
-- Acceptance tasks must be observable, repeatable, and explainable.
-- Chinese-taught and English-taught classes use the same capability IDs, maturity levels, and passing standards.
-- AI may not replace the student's initial understanding, key tracing, core judgment, or final explanation.
-- Acceptance content may not exceed the scope boundary or introduce advanced data structures indirectly.
+- Correct output, successful compilation, passing OJ, or complete source code alone cannot establish capability.
+- Core capability requires both understanding-oriented and action-oriented evidence.
+- Attendance, roll call, or speaking frequency alone cannot represent participation.
+- Both language tracks use the same competency IDs, maturity targets, and grading standards.
+- AI may not replace initial understanding, key tracing, core judgment, or final explanation.
+- Acceptance may not exceed the scope boundary or introduce untaught advanced data structures.
 
----
+## 2. Minimum Maturity Rules
 
-# 1. Acceptance Unit
-
-Every assessable item consists of five elements:
-
-```text
-Capability ID + target maturity + task context + required evidence + passing criteria
-```
-
-Example:
-
-```text
-PC-C04 + L3 + trace one loop + EV-TR/EV-EX + fully explain initialization, condition, update, and termination
-```
-
-Acceptance criteria must not be written only as “can use loops” or “complete the program.”
-
----
-
-# 2. Minimum Acceptance Rules by Maturity
-
-| Level | Minimum task requirement | Minimum required evidence | Passing criteria | Insufficient performance |
-|---|---|---|---|---|
-| L1 Recognize | Identify the target concept in an example, error message, diagram, or program | EV-EX or EV-VI | Correctly identifies it without confusing nearby concepts | Guesses the name but cannot identify its location or role |
-| L2 Explain | Explain the reason, role, and limitation of the concept in one's own words | EV-EX plus either EV-CO or EV-VI | Gives a causal explanation and answers at least one follow-up question | Recites a definition or copies AI or course text |
-| L3 Trace | Predict state, control, function, or memory changes step by step for a given input | EV-TR plus either EV-EX or EV-VI | Every step matches execution and key transitions and termination are identified | Gives only final output or copies observed execution afterward |
-| L4 Implement | Independently create or modify a program for a small requirement | EV-IM plus at least one of EV-TE, EV-EX, or EV-MO | Runs, satisfies the requirement, and the main design and tests can be explained | Passes only sample cases or cannot modify or explain the program |
-| L5 Diagnose | Reproduce a defect, locate it, form a hypothesis, repair it, and perform regression checks | EV-DE, EV-TE, and EV-EX | Diagnosis is evidence-based, repair matches the cause, and existing behavior remains valid | Guess-and-edit behavior or simply accepts an AI repair |
-| L6 Transfer | Apply the capability to an unseen requirement, representation, or language context | EV-RE plus at least one of EV-MO, EV-CO, or EV-IM | Identifies the invariant principle, required adaptation, and new risks | Reuses the original template with superficial changes |
-
-## Cumulative Principle
-
-Maturity levels are not six fully independent certificates. Higher-level acceptance must still sample necessary lower-level understanding:
-
-- L4 must include explanation of core program behavior.
-- L5 must include tracing of the key path that causes the defect.
-- L6 must explain which principles remain unchanged and which implementation choices change.
-
----
-
-# 3. Evidence Combination Rules
-
-## 3.1 Minimum Combination for Core Capabilities
-
-Every capability classified as `SB-C` requires at least:
-
-1. One understanding-oriented artifact: `EV-EX`, `EV-VI`, `EV-TR`, or `EV-CO`.
-2. One action-oriented artifact: `EV-IM`, `EV-MO`, `EV-TE`, or `EV-DE`.
-
-Only targets at L1 or L2 may temporarily rely on understanding-oriented evidence alone.
-
-## 3.2 Evidence That Cannot Stand Alone
-
-The following cannot independently prove capability:
-
-- All automated tests pass.
-- The program compiles successfully.
-- Complete source code is submitted.
-- AI rates the answer positively.
-- The student says, “I understand.”
-- Output matches the sample.
-
-## 3.3 Evidence Consistency
-
-Conflicting evidence cannot be hidden by averaging scores.
-
-For example, if the program is correct but the trace contradicts actual execution, understanding has not been established. The instructor should lower the maturity judgment or require supplemental acceptance.
-
----
-
-# 4. Standard Acceptance Task Forms
-
-| Task code | Task form | Main maturity accepted | AI boundary |
+| Level | Minimum task | Main evidence | Passing criterion |
 |---|---|---|---|
-| AT-01 | Concept recognition and classification | L1–L2 | AI may be used for comparison after answering, not before classification |
-| AT-02 | Independent explanation with follow-up | L2 | AI logs may be retained, but the student answers independently first |
-| AT-03 | Paper or table-based tracing | L3 | AI may not perform the step-by-step trace during acceptance |
-| AT-04 | Reconstruct a visual model | L2–L3 | AI may check the diagram but may not create the student's first version |
-| AT-05 | Minimum implementation | L4 | Documentation may be consulted; AI rules depend on the activity, but every section must be explainable |
-| AT-06 | Requirement modification | L4–L6 | AI may offer a risk list but may not deliver the finished modification |
-| AT-07 | Defect diagnosis | L3–L5 | AI may propose candidate hypotheses; the student verifies and eliminates them |
-| AT-08 | Test design | L3–L5 | AI may supplement missed cases only after the student submits an initial set |
-| AT-09 | Compare solutions and trade-offs | L2–L6 | AI may generate candidates; the student performs comparison and decision-making |
-| AT-10 | Transfer to a new context | L6 | References may be consulted, but the original complete solution may not simply be reused |
-| AT-11 | Review an AI suggestion | PC-A and PC-V | The task requires verification of AI; accepting AI is not itself a passing condition |
-| AT-12 | Micro oral check | Samples every level | AI may not provide live answers |
+| L1 Recognize | Identify a concept in code, an error, or a visual | EV-EX / EV-VI | Correctly identifies it without confusing nearby concepts |
+| L2 Explain | Explain purpose, reason, and limitation in the student's own words | EV-EX + EV-CO / EV-VI | Gives a causal explanation and answers a follow-up |
+| L3 Trace | Predict state and flow step by step for a given input | EV-TR + EV-EX / EV-VI | Every step matches program behavior and identifies transitions and termination |
+| L4 Implement | Complete or modify a small program | EV-IM + EV-TE / EV-MO / EV-EX | Meets the requirement and explains design and testing |
+| L5 Diagnose | Reproduce, locate, hypothesize, correct, and regress | EV-DE + EV-TE + EV-EX | Uses evidence and preserves prior behavior |
+| L6 Transfer | Apply capability in a new context | EV-RE + EV-MO / EV-CO / EV-IM | Explains invariant principles, changed parts, and new risks |
 
----
+Higher-level acceptance still samples prerequisite understanding: L4 must explain, L5 must trace the defect path, and L6 must explain the transfer principle.
 
-# 5. Preparatory-Course Acceptance Model
+## 3. Standard Task Forms
 
-The preparatory course mainly accepts L2–L4, but not every capability must reach implementation.
+`AT-01` through `AT-11` may support practice, classroom discussion, and final-exam question generation. `AT-12` is redefined as the final one-on-one oral examination and no longer means a micro-oral check after each assignment.
 
-## 5.1 Minimum Completion Evidence Package
+| Task ID | Task form | Main capability | AI boundary |
+|---|---|---|---|
+| AT-01 | Concept recognition and classification | L1–L2 | Compare after answering; do not obtain the answer first |
+| AT-02 | Own explanation and follow-up | L2 | Student answers independently first |
+| AT-03 | Paper or table tracing | L3 | AI may not calculate the trace step by step |
+| AT-04 | Visual-model reconstruction | L2–L3 | AI may review, not create the first version |
+| AT-05 | Minimal implementation | L4 | Documentation is allowed; student explains each section |
+| AT-06 | Requirement modification | L4–L6 | Student performs the core modification |
+| AT-07 | Defect diagnosis | L3–L5 | AI may suggest hypotheses; student verifies them |
+| AT-08 | Test design | L3–L5 | AI may add cases only after the student's first set |
+| AT-09 | Solution comparison and trade-off | L2–L6 | Student compares and decides |
+| AT-10 | Transfer to a new context | L6 | Do not reuse a complete prior answer |
+| AT-11 | AI suggestion review | PC-A, PC-V | Verify with tests or tracing |
+| AT-12 | Final one-on-one oral examination | Integrated sample | AI may not answer live |
 
-Every student should complete at least:
+## 4. Homework and Classroom Participation
 
-1. One explanation of a small program's execution process: `PC-E`, `EV-EX + EV-VI`.
-2. One condition or loop trace: `PC-C`, `EV-TR + EV-EX`.
-3. One simple requirement modification: `PC-D/PC-C`, `EV-MO + EV-TE`.
-4. One error classification and initial debugging task: `PC-E/PC-V`, `EV-DE + EV-EX`.
-5. One AI-suggestion verification record: `PC-A`, `EV-AI + EV-TE`.
+### 4.1 Homework
 
-## 5.2 Passing Methods That Must Not Be Used
+- Homework is assigned after each class.
+- It is not submitted, graded, or individually marked.
+- Students keep their own programs, tests, traces, error notes, and AI-use records.
+- The next class reserves 15–25 minutes to discuss the previous homework.
+- Homework may become the context or modification material for the final oral examination.
 
-- One final project as the only evidence.
-- Online-judge passing counts alone.
-- Multiple-choice questions as the sole assessment of tracing.
-- Attendance as a substitute for understanding evidence.
-- Awarding L4 because AI generated a complete program.
+### 4.2 Classroom Participation
 
----
+Participation is not attendance or speaking frequency. Valid evidence includes:
 
-# 6. Formal-Course Acceptance Model
+- Asking a specific question or describing a blocker.
+- Answering, extending, or correcting a technical explanation.
+- Joining peer tracing, testing, debugging, or comparison.
+- Sharing an error, a test case, or an alternative solution.
+- Participating through writing, anonymous questions, diagrams, program operation, or group records.
 
-The formal course should accumulate L4–L6 evidence progressively.
+Instructors should judge sustained, meaningful engagement rather than reward fast speaking or penalize introverted communication.
 
-Each major competency group requires at least:
+## 5. Final One-on-One Oral Examination
 
-- One independent or resource-constrained implementation.
-- One requirement modification.
-- One testing or debugging task.
-- One explanation, comparison, or oral sampling task.
+The final oral examination is the only summative assessment. Its detailed content and procedure will be designed later, but it must collectively verify:
 
-Final acceptance of integrated capability `PC-I` should contain:
+1. Reading and explanation.
+2. Execution tracing.
+3. Requirement modification.
+4. Test design and verification.
+5. Defect diagnosis.
+6. Function or responsibility decomposition.
+7. AI suggestion judgment and verification.
 
-```text
-Requirement understanding
-→ data and control design
-→ implementation
-→ testing
-→ defect repair
-→ requirement change
-→ regression verification
-→ explanation and reflection
-```
+Students may bring their saved homework and learning records as references, but references or AI may not replace live reasoning and explanation.
 
-Even when the final product is functionally complete, inability to explain, modify, or diagnose it prevents an L5 or L6 judgment.
+## 6. Grade Structure
 
----
+The official course announcement may choose within these ranges:
 
-# 7. AI Acceptance Rules
+- Classroom participation: 20–30%.
+- Final one-on-one oral examination: 70–80%.
 
-## 7.1 Student Responsibilities That Must Be Preserved
+Roll call, number of submitted assignments, OJ count, or screenshots of completion may not become a third major grade source.
 
-The student must personally produce:
+## 7. AI Acceptance
 
-- A problem interpretation or initial approach before using AI.
-- At least one independently created expected result or test.
-- Technical verification of AI suggestions.
-- Reasons for accepting, modifying, or rejecting suggestions.
-- An explanation of the final program's core behavior.
+Students should retain their pre-AI understanding, self-created expected results or tests, a summary of the AI suggestion, the verification method, and the reason for accepting, modifying, or rejecting it.
 
-## 7.2 Minimum AI-Use Record
+The following do not establish AI literacy:
 
-| Field | Required content |
-|---|---|
-| Goal | What assistance was requested from AI |
-| Current state | What was understood, attempted, and where the difficulty occurred |
-| AI suggestion | A summary rather than a full transcript dump |
-| Verification method | Documentation, compilation, execution, testing, or tracing |
-| Decision | Accept, modify, or reject |
-| Reason | Evidence-based justification |
+- Saying only that AI approved the answer.
+- Being unable to identify AI-influenced parts.
+- Being unable to explain or modify AI-generated core code.
+- Claiming correctness without independent testing.
 
-A complete pasted conversation cannot replace this synthesis and judgment.
+## 8. Fairness and Exceptions
 
-## 7.3 AI-Related Failure Conditions
+- Do not deduct marks solely because a reasonable solution differs from the example.
+- The English track may use terminology cards, sentence scaffolds, and extra reading time.
+- Language fluency affects judgment only when it prevents technical understanding.
+- Tool or device failure uses a fallback environment or equivalent tracing, testing, and explanation task.
+- Reasonable absence does not directly lose roll-call points; students still demonstrate capability through later participation and the final oral examination.
 
-- Cannot identify which parts came from AI.
-- Cannot explain AI-generated core code.
-- Claims correctness without independent testing.
-- Uses “AI said so” as the only reason.
-- Directly adopts a suggestion that conflicts with the course scope.
+## 9. Next Work
 
----
-
-# 8. Pass, Conditional Pass, Supplemental Acceptance, and Fail
-
-| Judgment | Condition |
-|---|---|
-| Pass | All required evidence reaches the target maturity and is mutually consistent |
-| Conditional pass | Core behavior is established, but one minor evidence item can be supplemented |
-| Supplemental acceptance | Evidence is insufficient, contradictory, or cannot be attributed to the student |
-| Fail | Core capability is absent or completion depends on an external full answer |
-
-Supplemental acceptance should target the missing capability rather than repeat all work. For example, when the program is correct but tracing is absent, the student may trace a new input live and answer follow-up questions.
-
----
-
-# 9. Acceptance Design Checklist
-
-Before publishing any formal activity or assessment, confirm:
-
-1. Which capability IDs are referenced?
-2. What is the target maturity?
-3. Does it comply with `06-scope-boundary`?
-4. Are there at least two complementary forms of evidence?
-5. Can it distinguish understanding from accidental correctness?
-6. Does it include normal, boundary, or failure cases?
-7. Are AI-use rules explicit?
-8. Can it be delivered with substantive equivalence in both language tracks?
-9. Can instructors or teaching assistants make consistent judgments from the criteria?
-10. Are the relevant rules reachable from the root README?
-
----
-
-# 10. Completion Criteria and Next Document
-
-After this document is established, later design work must be able to:
-
-- Convert each capability into concrete activities and rubrics.
-- Distinguish formative checks from summative acceptance.
-- Build evidence accumulation for the preparatory and formal courses.
-- Link requirements, domain concepts, knowledge dependencies, competencies, scope, acceptance, materials, and assessments in the traceability matrix.
-
-The next document is `08-delivery-map.*`, which will arrange shared capabilities and acceptance evidence into different delivery pacing for the Chinese preparatory class, English preparatory class, and formal course.
+Question types, duration, selection method, resource boundaries, make-up arrangements, and inter-rater consistency for the final oral examination will be defined in a separate bilingual official document.
 
 ## Navigation
 
-- [Previous: Course Scope Boundary](06-scope-boundary.en.md)
-- [Back to Instructional Design Workspace](README.en.md)
+- [Learning and Assessment Policy](13-learning-assessment-policy.en.md)
+- [Course Delivery Map](08-delivery-map.en.md)
 - [繁體中文版](07-acceptance-model.zh-TW.md)
