@@ -1,6 +1,6 @@
 # Programming Domain Model
 
-Version: 0.1.0  
+Version: 0.1.1  
 Status: Architecture draft  
 Corresponding Chinese version: [程式設計領域模型](03-programming-domain-model.zh-TW.md)
 
