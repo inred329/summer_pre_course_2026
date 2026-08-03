@@ -1,6 +1,6 @@
 # 教學內容設計區
 
-版本：0.5.0  
+版本：0.6.0  
 狀態：規劃中  
 對應英文版本：[Instructional Design Workspace](README.en.md)
 
@@ -49,6 +49,7 @@
 | 04 | [程式語言知識依賴圖](04-programming-language-knowledge-graph.zh-TW.md) | 定義理解核心概念時的主要先備知識與依賴。 |
 | 05 | [程式設計能力地圖](05-competency-map.zh-TW.md) | 將概念與依賴轉換為學生可展現的能力、成熟度與證據。 |
 | 06 | [課程範圍邊界](06-scope-boundary.zh-TW.md) | 定義前導與正式課程的核心交付、鋪墊、延後與排除範圍。 |
+| 07 | [能力驗收模型](07-acceptance-model.zh-TW.md) | 定義成熟度最低證據、標準驗收任務、AI 邊界與通過判準。 |
 
 英文導覽：[Instructional Design Workspace](README.en.md)
 
@@ -69,13 +70,14 @@ design/
 ├── 05-competency-map.zh-TW.md
 ├── 05-competency-map.en.md
 ├── 06-scope-boundary.zh-TW.md
-└── 06-scope-boundary.en.md
+├── 06-scope-boundary.en.md
+├── 07-acceptance-model.zh-TW.md
+└── 07-acceptance-model.en.md
 ```
 
 後續預計增加：
 
 ```text
-07-acceptance-model.*
 08-delivery-map.*
 09-risk-register.*
 10-traceability-matrix.*
@@ -100,12 +102,13 @@ design/
 - 資料組織目前維持在序列、記錄、索引與操作的抽象層，不預設進階資料結構為課程核心。
 - 能力成熟度分為辨識、解釋、追蹤、實作、診斷與遷移。
 - 範圍狀態分為核心交付、基礎鋪墊、延後深化、延後實作與課程外。
+- 核心能力驗收至少需要理解型與行動型兩種互補證據。
 - 英文前導班共 10 小時；中文前導班共 12 小時；正式課程共 48 小時。
 - 兩個前導班的共同核心學習成果與驗收標準一致。
 
 ## 下一步
 
-建立 `07-acceptance-model` 前，應先確認本次重構後的領域模型、知識依賴、能力與範圍文件彼此一致。
+建立 `08-delivery-map`，把共同能力、成熟度與最低證據安排成中文前導班、英文前導班與正式課程的不同交付節奏。
 
 ## 導覽
 
