@@ -50,14 +50,23 @@ The official design baseline currently includes:
 11. 中英文術語對照表｜Chinese–English Terminology Glossary
 12. 課程設計憲法遵循審查｜Course Design Constitution Compliance Review
 
-### 教材結構基準｜Material Structure Baseline
+### 教材與活動｜Materials and Activities
 
+- [教材與活動資源（繁體中文）](materials/README.zh-TW.md)
+- [Materials and Activity Resources (English)](materials/README.en.md)
 - [單元教材模板（繁體中文）](materials/TEMPLATE.zh-TW.md)
 - [Unit Material Template (English)](materials/TEMPLATE.en.md)
 
-所有後續教材、活動、作業、rubric 與教師文件都必須以此模板及設計追蹤矩陣為基準。
+目前已建立第一個正式雙語前導單元：
 
-All subsequent materials, activities, assignments, rubrics, and instructor documents must use this template and the design traceability matrix as their baseline.
+The first official bilingual preparatory unit is now available:
+
+- [前導單元 1：程式如何開始執行](materials/preparatory/unit-01-execution.zh-TW.md)
+- [Preparatory Unit 1: How a Program Begins to Run](materials/preparatory/unit-01-execution.en.md)
+
+所有後續教材、活動、作業、rubric 與教師文件都必須以教材模板及設計追蹤矩陣為基準。
+
+All subsequent materials, activities, assignments, rubrics, and instructor documents must use the material template and design traceability matrix as their baseline.
 
 ### 既有課程與執行規劃｜Existing Course and Operational Planning
 
@@ -159,13 +168,15 @@ Completed:
 - 課程憲法與 `01–10` 設計鏈
 - 中英文術語表
 - 憲法遵循審查
-- 雙語教材模板
+- 雙語教材模板與教材索引
+- 前導單元 1 雙語教材
 
 - Course Constitution and the `01–10` design chain
 - Chinese–English terminology glossary
 - Constitution compliance review
-- Bilingual material template
+- Bilingual material template and materials index
+- Bilingual Preparatory Unit 1 material
 
-下一階段是使用正式模板建立中文前導第 1 堂與英文前導 Session 1 的教材、活動、練習、驗收與教師執行資源。
+下一階段是建立前導單元 2「資料、型別與程式狀態」，並延續預測、追蹤、修改、測試、AI 驗證與微型口試證據。
 
-The next stage is to use the official template to build materials, activities, practice, acceptance, and instructor resources for Chinese Preparatory Session 1 and English Preparatory Session 1.
+The next stage is to create Preparatory Unit 2, “Data, Types, and Program State,” continuing prediction, tracing, modification, testing, AI verification, and micro-oral evidence.
