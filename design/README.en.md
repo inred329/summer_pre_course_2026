@@ -1,6 +1,6 @@
 # Instructional Design Workspace
 
-Version: 0.5.0  
+Version: 0.6.0  
 Status: In planning  
 Corresponding Chinese version: [教學內容設計區](README.zh-TW.md)
 
@@ -49,6 +49,7 @@ Every document must at least:
 | 04 | [Programming Language Knowledge Dependency Graph](04-programming-language-knowledge-graph.en.md) | Defines major prerequisite knowledge and dependencies for understanding core concepts. |
 | 05 | [Programming Competency Map](05-competency-map.en.md) | Converts concepts and dependencies into observable capabilities, maturity levels, and evidence. |
 | 06 | [Course Scope Boundary](06-scope-boundary.en.md) | Defines core delivery, foundations, deferrals, and exclusions for preparatory and formal courses. |
+| 07 | [Competency Acceptance Model](07-acceptance-model.en.md) | Defines minimum maturity evidence, standard acceptance tasks, AI boundaries, and passing criteria. |
 
 Chinese navigation: [教學內容設計區](README.zh-TW.md)
 
@@ -69,13 +70,14 @@ design/
 ├── 05-competency-map.zh-TW.md
 ├── 05-competency-map.en.md
 ├── 06-scope-boundary.zh-TW.md
-└── 06-scope-boundary.en.md
+├── 06-scope-boundary.en.md
+├── 07-acceptance-model.zh-TW.md
+└── 07-acceptance-model.en.md
 ```
 
 Planned additions:
 
 ```text
-07-acceptance-model.*
 08-delivery-map.*
 09-risk-register.*
 10-traceability-matrix.*
@@ -100,12 +102,13 @@ These must not be conflated: a domain relationship is not a learning sequence, a
 - Data organization currently remains at the abstraction level of sequences, records, indexing, and operations; advanced data structures are not presumed to be course core content.
 - Competency maturity is recognize, explain, trace, implement, diagnose, and transfer.
 - Scope states are core delivery, foundation only, deepen later, implement later, and out of scope.
+- Core capability acceptance requires at least one understanding-oriented and one action-oriented form of evidence.
 - The English preparatory class totals 10 hours; the Chinese preparatory class totals 12 hours; the formal course totals 48 hours.
 - Both preparatory tracks share the same core outcomes and acceptance standards.
 
 ## Next Step
 
-Before creating `07-acceptance-model`, confirm that the refactored domain, dependency, competency, and scope documents are mutually consistent.
+Create `08-delivery-map` to arrange shared capabilities, maturity targets, and minimum evidence into different pacing for the Chinese preparatory class, English preparatory class, and formal course.
 
 ## Navigation
 
