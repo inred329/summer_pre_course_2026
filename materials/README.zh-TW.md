@@ -1,14 +1,14 @@
 # 教材與活動資源
 
-版本：1.1.0  
-狀態：前導教材與評量制度基準完成  
+版本：1.2.0  
+狀態：前導教材、評量制度與教師執行包完成  
 最後更新：2026-08-03  
-重大變更摘要：將作業改為不繳交、不計分的自主練習，並納入課堂參與與一次最終一對一口試制度。  
+重大變更摘要：新增雙語教師執行指引與教材評量優先規則，完成可直接授課的前導課程執行基準。  
 對應英文版本：[Materials and Activity Resources](README.en.md)
 
 ## 文件目的
 
-本目錄提供中文與英文前導班的教材、活動、自主作業、課堂討論、參與觀察、AI 紀錄及最終口試準備資源。
+本目錄提供中文與英文前導班的教材、活動、自主作業、課堂討論、參與觀察、AI 紀錄、教師執行及最終口試準備資源。
 
 所有正式教材必須：
 
@@ -29,6 +29,23 @@
 | 4 | [函數、整合開發與 AI 驗證](preparatory/unit-04-functions-integration.zh-TW.md) | [Functions, Integrated Development, and AI Verification](preparatory/unit-04-functions-integration.en.md) | 函數責任、整合循環、回歸與 AI 審查 |
 
 中文班以四堂交付；英文班將單元 4 拆成 Session 4 與 Session 5。核心能力、難度與評量標準相同。
+
+## 教師執行資源
+
+- [前導課程教師執行指引](instructor/session-guides.zh-TW.md)
+- [Preparatory Course Instructor Implementation Guide](instructor/session-guides.en.md)
+- [前導教材評量制度補充規則](preparatory/ASSESSMENT-NOTE.zh-TW.md)
+- [Preparatory Material Assessment Override](preparatory/ASSESSMENT-NOTE.en.md)
+
+教師執行指引已包含：
+
+- 中文四堂與英文五堂的節奏配置。
+- 每堂課前次作業討論時間。
+- 必備錯誤案例與錯誤 AI 建議。
+- 課堂參與觀察點。
+- 時間不足與工具故障時的備援策略。
+
+教材中若仍出現「提交、補驗、微型口試」等舊措辭，以評量制度補充規則與 `design/07`、`design/13` 為準。
 
 ## 自主作業與評量資源
 
@@ -60,11 +77,13 @@
 - [前導教材憲法遵循審查](reviews/materials-constitution-review.zh-TW.md)
 - [Preparatory Materials Constitution Review](reviews/materials-constitution-review.en.md)
 
-## 發布前仍須完成
+## 下一階段
 
-- 在實際教室環境編譯所有 C17 範例。
-- 建立教師提供的缺陷程式與錯誤 AI 建議之雙語等值版本。
-- 另行建立最終一對一口試的正式雙語內容與流程文件。
+- 建立各單元可直接編譯的 C17 範例與缺陷程式。
+- 在實際教室環境驗證 GCC／Clang 與 Windows／Linux 指令。
+- 建立雙語等值的錯誤 AI 建議案例庫。
+- 逐份清理單元教材中的舊評量措辭。
+- 待後續討論後，建立最終一對一口試的正式雙語內容與流程文件。
 
 ## 導覽
 
