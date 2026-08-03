@@ -1,73 +1,75 @@
-# Preparatory Course Assignment Pack
+# Preparatory Independent Assignment and Oral Preparation Pack
 
-Version: 0.1.1  
-Status: Official assignment draft  
+Version: 0.2.0  
+Status: Official learning-task baseline  
 Last updated: 2026-08-03  
-Major change summary: Completed constitution review and clarified that the integrated assignment uses only preparatory-course basic types, conditions, loops, and functions.  
-Corresponding Chinese version: [前導課程作業包](preparatory-assignments.zh-TW.md)
+Major change summary: Assignments are now unsubmitted and ungraded formative learning tasks retained by students for next-class discussion and the final one-to-one oral examination.  
+Corresponding Chinese version: [前導課程自主作業與口試準備包](preparatory-assignments.zh-TW.md)
 
 ## Document Purpose
 
-For students, instructors, and teaching assistants in both preparatory tracks. Both tracks use the same core requirements, evidence, and passing standards; only deadlines, pacing, and language scaffolds may differ.
+For students, instructors, and teaching assistants in both preparatory tracks. Both tracks use the same core tasks and capability standards; only pacing and language scaffolds may differ.
 
-## Shared Assignment Rules
+## Assignment Policy
 
-Every assignment must include:
+- Every assignment should be completed, but it is not submitted and receives no direct grade.
+- Students retain their programs, tests, traces, errors, modifications, and AI records.
+- The next class discusses the previous assignment. Students may ask questions, share errors, compare solutions, or join class debugging.
+- These assignments and learning records become primary materials for the final one-to-one oral examination.
+- Instructors do not mark every assignment and do not deduct points for non-submission; students demonstrate capability through participation and the final oral examination.
+
+Students should retain:
 
 1. Understanding or prediction before execution.
 2. Program or modification result.
 3. Self-created tests and expected results.
 4. Actual results and comparison.
-5. One explanation, trace, debugging, or requirement-change artifact.
+5. One trace, debugging, or requirement-change record.
 6. An AI-use record when AI was used.
+7. One remaining uncertainty to bring to the next class.
 
-Correct output, successful compilation, passing OJ, or complete source code alone is insufficient for passing.
+Correct output, successful compilation, passing OJ, or complete source code alone does not establish capability.
 
 ---
 
 # Assignment 1: From Source Code to Execution
 
 - Related material: Unit 1
-- Requirement IDs: `X-01`, `X-02`, `X-04`
 - Competency IDs: `PC-E01`, `PC-E03`, `PC-E04`
 - Target maturity: L2–L4
-- Acceptance tasks: `AT-04`, `AT-05`, `AT-07`, `AT-12`
 
 ## Task
 
 Create a C program that prints three lines: your name, department or interest, and `I am learning C.`
 
-## Required Evidence
+## Suggested Records
 
 - A source-to-output flow diagram.
 - Expected output written before execution.
 - Compile and run commands.
 - One self-created compilation error, its classification, and correction explanation.
 - Before-and-after results after modifying one line and recompiling.
+- One question to raise in the next class.
 
-## Passing Criteria
+## Possible Next-Class Discussion
 
-Explain the difference between compilation and execution, and support the correction with evidence.
-
-## Remediation
-
-Classify the stage of a new error example and explain live why source changes require recompilation.
+- How are compilation and execution different?
+- Why must a source change be recompiled?
+- Does the location named by an error message always identify the root cause?
 
 ---
 
 # Assignment 2: Data and State Tracing
 
 - Related material: Unit 2
-- Requirement IDs: `CAP-D01` through `CAP-D04`
 - Competency IDs: `PC-D01` through `PC-D05`
 - Target maturity: L2–L4
-- Acceptance tasks: `AT-03`, `AT-05`, `AT-06`, `AT-08`
 
 ## Task
 
-Create a “purchase total calculator”: read unit price and quantity, then print the total.
+Create a purchase-total calculator: read unit price and quantity, then print the total.
 
-## Required Evidence
+## Suggested Records
 
 - Input–process–output table.
 - Variables, types, and reasons for their selection.
@@ -75,91 +77,65 @@ Create a “purchase total calculator”: read unit price and quantity, then pri
 - One state-trace table.
 - Requirement change: add a fixed shipping fee of 60; shipping is free when the total reaches 500.
 - Updated tests and regression results.
+- One unresolved question about types or state.
 
 ## Constraint
 
 Use only basic types, expressions, input/output, and necessary conditions; do not use arrays, functions, or advanced techniques.
-
-## Passing Criteria
-
-Type choices and tracing are reasonable, tests before and after modification are complete, and the first state change can be explained.
-
-## Remediation
-
-Trace instructor-provided values live and correct one format or type error.
 
 ---
 
 # Assignment 3: Conditions and Loops
 
 - Related material: Unit 3
-- Requirement IDs: `CAP-C01` through `CAP-C04`
 - Competency IDs: `PC-C01` through `PC-C07`
 - Target maturity: L3–L4
-- Acceptance tasks: `AT-03`, `AT-06`, `AT-07`, `AT-08`, `AT-12`
 
 ## Task
 
-Create a “valid score statistics” program: repeatedly read scores; input `-1` ends the program. Accept only 0–100, then print the valid count and sum.
+Create a valid-score statistics program: repeatedly read scores; input `-1` ends the program. Accept only 0–100, then print the valid count and sum.
 
-## Required Evidence
+## Suggested Records
 
 - The four loop elements.
 - At least one iteration-by-iteration trace.
 - Normal, boundary, and exceptional cases.
-- Diagnosis of one instructor-provided off-by-one or infinite-loop defect.
+- One off-by-one or infinite-loop defect and its diagnosis record.
 - Requirement change: also print the average; when there is no valid score, print `No valid score`.
-
-## Passing Criteria
-
-Explain termination, valid-data checks, and update order; run regression tests after correcting the defect.
-
-## Remediation
-
-Trace a new input sequence live and identify each iteration state and the stopping reason.
+- Regression tests after the correction.
+- One loop question to bring to class.
 
 ---
 
 # Assignment 4: Functions and Responsibility Decomposition
 
 - Related material: Unit 4
-- Requirement IDs: `CAP-F01` through `CAP-F04`
 - Competency IDs: `PC-F01` through `PC-F05`
 - Target maturity: L2–L4
-- Acceptance tasks: `AT-04`, `AT-05`, `AT-06`, `AT-09`, `AT-12`
 
 ## Task
 
-Refactor an instructor-provided program in which all work is inside `main` into at least two functions with clear responsibilities.
+Refactor a program in which all work is inside `main` into at least two functions with clear responsibilities.
 
 Suggested context: read three numbers, find the maximum, and print it.
 
-## Required Evidence
+## Suggested Records
 
 - Explanation of responsibility problems before refactoring.
 - Function-responsibility diagram and interfaces.
 - Call trace.
 - Identical test results before and after refactoring.
 - Requirement change: also print the minimum.
-- Compare two possible decompositions and justify the choice.
-
-## Passing Criteria
-
-Responsibilities are clear and independently testable, and the student can trace parameters and return values.
-
-## Remediation
-
-Decompose another oversized function or trace a new set of call data.
+- Two possible decompositions and the reason for choosing one.
+- One uncertainty about function design.
 
 ---
 
 # Integrated Assignment: Small Score Reporter
 
 - Related material: Units 1–4
-- Requirement IDs: `EDU-01` through `EDU-04`, `X-01` through `X-06`
 - Competency IDs: `PC-E`, `PC-D`, `PC-C`, `PC-F`, `PC-V`, `PC-A`, `PC-I`
 - Target maturity: L3–L4
-- Acceptance tasks: `AT-05` through `AT-12`
 
 ## Basic Requirements
 
@@ -174,10 +150,10 @@ Valid scores are 0–100. When any input is invalid, print `Invalid input` and s
 ## Permitted Core-Solution Scope
 
 - Use three separate score variables, basic types, conditions, functions, and necessary expressions.
-- “Remove the lowest score and recalculate the average” can be completed by subtracting the minimum from the sum of three scores and dividing by 2.
-- Arrays or any untaught data structure are neither required nor encouraged for this task.
+- Removing the lowest score and recalculating the average can be completed by subtracting the minimum from the sum of three scores and dividing by 2.
+- Arrays or any untaught data structure are neither required nor encouraged.
 
-## Required Development Cycle
+## Suggested Development Cycle
 
 ```text
 Understand requirements
@@ -192,7 +168,7 @@ Understand requirements
 → Explain and reflect
 ```
 
-## Required Evidence
+## Suggested Records
 
 1. Requirement-analysis table.
 2. Data and function-responsibility diagram.
@@ -201,50 +177,33 @@ Understand requirements
 5. One defect-diagnosis record.
 6. Requirement change: remove the lowest score and recalculate the average.
 7. Regression tests.
-8. AI-use record or a “no AI used” declaration.
-9. Micro-oral check.
+8. AI-use record or a no-AI-used declaration.
+9. A self-question list for final oral preparation.
 
-## AI Review Task
+## AI Review Practice
 
-The instructor provides one potentially incorrect AI suggestion. Students predict first, then compile, run, and test before accepting, modifying, or rejecting it with evidence.
+Find one potentially incorrect AI suggestion. Predict first, then compile, run, and test before accepting, modifying, or rejecting it with evidence.
 
 ## Not Permitted
 
 - Arrays, pointers, dynamic memory, or advanced data structures as the core solution.
-- Submitting AI-generated code that cannot be explained.
+- Keeping a complete AI-generated program that the student cannot explain as oral-examination preparation.
 - Using one sample output as proof of correctness.
-
-## Passing Criteria
-
-- Program satisfies requirements and tests are trustworthy.
-- Student explains data, control, and function responsibilities.
-- Student modifies a requirement and performs regression verification.
-- Student diagnoses one defect.
-- Student explains how an AI suggestion was verified.
-
-## Remediation
-
-Remediation targets the missing capability rather than requiring indiscriminate resubmission:
-
-- Weak tracing: live-trace a new input.
-- Weak testing: add boundary and exceptional cases.
-- Weak function understanding: modify an interface and explain it.
-- Weak AI verification: review another incorrect suggestion.
 
 ---
 
-# Submission Format
+# Independent Storage
 
-Submit one folder per assignment:
+No upload or submission is required. A suggested student folder is:
 
 ```text
 assignment-x/
-├── README.md          # understanding, predictions, tests, reflection, AI record
+├── README.md          # understanding, predictions, tests, questions, reflection, AI record
 ├── program.c          # program
-└── evidence/          # trace tables, diagrams, or result screenshots
+└── evidence/          # trace tables, diagrams, or result records
 ```
 
-Equivalent formats are acceptable, but required evidence may not be omitted.
+Equivalent storage is acceptable as long as the student can find, read, modify, and explain the work during class discussion and the final oral examination.
 
 ## Shared AI Use Rules
 
@@ -258,10 +217,10 @@ Equivalent formats are acceptable, but required evidence may not be omitted.
 ### Prohibited
 
 - Request a complete answer before understanding and an initial approach.
-- Let AI perform tracing, core decomposition, or the oral check.
-- Submit code that cannot be explained, modified, or tested.
+- Let AI perform tracing, core decomposition, or final oral answers.
+- Keep work that cannot be explained, modified, or tested as a completed result.
 
-### Must Retain
+### Suggested Records
 
 - Understanding or approach before AI use.
 - Self-created expected results and tests.
@@ -271,7 +230,8 @@ Equivalent formats are acceptable, but required evidence may not be omitted.
 
 ## Navigation
 
+- [Learning and Assessment Policy](../../design/13-learning-assessment-policy.en.md)
 - [Materials Index](../README.en.md)
-- [Shared Rubric](rubric.en.md)
+- [Classroom Participation and Final Oral Examination Rubric](rubric.en.md)
 - [AI Use Log Template](ai-use-log.en.md)
 - [繁體中文版](preparatory-assignments.zh-TW.md)
