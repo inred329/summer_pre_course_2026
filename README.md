@@ -51,6 +51,8 @@ The official design baseline includes stages `01–13`: vision, requirements, do
 - [前導教材評量制度補充規則](materials/preparatory/ASSESSMENT-NOTE.zh-TW.md)
 - [Preparatory Material Assessment Override](materials/preparatory/ASSESSMENT-NOTE.en.md)
 - [C17 範例與缺陷案例｜C17 Examples and Defect Cases](examples/README.md)
+- [測試案例與錯誤 AI 建議](examples/TESTS-AND-AI.zh-TW.md)
+- [Test Cases and Incorrect AI Suggestions](examples/TESTS-AND-AI.en.md)
 
 ## 正式學習與評量制度｜Official Learning and Assessment Policy
 
@@ -120,7 +122,9 @@ Completed:
 - 作業討論與參與觀察教師指引
 - 雙語教師執行包
 - 教材評量制度補充規則
+- 單元 1–4 雙語舊評量措辭清理
 - 第一批單元 1–4 C17 正確範例與缺陷程式
+- 雙語測試案例與錯誤 AI 建議文件
 - AI 使用紀錄模板
 - 教材憲法遵循審查
 
@@ -131,10 +135,24 @@ Completed:
 - Assignment-discussion and participation-observation guide
 - Bilingual instructor implementation pack
 - Material-assessment precedence rule
+- Legacy-assessment wording cleanup for Units 1–4 in both languages
 - First C17 correct examples and defect cases for Units 1–4
+- Bilingual test cases and incorrect-AI-suggestion documents
 - AI-use log template
 - Materials constitution review
 
-下一階段是擴充範例與錯誤 AI 建議案例庫、在實際教室環境完成 GCC／Clang 編譯驗證，並逐份清理單元教材中的舊評量措辭。最終口試內容與流程仍待後續討論後另立正式雙語文件。
+下一階段：
 
-The next stage is to expand the example and incorrect-AI-suggestion library, complete GCC/Clang verification in the actual classroom environment, and clean legacy assessment wording from each unit. The final oral-examination content and procedure will still be defined later after discussion.
+Next stage:
+
+- 在實際教室環境記錄 GCC 與 Clang 版本、編譯指令、警告差異與執行結果。
+- 擴充每個單元的正常、邊界、錯誤與回歸案例。
+- 增加更多看似合理但技術上錯誤的 AI 建議，並附學生驗證提示。
+- 依實際試教結果微調教師節奏、備援活動與學生常見誤解。
+- 最終口試內容與流程仍待後續討論後另立正式雙語文件。
+
+- Record GCC and Clang versions, compile commands, warning differences, and execution results in the actual classroom environment.
+- Expand normal, boundary, error, and regression cases for each unit.
+- Add more plausible but technically incorrect AI suggestions with student verification prompts.
+- Refine instructor pacing, fallback activities, and misconception guidance after classroom trials.
+- The final oral-examination content and procedure will still be defined later in a separate bilingual official document.
