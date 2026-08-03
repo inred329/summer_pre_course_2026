@@ -1,9 +1,9 @@
 # Preparatory Course Assignment Pack
 
-Version: 0.1.0  
+Version: 0.1.1  
 Status: Official assignment draft  
 Last updated: 2026-08-03  
-Major change summary: Established four formative assignments, one integrated assignment, required evidence, AI boundaries, and remediation methods.  
+Major change summary: Completed constitution review and clarified that the integrated assignment uses only preparatory-course basic types, conditions, loops, and functions.  
 Corresponding Chinese version: [前導課程作業包](preparatory-assignments.zh-TW.md)
 
 ## Document Purpose
@@ -170,6 +170,12 @@ Read three quiz scores and a passing threshold. Print:
 - The highest and lowest score.
 
 Valid scores are 0–100. When any input is invalid, print `Invalid input` and stop.
+
+## Permitted Core-Solution Scope
+
+- Use three separate score variables, basic types, conditions, functions, and necessary expressions.
+- “Remove the lowest score and recalculate the average” can be completed by subtracting the minimum from the sum of three scores and dividing by 2.
+- Arrays or any untaught data structure are neither required nor encouraged for this task.
 
 ## Required Development Cycle
 
