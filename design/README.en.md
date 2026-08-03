@@ -1,6 +1,6 @@
 # Instructional Design Workspace
 
-Version: 0.2.0  
+Version: 0.3.0  
 Status: In planning  
 Corresponding Chinese version: [教學內容設計區](README.zh-TW.md)
 
@@ -13,7 +13,7 @@ The course is not designed by starting with weekly schedules, slides, or textboo
 1. The educational vision and problem to solve.
 2. Stakeholders and their needs.
 3. The complete programming-language knowledge space and concept dependencies.
-4. The capabilities students should possess at course completion.
+4. The capabilities and maturity levels students should possess at course completion.
 5. Observable and assessable evidence of learning.
 6. Scope boundaries between the preparatory and formal courses.
 7. Delivery pacing for the Chinese-taught and English-taught classes.
@@ -45,6 +45,7 @@ Every document must satisfy at least the following principles:
 | 01 | [Course Product Vision](01-product-vision.en.md) | Defines the educational problem, product positioning, success conditions, and relationship between the preparatory and formal courses. |
 | 02 | [Instructional Requirements Map](02-requirements-map.en.md) | Defines educational, capability, cross-cutting, and acceptance-oriented requirements. |
 | 03 | [Programming Language Knowledge Graph](03-programming-language-knowledge-graph.en.md) | Defines the relationships among translation and execution, data, control, functions, memory, data organization, verification, and AI. |
+| 04 | [Programming Competency Map](04-competency-map.en.md) | Converts knowledge nodes into observable student capabilities, maturity levels, prerequisites, and evidence. |
 
 Chinese navigation: [教學內容設計區](README.zh-TW.md)
 
@@ -59,13 +60,14 @@ design/
 ├── 02-requirements-map.zh-TW.md
 ├── 02-requirements-map.en.md
 ├── 03-programming-language-knowledge-graph.zh-TW.md
-└── 03-programming-language-knowledge-graph.en.md
+├── 03-programming-language-knowledge-graph.en.md
+├── 04-competency-map.zh-TW.md
+└── 04-competency-map.en.md
 ```
 
 Planned additions:
 
 ```text
-04-competency-map.*
 05-scope-boundary.*
 06-acceptance-model.*
 07-delivery-map.*
@@ -107,6 +109,7 @@ Planned additions:
 - Each concept should be developed through Need → Design Purpose → Language Logic → Syntax → Implementation → Verification.
 - Programming is organized around data and state, flow and control, and functions and abstraction.
 - Program translation and execution, the memory model, data organization, testing and debugging, and AI literacy are necessary knowledge dimensions.
+- Competency maturity is classified by observable behavior as recognize, explain, trace, implement, diagnose, and transfer.
 - The English preparatory class has five 2-hour sessions, totaling 10 hours.
 - The Chinese preparatory class has four 3-hour sessions, totaling 12 hours.
 - The formal course has 16 weeks of 3-hour sessions, totaling 48 hours.
