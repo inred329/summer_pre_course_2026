@@ -1,7 +1,9 @@
 # Instructional Design Workspace
 
-Version: 0.9.0  
-Status: In planning  
+Version: 1.0.0  
+Status: Design baseline complete; entering material development  
+Last updated: 2026-08-03  
+Major change summary: Added the terminology glossary and constitution compliance review, completing the design-baseline stage.  
 Corresponding Chinese version: [教學內容設計區](README.zh-TW.md)
 
 ## Document Purpose
@@ -16,11 +18,12 @@ The design sequence is:
 4. Knowledge dependencies needed to understand those concepts.
 5. Student capabilities and maturity levels.
 6. Scope boundaries between preparatory and formal courses.
-7. Observable and assessable evidence.
+7. Observable and assessable learning evidence.
 8. Delivery pacing for both preparatory tracks and the formal course.
 9. Design and delivery risks.
 10. Traceability among requirements, competencies, scope, acceptance, delivery, and risks.
-11. Materials, activities, assignments, and assessments.
+11. Chinese–English terminology governance and constitution compliance review.
+12. Materials, activities, assignments, and assessments.
 
 ## Constitutional Compliance
 
@@ -33,12 +36,12 @@ Every document must at least:
 
 - Promote genuine understanding rather than output completion.
 - Be created as a synchronized, substantively equivalent bilingual pair.
-- Give capabilities prerequisites and acceptance methods.
+- Give competencies prerequisites and acceptance methods.
 - Control cognitive load for beginners.
 - Treat reading, modification, testing, debugging, explanation, and writing from scratch as equally important.
 - Provide visuals for concepts and relationships that benefit from visualization.
 - Use AI to support learning rather than replace core thinking.
-- Make preparatory and formal courses a continuous capability progression.
+- Make preparatory and formal courses a continuous competency progression.
 - Be reachable from the root README through direct or indirect navigation.
 
 ## Official Design Documents
@@ -49,42 +52,16 @@ Every document must at least:
 | 02 | [Instructional Requirements Map](02-requirements-map.en.md) | Defines educational, capability, and cross-cutting requirements. |
 | 03 | [Programming Domain Model](03-programming-domain-model.en.md) | Defines the concepts that exist in the programming domain and their relationships. |
 | 04 | [Programming Language Knowledge Dependency Graph](04-programming-language-knowledge-graph.en.md) | Defines major prerequisite knowledge and dependencies for understanding core concepts. |
-| 05 | [Programming Competency Map](05-competency-map.en.md) | Converts concepts and dependencies into observable capabilities, maturity levels, and evidence. |
+| 05 | [Programming Competency Map](05-competency-map.en.md) | Converts concepts and dependencies into observable competencies, maturity levels, and evidence. |
 | 06 | [Course Scope Boundary](06-scope-boundary.en.md) | Defines core delivery, foundations, deferrals, and exclusions for preparatory and formal courses. |
 | 07 | [Competency Acceptance Model](07-acceptance-model.en.md) | Defines minimum maturity evidence, standard acceptance tasks, AI boundaries, and passing criteria. |
-| 08 | [Course Delivery Map](08-delivery-map.en.md) | Arranges shared capabilities, maturity targets, and evidence across both preparatory tracks and the 16-week formal course. |
+| 08 | [Course Delivery Map](08-delivery-map.en.md) | Arranges shared competencies, maturity targets, and evidence across both preparatory tracks and the 16-week formal course. |
 | 09 | [Course Risk Register](09-risk-register.en.md) | Defines risk priority, triggers, mitigation, contingency responses, and accountable roles. |
 | 10 | [Course Design Traceability Matrix](10-traceability-matrix.en.md) | Connects requirements, domain concepts, knowledge nodes, competencies, scope, acceptance, delivery, and risks. |
+| 11 | [Chinese–English Terminology Glossary](11-terminology-glossary.en.md) | Establishes the official terminology, translation, and usage baseline. |
+| 12 | [Course Design Constitution Compliance Review](12-constitution-compliance-review.en.md) | Records the constitutional comparison, gaps, and controls required for material development. |
 
 Chinese navigation: [教學內容設計區](README.zh-TW.md)
-
-## Design Document Structure
-
-```text
-design/
-├── README.zh-TW.md
-├── README.en.md
-├── 01-product-vision.zh-TW.md
-├── 01-product-vision.en.md
-├── 02-requirements-map.zh-TW.md
-├── 02-requirements-map.en.md
-├── 03-programming-domain-model.zh-TW.md
-├── 03-programming-domain-model.en.md
-├── 04-programming-language-knowledge-graph.zh-TW.md
-├── 04-programming-language-knowledge-graph.en.md
-├── 05-competency-map.zh-TW.md
-├── 05-competency-map.en.md
-├── 06-scope-boundary.zh-TW.md
-├── 06-scope-boundary.en.md
-├── 07-acceptance-model.zh-TW.md
-├── 07-acceptance-model.en.md
-├── 08-delivery-map.zh-TW.md
-├── 08-delivery-map.en.md
-├── 09-risk-register.zh-TW.md
-├── 09-risk-register.en.md
-├── 10-traceability-matrix.zh-TW.md
-└── 10-traceability-matrix.en.md
-```
 
 ## Division of the Three Core Models
 
@@ -94,27 +71,32 @@ design/
 | Knowledge dependency graph | What usually must be understood before another concept? |
 | Competency map | What must students be able to do, and to what maturity? |
 
-These must not be conflated: a domain relationship is not a learning sequence, a knowledge dependency is not a weekly schedule, and capability maturity is not the same as a topic having been introduced.
+These must not be conflated: a domain relationship is not a learning sequence, a knowledge dependency is not a weekly schedule, and competency maturity is not the same as a topic having been introduced.
 
 ## Current Core Assumptions
 
-- C is the instructional language, while programming capability and the logic of C are the core goals.
+- C is the instructional language, while programming competency and the logic of C are the core goals.
 - Each concept develops through Need → Design Purpose → Language Logic → Syntax → Implementation → Verification.
 - Data and state, flow and control, and functions and abstraction are foundational pillars.
 - The toolchain, memory model, data organization, testing and debugging, and AI literacy are necessary dimensions.
-- Data organization currently remains at the abstraction level of sequences, records, indexing, and operations; advanced data structures are not presumed to be course core content.
+- Data organization currently remains at the abstraction level of sequences, records, indexing, and operations; advanced data structures are not presumed to be core course content.
 - Competency maturity is recognize, explain, trace, implement, diagnose, and transfer.
 - Scope states are core delivery, foundation only, deepen later, implement later, and out of scope.
-- Core capability acceptance requires at least one understanding-oriented and one action-oriented form of evidence.
+- Core competency acceptance requires at least one understanding-oriented and one action-oriented form of evidence.
 - The English preparatory class totals 10 hours; the Chinese preparatory class totals 12 hours; the formal course totals 48 hours.
 - Both preparatory tracks share the same core outcomes and acceptance standards.
 - The Chinese-taught track's additional two hours support more tracing, remediation, diagnosis, and acceptance rather than a higher core standard.
 - High-priority risks must not be treated by lowering acceptance, expanding scope, or adding advanced data structures.
 - Every core requirement, competency, acceptance task, and delivery location must support bidirectional traceability.
+- All materials and assessments use the approved terminology in `11-terminology-glossary`.
+
+## Constitution Review Result
+
+`12-constitution-compliance-review` found no major conflict requiring subsequent work to stop. The terminology-gap correction is complete; existing documents `01–10` will receive last-updated dates and major-change summaries when they are next substantively revised.
 
 ## Next Step
 
-Use `10-traceability-matrix` as the baseline for creating preparatory-course materials, activities, assignments, rubrics, and instructor resources. Every new artifact must cite requirement IDs, competency IDs, target maturity, and acceptance tasks.
+Create a bilingual teaching-material template as the single structural baseline for all preparatory and formal-course units. Every new artifact must cite requirement IDs, competency IDs, target maturity, scope state, and acceptance tasks.
 
 ## Navigation
 
