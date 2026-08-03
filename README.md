@@ -44,6 +44,14 @@ The official design baseline includes stages `01–13`: vision, requirements, do
 - [課堂參與與最終口試評分規準](materials/assignments/rubric.zh-TW.md)
 - [Classroom Participation and Final Oral Examination Rubric](materials/assignments/rubric.en.md)
 
+### 教師執行與程式範例｜Instructor Delivery and Code Examples
+
+- [前導課程教師執行指引](materials/instructor/session-guides.zh-TW.md)
+- [Preparatory Course Instructor Implementation Guide](materials/instructor/session-guides.en.md)
+- [前導教材評量制度補充規則](materials/preparatory/ASSESSMENT-NOTE.zh-TW.md)
+- [Preparatory Material Assessment Override](materials/preparatory/ASSESSMENT-NOTE.en.md)
+- [C17 範例與缺陷案例｜C17 Examples and Defect Cases](examples/README.md)
+
 ## 正式學習與評量制度｜Official Learning and Assessment Policy
 
 - 每次課後都有自主作業，但不繳交、不計分、不逐份批改。
@@ -110,6 +118,9 @@ Completed:
 - 自主作業與口試準備包
 - 課堂參與與最終口試 rubric
 - 作業討論與參與觀察教師指引
+- 雙語教師執行包
+- 教材評量制度補充規則
+- 第一批單元 1–4 C17 正確範例與缺陷程式
 - AI 使用紀錄模板
 - 教材憲法遵循審查
 
@@ -118,9 +129,12 @@ Completed:
 - Independent homework and oral-preparation pack
 - Classroom-participation and final-oral rubric
 - Assignment-discussion and participation-observation guide
+- Bilingual instructor implementation pack
+- Material-assessment precedence rule
+- First C17 correct examples and defect cases for Units 1–4
 - AI-use log template
 - Materials constitution review
 
-下一階段是在後續討論後建立最終一對一口試的正式雙語內容與流程文件。發布前仍須在實際教室環境編譯所有 C17 範例，並建立雙語等值的缺陷程式與錯誤 AI 建議。
+下一階段是擴充範例與錯誤 AI 建議案例庫、在實際教室環境完成 GCC／Clang 編譯驗證，並逐份清理單元教材中的舊評量措辭。最終口試內容與流程仍待後續討論後另立正式雙語文件。
 
-The next stage is to create the formal bilingual final one-on-one oral-examination content and procedure after further discussion. Before release, all C17 examples must still be compiled in the actual classroom environment, and bilingual-equivalent defective programs and incorrect AI suggestions must be prepared.
+The next stage is to expand the example and incorrect-AI-suggestion library, complete GCC/Clang verification in the actual classroom environment, and clean legacy assessment wording from each unit. The final oral-examination content and procedure will still be defined later after discussion.
