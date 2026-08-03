@@ -1,6 +1,6 @@
 # Constitution of the 2026 Summer Preparatory Course
 
-Version: 1.0.0  
+Version: 1.1.0  
 Status: Official baseline document  
 Scope: All course plans, teaching materials, handouts, slides, code examples, exercises, assignments, assessments, teacher documents, student documents, and maintenance documents in this repository
 
@@ -178,14 +178,15 @@ Teaching materials should ordinarily include:
 2. Learning objectives
 3. Prerequisites
 4. Core concepts
-5. Minimal executable example
-6. Execution-flow or reasoning explanation
-7. Common errors
-8. Guided practice
-9. Independent practice
-10. Self-check
-11. AI rules or guidance
-12. Unit summary
+5. Appropriate visual representation
+6. Minimal executable example
+7. Execution-flow or reasoning explanation
+8. Common errors
+9. Guided practice
+10. Independent practice
+11. Self-check
+12. AI rules or guidance
+13. Unit summary
 
 Different document types may adapt this structure to their purpose, but equivalent documents shall not change their basic organization arbitrarily.
 
@@ -201,7 +202,26 @@ Code in official documents must:
 
 The Chinese and English versions should ordinarily use identical code, data, and test cases. Only explanatory text, interface text, or comments may be translated where needed.
 
-## Article 15 — Cognitive Load Must Be Controlled
+## Article 15 — Visual-First Teaching Principle
+
+To help students form accurate mental models, official documents must provide an appropriate visual representation whenever diagrams, flowcharts, structural diagrams, memory diagrams, sequence diagrams, relationship diagrams, concept maps, state diagrams, or other visual forms would materially improve understanding. Such content must not be presented only in prose.
+
+Visualizations must satisfy the following requirements:
+
+1. Every visual must address a clear learning objective or question and must not serve merely as decoration.
+2. The visual, explanatory text, code, inputs and outputs, and observed execution results must be mutually consistent.
+3. The visual must emphasize the current core concept and avoid introducing elements that are irrelevant or have not yet been taught.
+4. The visual must label the necessary nodes, relationships, directions, states, scopes, time order, or memory locations so that readers can interpret it correctly.
+5. The Chinese and English versions must use the same visual structure, data, and meaning; necessary text labels may be translated.
+6. A visual must not replace necessary explanation, and prose must not redundantly restate every visual element without reason; the two should complement one another.
+7. When a visual alone cannot establish correctness, it must be paired with program execution, tracing, testing, or student manipulation for verification.
+8. When an author judges that a topic is unsuitable for visualization, the reason must be defensible; obvious learning-supporting visuals may not be omitted merely because they are inconvenient to create.
+
+Where appropriate, teaching materials should follow this comprehension path:
+
+> Visual model → verbal concept → code implementation → execution observation → student verification
+
+## Article 16 — Cognitive Load Must Be Controlled
 
 Documents shall not require beginners to process too many new concepts at once.
 
@@ -216,7 +236,7 @@ They should use:
 
 Visual attractiveness shall not take precedence over readability and understanding.
 
-## Article 16 — Information Priority Levels
+## Article 17 — Information Priority Levels
 
 Documents must clearly distinguish:
 
@@ -228,7 +248,7 @@ Documents must clearly distinguish:
 
 Not all information shall be presented as equally important.
 
-## Article 17 — Accuracy and Source Responsibility
+## Article 18 — Accuracy and Source Responsibility
 
 Technical facts, tool instructions, version information, and rules in official documents must be verified.
 
@@ -236,7 +256,7 @@ Content likely to change over time must state its version, date, or applicable e
 
 AI-generated content shall not be presumed correct merely because it is fluent.
 
-## Article 18 — Version and Change Traceability
+## Article 19 — Version and Change Traceability
 
 Important documents shall preserve:
 
@@ -251,7 +271,7 @@ Major changes should retain their decision history through Git commits, Issues, 
 
 # Part III — Curriculum Content and Teaching Standards
 
-## Article 19 — Understanding Before Completion
+## Article 20 — Understanding Before Completion
 
 Successful execution, passing automated tests, or producing a polished artifact does not by itself demonstrate understanding.
 
@@ -265,13 +285,13 @@ The course must enable students to explain:
 - How an error is located
 - How the solution changes when requirements change
 
-## Article 20 — Students Retain Responsibility for Thinking
+## Article 21 — Students Retain Responsibility for Thinking
 
 Teachers, classmates, search engines, and AI may assist, but they shall not replace students’ understanding of and responsibility for their own work.
 
 Code that a student cannot explain, modify, test, or verify shall not be treated as a completed learning outcome.
 
-## Article 21 — Think First, Implement Second, Verify Last
+## Article 22 — Think First, Implement Second, Verify Last
 
 Programming activities should ordinarily follow this sequence:
 
@@ -288,7 +308,7 @@ Programming activities should ordinarily follow this sequence:
 
 “Obtain a complete answer first and infer the reasoning afterward” shall not be designed as the main learning process.
 
-## Article 22 — Progressive Learning
+## Article 23 — Progressive Learning
 
 New concepts must build on abilities that can reasonably be confirmed.
 
@@ -304,7 +324,7 @@ Teaching shall:
 
 Frameworks, abstraction layers, or libraries that students cannot yet understand shall not be introduced merely to increase project scale.
 
-## Article 23 — Examples Must Serve Concepts
+## Article 24 — Examples Must Serve Concepts
 
 Every example must have a clear instructional purpose and identify:
 
@@ -316,7 +336,7 @@ Every example must have a clear instructional purpose and identify:
 
 Entertainment or visual effects shall not obscure the core concept.
 
-## Article 24 — Reading, Modification, and Debugging Are Equal Skills
+## Article 25 — Reading, Modification, and Debugging Are Equal Skills
 
 The course shall not train students only to write programs from a blank file.
 
@@ -332,7 +352,7 @@ It must provide sufficient opportunities to:
 - Design tests
 - Explain trade-offs
 
-## Article 25 — Errors Are Official Teaching Materials
+## Article 26 — Errors Are Official Teaching Materials
 
 Syntax errors, type errors, runtime errors, logic errors, boundary errors, and incorrect AI responses may all be used as formal teaching materials.
 
@@ -345,7 +365,7 @@ Students must learn to:
 5. Test the hypothesis.
 6. Explain the reason for the correction.
 
-## Article 26 — Testing and Verification Are Core Skills
+## Article 27 — Testing and Verification Are Core Skills
 
 Students shall not accept an answer merely because it came from a teacher, textbook, website, or AI system.
 
@@ -359,7 +379,7 @@ The course must require students to:
 - Check assumptions about input
 - Explain why the current result should be trusted
 
-## Article 27 — Multiple Reasonable Solutions Are Permitted
+## Article 28 — Multiple Reasonable Solutions Are Permitted
 
 Students may use solutions different from the example when those solutions satisfy the specification, current learning scope, safety requirements, and readability expectations.
 
@@ -374,7 +394,7 @@ Assessment should focus on:
 - Ability to modify
 - Ability to explain
 
-## Article 28 — Products Serve Learning
+## Article 29 — Products Serve Learning
 
 Projects and artifacts are vehicles for integrating abilities; they are not the ultimate purpose of the course.
 
@@ -382,7 +402,7 @@ Teachers, frameworks, libraries, or AI shall not complete core parts that studen
 
 Every project should be decomposable into units that students can understand, implement, test, modify, and explain.
 
-## Article 29 — The Curriculum Must Be Continuous
+## Article 30 — The Curriculum Must Be Continuous
 
 Every unit should state:
 
@@ -393,7 +413,7 @@ Every unit should state:
 
 The curriculum shall not become a collection of disconnected activities without cumulative development.
 
-## Article 30 — Preserve Flexibility Without Sacrificing the Core
+## Article 31 — Preserve Flexibility Without Sacrificing the Core
 
 Teachers may adapt the following according to student readiness, available time, and classroom response:
 
@@ -410,11 +430,11 @@ They may not arbitrarily lower common learning objectives, understanding require
 
 # Part IV — AI Use Standards
 
-## Article 31 — Role of AI
+## Article 32 — Role of AI
 
 AI is an aid for teaching, learning, feedback, debugging, and content maintenance. It is not a replacement for student thinking, teacher judgment, or content review.
 
-## Article 32 — Appropriate Uses of AI
+## Article 33 — Appropriate Uses of AI
 
 AI may be used to:
 
@@ -429,7 +449,7 @@ AI may be used to:
 
 All results must still be understood and verified by the user.
 
-## Article 33 — Learning Behaviors AI Must Not Replace
+## Article 34 — Learning Behaviors AI Must Not Replace
 
 AI shall not replace:
 
@@ -444,7 +464,7 @@ AI shall not replace:
 
 Teachers may impose stricter limits according to the objective of a unit.
 
-## Article 34 — Transparency of AI Use
+## Article 35 — Transparency of AI Use
 
 When AI is permitted in an assignment, assessment, or activity, the document must state:
 
@@ -456,7 +476,7 @@ When AI is permitted in an assignment, assessment, or activity, the document mus
 
 A vague statement such as “AI may be used appropriately” is not sufficient by itself.
 
-## Article 35 — AI-Generated Content Must Be Reviewed
+## Article 36 — AI-Generated Content Must Be Reviewed
 
 Official material generated or translated by AI must be reviewed by a human for:
 
@@ -474,7 +494,7 @@ Unreviewed AI-generated content shall not be published as official course materi
 
 # Part V — Assessment and Fairness Standards
 
-## Article 36 — Assessment Measures Ability, Not Output Alone
+## Article 37 — Assessment Measures Ability, Not Output Alone
 
 Assessment shall not use final output or automated-test results as the sole measure of learning.
 
@@ -490,7 +510,7 @@ Major assessments must include at least one form of understanding check, such as
 - Reflection record
 - Explanation of AI use
 
-## Article 37 — Substantive Equality Between the Two Classes
+## Article 38 — Substantive Equality Between the Two Classes
 
 The Chinese-taught and English-taught classes must have the same:
 
@@ -505,7 +525,7 @@ The Chinese-taught and English-taught classes must have the same:
 
 Differences in instructional language shall not result in lower expectations, fewer resources, or a disadvantage in assessment for either class.
 
-## Article 38 — Assessment Rules Must Be Public
+## Article 39 — Assessment Rules Must Be Public
 
 Before an assessment begins, students must know:
 
@@ -520,7 +540,7 @@ Before an assessment begins, students must know:
 
 Hidden criteria announced only after submission shall not affect grades.
 
-## Article 39 — Accessibility and Respect
+## Article 40 — Accessibility and Respect
 
 Documents and activities should avoid preventing students from demonstrating genuine learning because of language, cultural background, equipment differences, or unnecessary technical barriers.
 
@@ -532,7 +552,7 @@ Students’ questions, mistakes, and learning records shall be treated respectfu
 
 # Part VI — Maintenance, Governance, and Amendment
 
-## Article 40 — Materials Must Be Transferable to Other Teachers and Maintainers
+## Article 41 — Materials Must Be Transferable to Other Teachers and Maintainers
 
 Official materials shall not depend on implicit knowledge held only by the original author.
 
@@ -545,7 +565,7 @@ Important units should preserve:
 - Common student difficulties
 - Elements that may be adapted and elements that must not be sacrificed
 
-## Article 41 — Review Before Major Changes
+## Article 42 — Review Before Major Changes
 
 Before adding or substantially revising a document, check at least:
 
@@ -561,8 +581,10 @@ Before adding or substantially revising a document, check at least:
 10. Does it distinguish core and extension content?
 11. Does it define completion clearly?
 12. Can another teacher use and maintain it independently?
+13. Has an appropriate visual been provided wherever visualization could improve understanding? If not, is the reason sufficient?
+14. Are visuals consistent with the prose, code, data, and actual execution results?
 
-## Article 42 — Amendment Principles
+## Article 43 — Amendment Principles
 
 This Constitution may evolve, but its protected values shall not be weakened for short-term convenience.
 
@@ -574,7 +596,7 @@ Every amendment must:
 - Check the impact on existing materials
 - Create a migration or correction plan where necessary
 
-## Article 43 — Resolving Unspecified Conflicts
+## Article 44 — Resolving Unspecified Conflicts
 
 When this Constitution does not explicitly resolve a situation, ask in order:
 
@@ -584,10 +606,25 @@ When this Constitution does not explicitly resolve a situation, ask in order:
 4. Which decision is easier for future teachers and students to understand?
 5. Which decision prevents AI, tools, or products from replacing core abilities?
 
-## Article 44 — Supreme Test
+## Article 45 — Supreme Test
 
 Every course decision shall ultimately be tested against this question:
 
 > Does this design make students more capable of understanding, explaining, implementing, modifying, debugging, testing, verifying, and extending what they have learned?
 
 When the answer is no, the design shall not be adopted, even when it is faster, more visually impressive, or easier to complete.
+
+---
+
+## Version History
+
+### 1.1.0
+
+- Added the Visual-First Teaching Principle.
+- Required official documents to include an appropriate visual whenever visualization materially improves understanding.
+- Added visual representation to the standard teaching-document structure and major-change review checklist.
+- Required consistency among visuals, prose, code, data, and execution results.
+
+### 1.0.0
+
+- Established the initial version of this Constitution.
