@@ -1,7 +1,9 @@
 # 教學內容設計區
 
-版本：0.9.0  
-狀態：規劃中  
+版本：1.0.0  
+狀態：設計基準完成，進入教材製作  
+最後更新：2026-08-03  
+重大變更摘要：納入術語表與憲法遵循審查，完成設計基準階段。  
 對應英文版本：[Instructional Design Workspace](README.en.md)
 
 ## 文件目的
@@ -20,7 +22,8 @@
 8. 中文班、英文班與正式課程的交付節奏。
 9. 設計與執行風險。
 10. 需求、能力、範圍、驗收、交付與風險的追蹤關係。
-11. 教材、活動、作業與評量。
+11. 中英文術語治理與憲法遵循審查。
+12. 教材、活動、作業與評量。
 
 ## 憲法遵循
 
@@ -55,36 +58,10 @@
 | 08 | [課程交付地圖](08-delivery-map.zh-TW.md) | 將共同能力、成熟度與驗收證據安排到兩個前導班及 16 週正式課程。 |
 | 09 | [課程風險登錄表](09-risk-register.zh-TW.md) | 定義風險優先級、觸發條件、緩解措施、應變與責任角色。 |
 | 10 | [課程設計追蹤矩陣](10-traceability-matrix.zh-TW.md) | 串接需求、領域概念、知識節點、能力、範圍、驗收、交付與風險。 |
+| 11 | [中英文術語對照表](11-terminology-glossary.zh-TW.md) | 建立正式術語、翻譯與使用說明基準。 |
+| 12 | [課程設計憲法遵循審查](12-constitution-compliance-review.zh-TW.md) | 記錄設計文件的憲法對照、缺口與教材階段控制要求。 |
 
 英文導覽：[Instructional Design Workspace](README.en.md)
-
-## 設計文件架構
-
-```text
-design/
-├── README.zh-TW.md
-├── README.en.md
-├── 01-product-vision.zh-TW.md
-├── 01-product-vision.en.md
-├── 02-requirements-map.zh-TW.md
-├── 02-requirements-map.en.md
-├── 03-programming-domain-model.zh-TW.md
-├── 03-programming-domain-model.en.md
-├── 04-programming-language-knowledge-graph.zh-TW.md
-├── 04-programming-language-knowledge-graph.en.md
-├── 05-competency-map.zh-TW.md
-├── 05-competency-map.en.md
-├── 06-scope-boundary.zh-TW.md
-├── 06-scope-boundary.en.md
-├── 07-acceptance-model.zh-TW.md
-├── 07-acceptance-model.en.md
-├── 08-delivery-map.zh-TW.md
-├── 08-delivery-map.en.md
-├── 09-risk-register.zh-TW.md
-├── 09-risk-register.en.md
-├── 10-traceability-matrix.zh-TW.md
-└── 10-traceability-matrix.en.md
-```
 
 ## 三份核心模型的分工
 
@@ -111,10 +88,15 @@ design/
 - 中文班額外 2 小時用於更多追蹤、補救、診斷與驗收，不提高核心標準。
 - 高優先風險不得透過降低驗收、擴張範圍或加入進階資料結構處理。
 - 每項核心需求、能力、驗收與交付位置都必須能雙向追蹤。
+- 所有教材與評量使用 `11-terminology-glossary` 的正式術語。
+
+## 憲法審查結果
+
+`12-constitution-compliance-review` 未發現需要停止後續工作的重大衝突。術語表缺口已修正；既有 `01–10` 的最後更新日期與重大變更摘要，將於下次實質修改時補齊。
 
 ## 下一步
 
-以 `10-traceability-matrix` 為基準，開始建立前導課程教材、活動、作業、rubric 與教師執行資源。每個新產物都必須引用需求 ID、能力 ID、目標成熟度與驗收任務。
+建立中英文教材模板，作為所有前導與正式課程單元的唯一結構基準。每個新產物都必須引用需求 ID、能力 ID、目標成熟度、範圍狀態與驗收任務。
 
 ## 導覽
 
