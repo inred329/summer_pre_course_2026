@@ -34,9 +34,9 @@ The Course Constitution is the highest governing document of this repository. It
 
 ### 教學設計｜Instructional Design
 
-教學內容以需求工程與系統設計方式建立，依序定義願景、需求、領域模型、知識依賴、能力與範圍，再建立驗收、課程節奏與教材。
+教學內容以需求工程與系統設計方式建立，依序定義願景、需求、領域模型、知識依賴、能力、範圍與驗收，再建立課程節奏與教材。
 
-Instructional content is designed through requirements engineering and system design: vision, requirements, the domain model, knowledge dependencies, competencies, and scope are defined before acceptance, delivery, and teaching materials.
+Instructional content is designed through requirements engineering and system design: vision, requirements, the domain model, knowledge dependencies, competencies, scope, and acceptance are defined before delivery pacing and teaching materials.
 
 - [教學內容設計區（繁體中文）](design/README.zh-TW.md)
 - [Instructional Design Workspace (English)](design/README.en.md)
@@ -51,6 +51,7 @@ The design workspace currently provides navigation to:
 4. 程式語言知識依賴圖｜Programming Language Knowledge Dependency Graph
 5. 程式設計能力地圖｜Programming Competency Map
 6. 課程範圍邊界｜Course Scope Boundary
+7. 能力驗收模型｜Competency Acceptance Model
 
 ### 既有課程與執行規劃｜Existing Course and Operational Planning
 
@@ -98,6 +99,10 @@ The three core design models have distinct responsibilities:
 
 Data organization currently remains at the abstraction level of sequences, records, indexing, and operations; advanced data structures are not presumed to be core course content.
 
+能力驗收至少需要互補證據；正確輸出、成功編譯或 AI 的正面評價都不能單獨證明學生已建立能力。
+
+Competency acceptance requires complementary evidence; correct output, successful compilation, or positive AI feedback cannot independently establish student capability.
+
 ---
 
 ## 文件完成條件｜Document Completion Conditions
@@ -138,7 +143,8 @@ Completed:
 - 程式語言知識依賴圖｜Programming Language Knowledge Dependency Graph
 - 程式設計能力地圖｜Programming Competency Map
 - 課程範圍邊界｜Course Scope Boundary
+- 能力驗收模型｜Competency Acceptance Model
 
-下一階段是在再次確認上述文件一致後，建立能力驗收模型。
+下一階段是建立交付地圖，把共同能力、成熟度與最低證據安排到中文前導班、英文前導班與正式課程中。
 
-The next stage is to create the competency acceptance model after one more consistency review of the documents above.
+The next stage is to create the delivery map, arranging shared capabilities, maturity targets, and minimum evidence across the Chinese preparatory class, English preparatory class, and formal course.
