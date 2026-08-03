@@ -1,97 +1,142 @@
-# Preparatory Grading Guide for Instructors and TAs
+# Assignment Discussion and Participation Observation Guide
 
-Version: 0.1.0  
-Status: Official instructor draft  
+Version: 0.2.0  
+Status: Official instructor implementation baseline  
 Last updated: 2026-08-03  
-Major change summary: Established assignment-evidence review, micro-oral checks, fair judgment, and remediation procedures.  
-Corresponding Chinese version: [前導課程教師與助教批改指引](grading-guide.zh-TW.md)
+Major change summary: Removed per-assignment marking and repeated micro-orals; established assignment discussion, participation observation, and final-oral preparation procedures.  
+Corresponding Chinese version: [作業討論與課堂參與觀察指引](grading-guide.zh-TW.md)
 
 ## Document Purpose
 
-For instructors and teaching assistants to grade assignments, provide formative feedback, conduct micro-oral checks, and run remediation consistently. Program output or automated-test results alone are insufficient.
+For instructors and teaching assistants to facilitate discussion of the previous assignment, observe classroom participation, provide formative feedback, and prepare students for the final oral examination. Assignments are not submitted, graded, or marked one by one.
 
-## 1. Grading Sequence
+## 1. Assignment Discussion at the Start of Class
 
-1. Confirm requirements, competencies, scope, and required evidence.
-2. Read the student's pre-execution understanding, predictions, and tests.
-3. Check whether the program satisfies the specification and current scope.
-4. Compare tracing, expected results, and actual behavior for consistency.
-5. Review requirement modification, defect diagnosis, and regression testing.
-6. When AI was used, review transparency and technical verification.
-7. Sample core capability with one to three micro-oral questions.
-8. Decide pass, conditional pass, remediation, or not passed according to the missing capability.
+Ordinarily reserve 15–25 minutes:
 
-## 2. Prohibited Shortcuts
+1. Invite students to raise obstacles, errors, or alternative solutions.
+2. Select one or two representative issues for class tracing.
+3. Require prediction before execution or inspection.
+4. Compare expected and actual behavior.
+5. Guide with follow-up questions rather than posting a complete answer.
+6. After correction, create tests and run regression verification.
+7. Summarize the principle that transfers into the new unit.
 
-- Looking only at whether the program compiles.
-- Looking only at OJ or test pass rate.
-- Deducting marks solely because the program differs from a model answer.
-- Lowering programming-capability judgment because English expression is not fluent.
-- Automatically failing any AI use, or failing to review AI use at all.
-- Letting a total score conceal a core gap such as inability to explain, lack of tests, or lack of regression verification.
+When no student volunteers a question, use an anonymous error case, common defect, incorrect AI suggestion, or two reasonable alternatives to begin discussion.
 
-## 3. Micro-Oral Principles
+## 2. Instructor Questioning
 
-- Use the student's own program but change an input, threshold, or requirement.
-- Ask questions such as “What is the next state?”, “Why is this test important?”, or “What changes here affect elsewhere?”
-- Do not require memorized syntax definitions.
-- AI may not answer live.
-- Usually limit the check to 2–5 minutes.
+Prefer questions such as:
 
-## 4. Remediation Mapping
+- What did you expect?
+- What actually happened?
+- Where is the first inconsistency?
+- What does this variable represent?
+- What happens with a boundary input?
+- Which tests are affected by this change?
+- How do you know the correction did not break prior behavior?
+- Which assumption in the AI suggestion needs verification?
 
-| Gap | Remediation |
-|---|---|
-| Execution model | Classify a new error and draw the toolchain |
-| State understanding | Live-trace new values |
-| Condition / loop | Locate and correct a boundary or termination defect |
-| Function understanding | Modify an interface and trace parameters and return values |
-| Insufficient testing | Add normal, boundary, and necessary exceptional cases |
-| Insufficient debugging | Reproduce, hypothesize, verify, correct, and regress |
-| Insufficient AI verification | Review a new incorrect suggestion with evidence |
+Avoid immediately giving a complete corrected version or relying on memorized syntax definitions.
 
-Remediation targets the missing capability rather than requiring indiscriminate resubmission of the entire assignment.
+## 3. Participation Observation
 
-## 5. Bilingual Fairness
+Participation evidence includes:
 
-- Both tracks use the same rubric, competency IDs, and passing standards.
-- The English-taught track may use terminology cards, sentence scaffolds, and additional reading time.
-- The Chinese-taught track's additional time supports tracing, remediation, diagnosis, and acceptance rather than additional core requirements.
-- Technical understanding may be expressed through diagrams, tables, traces, or concise language; verbal polish is not technical maturity.
+- Raising a concrete question or describing an obstacle.
+- Answering or revising reasoning.
+- Participating in tracing, testing, debugging, or comparison.
+- Sharing an error the student made.
+- Proposing a test case.
+- Helping a peer without doing the work for them.
+- Using writing, code operation, anonymous questions, or short reflection.
 
-## 6. Tool Failure
+Do not judge participation through:
+
+- Presence alone.
+- A speaking-frequency ranking.
+- Rewarding only the fastest responders.
+- Treating silence as proof of no learning.
+
+Record the overall pattern across multiple classes with brief observation codes or notes; do not assign points for every comment.
+
+## 4. Deliberately Designed Opportunities to Make Mistakes
+
+Prepare at least:
+
+- One syntax or compilation error.
+- One logic, boundary, or termination error.
+- One plausible but incorrect AI suggestion or explanation.
+- One small requirement change.
+
+Use errors to practice reproduction, hypothesis, verification, correction, and regression rather than to shame students.
+
+## 5. No Single-Answer Policy
+
+Instructors may prepare reference solutions, but class learning should emphasize:
+
+- Deriving solutions.
+- Comparing multiple reasonable forms.
+- Discussing trade-offs.
+- Verifying through tests.
+
+Do not reject a solution merely because it differs from the example when it satisfies the requirement, current scope, safety, and readability.
+
+## 6. Bilingual and Participation Fairness
+
+- Both tracks use the same capability and participation standards.
+- The English-taught track may use terminology cards, sentence scaffolds, more reading time, and written responses.
+- Additional time in the Chinese-taught track supports more tracing, discussion, and remediation rather than higher requirements.
+- Introverted students may participate through anonymous questions, written traces, group activity, or code operation.
+- Technical understanding matters more than verbal polish.
+
+## 7. Tool Failure
 
 When tools fail:
 
 1. Record the environment problem.
 2. Switch to a fallback environment.
-3. Preserve prediction, tracing, testing, and explanation activities.
-4. Do not directly judge capability as missing merely because the original device could not run the program.
+3. Preserve prediction, tracing, testing, and explanation.
+4. Use paper tracing, instructor equipment, or peer screen sharing.
+5. Do not treat equipment failure as non-participation or missing capability.
 
-## 7. AI-Use Judgment
+## 8. AI-Use Guidance
 
-Valid AI use includes:
+Require students to distinguish:
 
-- Understanding and approach before AI use.
-- Tests created by the student first.
-- Summary of the AI suggestion.
-- A reproducible verification method.
-- Reason for accepting, modifying, or rejecting.
+- Their own initial understanding.
+- Candidate suggestions supplied by AI.
+- Their own verification.
+- The reason for accepting, modifying, or rejecting the suggestion.
 
-When code is correct but the student cannot explain AI-influenced parts, arrange oral and requirement-change remediation rather than replacing evidence with a guess about intent.
+Do not automatically deduct for AI use, and do not ignore verification merely because the program is correct.
 
-## 8. Pre-Release Grade Check
+## 9. Final Oral Preparation
 
-- [ ] Both understanding-oriented and action-oriented evidence were reviewed.
-- [ ] Output, compilation, or OJ was not used alone.
-- [ ] Reasonable alternative solutions were allowed.
-- [ ] Remediation directly maps to the missing capability.
-- [ ] Standards are equivalent across language tracks.
-- [ ] AI use was judged through transparency and verification.
+Near the end of the course, remind students to organize:
+
+- Their assignments and different versions.
+- Representative errors and corrections.
+- Test and regression records.
+- Cases where AI was used.
+- Concepts that remained uncertain or were later revised.
+
+Instructors may demonstrate the kinds of capabilities the oral examination will use, while detailed content and procedure are defined separately.
+
+## 10. Pre-Grade Check
+
+- [ ] Participation was not calculated from attendance or speaking count.
+- [ ] Multiple participation modes were available.
+- [ ] Each class ordinarily preserved previous-assignment discussion time.
+- [ ] Assignments were neither individually graded nor required for submission.
+- [ ] The final oral examination remained the main grade source.
+- [ ] Standards were equivalent across language tracks.
+- [ ] AI use was judged through understanding and verification.
 - [ ] Student safety, dignity, and fairness were prioritized.
 
 ## Navigation
 
-- [Assignment Pack](preparatory-assignments.en.md)
-- [Shared Rubric](rubric.en.md)
+- [Learning and Assessment Policy](../../design/13-learning-assessment-policy.en.md)
+- [Independent Assignment and Oral Preparation Pack](preparatory-assignments.en.md)
+- [Classroom Participation and Final Oral Examination Rubric](rubric.en.md)
 - [繁體中文版](grading-guide.zh-TW.md)
