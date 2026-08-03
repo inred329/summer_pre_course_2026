@@ -34,9 +34,9 @@ The Course Constitution is the highest governing document of this repository. It
 
 ### 教學設計｜Instructional Design
 
-教學內容以需求工程與系統設計的方式建立，先定義願景、需求與知識依賴，再建立能力、範圍、課程節奏及教材。
+教學內容以需求工程與系統設計方式建立，依序定義願景、需求、領域模型、知識依賴、能力與範圍，再建立驗收、課程節奏與教材。
 
-Instructional content is designed through a requirements-engineering and system-design approach: vision, requirements, and knowledge dependencies are defined before competencies, scope, delivery, and teaching materials.
+Instructional content is designed through requirements engineering and system design: vision, requirements, the domain model, knowledge dependencies, competencies, and scope are defined before acceptance, delivery, and teaching materials.
 
 - [教學內容設計區（繁體中文）](design/README.zh-TW.md)
 - [Instructional Design Workspace (English)](design/README.en.md)
@@ -47,7 +47,10 @@ The design workspace currently provides navigation to:
 
 1. 課程產品願景｜Course Product Vision
 2. 教學需求地圖｜Instructional Requirements Map
-3. 程式語言知識圖｜Programming Language Knowledge Graph
+3. 程式設計領域模型｜Programming Domain Model
+4. 程式語言知識依賴圖｜Programming Language Knowledge Dependency Graph
+5. 程式設計能力地圖｜Programming Competency Map
+6. 課程範圍邊界｜Course Scope Boundary
 
 ### 既有課程與執行規劃｜Existing Course and Operational Planning
 
@@ -55,13 +58,13 @@ The design workspace currently provides navigation to:
 
 The following files were created during an earlier planning stage and still require bilingual completion, consistency review, and navigation review under the Constitution:
 
-- `docs/course-overview.md`：共用課程目標與設計決策
-- `classes/zh/README.md`：中文班規劃
-- `classes/en/README.md`：英文班規劃
-- `planning/timeline.md`：籌備時程
-- `planning/checklist.md`：執行檢查清單
+- `docs/course-overview.md`
+- `classes/zh/README.md`
+- `classes/en/README.md`
+- `planning/timeline.md`
+- `planning/checklist.md`
 
-在完成上述要求前，這些文件視為待整理內容，而非目前正式基準。
+完成上述要求前，這些文件視為待整理內容，而非目前正式基準。
 
 Until those requirements are satisfied, these files are treated as materials awaiting normalization rather than current official baselines.
 
@@ -79,18 +82,21 @@ Each major concept should be developed through this sequence:
 
 > 需求｜Need → 設計目的｜Design Purpose → 語言邏輯｜Language Logic → 語法｜Syntax → 實作｜Implementation → 驗證｜Verification
 
-課程目前以以下知識面向組織：
+設計文件中的三個核心模型具有不同責任：
 
-The current knowledge architecture includes:
+The three core design models have distinct responsibilities:
 
-- 程式轉換與執行｜Program Translation and Execution
-- 資料與狀態｜Data and State
-- 流程與控制｜Flow and Control
-- 函數與抽象｜Functions and Abstraction
-- 記憶體模型｜Memory Model
-- 資料組織｜Data Organization
-- 測試、除錯與驗證｜Testing, Debugging, and Verification
-- AI 輔助學習與人工驗證｜AI-assisted Learning and Human Verification
+- 領域模型：有哪些概念與關係。
+- 知識依賴圖：理解某概念前通常需要理解什麼。
+- 能力地圖：學生必須能做到什麼，以及做到什麼程度。
+
+- Domain model: which concepts and relationships exist.
+- Knowledge dependency graph: what usually must be understood before another concept.
+- Competency map: what students must be able to do and to what maturity.
+
+資料組織目前維持在序列、記錄、索引與操作的抽象層，不預設進階資料結構為課程核心。
+
+Data organization currently remains at the abstraction level of sequences, records, indexing, and operations; advanced data structures are not presumed to be core course content.
 
 ---
 
@@ -128,8 +134,11 @@ Completed:
 - 課程憲法｜Course Constitution
 - 課程產品願景｜Course Product Vision
 - 教學需求地圖｜Instructional Requirements Map
-- 程式語言知識圖｜Programming Language Knowledge Graph
+- 程式設計領域模型｜Programming Domain Model
+- 程式語言知識依賴圖｜Programming Language Knowledge Dependency Graph
+- 程式設計能力地圖｜Programming Competency Map
+- 課程範圍邊界｜Course Scope Boundary
 
-下一階段將把知識節點轉換成可觀察、可驗收的能力地圖，之後再切分前導課程與正式課程範圍。
+下一階段是在再次確認上述文件一致後，建立能力驗收模型。
 
-The next stage is to transform knowledge nodes into an observable and assessable competency map, followed by defining the scope boundary between the preparatory and formal courses.
+The next stage is to create the competency acceptance model after one more consistency review of the documents above.
