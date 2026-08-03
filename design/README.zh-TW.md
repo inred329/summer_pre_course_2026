@@ -1,6 +1,6 @@
 # 教學內容設計區
 
-版本：0.7.0  
+版本：0.8.0  
 狀態：規劃中  
 對應英文版本：[Instructional Design Workspace](README.en.md)
 
@@ -18,7 +18,9 @@
 6. 前導課程與正式課程的範圍邊界。
 7. 可觀察、可驗收的學習證據。
 8. 中文班、英文班與正式課程的交付節奏。
-9. 風險、追蹤關係與後續教材設計。
+9. 設計與執行風險。
+10. 需求、能力、範圍、驗收、交付與風險的追蹤關係。
+11. 教材、活動、作業與評量。
 
 ## 憲法遵循
 
@@ -51,6 +53,7 @@
 | 06 | [課程範圍邊界](06-scope-boundary.zh-TW.md) | 定義前導與正式課程的核心交付、鋪墊、延後與排除範圍。 |
 | 07 | [能力驗收模型](07-acceptance-model.zh-TW.md) | 定義成熟度最低證據、標準驗收任務、AI 邊界與通過判準。 |
 | 08 | [課程交付地圖](08-delivery-map.zh-TW.md) | 將共同能力、成熟度與驗收證據安排到兩個前導班及 16 週正式課程。 |
+| 09 | [課程風險登錄表](09-risk-register.zh-TW.md) | 定義風險優先級、觸發條件、緩解措施、應變與責任角色。 |
 
 英文導覽：[Instructional Design Workspace](README.en.md)
 
@@ -75,13 +78,14 @@ design/
 ├── 07-acceptance-model.zh-TW.md
 ├── 07-acceptance-model.en.md
 ├── 08-delivery-map.zh-TW.md
-└── 08-delivery-map.en.md
+├── 08-delivery-map.en.md
+├── 09-risk-register.zh-TW.md
+└── 09-risk-register.en.md
 ```
 
 後續預計增加：
 
 ```text
-09-risk-register.*
 10-traceability-matrix.*
 ```
 
@@ -108,10 +112,11 @@ design/
 - 英文前導班共 10 小時；中文前導班共 12 小時；正式課程共 48 小時。
 - 兩個前導班的共同核心學習成果與驗收標準一致。
 - 中文班額外 2 小時用於更多追蹤、補救、診斷與驗收，不提高核心標準。
+- 高優先風險不得透過降低驗收、擴張範圍或加入進階資料結構處理。
 
 ## 下一步
 
-建立 `09-risk-register`，識別課程節奏、認知負荷、雙語一致性、AI 依賴、驗收執行及文件維護風險。
+建立 `10-traceability-matrix`，把需求、領域概念、知識節點、能力、範圍狀態、驗收任務、交付階段與風險 ID 串成可檢查的追蹤關係。
 
 ## 導覽
 
