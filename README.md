@@ -34,9 +34,9 @@ The Course Constitution is the highest governing document of this repository. It
 
 ### 教學設計｜Instructional Design
 
-教學內容以需求工程與系統設計方式建立，依序定義願景、需求、領域模型、知識依賴、能力、範圍與驗收，再建立課程節奏與教材。
+教學內容以需求工程與系統設計方式建立，依序定義願景、需求、領域模型、知識依賴、能力、範圍、驗收與交付節奏，再建立風險、追蹤關係與教材。
 
-Instructional content is designed through requirements engineering and system design: vision, requirements, the domain model, knowledge dependencies, competencies, scope, and acceptance are defined before delivery pacing and teaching materials.
+Instructional content is designed through requirements engineering and system design: vision, requirements, the domain model, knowledge dependencies, competencies, scope, acceptance, and delivery pacing are defined before risks, traceability, and teaching materials.
 
 - [教學內容設計區（繁體中文）](design/README.zh-TW.md)
 - [Instructional Design Workspace (English)](design/README.en.md)
@@ -52,6 +52,7 @@ The design workspace currently provides navigation to:
 5. 程式設計能力地圖｜Programming Competency Map
 6. 課程範圍邊界｜Course Scope Boundary
 7. 能力驗收模型｜Competency Acceptance Model
+8. 課程交付地圖｜Course Delivery Map
 
 ### 既有課程與執行規劃｜Existing Course and Operational Planning
 
@@ -103,6 +104,10 @@ Data organization currently remains at the abstraction level of sequences, recor
 
 Competency acceptance requires complementary evidence; correct output, successful compilation, or positive AI feedback cannot independently establish student capability.
 
+兩個前導班採不同節奏但相同核心標準；中文班額外 2 小時用於更多追蹤、補救、診斷與驗收，而不是新增核心能力。
+
+The two preparatory tracks use different pacing but the same core standard; the Chinese-taught track's additional two hours support more tracing, remediation, diagnosis, and acceptance rather than additional core capabilities.
+
 ---
 
 ## 文件完成條件｜Document Completion Conditions
@@ -144,7 +149,8 @@ Completed:
 - 程式設計能力地圖｜Programming Competency Map
 - 課程範圍邊界｜Course Scope Boundary
 - 能力驗收模型｜Competency Acceptance Model
+- 課程交付地圖｜Course Delivery Map
 
-下一階段是建立交付地圖，把共同能力、成熟度與最低證據安排到中文前導班、英文前導班與正式課程中。
+下一階段是建立風險登錄表，識別課程節奏、認知負荷、雙語一致性、AI 依賴、驗收執行與文件維護風險。
 
-The next stage is to create the delivery map, arranging shared capabilities, maturity targets, and minimum evidence across the Chinese preparatory class, English preparatory class, and formal course.
+The next stage is to create the risk register for pacing, cognitive load, bilingual equivalence, AI dependency, acceptance execution, and document-maintenance risks.
