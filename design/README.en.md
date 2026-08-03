@@ -1,6 +1,6 @@
 # Instructional Design Workspace
 
-Version: 0.8.0  
+Version: 0.9.0  
 Status: In planning  
 Corresponding Chinese version: [教學內容設計區](README.zh-TW.md)
 
@@ -54,6 +54,7 @@ Every document must at least:
 | 07 | [Competency Acceptance Model](07-acceptance-model.en.md) | Defines minimum maturity evidence, standard acceptance tasks, AI boundaries, and passing criteria. |
 | 08 | [Course Delivery Map](08-delivery-map.en.md) | Arranges shared capabilities, maturity targets, and evidence across both preparatory tracks and the 16-week formal course. |
 | 09 | [Course Risk Register](09-risk-register.en.md) | Defines risk priority, triggers, mitigation, contingency responses, and accountable roles. |
+| 10 | [Course Design Traceability Matrix](10-traceability-matrix.en.md) | Connects requirements, domain concepts, knowledge nodes, competencies, scope, acceptance, delivery, and risks. |
 
 Chinese navigation: [教學內容設計區](README.zh-TW.md)
 
@@ -80,13 +81,9 @@ design/
 ├── 08-delivery-map.zh-TW.md
 ├── 08-delivery-map.en.md
 ├── 09-risk-register.zh-TW.md
-└── 09-risk-register.en.md
-```
-
-Planned addition:
-
-```text
-10-traceability-matrix.*
+├── 09-risk-register.en.md
+├── 10-traceability-matrix.zh-TW.md
+└── 10-traceability-matrix.en.md
 ```
 
 ## Division of the Three Core Models
@@ -113,10 +110,11 @@ These must not be conflated: a domain relationship is not a learning sequence, a
 - Both preparatory tracks share the same core outcomes and acceptance standards.
 - The Chinese-taught track's additional two hours support more tracing, remediation, diagnosis, and acceptance rather than a higher core standard.
 - High-priority risks must not be treated by lowering acceptance, expanding scope, or adding advanced data structures.
+- Every core requirement, competency, acceptance task, and delivery location must support bidirectional traceability.
 
 ## Next Step
 
-Create `10-traceability-matrix` to connect requirements, domain concepts, knowledge nodes, competencies, scope states, acceptance tasks, delivery stages, and risk IDs into an auditable chain.
+Use `10-traceability-matrix` as the baseline for creating preparatory-course materials, activities, assignments, rubrics, and instructor resources. Every new artifact must cite requirement IDs, competency IDs, target maturity, and acceptance tasks.
 
 ## Navigation
 
