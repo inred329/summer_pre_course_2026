@@ -1,6 +1,6 @@
 # Instructional Design Workspace
 
-Version: 0.3.0  
+Version: 0.4.0  
 Status: In planning  
 Corresponding Chinese version: [教學內容設計區](README.zh-TW.md)
 
@@ -14,8 +14,8 @@ The course is not designed by starting with weekly schedules, slides, or textboo
 2. Stakeholders and their needs.
 3. The complete programming-language knowledge space and concept dependencies.
 4. The capabilities and maturity levels students should possess at course completion.
-5. Observable and assessable evidence of learning.
-6. Scope boundaries between the preparatory and formal courses.
+5. Scope boundaries between the preparatory and formal courses.
+6. Observable and assessable evidence of learning.
 7. Delivery pacing for the Chinese-taught and English-taught classes.
 8. Materials, activities, assignments, and assessments.
 
@@ -46,6 +46,7 @@ Every document must satisfy at least the following principles:
 | 02 | [Instructional Requirements Map](02-requirements-map.en.md) | Defines educational, capability, cross-cutting, and acceptance-oriented requirements. |
 | 03 | [Programming Language Knowledge Graph](03-programming-language-knowledge-graph.en.md) | Defines the relationships among translation and execution, data, control, functions, memory, data organization, verification, and AI. |
 | 04 | [Programming Competency Map](04-competency-map.en.md) | Converts knowledge nodes into observable student capabilities, maturity levels, prerequisites, and evidence. |
+| 05 | [Course Scope Boundary](05-scope-boundary.en.md) | Defines core delivery, foundation-only, deferred implementation, later deepening, and out-of-scope content for the preparatory and formal courses. |
 
 Chinese navigation: [教學內容設計區](README.zh-TW.md)
 
@@ -62,13 +63,14 @@ design/
 ├── 03-programming-language-knowledge-graph.zh-TW.md
 ├── 03-programming-language-knowledge-graph.en.md
 ├── 04-competency-map.zh-TW.md
-└── 04-competency-map.en.md
+├── 04-competency-map.en.md
+├── 05-scope-boundary.zh-TW.md
+└── 05-scope-boundary.en.md
 ```
 
 Planned additions:
 
 ```text
-05-scope-boundary.*
 06-acceptance-model.*
 07-delivery-map.*
 08-risk-register.*
@@ -85,12 +87,12 @@ Planned additions:
 | Non-functional requirements | Fairness, bilingual quality, maintainability, and cognitive load |
 | Domain model | Programming-language knowledge graph and language logic |
 | Architecture and dependencies | Competency map and prerequisites |
-| MVP | Minimum viable preparation provided by the preparatory course |
+| MVP | Minimum viable preparation and its scope boundary |
 | Production release | The 16-week formal C programming course |
 | Acceptance criteria | Observable evidence of learning |
 | Test cases | Exercises, oral explanations, modification tasks, and assessments |
 | Defects | Misconceptions and learning breakdowns |
-| Traceability matrix | Alignment among goals, knowledge, capabilities, materials, and assessments |
+| Traceability matrix | Alignment among goals, knowledge, capabilities, scope, materials, and assessments |
 
 ## Working Sequence
 
@@ -98,8 +100,8 @@ Planned additions:
 2. Build the requirements map.
 3. Build the programming language knowledge graph.
 4. Transform knowledge nodes into an observable and assessable competency map.
-5. Define the final capabilities delivered by the formal course.
-6. Work backward to identify the MVP scope of the preparatory course.
+5. Define scope boundaries for preparatory, formal, and deferred content.
+6. Build the competency acceptance model.
 7. Assemble shared capabilities into different delivery schedules for the Chinese-taught and English-taught classes.
 8. Create lesson plans and teaching materials only after the above steps are complete.
 
@@ -110,6 +112,7 @@ Planned additions:
 - Programming is organized around data and state, flow and control, and functions and abstraction.
 - Program translation and execution, the memory model, data organization, testing and debugging, and AI literacy are necessary knowledge dimensions.
 - Competency maturity is classified by observable behavior as recognize, explain, trace, implement, diagnose, and transfer.
+- Scope states are core delivery, foundation only, deepen later, implement later, and out of scope.
 - The English preparatory class has five 2-hour sessions, totaling 10 hours.
 - The Chinese preparatory class has four 3-hour sessions, totaling 12 hours.
 - The formal course has 16 weeks of 3-hour sessions, totaling 48 hours.
