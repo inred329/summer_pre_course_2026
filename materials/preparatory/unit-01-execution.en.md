@@ -1,11 +1,19 @@
 # Preparatory Unit P-U01: How Does Program Text Become an Execution Result?
 
-Version: 1.0.0  
+Version: 1.0.1  
 Status: Student-material trial version  
 Last updated: 2026-08-04  
 Corresponding Chinese version: [前導單元 P-U01：程式如何從文字變成執行結果？](unit-01-execution.zh-TW.md)
 
 ---
+
+## Document Purpose and Completion Standard
+
+This is a student-facing chapter for independent reading, practice, review, and later reference. It is not an instructor schedule, assessment policy, or submission guide.
+
+Completing the chapter means more than making a program run. You should be able to explain how source code is compiled into an executable, predict a result before execution, and use compiler messages and observed behavior to revise your understanding.
+
+The activities in this chapter do not need to be submitted. You are encouraged to keep your predictions, programs, errors, and corrections for later review or classroom discussion.
 
 ## What Question Does This Chapter Answer?
 
@@ -467,6 +475,8 @@ Explain the following in your own words to an AI system:
 > What is the relationship among source code, a compiler, an executable, and program execution?
 
 You do not need a fixed prompt, and you do not need to save or submit the conversation. This activity simply gives you a chance to state your understanding and notice whether the conversation reveals anything that is still unclear.
+
+An AI response may still be incomplete or incorrect. If it conflicts with the chapter diagram, compiler behavior, or reproducible execution results, judge it using observable evidence rather than accepting it as an answer.
 
 ---
 
