@@ -1,9 +1,9 @@
 # 教材與活動資源
 
-版本：1.3.0  
+版本：1.3.1  
 狀態：16 個 Unit 的完整雙語學生教材、前導課教師資源與評量基準已建立  
 最後更新：2026-08-05  
-重大變更摘要：納入 P-U01 至 P-U04 與 F-U01 至 F-U12 的完整雙語學生教材，並統一 AI 為低比重概念對話工具。  
+重大變更摘要：納入 P-U01 至 P-U04 與 F-U01 至 F-U12 的完整雙語學生教材，統一 AI 為低比重概念對話工具，並新增全文件憲法遵循重審。  
 對應英文版本：[Materials and Activity Resources](README.en.md)
 
 ## 文件目的
@@ -86,11 +86,13 @@
 - [Preparatory Materials Constitution Review](reviews/materials-constitution-review.en.md)
 - [P-U01 憲法遵循審查](reviews/pu01-constitution-review.zh-TW.md)
 - [P-U01 Constitution Compliance Review](reviews/pu01-constitution-review.en.md)
+- [全文件憲法遵循重審](reviews/all-documents-constitution-review.zh-TW.md)
+- [Repository-Wide Constitution Compliance Review](reviews/all-documents-constitution-review.en.md)
 
 ## 下一階段
 
 - 對 16 個 Unit 的 C17 程式進行實際編譯與執行驗證。
-- 建立全 Unit 雙語憲法、技術與導覽審查矩陣。
+- 建立全 Unit 雙語技術與導覽審查矩陣。
 - 依審查結果補強較複雜的正式 Unit。
 - 更新共用教材模板，使其反映目前的學生教材基準。
 - 完成教材審查後，再將 Unit 切分為實際 Lesson 與週次。
