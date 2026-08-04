@@ -1,7 +1,7 @@
 # Concept-Driven Unit Map
 
-Version: 0.1.0  
-Status: Unit composition draft  
+Version: 0.2.0  
+Status: Complete Unit composition draft  
 Last updated: 2026-08-04  
 Corresponding Chinese version: [Concept 驅動的 Unit Map](16-unit-map.zh-TW.md)
 
@@ -17,8 +17,25 @@ A Unit is not a chapter label or syntax list. It consists of:
 4. Existing Concepts that are deepened or reused.
 5. At least one prediction, tracing, testing, debugging, or verification activity.
 6. Corresponding C-language tools and syntax.
+7. One brief post-Unit concept-explanation activity.
 
-This document defines the Unit skeleton only. It does not determine weekly pacing or replace the final student-facing materials.
+This document defines the Unit skeleton only. It does not determine weekly pacing or replace final student-facing materials.
+
+## Role of AI
+
+AI is not a standalone Unit and is not the subject of the materials.
+
+At the end of each Unit, students complete only one brief activity: explain the Unit's core Concept to an AI in their own words and use the conversation to check whether their understanding is clear.
+
+This activity:
+
+- Provides no fixed prompt.
+- Requires no submitted conversation record.
+- Requires no specific AI tool.
+- Does not replace prediction, implementation, testing, debugging, or verification.
+- Does not require AI to provide the answer or program first.
+
+The central principle is: **students explain to AI instead of first asking AI to explain for them.**
 
 ## Unit Composition Markers
 
@@ -74,6 +91,10 @@ Students must experience:
 - Producing and diagnosing one compile error
 - Comparing edited source run without recompilation against the recompiled version
 
+Post-Unit concept explanation:
+
+> Explain to an AI the relationship among source code, compiler, executable, and execution.
+
 ---
 
 ## P-U02 — How Does a Program Remember Data and Change State?
@@ -118,6 +139,10 @@ Students must experience:
 - Comparing integer and floating-point representation
 - Diagnosing uninitialized, type-mismatch, or incorrect-format cases
 
+Post-Unit concept explanation:
+
+> Explain to an AI the relationship among variable, value, type, and state.
+
 ---
 
 ## P-U03 — How Does a Program Select and Repeat?
@@ -158,6 +183,10 @@ Students must experience:
 - Comparing `<` and `<=` boundary behavior
 - Diagnosing infinite loops and off-by-one errors
 - Running regression checks after a requirement change
+
+Post-Unit concept explanation:
+
+> Explain to an AI the difference between decision and repetition and how both control program flow.
 
 ---
 
@@ -201,7 +230,11 @@ Students must experience:
 - Predicting parameters and return values
 - Tracing state before and after a call
 - Designing normal, boundary, and regression cases for a function
-- Verifying a plausible but incorrect AI function suggestion
+- Comparing different function decompositions
+
+Post-Unit concept explanation:
+
+> Explain to an AI why functions help decompose problems and what roles parameters and return values play.
 
 ---
 
@@ -217,7 +250,19 @@ Primary Concepts: Representation, Type, Operator, Evaluation, Conversion, and Fo
 
 Deepened: Value, Expression, Expected Result, and Testing.
 
-C mapping: integer ranges, floating-point error, character encoding, implicit and explicit conversion, and formatted output.
+C mapping: integer ranges, binary representation, MSB, LSB, floating-point error, character encoding, implicit and explicit conversion, and formatted output.
+
+Students must experience:
+
+- Comparing decimal and binary representation
+- Identifying the positions and meanings of MSB and LSB
+- Predicting integer and floating-point results
+- Observing differences caused by conversion and formatting
+- Verifying type assumptions with boundary values
+
+Post-Unit concept explanation:
+
+> Explain to an AI what MSB and LSB are and how they differ.
 
 ---
 
@@ -231,6 +276,18 @@ Deepened: Decision, Repetition, Boundary, State Change, and Verification.
 
 C mapping: `switch`, nested control, compound conditions, sentinel loops, and loop invariants.
 
+Students must experience:
+
+- Drawing compound control paths
+- Describing an initial loop invariant
+- Comparing sentinel designs
+- Finding boundary and path omissions
+- Re-verifying after changing the flow
+
+Post-Unit concept explanation:
+
+> Explain to an AI the relationship among sentinel, loop condition, and boundary.
+
 ---
 
 ## F-U03 — How Does Data Form an Ordered Collection?
@@ -242,6 +299,18 @@ Primary Concepts: Collection, Object, Layout, Boundary, Iteration, and Memory Sa
 Composite Concept: `CT-K01 Array`.
 
 C mapping: one-dimensional arrays, indexes, length, traversal, out-of-bounds access, and arrays as function parameters.
+
+Students must experience:
+
+- Drawing relationships between array elements and indexes
+- Predicting traversal order
+- Comparing valid and invalid indexes
+- Diagnosing out-of-bounds and off-by-one errors
+- Retesting after changing array length
+
+Post-Unit concept explanation:
+
+> Explain to an AI the relationship among array, index, length, and boundary.
 
 ---
 
@@ -255,6 +324,18 @@ Composite Concept: `CT-K02 String`.
 
 C mapping: `char` arrays, null terminator, string literals, `fgets`, string functions, and buffer safety.
 
+Students must experience:
+
+- Drawing string layout in an array
+- Explaining the role of the null terminator
+- Comparing character count and array capacity
+- Diagnosing missing terminators and insufficient buffers
+- Verifying string processing with input cases
+
+Post-Unit concept explanation:
+
+> Explain to an AI the difference between a character array and a C string and why the null terminator matters.
+
 ---
 
 ## F-U05 — How Does a Function Call Create a New Execution Environment?
@@ -267,6 +348,18 @@ Deepened: Function, Call, Parameter, Return Value, and Invariant.
 
 C mapping: automatic local variables, call frames, recursion, base cases, and the concept of stack overflow.
 
+Students must experience:
+
+- Drawing a function call stack
+- Tracing parameters and local variables
+- Comparing scope and lifetime
+- Identifying a recursive base case
+- Diagnosing infinite recursion
+
+Post-Unit concept explanation:
+
+> Explain to an AI the relationship among call stack, scope, and lifetime.
+
 ---
 
 ## F-U06 — How Can Data Be Manipulated Indirectly Through Addresses?
@@ -276,6 +369,18 @@ Core question: **How can one value refer to another object and use its address t
 Primary Concepts: Address, Pointer, Indirection, Aliasing, Null Reference, Lifetime, and Memory Safety.
 
 C mapping: `&`, `*`, pointer parameters, null pointers, and limited pointer arithmetic.
+
+Students must experience:
+
+- Drawing relationships among objects, addresses, and pointers
+- Predicting dereference results
+- Comparing a pointer with the object it points to
+- Observing shared modification caused by aliasing
+- Diagnosing null, dangling, and invalid dereference cases
+
+Post-Unit concept explanation:
+
+> Explain to an AI the relationship among address, pointer, dereference, and pointed-to object.
 
 ---
 
@@ -289,6 +394,18 @@ Composite Concept: `CT-K03 Structure`.
 
 C mapping: `struct`, member access, nested structures, structure assignment, and `typedef`.
 
+Students must experience:
+
+- Identifying data fields from requirements
+- Comparing separate variables with one structure
+- Observing member layout
+- Passing and modifying structures
+- Designing valid-data conditions for a structure
+
+Post-Unit concept explanation:
+
+> Explain to an AI how a structure combines fields of different types into one meaningful object.
+
 ---
 
 ## F-U08 — How Does a Program Obtain and Release Space During Execution?
@@ -298,6 +415,18 @@ Core question: **When data size or lifetime cannot be fixed in advance, how does
 Primary Concepts: Dynamic Allocation, Ownership, Lifetime, Pointer, and Memory Safety.
 
 C mapping: `malloc`, `calloc`, `realloc`, `free`, memory leaks, dangling pointers, and double free.
+
+Students must experience:
+
+- Drawing allocation, use, and release flow
+- Determining resource ownership
+- Checking allocation failure
+- Diagnosing leaks, dangling pointers, and double free
+- Re-verifying after changing capacity requirements
+
+Post-Unit concept explanation:
+
+> Explain to an AI the relationship among dynamic memory, ownership, lifetime, and `free`.
 
 ---
 
@@ -311,6 +440,18 @@ Composite Concept: `CT-K04 File I/O`.
 
 C mapping: `FILE *`, `fopen`, `fclose`, text-file I/O, EOF, and checking function return values.
 
+Students must experience:
+
+- Distinguishing a stream from a file
+- Checking file-open and read/write results
+- Tracing read position and EOF
+- Diagnosing format and file errors
+- Verifying resource closure and persisted data
+
+Post-Unit concept explanation:
+
+> Explain to an AI the relationship among stream, file, EOF, and error checking.
+
 ---
 
 ## F-U10 — How Can a Program Be Divided into Independently Maintainable Modules?
@@ -323,6 +464,18 @@ Composite Concept: `CT-K05 Modular Programming`.
 
 C mapping: `.h`, `.c`, include guards, separate compilation, and linking.
 
+Students must experience:
+
+- Distinguishing interface from implementation
+- Creating a header and source file
+- Tracing separate compilation and linking
+- Diagnosing declaration, definition, and linker errors
+- Replacing an implementation without changing the client program
+
+Post-Unit concept explanation:
+
+> Explain to an AI the relationship among module, interface, implementation, and linking.
+
 ---
 
 ## F-U11 — How Can Programs Be Proven, Diagnosed, and Improved Systematically?
@@ -333,25 +486,40 @@ Primary Concepts: Testing, Verification, Validation, Debugging, Error Diagnosis,
 
 C mapping: test tables, reproducing errors, narrowing scope, regression after correction, comparing programs, and refactoring.
 
+Students must experience:
+
+- Writing expected results first
+- Designing normal, boundary, and error cases
+- Reproducing and narrowing a problem
+- Running regression after correction
+- Comparing behavior before and after refactoring
+
+Post-Unit concept explanation:
+
+> Explain to an AI the differences among testing, verification, validation, and debugging.
+
 ---
 
-## F-U12 — How Can Students Collaborate Responsibly with AI?
+## F-U12 — How Can a Program Integrate Concepts Across the Course?
 
-Core question: **When AI can quickly produce programs and explanations, how do students preserve judgment and build trustworthy evidence?**
-
-Primary Concepts: AI Collaboration, Expected Result, Testing, Verification, Error Diagnosis, and Documentation.
-
-C mapping: reviewing AI-generated C programs, verifying incorrect suggestions, strengthening tests, comparing solutions, and recording decisions.
-
----
-
-## F-U13 — How Can a Program Integrate Concepts Across the Course?
-
-Core question: **How can requirements, data, control, functions, memory, interaction, and engineering be integrated into one program?**
+Core question: **How can requirements, data, control, functions, memory, interaction, and engineering be integrated into one verifiable program?**
 
 Primary Concepts: Requirement, Algorithm, Decomposition, Module, Protocol, Testing, Validation, and Maintenance.
 
 This Unit does not introduce a large amount of new syntax. It requires students to integrate, modify, diagnose, verify, and explain.
+
+Students must experience:
+
+- Converting requirements into observable behavior
+- Building data, control-flow, and module designs
+- Implementing a minimum executable version incrementally
+- Creating tests and regression cases
+- Handling requirement changes
+- Explaining design decisions and verification evidence
+
+Post-Unit concept explanation:
+
+> Explain to an AI how your integrated program connects requirements, data, control, functions, memory, and testing.
 
 ---
 
@@ -367,13 +535,15 @@ The same Unit may:
 
 A Lesson must not change the Unit's core question, Concept chain, or capability standards.
 
-## First-Version Quantity Conclusion
+## Complete Quantity Conclusion
 
 Current recommendation:
 
 - Preparatory course: 4 Units.
-- Formal course: 13 Units.
-- Total: 17 Unit skeletons.
+- Formal course: 12 Units.
+- Total: 16 Unit skeletons.
+
+AI is not assigned a separate Unit. It appears only as a low-weight, brief post-Unit concept-explanation activity.
 
 This number is not constitutionally fixed. Units may later be merged or split according to Concept boundaries, classroom trials, and available hours, but week count must not replace Concept-based derivation.
 
@@ -381,9 +551,10 @@ This number is not constitutionally fixed. Units may later be merged or split ac
 
 1. Check whether each Unit has a complete Concept dependency chain.
 2. Confirm that the number of new Concepts in each Unit is suitable for beginners.
-3. Compare the map with current Preparatory Units 1–4 and decide what to retain, split, or rewrite.
-4. Create a student-material outline for each Unit.
-5. Only then schedule Lessons for the Chinese-taught, English-taught, and formal courses.
+3. Compare the map with current Preparatory Units 1–4 and decide what to retain, split, merge, or rewrite.
+4. Create bilingual student-material outlines for all 16 Units.
+5. Begin with P-U01 as an independently readable official student text.
+6. Only then divide Units into Lessons for the Chinese-taught, English-taught, and formal courses.
 
 ## Navigation
 
