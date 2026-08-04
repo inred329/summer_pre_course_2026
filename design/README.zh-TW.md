@@ -1,9 +1,9 @@
 # 教學內容設計區
 
-版本：1.3.0  
-狀態：Concept Tree、Registry 與 Unit Map 草案完成  
+版本：1.4.0  
+狀態：Concept Tree、Registry、Unit Map 與 16-Unit 教材大綱草案完成  
 最後更新：2026-08-04  
-重大變更摘要：新增 Concept Registry 與 Concept 驅動的 Unit Map，將跨語言概念轉換為可追蹤的前導與正式課程 Unit 骨架。  
+重大變更摘要：新增 16 個 Unit 的雙語學生教材大綱，完成從 Concept 到 Unit 再到教材章節結構的第一版轉換。  
 對應英文版本：[Instructional Design Workspace](README.en.md)
 
 ## 文件目的
@@ -29,7 +29,8 @@
 | 13 | [學習與評量制度](13-learning-assessment-policy.zh-TW.md) | 定義不點名、作業不繳交、課堂參與與一次最終口試。 |
 | 14 | [程式設計 Concept Tree](14-programming-concept-tree.zh-TW.md) | 盤點跨語言核心概念、組合概念與 C 語言映射。 |
 | 15 | [程式設計 Concept Registry](15-programming-concept-registry.zh-TW.md) | 提供 Concept ID、主要依賴、課程範圍與目標成熟度。 |
-| 16 | [Concept 驅動的 Unit Map](16-unit-map.zh-TW.md) | 由 Concept 依賴組成前導與正式課程的 Unit 骨架。 |
+| 16 | [Concept 驅動的 Unit Map](16-unit-map.zh-TW.md) | 由 Concept 依賴組成 4 個前導與 12 個正式課程 Unit。 |
+| 17 | [16 個 Unit 的學生教材大綱](17-student-material-outlines.zh-TW.md) | 定義所有 Unit 的學習目標、章節順序、視覺模型、錯誤案例、練習與課後概念解釋。 |
 
 ## 目前正式評量制度
 
@@ -46,19 +47,20 @@
 - C 是教學語言，核心目標是可遷移的程式設計能力。
 - Concept 是知識來源；Unit 是 Concept 依賴鏈的教學組合；Lesson 是 Unit 的交付切片。
 - 教材依「問題或需求 → 學生預測 → 視覺模型 → 核心概念 → 語法與程式 → 執行追蹤 → 錯誤診斷 → 驗證與修改 → 總結」展開。
-- 閱讀、預測、修改、測試、除錯、解釋與 AI 驗證同等重要。
+- 閱讀、預測、修改、測試、除錯與解釋同等重要。
+- AI 僅作為低比重的課後概念對話對象，不是課程主題，也不取代學生思考。
 - 每個 Unit 應刻意提供可犯錯、可診斷、可修正的學習機會。
 - 進階資料結構不預設為前導課程核心。
 - 中英文班使用相同 Unit、能力、難度與評量標準，只調整 Lesson 節奏與語言支架。
 
 ## 下一步
 
-1. 審查 4 個前導 Unit 與 13 個正式 Unit 的概念邊界。
-2. 檢查每個 Unit 的新 Concept 數量與依賴完整性。
-3. 對照現有前導教材，決定保留、拆分、合併或重寫內容。
-4. 為每個 Unit 建立雙語學生教材大綱。
-5. 從前導 P-U01 開始撰寫學生可獨立閱讀的正式教材。
-6. 最後才把 Unit 切分為中文班、英文班與正式課程的 Lesson。
+1. 從前導 P-U01 開始撰寫學生可獨立閱讀的中英文正式教材。
+2. 以 P-U01 的實際寫作結果修正共同教材模板。
+3. 依序完成 P-U02、P-U03 與 P-U04。
+4. 試教前導教材並記錄學生閱讀、預測與理解上的問題。
+5. 再依序展開 F-U01 至 F-U12。
+6. 最後才將 Unit 切分為中文班、英文班與正式課程的 Lesson。
 
 最終一對一口試內容與流程仍待後續討論後另立正式雙語文件，但目前不作為教材開發的前置阻擋。
 
