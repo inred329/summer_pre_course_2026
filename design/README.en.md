@@ -1,9 +1,9 @@
 # Instructional Design Workspace
 
-Version: 1.1.0  
-Status: Design, materials, and assessment-policy baselines complete  
-Last updated: 2026-08-03  
-Major change summary: Added the learning and assessment policy and aligned the competency acceptance and delivery maps.  
+Version: 1.2.0  
+Status: Concept Tree inventory draft complete  
+Last updated: 2026-08-04  
+Major change summary: Added the Programming Concept Tree as the shared knowledge source for concept dependencies, competency mapping, Unit composition, and student-facing materials.  
 Corresponding Chinese version: [教學內容設計區](README.zh-TW.md)
 
 ## Document Purpose
@@ -27,6 +27,7 @@ This directory designs the 2026 Summer C Programming Preparatory Course and its 
 | 11 | [Chinese–English Terminology Glossary](11-terminology-glossary.en.md) | Establishes official terminology and translation. |
 | 12 | [Course Design Constitution Compliance Review](12-constitution-compliance-review.en.md) | Records constitutional comparison and control requirements. |
 | 13 | [Learning and Assessment Policy](13-learning-assessment-policy.en.md) | Defines no graded roll call, unsubmitted homework, participation, and one final oral examination. |
+| 14 | [Programming Concept Tree](14-programming-concept-tree.en.md) | Inventories cross-language core concepts, composite concepts, and C-language mappings. |
 
 ## Current Official Assessment Policy
 
@@ -47,9 +48,15 @@ This directory designs the 2026 Summer C Programming Preparatory Course and its 
 - Advanced data structures are not presumed core preparatory content.
 - Both language tracks use the same competencies, difficulty, and assessment standards while pacing and language scaffolds may differ.
 
-## Next Step
+## Next Steps
 
-Discuss and create the final one-on-one oral-examination document covering question types, duration, selection, permitted resources, make-up arrangements, and inter-rater consistency. Detailed oral procedures are intentionally not fixed before that discussion.
+1. Assign a unique ID to every concept in the Concept Tree.
+2. Distinguish core concepts, composite concepts, and C-language mappings.
+3. Build a Concept Dependency Graph.
+4. Mark target maturity for the preparatory and formal courses.
+5. Compose Units from concept dependencies before writing student-facing materials.
+
+The final one-on-one oral-examination content and procedure will still be defined later in a separate bilingual official document, but it is not a prerequisite for current material development.
 
 ## Navigation
 
