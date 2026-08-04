@@ -1,9 +1,9 @@
 # Assignment Discussion and Participation Observation Guide
 
-Version: 0.2.0  
+Version: 0.3.0  
 Status: Official instructor implementation baseline  
-Last updated: 2026-08-03  
-Major change summary: Removed per-assignment marking and repeated micro-orals; established assignment discussion, participation observation, and final-oral preparation procedures.  
+Last updated: 2026-08-05  
+Major change summary: Retains assignment discussion and inclusive participation observation while making AI examples optional external-suggestion cases rather than required evidence in every Unit or final-oral preparation.  
 Corresponding Chinese version: [作業討論與課堂參與觀察指引](grading-guide.zh-TW.md)
 
 ## Document Purpose
@@ -20,9 +20,9 @@ Ordinarily reserve 15–25 minutes:
 4. Compare expected and actual behavior.
 5. Guide with follow-up questions rather than posting a complete answer.
 6. After correction, create tests and run regression verification.
-7. Summarize the principle that transfers into the new unit.
+7. Summarize the principle that transfers into the new Unit.
 
-When no student volunteers a question, use an anonymous error case, common defect, incorrect AI suggestion, or two reasonable alternatives to begin discussion.
+When no student volunteers a question, use an anonymous error case, common defect, optional incorrect external suggestion, or two reasonable alternatives to begin discussion.
 
 ## 2. Instructor Questioning
 
@@ -35,7 +35,7 @@ Prefer questions such as:
 - What happens with a boundary input?
 - Which tests are affected by this change?
 - How do you know the correction did not break prior behavior?
-- Which assumption in the AI suggestion needs verification?
+- Which assumption in this external suggestion needs verification?
 
 Avoid immediately giving a complete corrected version or relying on memorized syntax definitions.
 
@@ -66,8 +66,9 @@ Prepare at least:
 
 - One syntax or compilation error.
 - One logic, boundary, or termination error.
-- One plausible but incorrect AI suggestion or explanation.
 - One small requirement change.
+
+When useful, add one plausible but incorrect external suggestion. Its source may be AI, a search result, a documentation misreading, or a peer claim; it is not required in every Unit.
 
 Use errors to practice reproduction, hypothesis, verification, correction, and regression rather than to shame students.
 
@@ -100,16 +101,12 @@ When tools fail:
 4. Use paper tracing, instructor equipment, or peer screen sharing.
 5. Do not treat equipment failure as non-participation or missing capability.
 
-## 8. AI-Use Guidance
+## 8. External Suggestions and AI Use
 
-Require students to distinguish:
-
-- Their own initial understanding.
-- Candidate suggestions supplied by AI.
-- Their own verification.
-- The reason for accepting, modifying, or rejecting the suggestion.
-
-Do not automatically deduct for AI use, and do not ignore verification merely because the program is correct.
+- AI is not a fixed activity and is not a participation or assignment completion requirement.
+- When a student used AI or another external suggestion, instructors may ask what the original understanding was, how the suggestion was verified, and why it was accepted or rejected.
+- Do not automatically deduct for AI use, and do not require a declaration from students who did not use it.
+- Correct output does not replace understanding, testing, and evidence-based judgment.
 
 ## 9. Final Oral Preparation
 
@@ -118,8 +115,8 @@ Near the end of the course, remind students to organize:
 - Their assignments and different versions.
 - Representative errors and corrections.
 - Test and regression records.
-- Cases where AI was used.
 - Concepts that remained uncertain or were later revised.
+- When relevant, one optional example of an external suggestion they verified or rejected.
 
 Instructors may demonstrate the kinds of capabilities the oral examination will use, while detailed content and procedure are defined separately.
 
@@ -131,7 +128,7 @@ Instructors may demonstrate the kinds of capabilities the oral examination will 
 - [ ] Assignments were neither individually graded nor required for submission.
 - [ ] The final oral examination remained the main grade source.
 - [ ] Standards were equivalent across language tracks.
-- [ ] AI use was judged through understanding and verification.
+- [ ] AI was not required; when used, judgment focused on understanding and verification.
 - [ ] Student safety, dignity, and fairness were prioritized.
 
 ## Navigation
