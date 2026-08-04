@@ -1,79 +1,36 @@
-# Preparatory Unit 1: How a Program Begins to Run
+# Preparatory Unit P-U01: How Does Program Text Become an Execution Result?
 
-Version: 0.2.0  
-Status: Official teaching material  
-Last updated: 2026-08-03  
-Major change summary: Removed submission, per-assignment passing, remediation, and repeated micro-oral wording; reframed activities as independent practice, formative classroom discussion, and preparation for the single final oral examination.  
-Corresponding Chinese version: [前導單元 1：程式如何開始執行](unit-01-execution.zh-TW.md)
+Version: 1.0.0  
+Status: Student-material trial version  
+Last updated: 2026-08-04  
+Corresponding Chinese version: [前導單元 P-U01：程式如何從文字變成執行結果？](unit-01-execution.zh-TW.md)
 
-## Document Purpose
+---
 
-This material is for direct use by instructors, teaching assistants, and students. It supports Chinese Session 1 and English Session 1.
+## What Question Does This Chapter Answer?
 
-Homework and learning records in this unit are not submitted, graded, or individually marked. Students retain their own programs, predictions, tests, corrections, and AI-use notes for classroom discussion and final oral-examination preparation.
+The C program you type into an editor is only a text file. Saving it does not make the computer immediately understand it, and code that looks correct does not automatically produce a result.
 
-## Basic Information
+This chapter answers one core question:
 
-- Requirement IDs: `X-01`, `X-02`, `X-03`, `X-04`, `CAP-D01`, `DEL-01`, `DEL-02`
-- Competency IDs: `PC-E01`, `PC-E03`, `PC-E04`, `PC-D01`, `PC-D03`, `PC-V01`, `PC-V02`
-- Target maturity: L2–L4
-- Scope state: `SB-C`
-- Formative task references: `AT-02`, `AT-04`, `AT-05`, `AT-07`
-- Final oral reference: `AT-12`
-- Estimated time: 100–120 minutes in Chinese; 120 minutes in English
+> How does human-readable C source code become behavior that a computer actually executes?
 
-## Learning Objectives
+After reading the chapter and completing its activities, you should be able to:
 
-Students can:
+1. Distinguish source code, a source file, an executable, a running program, and output.
+2. Explain that compilation and execution are different stages.
+3. Create, compile, and run a minimal C program.
+4. Write an expected output before execution and compare it with the actual result.
+5. Decide whether a problem occurs before execution or after the program has started running.
+6. Explain why source code must be recompiled after it changes.
 
-1. Explain the major stages through which C source code becomes executable behavior.
-2. Create, compile, and run a minimal C program.
-3. Predict output before execution and compare expected with actual results.
-4. Distinguish a compile-stage problem from an incorrect execution result.
-5. Distinguish source code, a source file, an executable, a running program, and output.
+No prior programming experience is required. You only need to be able to create a text file and use a terminal or the development environment selected by the instructor.
 
-## Required Tools and Environment
+---
 
-- GCC or Clang with C17 support.
-- Recommended filename: `hello.c`
+## 1. Make a Prediction First
 
-```bash
-gcc -std=c17 -Wall -Wextra -pedantic hello.c -o hello
-./hello
-```
-
-Windows PowerShell:
-
-```powershell
-.\hello.exe
-```
-
-When the environment fails, use a prepared classroom computer, an instructor-tested online environment, paper tracing, or instructor demonstration. Tool failure is not non-participation.
-
-## Core Question
-
-> How does human-readable C source code become behavior that the computer actually runs?
-
-## Visual Model
-
-```mermaid
-flowchart LR
-    S[hello.c Source Code] --> C[Compiler]
-    C -->|Success| E[hello / hello.exe Executable]
-    C -->|Failure| CE[Compile Error Message]
-    E --> R[Operating System Starts Program]
-    R --> O[Standard Output]
-    R -->|Behavior differs from expectation| RE[Execution-result or Logic Problem]
-```
-
-Key observations:
-
-- Compilation and execution are different stages.
-- Compilation failure means `main` has not begun to run.
-- Successful compilation does not prove that the requirement is satisfied.
-- Editing source code does not update an existing executable until recompilation.
-
-## Minimal Program
+Suppose you create a file named `hello.c` with the following contents:
 
 ```c
 #include <stdio.h>
@@ -84,32 +41,203 @@ int main(void) {
 }
 ```
 
-Expected output:
+Before reading further, answer these questions:
+
+1. Does saving `hello.c` immediately display `Hello, C!`?
+2. After you press “compile,” has the program already run?
+3. If compilation fails, has `main` started running?
+4. If you edit the text and then run the old executable without recompiling, will you see the new text or the old text?
+
+Write down your answers. They do not need to be correct yet. Their purpose is to let you compare what you originally believed with what actually happens.
+
+---
+
+## 2. Five Things That Are Easy to Confuse
+
+Beginners often call all five of the following things “the program,” but they are not the same.
+
+### 2.1 Source Code
+
+Source code is program text that humans can read and edit, for example:
+
+```c
+printf("Hello, C!\n");
+```
+
+It describes intended behavior, but it is not yet the behavior being executed by the computer.
+
+### 2.2 Source File
+
+A source file stores source code. This chapter uses:
+
+```text
+hello.c
+```
+
+The `.c` extension indicates a C source file.
+
+### 2.3 Compiler
+
+A compiler is a tool. It reads source code, checks some kinds of errors, and attempts to translate the program into a form that the computer can later execute.
+
+This course may use GCC or Clang.
+
+### 2.4 Executable
+
+After successful compilation, you obtain a file that the operating system can start, such as:
+
+```text
+hello
+```
+
+or on Windows:
+
+```text
+hello.exe
+```
+
+The executable and `hello.c` are different files. Editing `hello.c` does not automatically change an existing `hello.exe`.
+
+### 2.5 Running Program and Output
+
+The program begins to execute only after the operating system starts the executable. A running program performs instructions in sequence. It may produce output, and that output may still differ from what you expected.
+
+Output is one observable result of execution. It is not the source code and it is not the executable itself.
+
+---
+
+## 3. The Complete Path from Source Code to Output
+
+```mermaid
+flowchart LR
+    S[hello.c\nSource Code and Source File] --> C[Compiler]
+    C -->|Compilation succeeds| E[hello / hello.exe\nExecutable]
+    C -->|Compilation fails| CE[Compile Error Message]
+    E --> R[Operating System Starts It]
+    R --> P[Program Executes]
+    P --> O[Output or Other Observable Result]
+```
+
+The most important part of the diagram is the order of the stages:
+
+```text
+Source code
+→ Compilation
+→ Executable
+→ Start
+→ Execution
+→ Output
+```
+
+Notice that:
+
+- If compilation fails, the new program has not started running.
+- Successful compilation only means an executable was produced; it does not prove that the requirement is satisfied.
+- Successful execution only means that some behavior completed; it does not prove that the behavior matches your purpose.
+- After source code changes, it must be compiled again to produce a corresponding new executable.
+
+---
+
+## 4. Your First Minimal C Program
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    printf("Hello, C!\n");
+    return 0;
+}
+```
+
+You do not need to memorize all of the syntax yet. For now, recognize the role of each part.
+
+### `#include <stdio.h>`
+
+This allows the program to use standard input and output facilities. The `printf` used in this chapter depends on it.
+
+### `int main(void)`
+
+`main` is the primary function entered when the program starts. Functions will be studied more fully in a later Unit.
+
+### `printf("Hello, C!\n");`
+
+This asks the program to send text to standard output.
+
+The sequence:
+
+```text
+\n
+```
+
+represents a newline.
+
+### `return 0;`
+
+This ends `main`, using `0` to indicate normal completion. For this chapter, it is enough to know that it ends the minimal program.
+
+---
+
+## 5. Predict First, Then Run
+
+Before executing the program, write the expected output:
 
 ```text
 Hello, C!
 ```
 
-## Prediction and Trace
+Then create `hello.c` and compile it.
 
-| Step | Event | State | Expected result |
-|---|---|---|---|
-| 1 | Compile `hello.c` | Program is not running | Create an executable or show a compile error |
-| 2 | Start the executable | Enter `main` | No output yet |
-| 3 | Execute `printf` | Write to standard output | Display `Hello, C!` and a newline |
-| 4 | Execute `return 0` | Program ends | Return to the terminal |
+Linux, macOS, or a Unix-like terminal:
 
-Formative classroom prompts:
+```bash
+gcc -std=c17 -Wall -Wextra -pedantic hello.c -o hello
+./hello
+```
 
-- Does successful compilation automatically display output?
-- If compilation fails, has `main` begun to run?
-- Which version runs after editing without recompiling?
+Windows PowerShell:
 
-These are classroom prompts, not separate oral examinations.
+```powershell
+gcc -std=c17 -Wall -Wextra -pedantic hello.c -o hello.exe
+.\hello.exe
+```
 
-## Common Error Cases
+When using Clang, replace `gcc` with `clang`.
 
-### Missing Semicolon
+### What Does Each Command Do?
+
+```bash
+gcc ... hello.c -o hello
+```
+
+This is compilation. It attempts to create an executable named `hello` from `hello.c`.
+
+```bash
+./hello
+```
+
+This is execution. It asks the operating system to start the executable that was just created.
+
+The compilation command and the execution command cannot replace one another.
+
+---
+
+## 6. Trace What Happens over Time
+
+| Step | Event | Is the program running? | Observable result |
+|---|---|---:|---|
+| 1 | Edit and save `hello.c` | No | Source-file contents change |
+| 2 | Run the compile command | No | An executable is created, or a compile error appears |
+| 3 | Run `./hello` or `.\hello.exe` | Yes | The operating system enters `main` |
+| 4 | Execute `printf` | Yes | `Hello, C!` and a newline are displayed |
+| 5 | Execute `return 0` | About to end | Control returns to the terminal |
+
+Return to the predictions you wrote in Section 1. Which were correct? Which need revision?
+
+---
+
+## 7. Error Case One: A Missing Semicolon
+
+Change the program to:
 
 ```c
 #include <stdio.h>
@@ -120,36 +248,145 @@ int main(void) {
 }
 ```
 
-Diagnosis cycle:
+The semicolon at the end of the `printf` line is missing.
 
-1. Classify the stage.
-2. Locate the useful part of the compiler message.
-3. Compare with the last working version.
-4. Correct the defect.
-5. Recompile and run a regression check.
+### Decide Before Compiling
 
-### Editing Without Recompiling
+1. Will the problem appear during compilation or execution?
+2. Will `Hello, C!` be printed?
+3. Does the line number in a compiler message always identify the exact location where the defect began?
 
-Change the text to `Hello, Student!`, save the source, and run the old executable.
+### Diagnosis Steps
 
-Expected observation: the old output remains until recompilation.
+1. First classify this as a compilation-stage problem.
+2. Read the first useful error message.
+3. Inspect the nearby code rather than staring at only one character.
+4. Compare it with the last version that compiled successfully.
+5. Restore the semicolon.
+6. Compile again.
+7. Run again and confirm that the original behavior has returned.
 
-## Guided Practice
+The final step is a regression check: after correcting a defect, verify that behavior that should still work continues to work.
 
-Predict the original output, compile and run, change the output to the student's English name, recompile, and run again.
+### Why Might the Message Point to the Next Line?
 
-Students retain:
+The compiler reads the program progressively. When one line is missing a semicolon, it may not know that the syntax cannot continue until it reaches the next line. A compiler message is therefore diagnostic evidence, not always a complete answer.
 
-- Two expected outputs.
-- Two actual outputs.
-- Compile and execution commands.
-- One sentence explaining why recompilation was required.
+---
 
-No submission is required.
+## 8. Error Case Two: Editing Source Code but Running the Old Version
 
-## Independent Practice
+First compile and run the original program successfully:
 
-Create a program that prints:
+```text
+Hello, C!
+```
+
+Then change the source code to:
+
+```c
+printf("Hello, Student!\n");
+```
+
+Save the file, but do not compile it again yet. Run the old `hello` or `hello.exe` directly.
+
+### Predict First
+
+Will the screen display:
+
+```text
+Hello, C!
+```
+
+or:
+
+```text
+Hello, Student!
+```
+
+### What Does the Experiment Show?
+
+Without recompilation, the operating system still starts the executable that was built earlier, so you will normally see the old output.
+
+Think of the relationship this way:
+
+```text
+hello.c (new contents)
+
+not recompiled yet
+
+hello.exe (still built from the old contents)
+```
+
+Only after recompilation does the new source code produce a new executable.
+
+---
+
+## 9. Successful Compilation Does Not Mean the Program Is Correct
+
+The following program can compile successfully:
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    printf("Goodbye, C!\n");
+    return 0;
+}
+```
+
+But suppose the requirement is:
+
+```text
+Display Hello, C!
+```
+
+The program still fails to satisfy the requirement.
+
+You must therefore distinguish three ideas.
+
+### Compilation Is Successful
+
+The program follows rules accepted by the compiler and an executable is produced.
+
+### Execution Completes
+
+The program starts and ends without an obvious interruption.
+
+### The Result Is Correct
+
+The actual result agrees with both the requirement and the expected result.
+
+These three statements are not equivalent.
+
+---
+
+## 10. Guided Practice: Change the Output to Your Name
+
+Do not change the program immediately. First write the output you want, for example:
+
+```text
+Hello, Alex!
+```
+
+Then:
+
+1. Identify the part of the program that must change.
+2. Modify the text inside the string.
+3. Save the source file.
+4. Compile again.
+5. Run the new executable.
+6. Compare the expected output with the actual output.
+
+Finally, answer in one sentence:
+
+> Why can you not edit `hello.c` and then only run the old `hello.exe`?
+
+---
+
+## 11. Independent Practice: A Two-Line Introduction
+
+Create a program that displays:
 
 ```text
 My name is <your English name>.
@@ -161,96 +398,112 @@ Constraints:
 - Use one `main` function.
 - Use one or two `printf` calls.
 - End each line correctly.
-- Input, variables, and conditions are not required.
+- Input, variables, conditions, and loops are not needed.
 
-Students retain their source code, expected output, actual output, and one explanation linking statements to output lines. This work is used in the next classroom discussion and may be selected as preparation material for the final oral examination.
+### Suggested Learning Records to Keep
 
-## Testing and Verification
+- The expected output written before execution.
+- The source code.
+- The compile command used.
+- The actual output.
+- Any errors and corrections.
+- One sentence explaining which `printf` corresponds to each output line.
 
-| Type | Action | Expected result |
+This independent practice does not need to be submitted. It can be kept for later classroom discussion and review.
+
+---
+
+## 12. A Small Test Table
+
+| Type | Change or action | Expected result |
 |---|---|---|
-| Normal | Compile and run the original version | Required output appears |
-| Formatting | Remove the final `\n` | The next shell prompt may appear on the same line |
-| Error | Remove a semicolon and compile | Compilation fails; no updated executable is created |
-| Regression | Restore the semicolon and recompile | Required output works again |
+| Normal case | Compile and run the original version | `Hello, C!` appears |
+| Formatting case | Remove the final `\n` | The terminal prompt may appear on the same line |
+| Compile error | Remove a semicolon and compile | Compilation fails; no corresponding new version is created |
+| Regression check | Restore the semicolon, recompile, and run | Correct output returns |
+| Old-version experiment | Edit the text but do not recompile | The contents of the old executable still run |
 
-## Requirement Modification
+The purpose of the table is not to add busywork. It makes clear what you intend to observe before each operation.
 
-Change the first line to `Student: <name>` and add:
+---
+
+## 13. Requirement Modification
+
+The requirement now changes to three lines:
 
 ```text
+Student: <your English name>
+I am learning C.
 Prediction before execution.
 ```
 
-Students must update the expected output before changing the program, identify affected statements, recompile, and verify both the original and revised behaviors.
+Complete these steps in order:
 
-## AI Use Rules
+1. Write the complete expected output first.
+2. Decide which parts of the original program must change.
+3. Modify the source code.
+4. Compile again.
+5. Run and compare the result.
+6. Run one more time to confirm that the result is reproducible.
 
-Permitted:
+This process will appear repeatedly in later Units:
 
-- Ask for help interpreting an error message after making a first attempt.
-- Ask for candidate causes and verify them independently.
-- Ask AI to review a student-written toolchain explanation.
+```text
+Understand the requirement
+→ Establish an expectation
+→ Modify the program
+→ Compile
+→ Execute
+→ Compare
+→ Correct
+```
 
-Not permitted:
+---
 
-- Asking AI for the prediction before making an independent prediction.
-- Asking AI to complete the practice and copying it unchanged.
-- Treating “AI says so” as technical evidence.
+## 14. Explain the Concept to AI
 
-Students retain:
+Explain the following in your own words to an AI system:
 
-- Their pre-AI understanding or program.
-- Their own expected result.
-- A summary of the AI suggestion.
-- Verification steps and results.
-- The reason for accepting, modifying, or rejecting the suggestion.
+> What is the relationship among source code, a compiler, an executable, and program execution?
 
-## Self-Check
+You do not need a fixed prompt, and you do not need to save or submit the conversation. This activity simply gives you a chance to state your understanding and notice whether the conversation reveals anything that is still unclear.
 
-- I can distinguish source code from an executable.
-- I can explain that compilation failure occurs before execution.
-- I can predict output before running.
-- I can recompile after a source change.
-- I can use compiler messages as diagnostic evidence.
+---
 
-This self-check is not an assignment grade.
+## 15. Self-Check
 
-## Classroom Participation Evidence
+After reading this chapter, check whether you can:
 
-Participation may include:
+- Explain the relationship between source code and a source file.
+- Distinguish a source file from an executable.
+- Distinguish compilation from execution.
+- Explain that a program has not started executing when compilation fails.
+- Write an expected output before running a program.
+- Recompile after source code changes.
+- Use the missing-semicolon case to describe a basic diagnosis cycle.
+- Explain why successful compilation does not prove that a requirement is satisfied.
 
-- Asking a question about compilation or execution.
-- Explaining a prediction.
-- Sharing an error or failed attempt.
-- Operating the compiler for a group.
-- Writing a process order or trace.
-- Suggesting a test.
-- Correcting or revising an explanation.
+For any item that remains uncertain, return to the corresponding section and repeat the prediction and experiment.
 
-Attendance or speaking frequency alone is not participation evidence.
+---
 
-## Final Oral Preparation
+## 16. Chapter Summary
 
-Students should be prepared to explain, trace, modify, or diagnose an equivalent example during the one final one-on-one oral examination. This unit does not define the oral examination's detailed format, timing, or question-selection procedure.
+C source code is text that humans can read and modify. A compiler reads the source code and, when successful, creates an executable. The program begins to run only after the operating system starts that executable, and execution may then produce output.
 
-## Suggested Teaching Schedule
+Remember four central judgments:
 
-| Time | Activity |
-|---:|---|
-| 0–10 min | Core question and environment check |
-| 10–25 min | Toolchain visual and process ordering |
-| 25–40 min | Minimal-program reading and prediction |
-| 40–60 min | Compile, run, and compare |
-| 60–75 min | Missing-semicolon diagnosis |
-| 75–90 min | Edit-without-recompiling experiment |
-| 90–105 min | Independent practice and requirement change |
-| 105–120 min | Reflection, questions, and homework preparation |
+1. Compilation and execution are different stages.
+2. When compilation fails, the new program has not started executing.
+3. Source code must be recompiled after it changes.
+4. Neither successful compilation nor completed execution alone proves that the result satisfies the requirement.
+
+The next Unit asks a new question: how does a program preserve data and change its state while it executes?
+
+---
 
 ## Navigation
 
-- [Assessment precedence note](ASSESSMENT-NOTE.en.md)
-- [Instructor implementation guide](../instructor/session-guides.en.md)
-- [C17 examples and defect cases](../../examples/README.md)
-- [Materials index](../README.en.md)
+- [Materials Index](../README.en.md)
+- [Next Unit: Data, Types, and Program State](unit-02-data-state.en.md)
 - [繁體中文版](unit-01-execution.zh-TW.md)
