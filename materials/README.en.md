@@ -1,9 +1,9 @@
 # Materials and Activity Resources
 
-Version: 1.3.0  
+Version: 1.3.1  
 Status: Complete bilingual student materials for 16 Units, preparatory instructor resources, and assessment baselines established  
 Last updated: 2026-08-05  
-Major change summary: Added complete bilingual student materials for P-U01 through P-U04 and F-U01 through F-U12, and standardized AI as a low-weight concept-conversation tool.  
+Major change summary: Added complete bilingual student materials for P-U01 through P-U04 and F-U01 through F-U12, standardized AI as a low-weight concept-conversation tool, and added a repository-wide constitution compliance review.  
 Corresponding Chinese version: [教材與活動資源](README.zh-TW.md)
 
 ## Document Purpose
@@ -86,11 +86,13 @@ The existing AI-use log template remains an optional extension resource. It is n
 - [Preparatory Materials Constitution Review](reviews/materials-constitution-review.en.md)
 - [P-U01 憲法遵循審查](reviews/pu01-constitution-review.zh-TW.md)
 - [P-U01 Constitution Compliance Review](reviews/pu01-constitution-review.en.md)
+- [全文件憲法遵循重審](reviews/all-documents-constitution-review.zh-TW.md)
+- [Repository-Wide Constitution Compliance Review](reviews/all-documents-constitution-review.en.md)
 
 ## Next Stage
 
 - Compile and execute the C17 code across all 16 Units in the target environments.
-- Build a bilingual constitution, technical, and navigation review matrix for all Units.
+- Build a bilingual technical and navigation review matrix for all Units.
 - Strengthen the more complex formal Units according to review findings.
 - Update the shared material template to reflect the current student-material baseline.
 - Divide Units into actual Lessons and weeks only after material review is complete.
