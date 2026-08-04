@@ -1,14 +1,14 @@
 # Preparatory Course Instructor Implementation Guide
 
-Version: 0.1.0  
+Version: 0.2.0  
 Status: Official implementation draft  
-Last updated: 2026-08-03  
-Major change summary: Established the shared delivery flow, homework discussion, error cases, participation observation, and fallback strategies for the four Chinese sessions and five English sessions.  
+Last updated: 2026-08-05  
+Major change summary: Retains the shared four-session Chinese and five-session English delivery flow while making incorrect AI suggestions optional verification material rather than a fixed AI-verification segment or required student record.  
 Corresponding Chinese version: [前導課程教師執行指引](session-guides.zh-TW.md)
 
 ## Document Purpose
 
-For instructors and teaching assistants to deliver the preparatory course directly. This document does not define the complete question set or procedure for the final oral examination; those details will be specified separately.
+For instructors and teaching assistants delivering the preparatory course. This document carries pacing, homework discussion, participation observation, representative errors, and fallback strategies. It does not define the complete final-oral procedure and does not place instructor administration back into student chapters.
 
 ## Shared Class Cycle
 
@@ -24,7 +24,15 @@ Previous-homework discussion for 15–25 minutes
 → Next independent homework
 ```
 
-Homework is not submitted or graded. Students keep their own programs, tests, traces, errors, and AI-use records.
+Homework is not submitted or graded. Students keep their programs, tests, traces, errors, and modifications. Routine AI use and saved AI conversations are not required.
+
+## Role of AI in Instructor Delivery
+
+- AI is not a separate course topic and does not receive a fixed time block.
+- When useful, an instructor may use one plausible but incorrect AI suggestion as an ordinary error case.
+- The same cycle applies: predict first, then verify through code, compiler behavior, tracing, or testing.
+- Not using AI does not affect participation or assessment.
+- Students are not required to provide AI-use logs, no-AI declarations, or fixed-format reflections.
 
 ## Participation Observation
 
@@ -69,11 +77,11 @@ Attendance, roll call, speaking frequency, and response speed must not replace p
 - Source is modified while the old executable is run.
 - “Compilation succeeded” is mistaken for “the program ran and is correct.”
 
-### Incorrect AI Suggestion
+### Optional External-Suggestion Case
 
 > “After editing a `.c` file, running the existing `.exe` automatically uses the latest source code.”
 
-Students predict first, then verify through source modification, running the old executable, and recompiling.
+Whether the suggestion came from AI, a search result, or a peer, students predict first and verify through source modification, running the old executable, and recompiling.
 
 ### If Time Is Short
 
@@ -116,7 +124,7 @@ double average = total / count;
 
 Also prepare a mismatch between `%d` or `%lf` and the variable type.
 
-### Incorrect AI Suggestion
+### Optional External-Suggestion Case
 
 > “When the variable on the left is `double`, integer division on the right always preserves the fractional part.”
 
@@ -156,13 +164,13 @@ Prioritize:
 - The loop control variable is not updated.
 - The sentinel value is incorrectly included in statistics.
 
-### Incorrect AI Suggestion
+### Optional External-Suggestion Case
 
 > “A loop that contains `break` can never become infinite.”
 
 Students construct a counterexample in which the `break` statement is unreachable.
 
-## Session 4: Functions, Integration, and AI Verification (180 minutes)
+## Session 4: Functions, Responsibility Decomposition, and Integration (180 minutes)
 
 ### Previous-Homework Discussion
 
@@ -174,7 +182,7 @@ Prioritize:
 
 ### Core Question
 
-> How can a small requirement be decomposed, implemented, tested, modified, and checked against AI suggestions?
+> How can a small requirement be decomposed, implemented, tested, modified, and supported with trustworthy evidence?
 
 ### Suggested Timing
 
@@ -185,9 +193,9 @@ Prioritize:
 | 55–85 | Trace calls, parameters, and return values |
 | 85–95 | Break |
 | 95–130 | Refactor an oversized `main` |
-| 130–155 | Integrated task and requirement modification |
-| 155–170 | Review an incorrect AI suggestion |
-| 170–180 | Organize homework and final-oral preparation principles |
+| 130–160 | Integrated task, requirement modification, and regression testing |
+| 160–175 | Compare decomposition approaches or diagnose one external suggestion |
+| 175–180 | Organize homework and final-oral preparation principles |
 
 ### Required Error Cases
 
@@ -196,7 +204,7 @@ Prioritize:
 - The function name does not match its responsibility.
 - Only the new behavior is tested after modification; prior behavior is not regressed.
 
-### Incorrect AI Suggestion
+### Optional External-Suggestion Case
 
 > “Changing every variable into a global variable makes function decomposition simpler and is therefore the best solution for beginners.”
 
@@ -210,7 +218,7 @@ Students compare the traceability and testability of global state with parameter
 - Session 2: Data, types, and program state.
 - Session 3: Conditions, loops, and termination.
 - Session 4: Functions and responsibility decomposition.
-- Session 5: Integrated cycle, AI verification, and organization of learning evidence.
+- Session 5: Integrated cycle, requirement modification, regression testing, and learning organization.
 
 Each English session is 120 minutes. Except for Session 1, reserve 15–20 minutes for discussing the previous homework. Terminology cards, sentence scaffolds, written responses, and pair discussion may be used without changing the core tasks or standards.
 
@@ -230,7 +238,7 @@ Record only:
 - Questions to continue next class.
 - Overall participation patterns and a small amount of representative evidence.
 
-Do not create a per-session roll-call score or accumulate points for every spoken contribution.
+Do not create per-session roll-call scores, fixed AI-use logs, or point totals for each spoken contribution.
 
 ## Navigation
 
