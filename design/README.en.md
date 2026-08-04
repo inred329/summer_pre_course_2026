@@ -1,9 +1,9 @@
 # Instructional Design Workspace
 
-Version: 1.2.0  
-Status: Concept Tree inventory draft complete  
+Version: 1.3.0  
+Status: Concept Tree, Registry, and Unit Map drafts complete  
 Last updated: 2026-08-04  
-Major change summary: Added the Programming Concept Tree as the shared knowledge source for concept dependencies, competency mapping, Unit composition, and student-facing materials.  
+Major change summary: Added the Concept Registry and concept-driven Unit Map to convert cross-language concepts into traceable preparatory and formal-course Unit skeletons.  
 Corresponding Chinese version: [教學內容設計區](README.zh-TW.md)
 
 ## Document Purpose
@@ -28,6 +28,8 @@ This directory designs the 2026 Summer C Programming Preparatory Course and its 
 | 12 | [Course Design Constitution Compliance Review](12-constitution-compliance-review.en.md) | Records constitutional comparison and control requirements. |
 | 13 | [Learning and Assessment Policy](13-learning-assessment-policy.en.md) | Defines no graded roll call, unsubmitted homework, participation, and one final oral examination. |
 | 14 | [Programming Concept Tree](14-programming-concept-tree.en.md) | Inventories cross-language core concepts, composite concepts, and C-language mappings. |
+| 15 | [Programming Concept Registry](15-programming-concept-registry.en.md) | Provides Concept IDs, primary dependencies, course scope, and target maturity. |
+| 16 | [Concept-Driven Unit Map](16-unit-map.en.md) | Composes Concept dependencies into preparatory and formal-course Unit skeletons. |
 
 ## Current Official Assessment Policy
 
@@ -42,19 +44,21 @@ This directory designs the 2026 Summer C Programming Preparatory Course and its 
 ## Core Principles
 
 - C is the instructional language; transferable programming competency is the core goal.
-- Materials follow Need → Design Purpose → Language Logic → Syntax → Implementation → Verification.
+- Concepts are the knowledge source; Units are instructional compositions of Concept dependency chains; Lessons are delivery slices of Units.
+- Materials follow Problem or Need → Student Prediction → Visual Model → Core Concept → Syntax and Code → Execution Trace → Error Diagnosis → Verification and Modification → Summary.
 - Reading, prediction, modification, testing, debugging, explanation, and AI verification are equally important.
-- Every unit should deliberately provide opportunities to make, diagnose, and correct errors.
+- Every Unit should deliberately provide opportunities to make, diagnose, and correct errors.
 - Advanced data structures are not presumed core preparatory content.
-- Both language tracks use the same competencies, difficulty, and assessment standards while pacing and language scaffolds may differ.
+- Both language tracks use the same Units, competencies, difficulty, and assessment standards while Lesson pacing and language scaffolds may differ.
 
 ## Next Steps
 
-1. Assign a unique ID to every concept in the Concept Tree.
-2. Distinguish core concepts, composite concepts, and C-language mappings.
-3. Build a Concept Dependency Graph.
-4. Mark target maturity for the preparatory and formal courses.
-5. Compose Units from concept dependencies before writing student-facing materials.
+1. Review the Concept boundaries of the 4 preparatory Units and 13 formal-course Units.
+2. Check the number of new Concepts and dependency completeness in each Unit.
+3. Compare the map with current preparatory materials and decide what to retain, split, merge, or rewrite.
+4. Create bilingual student-material outlines for every Unit.
+5. Begin with Preparatory P-U01 as an independently readable official student text.
+6. Only then divide Units into Lessons for the Chinese-taught, English-taught, and formal courses.
 
 The final one-on-one oral-examination content and procedure will still be defined later in a separate bilingual official document, but it is not a prerequisite for current material development.
 
