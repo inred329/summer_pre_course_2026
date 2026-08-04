@@ -1,8 +1,8 @@
 # Formal Unit F-U08: How Does a Program Obtain and Release Space During Execution?
 
-Version: 1.0.0  
+Version: 1.0.1  
 Status: Official student material  
-Last updated: 2026-08-04  
+Last updated: 2026-08-05  
 Corresponding Chinese version: [正式單元 F-U08：程式如何在執行期間取得與釋放空間？](unit-08-dynamic-memory.zh-TW.md)
 
 ## Purpose and Completion Standard
@@ -62,14 +62,20 @@ if (values == NULL) {
 
 int main(void) {
     int n;
-    scanf("%d", &n);
+
+    if (scanf("%d", &n) != 1) {
+        fprintf(stderr, "Invalid input\n");
+        return 1;
+    }
 
     if (n <= 0) {
+        fprintf(stderr, "Size must be positive\n");
         return 1;
     }
 
     int *values = malloc((size_t)n * sizeof *values);
     if (values == NULL) {
+        fprintf(stderr, "Allocation failed\n");
         return 1;
     }
 
@@ -84,13 +90,15 @@ int main(void) {
 ```
 
 ```text
-Decide size
+Read and validate size
 → allocate
 → check
 → initialize/use
 → release
 → stop using
 ```
+
+The input check is part of the program contract. Without it, a failed `scanf` leaves `n` without a valid value for later decisions.
 
 ---
 
@@ -205,7 +213,7 @@ If an AI response conflicts with an allocation diagram, function contract, or me
 
 ## 12. Self-Check
 
-- I can check allocation failure.
+- I can check input and allocation failure.
 - I can pair every successful allocation with a release responsibility.
 - I can explain ownership.
 - I do not use objects after `free`.
@@ -214,7 +222,7 @@ If an AI response conflicts with an allocation diagram, function contract, or me
 
 ## 13. Chapter Summary
 
-Dynamic memory lets a program choose size and lifetime during execution, but it also gives ownership and release responsibility to the programmer. Reliable management requires explicit contracts, failure checks, correct release, and no use afterward. The next Unit stores data in files so it can persist after program termination.
+Dynamic memory lets a program choose size and lifetime during execution, but it also gives ownership and release responsibility to the programmer. Reliable management requires explicit contracts, input and allocation checks, correct release, and no use afterward. The next Unit stores data in files so it can persist after program termination.
 
 ## Navigation
 
