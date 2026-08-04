@@ -1,14 +1,14 @@
 # Preparatory Material Assessment Override
 
-Version: 1.0.0  
+Version: 1.1.0  
 Status: Official precedence rule  
-Last updated: 2026-08-03  
-Major change summary: Established one rule that overrides legacy wording about submission, per-assignment grading, remediation, and micro-orals in preparatory materials.  
+Last updated: 2026-08-05  
+Major change summary: Retains the current unsubmitted-homework and single-final-oral policy while making AI-use notes an optional personal review resource.  
 Corresponding Chinese version: [前導教材評量制度補充規則](ASSESSMENT-NOTE.zh-TW.md)
 
 ## Scope
 
-This rule applies to every preparatory unit under `materials/preparatory/`. When legacy wording in a unit conflicts with this file, `design/13-learning-assessment-policy`, or `design/07-acceptance-model`, the current design baseline and this file take precedence.
+This rule applies to every preparatory Unit under `materials/preparatory/`. When legacy wording in a Unit conflicts with this file, `design/13-learning-assessment-policy`, or `design/07-acceptance-model`, the current design baseline and this file take precedence.
 
 ## Official Interpretation
 
@@ -29,15 +29,16 @@ This rule applies to every preparatory unit under `materials/preparatory/`. When
 - Classroom questioning, tracing, testing, and debugging are formative learning activities.
 - Classroom participation and one final one-on-one oral examination make up the official grade.
 - Roll call, attendance percentage, and speaking count are not graded.
+- AI is not an assignment completion requirement, and routine use or saved conversations are not required.
 
-## Students Should Retain
+## Students May Retain
 
 - Programs and different versions.
 - Predictions before execution.
 - Tests and expected results.
 - State or flow traces.
 - Errors, corrections, and regression results.
-- AI-use and verification records.
+- When AI was used, optional notes about suggestions and verification that help personal review; no declaration is required when AI was not used.
 
 ## Navigation
 
