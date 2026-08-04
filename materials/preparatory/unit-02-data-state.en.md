@@ -1,8 +1,8 @@
 # Preparatory Unit P-U02: How Does a Program Remember Data and Change State?
 
-Version: 1.0.0  
+Version: 1.0.1  
 Status: Official student material  
-Last updated: 2026-08-04  
+Last updated: 2026-08-05  
 Corresponding Chinese version: [前導單元 P-U02：程式如何記住資料並改變狀態？](unit-02-data-state.zh-TW.md)
 
 ## Purpose and Completion Standard
@@ -23,7 +23,8 @@ After completing this chapter, you should be able to:
 2. Trace state changes caused by initialization, assignment, and expressions.
 3. Distinguish basic integer and floating-point behavior.
 4. Build a simple input-process-output flow.
-5. Update expected results and tests after a requirement changes.
+5. Check whether input succeeded before using a variable.
+6. Update expected results and tests after a requirement changes.
 
 Prerequisite: you can create, compile, and run a minimal C program and write an expected output before execution.
 
@@ -158,7 +159,11 @@ In C, `=` means assignment, not mathematical equality. The left side identifies 
 int main(void) {
     int score;
 
-    scanf("%d", &score);
+    if (scanf("%d", &score) != 1) {
+        fprintf(stderr, "Invalid input\n");
+        return 1;
+    }
+
     score = score + 5;
     printf("Adjusted score: %d\n", score);
 
@@ -168,13 +173,16 @@ int main(void) {
 
 For now, treat `&score` as the form that allows `scanf` to write input into `score`. Its pointer meaning will be studied in a later Unit.
 
+`scanf` reports how many requested values were successfully read. The program must check that result before using `score`; otherwise a failed input operation can leave the variable without a valid value.
+
 Tests:
 
-| Input | Expected output |
+| Input | Expected result |
 |---:|---|
 | 80 | `Adjusted score: 85` |
 | 0 | `Adjusted score: 5` |
 | -5 | `Adjusted score: 0` |
+| `abc` | error message and nonzero exit status |
 
 ---
 
@@ -187,7 +195,7 @@ double average = total / count;
 printf("%.1f\n", average);
 ```
 
-Predict before running. The result is usually:
+Predict before running. The result is:
 
 ```text
 2.0
@@ -212,7 +220,7 @@ int score = 80;
 printf("%f\n", score);
 ```
 
-`%f` expects a floating-point value, but `score` is an `int`. Use compiler warnings as diagnostic evidence rather than trusting an accidental screen result.
+`%f` expects a floating-point value, but `score` is an `int`. This mismatch causes undefined behavior. Use compiler warnings as diagnostic evidence rather than trusting an accidental screen result.
 
 Correct form:
 
@@ -238,8 +246,9 @@ First:
 
 1. Write the input, processing, and output.
 2. Predict the results for inputs `20` and `-1`.
-3. Build a state table.
-4. Write, compile, run, and compare.
+3. Include a nonnumeric input test.
+4. Build a state table.
+5. Write, compile, run, and compare.
 
 ---
 
@@ -251,7 +260,7 @@ Read an original score and a bonus, then display:
 Final score: <value>
 ```
 
-Create at least three tests: a normal value, zero bonus, and a negative or extreme value. Use meaningful variable names and keep the state table and actual results.
+Create at least four tests: a normal value, zero bonus, a negative or extreme value, and invalid input. Use meaningful variable names and keep the state table and actual results.
 
 ---
 
@@ -267,7 +276,7 @@ Update the tests first:
 | 98 | 5 | 100 |
 | 100 | 0 | 100 |
 
-Then modify the program and confirm that the original cases still pass.
+Then modify the program and confirm that the original and invalid-input cases still behave correctly.
 
 ---
 
@@ -286,6 +295,7 @@ An AI response may be incomplete or incorrect. If it conflicts with a state tabl
 - I can distinguish a variable name from its current value.
 - I can explain initialization and assignment.
 - I can trace state line by line.
+- I can check input success before using a variable.
 - I can explain the difference between `5 / 2` and `5.0 / 2`.
 - I can select basic format specifiers from the data type.
 - I can update tests and run a regression check after a requirement change.
@@ -294,7 +304,7 @@ An AI response may be incomplete or incorrect. If it conflicts with a state tabl
 
 ## 14. Chapter Summary
 
-Program execution is not only about producing output. It repeatedly transforms an old state into a new state. Variables preserve current values, types constrain representation and operations, expressions produce results, and assignments write results back into state. The next Unit uses conditions and loops to decide how state changes next.
+Program execution is not only about producing output. It repeatedly transforms an old state into a new state. Variables preserve current values, types constrain representation and operations, expressions produce results, and assignments write results back into state. External input must be validated before it becomes reliable program state. The next Unit uses conditions and loops to decide how state changes next.
 
 ## Navigation
 
