@@ -1,8 +1,8 @@
 # Preparatory Unit P-U03: How Does a Program Select and Repeat?
 
-Version: 1.0.0  
+Version: 1.0.1  
 Status: Official student material  
-Last updated: 2026-08-04  
+Last updated: 2026-08-05  
 Corresponding Chinese version: [前導單元 P-U03：程式如何選擇與重複？](unit-03-control-flow.zh-TW.md)
 
 ## Purpose and Completion Standard
@@ -23,7 +23,8 @@ After completing this chapter, you should be able to:
 2. Predict `if`/`else` execution paths.
 3. Explain a loop's initial state, continuation condition, work, and update.
 4. Diagnose off-by-one errors and infinite loops.
-5. Verify control flow with normal, boundary, and invalid cases.
+5. Check input success before evaluating conditions.
+6. Verify control flow with normal, boundary, and invalid cases.
 
 Prerequisite: you can trace variable state, build basic expressions, and write an expected result before execution.
 
@@ -70,7 +71,11 @@ Minimal example:
 
 int main(void) {
     int score;
-    scanf("%d", &score);
+
+    if (scanf("%d", &score) != 1) {
+        fprintf(stderr, "Invalid input\n");
+        return 1;
+    }
 
     if (score >= 60) {
         printf("Pass\n");
@@ -82,7 +87,7 @@ int main(void) {
 }
 ```
 
-Test `59`, `60`, and `61`. Write each expected path and output before running.
+Test `59`, `60`, and `61`. Write each expected path and output before running. Also test a nonnumeric input and confirm that no branch uses an invalid `score` value.
 
 ---
 
@@ -258,7 +263,7 @@ if (score >= 90) {
 
 Read an age. Print `Minor` when it is below 18; otherwise print `Adult`.
 
-Create tests for `17`, `18`, and `19` first.
+Create tests for `17`, `18`, `19`, and invalid input first.
 
 ### Counter
 
@@ -275,6 +280,7 @@ Requirements:
 - `n = 5` expects 15.
 - `n = 1` expects 1.
 - `n <= 0` prints `Invalid input`.
+- Nonnumeric input is rejected before the loop.
 - Build an iteration trace.
 
 ---
@@ -291,7 +297,7 @@ Update expected results first:
 | 5 | 6 |
 | 6 | 12 |
 
-Identify where the new condition belongs, modify the program, and preserve the invalid-input test.
+Identify where the new condition belongs, modify the program, and preserve both invalid-value and invalid-format tests.
 
 ---
 
@@ -309,6 +315,7 @@ An AI response may be incomplete or incorrect. If it conflicts with a trace tabl
 
 - I can translate a requirement into a condition.
 - I can predict an `if`/`else` path.
+- I can check input success before evaluating a condition.
 - I can identify the four loop elements.
 - I can trace loop state one iteration at a time.
 - I can diagnose off-by-one errors and infinite loops.
@@ -319,7 +326,7 @@ An AI response may be incomplete or incorrect. If it conflicts with a trace tabl
 
 ## 15. Chapter Summary
 
-Conditions select paths from the current state. Loops repeatedly perform work and update state until a condition becomes false. Reliable control flow requires path prediction, state tracing, boundary tests, and termination reasoning. The next Unit divides larger work into functions with clear responsibilities.
+Conditions select paths from the current state. Loops repeatedly perform work and update state until a condition becomes false. Reliable control flow requires validated input, path prediction, state tracing, boundary tests, and termination reasoning. The next Unit divides larger work into functions with clear responsibilities.
 
 ## Navigation
 
