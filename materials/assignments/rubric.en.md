@@ -1,14 +1,14 @@
 # Classroom Participation and Final Oral Examination Rubric
 
-Version: 0.2.0  
+Version: 0.3.0  
 Status: Official grading baseline  
-Last updated: 2026-08-03  
-Major change summary: Replaced per-assignment grading with classroom participation and one final one-to-one oral examination.  
+Last updated: 2026-08-05  
+Major change summary: Retains participation plus one final oral examination while making AI judgment conditional on actual AI use rather than a universal grading requirement.  
 Corresponding Chinese version: [課堂參與與最終口試評分規準](rubric.zh-TW.md)
 
 ## Document Purpose
 
-For instructors and teaching assistants evaluating classroom participation and the final one-to-one oral examination. Assignments are not submitted or graded; they serve as formative learning, classroom-discussion, and final-examination materials.
+For instructors and teaching assistants evaluating classroom participation and the final one-to-one oral examination. Assignments are not submitted or graded; they serve as formative learning, classroom-discussion, and final-oral preparation materials.
 
 ## 1. Grade Structure
 
@@ -61,7 +61,7 @@ The student's own assignments, programs, tests, errors, and learning records are
 | Execution tracing and mental model | 20% | Traces state, control paths, or function calls step by step |
 | Live modification and implementation | 20% | Modifies a small requirement and explains the impact |
 | Testing, debugging, and regression verification | 25% | Creates tests, locates errors, verifies corrections, and checks prior behavior |
-| Explanation, reflection, and AI judgment | 15% | Answers follow-ups and explains trade-offs and AI verification |
+| Explanation, reflection, and evidence-based judgment | 15% | Answers follow-ups, explains trade-offs, and supports judgments with reproducible evidence |
 
 ## Four Performance Levels
 
@@ -91,14 +91,14 @@ The student's own assignments, programs, tests, errors, and learning records are
 - 4: Independently creates normal, boundary, and necessary exceptional tests, diagnoses with evidence, and completes regression verification.
 - 3: Creates reasonable tests and completes basic diagnosis and regression checks.
 - 2: Tests only one case or provides a correction without evidence.
-- 1: Replaces verification with successful execution or an AI judgment.
+- 1: Replaces verification with successful execution, an external answer, or a tool judgment.
 
-### Explanation, Reflection, and AI Judgment
+### Explanation, Reflection, and Evidence-Based Judgment
 
-- 4: Answers follow-ups clearly and explains limitations, trade-offs, and evidence used to verify AI suggestions.
-- 3: Explains core decisions and how AI was used.
-- 2: Explanation is fragmented and cannot clearly separate personal judgment from AI suggestions.
-- 1: Cannot explain the work or uses “AI said so” as the reason.
+- 4: Answers follow-ups clearly and explains limitations, trade-offs, and evidence. When AI was used, explains how its suggestions were verified.
+- 3: Explains core decisions and main evidence. When AI was used, distinguishes personal judgment from AI suggestions.
+- 2: Explanation is fragmented and judgment relies mainly on intuition or external answers without reproducible evidence.
+- 1: Cannot explain the work or uses “the tool/AI said so” as the main reason.
 
 ## Core Capability Thresholds
 
@@ -108,9 +108,10 @@ A total score may not hide a core capability gap. The oral examination may not b
 - Cannot complete any small requirement change.
 - Cannot independently create at least one valid test.
 - Trace clearly contradicts actual program behavior.
-- AI was used but its suggestion cannot be explained or verified.
+- Mainly relies on an external answer that cannot be explained, modified, or verified.
+- When AI was used, its suggestion cannot be explained or verified.
 
-Remediation or reassessment procedures will be defined when the detailed oral-examination process is finalized.
+Detailed oral and reassessment procedures will be defined when the formal oral-examination policy is finalized.
 
 ## Fairness Principles
 
@@ -119,6 +120,7 @@ Remediation or reassessment procedures will be defined when the detailed oral-ex
 - Language-expression errors affect evaluation only when they prevent technical understanding.
 - Tool failure requires a fallback environment or equivalent oral, paper, and code evidence.
 - Participation supports multiple expression modes and does not reward extroversion alone.
+- Not using AI does not affect the grade, and students are not required to prove that they did not use it.
 
 ## Navigation
 
