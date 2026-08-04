@@ -1,105 +1,109 @@
-# Preparatory Unit 2: Data, Types, and Program State
+# Preparatory Unit P-U02: How Does a Program Remember Data and Change State?
 
-Version: 0.2.0  
-Status: Official teaching material  
-Last updated: 2026-08-03  
-Major change summary: Removed submission, per-assignment passing, remediation, and repeated micro-oral wording; reframed activities as independent practice, formative classroom discussion, and preparation for the single final oral examination.  
-Corresponding Chinese version: [前導單元 2：資料、型別與程式狀態](unit-02-data-state.zh-TW.md)
+Version: 1.0.0  
+Status: Official student material  
+Last updated: 2026-08-04  
+Corresponding Chinese version: [前導單元 P-U02：程式如何記住資料並改變狀態？](unit-02-data-state.zh-TW.md)
 
-## Document Purpose
+## Purpose and Completion Standard
 
-For direct use by instructors, teaching assistants, and students. The Chinese preparatory track uses it across the latter part of Session 1 and Session 2; the English preparatory track uses it in Session 2.
+This is a student chapter for independent reading, practice, and review. Completing the chapter means more than producing correct output. You should be able to explain the relationship among values, types, variables, and state, trace how assignments change state, and use tests to show that a modified program still satisfies its requirement.
 
-Homework and learning records in this unit are not submitted, graded, or individually marked. Students retain their state traces, programs, tests, errors, and AI-use notes for the next classroom discussion and final one-on-one oral-examination preparation.
+The activities do not need to be submitted. Keep your predictions, state tables, programs, tests, and corrections for your own review.
 
-## Basic Information
+## What Question Does This Chapter Answer?
 
-- Requirement IDs: `CAP-D01` through `CAP-D04`, `X-02`, `X-03`, `X-04`
-- Competency IDs: `PC-D01` through `PC-D05`, `PC-V01`, `PC-V03`
-- Target maturity: L2–L4
-- Scope state: `SB-C`
-- Formative task references: `AT-02`, `AT-03`, `AT-05`, `AT-06`, `AT-08`
-- Final oral reference: `AT-12`
-- Risk IDs: `R-02`, `R-05`, `R-09`
-- Estimated time: Chinese 150–180 minutes; English 120 minutes
+In the previous Unit, the program printed fixed text. Real programs must preserve data, update it, and produce new results from the current state.
 
-## 1. Learning Objectives
+> How does a program preserve current data and produce a new state after each execution step?
 
-Students can:
+After completing this chapter, you should be able to:
 
-1. Distinguish a value, type, variable name, and current value.
-2. Trace state changes caused by declaration, initialization, assignment, and expression evaluation.
-3. Select `int` or `double` according to data meaning.
-4. Build a basic input–process–output program.
-5. Modify one requirement and update expected results and tests.
+1. Distinguish data, value, type, variable name, and current value.
+2. Trace state changes caused by initialization, assignment, and expressions.
+3. Distinguish basic integer and floating-point behavior.
+4. Build a simple input-process-output flow.
+5. Update expected results and tests after a requirement changes.
 
-## 2. Prerequisites
+Prerequisite: you can create, compile, and run a minimal C program and write an expected output before execution.
 
-- Build, compile, and run a minimal C program.
-- Write expected output before execution.
-- Distinguish compilation problems from incorrect results.
+---
 
-When these capabilities are still unstable, use Unit 1 fallback activities and formative recovery practice rather than copying a complete program.
+## 1. Predict the State First
 
-## 3. Tools and Environment
+```c
+int score = 80;
+score = score + 5;
+printf("%d\n", score);
+```
 
-- GCC or Clang with C17 support.
-- Compile with: `gcc -std=c17 -Wall -Wextra -pedantic score.c -o score`
-- Fallback: an instructor-tested online compiler, paper tracing, or instructor equipment.
+Before running it, answer:
 
-Tool failure is not non-participation or proof of missing capability.
+1. What is `score` after the first line?
+2. Does the `score` on the right side of the second line mean the old value or the new value?
+3. After the second line runs, does the old value still remain as the current value?
+4. What is printed?
 
-## 4. Information Priority
+---
 
-### Must Understand
+## 2. Five Core Concepts
 
-- A variable name is not the value itself.
-- A type constrains representation and operations.
-- Assignment changes program state.
-- Input is an assumption, and output must be checked against an expected result.
+### Data
 
-### Must Complete
+Information processed by a program, such as a score, temperature, or character.
 
-- One state-trace table.
-- One input–process–output program.
-- One diagnosis of a type or expression error.
-- One requirement modification with regression testing.
+### Value
 
-Students retain these records themselves; no submission is required.
+The actual content at one moment, such as `80`, `3.5`, or `'A'`.
 
-### May Be Deferred
+### Type
 
-- Bit-level representation, complete overflow taxonomy, complex casts, and a full undefined-behavior taxonomy.
+A type determines how data is represented and which operations are available.
 
-## 5. Core Question
+```c
+int count = 5;
+double temperature = 23.5;
+char grade = 'A';
+```
 
-> How does a program remember data, change data, and let us verify that the new result is reasonable?
+### Variable
 
-## 6. Visual Model
+A variable uses a name to refer to a currently stored value. The name is not the value itself; the same name may hold different values at different times.
+
+### State
+
+The collection of the current values of important variables at a particular moment.
+
+---
+
+## 3. State-Change Model
 
 ```mermaid
 flowchart LR
-    I[Input] --> V[Variable]
-    V --> E[Expression]
+    O[Old State] --> E[Evaluate Expression]
     E --> A[Assignment]
-    A --> S[New State]
-    S --> O[Output]
-    X[Expected Result] --> C{Compare}
-    O --> C
+    A --> N[New State]
+    N --> P[Output or Next Step]
 ```
 
-Verification method: calculate first, then run. When results differ, locate the first state that differs.
+This statement:
 
-## 7. Core Concepts
+```c
+score = score + 5;
+```
 
-- Value: actual data, such as `80`.
-- Type: representation and permitted operations, such as `int` or `double`.
-- Variable: a name used to refer to current data state.
-- Initialization: assigning an initial value during declaration.
-- Assignment: writing a new result into a variable.
-- Expression: values, variables, and operators combined to produce a result.
+can be understood as:
 
-## 8. Minimal Executable Example
+```text
+Read the old value 80 on the right
+→ compute 80 + 5
+→ obtain 85
+→ write 85 into score on the left
+```
+
+---
+
+## 4. Minimal Executable Example
 
 ```c
 #include <stdio.h>
@@ -118,141 +122,183 @@ Expected output:
 85
 ```
 
-## 9. State Trace
+State trace:
 
-| Step | Statement | `score` Before | Evaluated Result | `score` After |
+| Step | Statement | `score` before | Expression result | `score` after |
 |---|---|---:|---:|---:|
-| 1 | `int score = 80;` | does not exist | 80 | 80 |
+| 1 | `int score = 80;` | does not exist yet | 80 | 80 |
 | 2 | `score = score + 5;` | 80 | 85 | 85 |
 | 3 | `printf(...)` | 85 | 85 | 85 |
 
-Formative classroom prompt: What roles do the `score` on the right and the `score` on the left play?
+---
 
-This is a classroom discussion prompt, not a separate oral examination.
+## 5. Initialization and Assignment Are Different
 
-## 10. Input–Process–Output Example
+Initialization gives a value when a variable is created:
+
+```c
+int score = 80;
+```
+
+Assignment updates a variable that already exists:
+
+```c
+score = 90;
+```
+
+In C, `=` means assignment, not mathematical equality. The left side identifies what will be updated; the right side is evaluated first.
+
+---
+
+## 6. Input, Processing, and Output
 
 ```c
 #include <stdio.h>
 
 int main(void) {
     int score;
+
     scanf("%d", &score);
     score = score + 5;
     printf("Adjusted score: %d\n", score);
+
     return 0;
 }
 ```
 
-Normal case: input `80`, expected `Adjusted score: 85`.  
-Boundary case: input `0`, expected `Adjusted score: 5`.
+For now, treat `&score` as the form that allows `scanf` to write input into `score`. Its pointer meaning will be studied in a later Unit.
 
-In this unit, treat `&score` only as the form required for `scanf` to write into the variable; pointer semantics are intentionally deferred.
+Tests:
 
-## 11. Common Errors
+| Input | Expected output |
+|---:|---|
+| 80 | `Adjusted score: 85` |
+| 0 | `Adjusted score: 5` |
+| -5 | `Adjusted score: 0` |
 
-### Integer Division
+---
+
+## 7. Error Case One: Integer Division
 
 ```c
 int total = 5;
 int count = 2;
 double average = total / count;
+printf("%.1f\n", average);
 ```
 
-The result may be `2.0`, not `2.5`. Trace operand types first, then change it to:
+Predict before running. The result is usually:
+
+```text
+2.0
+```
+
+Both operands of `total / count` are `int`, so integer division happens first and produces `2`. That result is converted to `double` afterward.
+
+Correction:
 
 ```c
 double average = (double) total / count;
 ```
 
-Students must explain the reason rather than merely replacing the code with an AI suggestion.
+Verify with `5/2`, `4/2`, and `1/2`.
 
-### Format and Type Mismatch
+---
 
-Using `%d` for a `double` or `%lf` to read an `int` is incorrect. Verify with compiler warnings, observed behavior, and the type table.
+## 8. Error Case Two: Format and Type Do Not Match
 
-## 12. Guided Practice
+```c
+int score = 80;
+printf("%f\n", score);
+```
 
-Build a “temperature plus one” program: read an integer temperature, add one, and print it.
+`%f` expects a floating-point value, but `score` is an `int`. Use compiler warnings as diagnostic evidence rather than trusting an accidental screen result.
 
-Students retain:
+Correct form:
 
-1. An input–process–output table.
-2. Two expected results.
-3. The program and actual results.
-4. One sentence explaining the state change.
+```c
+printf("%d\n", score);
+```
 
-## 13. Independent Homework
+Common mappings:
 
-### Score Adjuster
+| Type | `printf` | `scanf` |
+|---|---|---|
+| `int` | `%d` | `%d` |
+| `double` | `%f` | `%lf` |
+| `char` | `%c` | `%c` |
 
-Read an original score and bonus, then print the adjusted score.
+---
 
-- Input: two integers.
-- Output: `Final score: <value>`.
-- Constraint: use meaningful variable names and define three tests first.
-- Student-retained records: state table, program, test table, and explanation.
+## 9. Guided Practice: Increase a Temperature
 
-Alternative reasonable solutions are permitted. Homework is not submitted or individually graded; the next class may discuss errors, tests, or alternative solutions from this work.
+Requirement: read an integer temperature, add one, and print the result.
 
-## 14. Requirement Modification
+First:
 
-Add this rule: “The adjusted score may not exceed 100.” Students must:
+1. Write the input, processing, and output.
+2. Predict the results for inputs `20` and `-1`.
+3. Build a state table.
+4. Write, compile, run, and compare.
 
-1. Identify the affected processing step.
-2. Update expected results and add a case above 100.
-3. Modify the program.
-4. Re-run prior cases.
-5. Explain why the original tests were insufficient.
+---
 
-## 15. AI Use Rules
+## 10. Independent Practice: Score Adjuster
 
-Permitted: after completing a first version, ask AI for potentially missing tests or for help interpreting a compiler warning.  
-Prohibited: request a complete answer before producing a state table and initial approach; use code that cannot be explained.  
-Must retain: pre-AI approach, self-created tests, suggestion summary, verification method, and reason for accepting or rejecting it.
+Read an original score and a bonus, then display:
 
-## 16. Self-Check
+```text
+Final score: <value>
+```
 
-- I can distinguish values, types, variable names, and current values.
-- I can trace state before and after assignment.
-- I can explain why `5 / 2` differs from `5.0 / 2`.
-- I can update tests after a requirement change.
-- I can verify rather than simply trust an AI suggestion.
+Create at least three tests: a normal value, zero bonus, and a negative or extreme value. Use meaningful variable names and keep the state table and actual results.
 
-This self-check is not an assignment grade.
+---
 
-## 17. Classroom Participation Evidence
+## 11. Requirement Modification
 
-Participation may include:
+New rule: the adjusted score cannot exceed 100.
 
-- Explaining a state change.
-- Proposing a test or boundary case.
-- Sharing an integer-division or type error.
-- Operating the program, writing a trace, or submitting an anonymous question.
-- Revising one's own or a peer's reasoning.
+Update the tests first:
 
-Attendance or speaking frequency alone is not participation evidence.
+| Original | Bonus | Expected result |
+|---:|---:|---:|
+| 80 | 5 | 85 |
+| 98 | 5 | 100 |
+| 100 | 0 | 100 |
 
-## 18. Final Oral Preparation
+Then modify the program and confirm that the original cases still pass.
 
-Students should be prepared to explain, trace, modify, or diagnose an equivalent example during the one final one-on-one oral examination. This unit does not fix the oral examination's detailed format, timing, or question-selection method.
+---
 
-## 19. Instructor and TA Guidance
+## 12. Explain the Concept to AI
 
-- Require hand calculation before execution.
-- Do not expand `scanf` address syntax into a pointer lesson.
-- When time is short, retain state tracing, the type error, and requirement modification; reduce exercise count.
-- Successful output alone does not establish capability.
-- Use formative prompts instead of per-assignment grading or repeated micro-orals.
+Explain in your own words:
 
-## 20. Unit Summary
+> What is the relationship among a variable, a value, a type, and program state? How does assignment change state?
 
-This unit establishes the model that program execution changes state. The next unit uses conditions and repetition to decide how state changes.
+An AI response may be incomplete or incorrect. If it conflicts with a state table, compiler warning, or reproducible execution result, judge the claim again using evidence.
+
+---
+
+## 13. Self-Check
+
+- I can distinguish a variable name from its current value.
+- I can explain initialization and assignment.
+- I can trace state line by line.
+- I can explain the difference between `5 / 2` and `5.0 / 2`.
+- I can select basic format specifiers from the data type.
+- I can update tests and run a regression check after a requirement change.
+
+---
+
+## 14. Chapter Summary
+
+Program execution is not only about producing output. It repeatedly transforms an old state into a new state. Variables preserve current values, types constrain representation and operations, expressions produce results, and assignments write results back into state. The next Unit uses conditions and loops to decide how state changes next.
 
 ## Navigation
 
-- [Assessment precedence note](ASSESSMENT-NOTE.en.md)
-- [Instructor implementation guide](../instructor/session-guides.en.md)
-- [C17 examples and defect cases](../../examples/README.md)
+- [Previous Unit: How Does Program Text Become an Execution Result?](unit-01-execution.en.md)
+- [Next Unit: How Does a Program Select and Repeat?](unit-03-control-flow.en.md)
 - [Materials Index](../README.en.md)
 - [繁體中文版](unit-02-data-state.zh-TW.md)
