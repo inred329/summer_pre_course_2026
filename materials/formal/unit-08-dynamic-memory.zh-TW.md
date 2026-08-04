@@ -1,8 +1,8 @@
 # 正式單元 F-U08：程式如何在執行期間取得與釋放空間？
 
-版本：1.0.0  
+版本：1.0.1  
 狀態：正式學生教材  
-最後更新：2026-08-04  
+最後更新：2026-08-05  
 對應英文版本：[Formal Unit F-U08: How Does a Program Obtain and Release Space During Execution?](unit-08-dynamic-memory.en.md)
 
 ## 文件用途與完成標準
@@ -62,14 +62,20 @@ if (values == NULL) {
 
 int main(void) {
     int n;
-    scanf("%d", &n);
+
+    if (scanf("%d", &n) != 1) {
+        fprintf(stderr, "Invalid input\n");
+        return 1;
+    }
 
     if (n <= 0) {
+        fprintf(stderr, "Size must be positive\n");
         return 1;
     }
 
     int *values = malloc((size_t)n * sizeof *values);
     if (values == NULL) {
+        fprintf(stderr, "Allocation failed\n");
         return 1;
     }
 
@@ -86,13 +92,15 @@ int main(void) {
 流程：
 
 ```text
-決定大小
+讀取並驗證大小
 → 配置
 → 檢查
 → 初始化／使用
 → 釋放
 → 不再使用
 ```
+
+輸入檢查是程式契約的一部分。若 `scanf` 失敗，`n` 就沒有可供後續判斷使用的有效值。
 
 ---
 
@@ -218,7 +226,7 @@ AI 回應若與配置圖、函式規格或記憶體檢查結果衝突，應以�
 
 ## 12. 自我檢核
 
-- 我能檢查配置失敗。
+- 我能檢查輸入與配置失敗。
 - 我能配對每次成功配置與釋放責任。
 - 我能說明所有權。
 - 我不會在 `free` 後使用物件。
@@ -227,7 +235,7 @@ AI 回應若與配置圖、函式規格或記憶體檢查結果衝突，應以�
 
 ## 13. 本章摘要
 
-動態記憶體讓程式在執行期間決定大小與生命週期，但也把所有權與釋放責任交給程式設計者。可靠管理需要明確介面、失敗檢查、正確釋放與不再使用。下一章將把資料寫入檔案，使其在程式結束後仍可保存。
+動態記憶體讓程式在執行期間決定大小與生命週期，但也把所有權與釋放責任交給程式設計者。可靠管理需要明確介面、輸入與配置失敗檢查、正確釋放與不再使用。下一章將把資料寫入檔案，使其在程式結束後仍可保存。
 
 ## 導覽
 
