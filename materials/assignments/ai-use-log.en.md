@@ -1,44 +1,45 @@
-# AI Use Log Template
+# Optional AI Verification Notes
 
-Version: 0.1.0  
-Status: Official template  
-Last updated: 2026-08-03  
-Major change summary: Established a transparent AI-use, verification, and responsibility record for preparatory assignments.  
-Corresponding Chinese version: [AI 使用紀錄模板](ai-use-log.zh-TW.md)
+Version: 0.2.0  
+Status: Optional learning resource  
+Last updated: 2026-08-05  
+Major change summary: Converted into an optional personal verification note; it is not submitted, does not affect grading, and no declaration is required when AI is not used.  
+Corresponding Chinese version: [AI 驗證筆記模板（選用）](ai-use-log.zh-TW.md)
 
 ## Document Purpose
 
-Students complete this form when AI is used in an assignment. When no AI is used, state “No AI was used for this assignment” and retain self-created expected results and tests.
+Students may choose this template when they used AI and want a personal verification note that supports later review.
+
+This document is not an assignment completion requirement, is not submitted, and does not affect participation or final-oral grading. When AI was not used, no “no AI used” declaration is required.
 
 ## Basic Information
 
-- Assignment:
-- Name / identifier:
+- Related Unit or assignment:
 - Date:
-- AI tool used:
+- Tool used (optional):
 
-## 1. State Before AI Use
+## 1. Understanding Before Use
 
-- My understanding of the requirement:
+- My understanding of the problem or requirement:
 - What I had already completed:
 - My specific problem:
 - My initial approach or hypothesis:
 - Expected results or tests I had already created:
 
-## 2. Summary of the AI Suggestion
+## 2. Summary of the External Suggestion
 
-Do not merely paste the full conversation. Summarize in your own words:
+Do not merely paste a full conversation. Summarize in your own words:
 
 - What I asked:
-- What the AI suggested:
+- What suggestion I received:
 - Which part might be useful:
-- Which part I was uncertain about:
+- Which part remained uncertain:
 
 ## 3. Verification Method
 
-Use at least one reproducible method:
+Use one or more reproducible methods:
 
-- [ ] Review course material or documentation
+- [ ] Review course material or official documentation
 - [ ] Compile and inspect warnings or errors
 - [ ] Run a normal case
 - [ ] Run a boundary case
@@ -48,7 +49,7 @@ Use at least one reproducible method:
 
 Verification process and result:
 
-## 4. Decision
+## 4. My Judgment
 
 - [ ] Accept
 - [ ] Accept after modification
@@ -56,24 +57,25 @@ Verification process and result:
 
 Reason and evidence:
 
-## 5. Effect on the Final Work
+## 5. Can I Now Work Independently?
 
-- Which parts were influenced by AI:
-- Which core parts I completed myself:
-- Whether I can now explain, modify, and test the related code:
-- If the requirement changes, what I would change first:
+- Can I explain the related Concept in my own words?
+- Can I modify the related code?
+- Can I create tests?
+- If the requirement changes, what would I inspect first?
 
-## Invalid Records
+## Use Principles
 
-The following do not count as valid records:
+The following usually do not support learning:
 
-- Pasting only the full conversation.
+- Pasting only a complete conversation.
 - Writing only “AI said it was correct.”
-- Providing no pre-AI approach or self-created test.
+- Having no personal prediction or test.
 - Performing no actual verification.
-- Being unable to identify which parts AI influenced.
+- Being unable to explain how the suggestion affected personal judgment.
 
 ## Navigation
 
 - [Preparatory Assignment Pack](preparatory-assignments.en.md)
+- [Materials Index](../README.en.md)
 - [繁體中文版](ai-use-log.zh-TW.md)

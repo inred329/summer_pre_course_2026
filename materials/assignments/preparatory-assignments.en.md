@@ -1,9 +1,9 @@
 # Preparatory Independent Assignment and Oral Preparation Pack
 
-Version: 0.2.0  
+Version: 0.3.0  
 Status: Official learning-task baseline  
-Last updated: 2026-08-03  
-Major change summary: Assignments are now unsubmitted and ungraded formative learning tasks retained by students for next-class discussion and the final one-to-one oral examination.  
+Last updated: 2026-08-05  
+Major change summary: Retains unsubmitted, ungraded assignments while removing mandatory AI-use records, no-AI declarations, and a separate required AI-review task.  
 Corresponding Chinese version: [前導課程自主作業與口試準備包](preparatory-assignments.zh-TW.md)
 
 ## Document Purpose
@@ -13,9 +13,9 @@ For students, instructors, and teaching assistants in both preparatory tracks. B
 ## Assignment Policy
 
 - Every assignment should be completed, but it is not submitted and receives no direct grade.
-- Students retain their programs, tests, traces, errors, modifications, and AI records.
+- Students keep their programs, tests, traces, errors, and modifications.
 - The next class discusses the previous assignment. Students may ask questions, share errors, compare solutions, or join class debugging.
-- These assignments and learning records become primary materials for the final one-to-one oral examination.
+- These assignments and learning records may be used as preparation for the final one-to-one oral examination.
 - Instructors do not mark every assignment and do not deduct points for non-submission; students demonstrate capability through participation and the final oral examination.
 
 Students should retain:
@@ -25,8 +25,8 @@ Students should retain:
 3. Self-created tests and expected results.
 4. Actual results and comparison.
 5. One trace, debugging, or requirement-change record.
-6. An AI-use record when AI was used.
-7. One remaining uncertainty to bring to the next class.
+6. One remaining uncertainty to bring to the next class.
+7. When AI was used, an optional brief note of any suggestion and verification result that helps later review; this is not a completion requirement.
 
 Correct output, successful compilation, passing OJ, or complete source code alone does not establish capability.
 
@@ -34,7 +34,7 @@ Correct output, successful compilation, passing OJ, or complete source code alon
 
 # Assignment 1: From Source Code to Execution
 
-- Related material: Unit 1
+- Related material: P-U01
 - Competency IDs: `PC-E01`, `PC-E03`, `PC-E04`
 - Target maturity: L2–L4
 
@@ -61,7 +61,7 @@ Create a C program that prints three lines: your name, department or interest, a
 
 # Assignment 2: Data and State Tracing
 
-- Related material: Unit 2
+- Related material: P-U02
 - Competency IDs: `PC-D01` through `PC-D05`
 - Target maturity: L2–L4
 
@@ -87,7 +87,7 @@ Use only basic types, expressions, input/output, and necessary conditions; do no
 
 # Assignment 3: Conditions and Loops
 
-- Related material: Unit 3
+- Related material: P-U03
 - Competency IDs: `PC-C01` through `PC-C07`
 - Target maturity: L3–L4
 
@@ -109,7 +109,7 @@ Create a valid-score statistics program: repeatedly read scores; input `-1` ends
 
 # Assignment 4: Functions and Responsibility Decomposition
 
-- Related material: Unit 4
+- Related material: P-U04
 - Competency IDs: `PC-F01` through `PC-F05`
 - Target maturity: L2–L4
 
@@ -133,8 +133,8 @@ Suggested context: read three numbers, find the maximum, and print it.
 
 # Integrated Assignment: Small Score Reporter
 
-- Related material: Units 1–4
-- Competency IDs: `PC-E`, `PC-D`, `PC-C`, `PC-F`, `PC-V`, `PC-A`, `PC-I`
+- Related material: P-U01 through P-U04
+- Competency IDs: `PC-E`, `PC-D`, `PC-C`, `PC-F`, `PC-V`, `PC-I`
 - Target maturity: L3–L4
 
 ## Basic Requirements
@@ -177,17 +177,16 @@ Understand requirements
 5. One defect-diagnosis record.
 6. Requirement change: remove the lowest score and recalculate the average.
 7. Regression tests.
-8. AI-use record or a no-AI-used declaration.
-9. A self-question list for final oral preparation.
+8. A self-question list for final oral preparation.
 
-## AI Review Practice
+## Optional AI Concept Conversation
 
-Find one potentially incorrect AI suggestion. Predict first, then compile, run, and test before accepting, modifying, or rejecting it with evidence.
+Students may explain their function decomposition, testing strategy, or error cause to AI and notice whether the conversation exposes anything still unclear. This is optional, and no conversation must be saved or submitted. When an AI response conflicts with code or test results, reproducible evidence should guide judgment.
 
 ## Not Permitted
 
 - Arrays, pointers, dynamic memory, or advanced data structures as the core solution.
-- Keeping a complete AI-generated program that the student cannot explain as oral-examination preparation.
+- Keeping a complete external answer that the student cannot explain, modify, or test as oral-examination preparation.
 - Using one sample output as proof of correctness.
 
 ---
@@ -198,40 +197,23 @@ No upload or submission is required. A suggested student folder is:
 
 ```text
 assignment-x/
-├── README.md          # understanding, predictions, tests, questions, reflection, AI record
+├── README.md          # understanding, predictions, tests, questions, and reflection
 ├── program.c          # program
 └── evidence/          # trace tables, diagrams, or result records
 ```
 
 Equivalent storage is acceptable as long as the student can find, read, modify, and explain the work during class discussion and the final oral examination.
 
-## Shared AI Use Rules
+## Shared AI Principles
 
-### Permitted
-
-- Explain an error message already encountered.
-- Add candidate tests after the student first proposes tests.
-- Compare two student-proposed approaches.
-- Suggest debugging hypotheses for student verification.
-
-### Prohibited
-
-- Request a complete answer before understanding and an initial approach.
-- Let AI perform tracing, core decomposition, or final oral answers.
-- Keep work that cannot be explained, modified, or tested as a completed result.
-
-### Suggested Records
-
-- Understanding or approach before AI use.
-- Self-created expected results and tests.
-- Summary of AI suggestions.
-- Verification method.
-- Reason for accepting, modifying, or rejecting.
+- AI is not an assignment completion requirement, and routine use is not required.
+- After forming an initial understanding, students may ask AI to explain an error, add candidate tests, or compare already-proposed approaches.
+- AI should not replace tracing, core decomposition, testing, or final oral answers.
+- Any AI suggestion still requires judgment through code, tests, compiler behavior, and reproducible results.
 
 ## Navigation
 
 - [Learning and Assessment Policy](../../design/13-learning-assessment-policy.en.md)
 - [Materials Index](../README.en.md)
 - [Classroom Participation and Final Oral Examination Rubric](rubric.en.md)
-- [AI Use Log Template](ai-use-log.en.md)
 - [繁體中文版](preparatory-assignments.zh-TW.md)

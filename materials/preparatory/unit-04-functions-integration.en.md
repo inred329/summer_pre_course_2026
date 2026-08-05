@@ -1,270 +1,339 @@
-# Preparatory Unit 4: Functions, Integrated Development, and AI Verification
+# Preparatory Unit P-U04: How Can a Large Problem Be Divided into Understandable Work?
 
-Version: 0.2.0  
-Status: Official teaching material  
-Last updated: 2026-08-03  
-Major change summary: Removed homework submission, per-item passing, remediation, and repeated micro-oral wording; reframed the unit around student-retained records, formative classroom discussion, and final-oral preparation.  
-Corresponding Chinese version: [前導單元 4：函數、整合開發與 AI 驗證](unit-04-functions-integration.zh-TW.md)
+Version: 1.0.1  
+Status: Official student material  
+Last updated: 2026-08-05  
+Corresponding Chinese version: [前導單元 P-U04：如何把一個大問題拆成可理解的工作？](unit-04-functions-integration.zh-TW.md)
 
-## Document Purpose
+## Purpose and Completion Standard
 
-The Chinese preparatory track uses this material across Sessions 3–4; the English preparatory track splits it between Session 4 (functions and decomposition) and Session 5 (integrated cycle and AI verification).
+This is a student chapter for independent reading, practice, and review. Completing it means you can separate responsibilities with functions, trace parameters and return values, divide a small requirement into testable parts, and define important interface conditions such as valid input and arithmetic range.
 
-## Basic Information
+The activities do not need to be submitted. Keep your responsibility diagrams, call traces, programs, tests, and corrections.
 
-- Requirement IDs: `CAP-F01` through `CAP-F04`, `EDU-03`, `EDU-04`, `X-03` through `X-06`
-- Competency IDs: `PC-F01` through `PC-F05`, `PC-V01` through `PC-V05`, `PC-A01` through `PC-A05`, `PC-I01`
-- Target maturity: L2–L4
-- Scope state: `SB-C` / `SB-F`
-- Formative tasks: `AT-02`, `AT-04` through `AT-11`
-- Final oral preparation: `AT-12`
-- Risk IDs: `R-01`, `R-02`, `R-05`, `R-12`
-- Estimated time: Chinese 240–300 minutes; English 240 minutes
+## What Question Does This Chapter Answer?
 
-## 1. Learning Objectives
+When a program has only a few lines, putting everything in `main` may still seem readable. As input, calculation, decisions, and output become mixed together, every change becomes harder.
 
-Students can:
+> When a program grows longer, how can responsibilities be separated so each part can be understood, tested, and modified?
 
-1. Describe a function's single responsibility in one sentence.
-2. Distinguish declaration, definition, call, parameter, and return value.
-3. Decompose a small requirement into independently testable functions.
-4. Complete a cycle of understanding, design, implementation, testing, debugging, modification, and regression verification.
-5. Review an AI suggestion and accept, modify, or reject it using evidence.
+After completing this chapter, you should be able to:
 
-## 2. Prerequisites
+1. Describe a function's responsibility in one sentence.
+2. Distinguish declaration, definition, call, parameter, argument, and return value.
+3. Trace data flow through a function call.
+4. Divide a small requirement into independently testable functions.
+5. State valid-input and failure behavior for a function interface.
+6. Update callers and tests after an interface changes.
 
-- Use data, conditions, and loops in a small program.
-- Establish expected results and boundary cases.
-- Trace state and diagnose basic defects.
+Prerequisite: you can use variables, conditions, and loops in small programs and create expected results and tests.
 
-When prerequisites are weak, use formative support rather than homework resubmission or copied programs.
+---
 
-## 3. Tools and Environment
+## 1. Identify Responsibilities First
 
-- GCC or Clang with C17 support.
-- Compile: `gcc -std=c17 -Wall -Wextra -pedantic report.c -o report`
-- Fallback: an instructor-tested online C compiler.
+Requirement: read a score and bonus, calculate the adjusted score, and display it.
 
-## 4. Information Priority
+Consider whether one function should be responsible for all three actions:
 
-### Must Understand
+1. Read input
+2. Calculate the bonus
+3. Display the result
 
-- Functions establish responsibility and interfaces; they are not merely a way to shorten code.
-- The caller provides inputs, and the function provides results through a return value.
-- A completed program still requires testing, modification, diagnosis, and explanation.
-- AI suggestions require student verification.
+If the calculation rule changes, which part should change? If you want to test the calculation, should keyboard input be required every time?
 
-### Must Complete and Retain
+---
 
-- One responsibility-decomposition diagram.
-- One short function with parameters and a return value.
-- One requirement modification with regression testing.
-- One AI-suggestion review record.
+## 2. A Function Is a Named Responsibility
 
-These records are not submitted or individually graded. Students retain them for classroom discussion and final oral preparation.
-
-### May Be Deferred
-
-- Multi-file programs, function pointers, full recursion implementation, and large project architecture.
-
-## 5. Core Question
-
-> When a problem grows, how do we separate responsibilities and prove that the solution remains trustworthy after change?
-
-## 6. Visual Model
+A function is not only a way to shorten code. It packages one task as a unit with a name, inputs, a result, and a contract.
 
 ```mermaid
 flowchart LR
-    R[Requirement] --> D[Responsibility Decomposition]
-    D --> F1[Read Data]
-    D --> F2[Compute Result]
-    D --> F3[Present Result]
-    F1 --> T[Test]
-    F2 --> T
-    F3 --> T
-    T --> M[Requirement Change]
-    M --> G[Regression Verification]
-    A[AI Suggestion] --> H[Human Review and Testing]
-    H --> M
+    C[Caller] -->|Arguments| F[Function]
+    F -->|Return Value or Status| C
 ```
 
-## 7. Minimal Function Example
+A useful responsibility statement is:
+
+> `add_bonus` receives an original score and a bonus and returns an adjusted score when the arithmetic result is representable.
+
+It does not read the keyboard or print the screen.
+
+---
+
+## 3. Minimal Function Example
 
 ```c
+#include <limits.h>
 #include <stdio.h>
 
-int add_bonus(int score, int bonus) {
-    return score + bonus;
+int add_bonus(int score, int bonus, int *result) {
+    if (result == NULL) {
+        return 0;
+    }
+
+    if ((bonus > 0 && score > INT_MAX - bonus) ||
+        (bonus < 0 && score < INT_MIN - bonus)) {
+        return 0;
+    }
+
+    *result = score + bonus;
+    return 1;
 }
 
 int main(void) {
-    int result = add_bonus(80, 5);
+    int result;
+
+    if (!add_bonus(80, 5, &result)) {
+        printf("Invalid calculation\n");
+        return 1;
+    }
+
     printf("%d\n", result);
     return 0;
 }
 ```
 
-Responsibility: `add_bonus` only calculates the adjusted score; it does not handle input or output.
-
-## 8. Call Trace
-
-| Step | Caller / Function | Data |
-|---|---|---|
-| 1 | `main` calls `add_bonus(80, 5)` | parameters `score=80`, `bonus=5` |
-| 2 | `add_bonus` computes | `85` |
-| 3 | Return to `main` | `result=85` |
-| 4 | `main` prints | `85` |
-
-## 9. Responsibility-Decomposition Activity
-
-Requirement: “Read three quiz scores, calculate the average, and print whether the student passes.”
-
-Suggested decomposition:
-
-- `read_score`: input may remain in `main`; the preparatory course does not require a separate input function.
-- `calculate_average`: receives three scores and returns the average.
-- `is_passing`: receives the average and returns whether it meets the threshold.
-- `main`: coordinates input, calls, and output.
-
-Other reasonable decompositions are allowed, but each function must have a one-sentence responsibility.
-
-## 10. Common Errors
-
-### Ignoring the Return Value
-
-```c
-add_bonus(score, bonus);
-printf("%d\n", score);
-```
-
-The function returns 85, but `score` remains 80. Students trace the data flow rather than looking only inside the function.
-
-### Too Many Responsibilities
-
-A function that reads, computes, decides, and prints is difficult to test independently. Students draw responsibilities and separate them.
-
-## 11. Guided Practice
-
-Create `max_of_two(int a, int b)` and return the larger value.
-
-Complete and retain:
-
-1. A one-sentence responsibility.
-2. Tests for `a>b`, `a<b`, and `a==b`.
-3. A call trace.
-4. The program and results.
-
-## 12. Independent Integrated Practice
-
-### Small Score Reporter
-
-Requirement: read three quiz scores and print the average plus `Pass` or `Try again`.
-
-Cycle:
+Expected output:
 
 ```text
-Understand the requirement
-→ Define data and tests
-→ Draw a responsibility-decomposition diagram
-→ Build the smallest version
-→ Run normal and boundary cases
-→ Diagnose one instructor-provided defect
-→ Modify the passing threshold
-→ Run regression tests
-→ Explain and reflect
+85
 ```
 
-Retain: decomposition diagram, program, test table, defect record, modification diff, and reflection.
+### Function Definition
 
-This practice is not submitted or individually graded. The class discusses representative decompositions, defects, and testing strategies.
+```c
+int add_bonus(int score, int bonus, int *result)
+```
 
-## 13. Requirement Modification
+- first `int`: status return type
+- `add_bonus`: function name
+- `score`, `bonus`, `result`: parameters
 
-Change the passing threshold from 60 to a user-provided value, and display the average to one decimal place.
+### Function Call
 
-Students identify:
+```c
+add_bonus(80, 5, &result)
+```
 
-- Which function interface changes.
-- Which tests must be added or updated.
-- Which original tests should continue to pass.
+`80`, `5`, and `&result` are arguments. Their values are given to the parameters.
 
-## 14. AI-Suggestion Review Task
+### Status and Output
 
-The instructor provides an AI suggestion such as:
+The function returns 1 for success and writes the calculation through `result`. It returns 0 without writing when the output pointer is null or the addition would overflow.
 
-> “Store `(a + b + c) / 3` in a `double`; it will always preserve the decimal part.”
+---
 
-Students must:
+## 4. Call Trace
 
-1. Calculate `80, 81, 82` manually.
-2. Run the original suggestion.
-3. Explain the integer-division problem.
-4. Modify and retest.
-5. Accept, modify, or reject the suggestion with evidence.
+| Step | Location | State or data |
+|---|---|---|
+| 1 | `main` | prepares arguments 80, 5, and `&result` |
+| 2 | `add_bonus` | validates output and arithmetic range |
+| 3 | `add_bonus` | writes 85 and returns success |
+| 4 | `main` | observes success and `result = 85` |
+| 5 | `main` | displays 85 |
 
-## 15. AI Use Rules
+The caller pauses its current work, and execution continues from the call location after the function completes.
 
-Permitted: ask AI for candidate tests, compare two decompositions, or propose debugging hypotheses.  
-Prohibited: let AI perform the core decomposition, complete the integrated practice, or answer the final oral live.  
-Must retain: pre-AI requirement understanding, initial decomposition, self-created tests, AI summary, verification, and decision.
+---
 
-## 16. Formative Learning Evidence and Classroom Discussion
+## 5. Declaration, Definition, and Call
 
-### Understanding-Oriented Evidence
+When a definition appears after `main`, provide a prototype first:
 
-- `EV-EX + EV-VI + EV-TR + EV-AI`
-- Explain function responsibilities and interfaces.
-- Trace parameters, return values, and data flow.
-- Explain the risk and verification method for an AI suggestion.
+```c
+int add_bonus(int score, int bonus, int *result);
+```
 
-### Action-Oriented Evidence
+- declaration/prototype: tells the compiler the interface
+- definition: provides the work
+- call: uses the function
 
-- `EV-IM + EV-TE + EV-DE + EV-MO`
-- Complete the integrated cycle, requirement change, and regression verification.
-- Review and correct one incorrect AI suggestion.
+The declaration and definition must agree exactly in return type and parameter types.
 
-### Formative Prompts
+---
 
-1. Why should this work be separated into functions?
-2. Where does the return value go?
-3. Which tests should still pass after changing the threshold?
-4. How did you prove the AI suggestion correct or incorrect?
+## 6. Error Case One: Ignoring a Return Value or Status
 
-These prompts support classroom discussion and participation observation. They are not separate oral exams or per-homework grading.
+```c
+int score = 80;
+int result;
+add_bonus(score, 5, &result);
+printf("%d\n", result);
+```
 
-### Participation Modes
+If the call fails, `result` is not guaranteed to have been written. The caller must test the status before using the output.
 
-- Propose a responsibility decomposition.
-- Trace calls and return values.
-- Share a defect, test, or refactoring rationale.
-- Compare alternative function interfaces.
-- Participate through writing, anonymous questions, program operation, or group records.
+Correct pattern:
 
-## 17. Instructor and TA Guidance
+```c
+if (add_bonus(score, 5, &result)) {
+    printf("%d\n", result);
+}
+```
 
-- Accept small, reasonable decompositions rather than demanding large architecture.
-- When code is correct but cannot be explained, use formative prompts and a small requirement change rather than per-item remediation.
-- When time is short, retain the integrated cycle and AI review; reduce extension features.
-- Do not introduce linked lists, trees, function pointers, or frameworks.
-- When tools fail, switch to paper tracing or instructor equipment; do not treat the failure as non-participation.
+---
 
-## 18. Final Oral Preparation
+## 7. Error Case Two: Too Many Responsibilities
 
-Students should be able to select from their own records:
+```c
+void do_everything(void) {
+    /* input, calculate, classify, print */
+}
+```
 
-- One function responsibility and interface design.
-- One parameter and return-value trace.
-- One requirement change with regression testing.
-- One AI suggestion they accepted, modified, or rejected.
+This function is difficult to test independently and makes the effect of a rule change unclear.
 
-This unit prepares capability evidence without fixing final oral question types or procedure in advance.
+A clearer division might be:
 
-## 19. Unit Summary
+```text
+main: coordinate the flow
+calculate_average: calculate an average
+is_passing: decide whether it passes
+print_report: present the result
+```
 
-Functions establish responsibility boundaries; testing, debugging, modification, and AI verification make results trustworthy. This unit completes the minimum integrated capability of the preparatory course.
+The goal is not the largest possible number of functions. Each function should have a clear responsibility.
+
+---
+
+## 8. Error Case Three: Confusing Parameter Order and Preconditions
+
+```c
+double divide(double numerator, double denominator);
+```
+
+Call:
+
+```c
+divide(2, 10)
+```
+
+The result is `0.2`, not `5.0`. Parameter order is part of the interface contract. The contract must also define `denominator == 0.0`; performing floating division by zero may produce infinities or exceptions according to the floating environment and is not a valid result for an interface that requires an ordinary quotient.
+
+---
+
+## 9. Guided Practice: Larger Value
+
+Create:
+
+```c
+int max_of_two(int a, int b);
+```
+
+Responsibility: receive two integers and return the larger one.
+
+Create tests first:
+
+| `a` | `b` | Expected result |
+|---:|---:|---:|
+| 5 | 3 | 5 |
+| 2 | 7 | 7 |
+| 4 | 4 | 4 |
+| `INT_MIN` | `INT_MAX` | `INT_MAX` |
+
+Then write the function and trace one call.
+
+---
+
+## 10. Independent Integrated Practice: Score Reporter
+
+Requirement: read three quiz scores and display the average and `Pass` or `Try again`.
+
+Suggested responsibilities:
+
+```c
+int calculate_average(int a, int b, int c, double *average);
+int is_passing(double average, double threshold);
+```
+
+Define score range, output-pointer behavior, and how the sum avoids signed overflow before implementation.
+
+Process:
+
+```text
+Understand requirement
+→ create tests
+→ divide responsibilities
+→ define interfaces and failure behavior
+→ implement
+→ trace calls
+→ run tests
+→ correct
+```
+
+Test below 60, exactly 60, above 60, a fractional average, invalid scores, and extreme integer inputs.
+
+---
+
+## 11. Requirement Modification
+
+The passing threshold is no longer fixed at 60. The caller provides it.
+
+Possible interface:
+
+```c
+int is_passing(double average, double threshold);
+```
+
+Identify:
+
+1. Which interface changes?
+2. Which call sites must be updated?
+3. Which valid-range rules apply to the threshold?
+4. Which tests must be added?
+5. Which old tests should still pass?
+
+---
+
+## 12. Test Functions, Not Only the Whole Screen
+
+When responsibilities are clear, inputs, status, and outputs can be tested directly:
+
+| Function | Input | Expected result |
+|---|---|---|
+| `add_bonus` | 80, 5, valid output | success and 85 |
+| `add_bonus` | `INT_MAX`, 1, valid output | failure, output unchanged |
+| `add_bonus` | 80, 5, `NULL` | failure |
+| `max_of_two` | 4, 4 | 4 |
+| `is_passing` | 59.9, 60 | false |
+| `is_passing` | 60.0, 60 | true |
+
+This makes the error location easier to narrow down.
+
+---
+
+## 13. Explain the Concept to AI
+
+Explain in your own words:
+
+> What is the relationship among a function's responsibility, parameters, arguments, return status, and output values? Why must arithmetic range and invalid-input behavior be part of the interface?
+
+An AI response may be incomplete or incorrect. If it conflicts with a call trace, type limit, function test, or reproducible result, judge the claim again using evidence.
+
+---
+
+## 14. Self-Check
+
+- I can describe a function's responsibility in one sentence.
+- I can distinguish declaration, definition, and call.
+- I can distinguish parameters and arguments.
+- I can trace status and output values.
+- I can diagnose ignored failure status.
+- I can define arithmetic and input contracts.
+- I can update callers and tests after an interface changes.
+
+---
+
+## 15. Chapter Summary
+
+Functions organize work into named units with interfaces and responsibilities. Reliable interfaces state inputs, outputs, failure behavior, and arithmetic limits. Callers provide arguments, inspect status, and use outputs only after success. Responsibility separation improves understanding, testing, debugging, and requirement changes. The formal course continues by deepening data representation, control flow, memory, and engineering practices.
 
 ## Navigation
 
+- [Previous Unit: How Does a Program Select and Repeat?](unit-03-control-flow.en.md)
+- [Formal-Course Materials Index](../formal/README.en.md)
 - [Materials Index](../README.en.md)
-- [Assessment Override](ASSESSMENT-NOTE.en.md)
 - [繁體中文版](unit-04-functions-integration.zh-TW.md)

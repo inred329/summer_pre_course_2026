@@ -1,98 +1,81 @@
-# Preparatory Unit 3: Conditions, Loops, and Control Flow
+# Preparatory Unit P-U03: How Does a Program Select and Repeat?
 
-Version: 0.2.0  
-Status: Official teaching material  
-Last updated: 2026-08-03  
-Major change summary: Removed homework submission, per-item passing, remediation, and repeated micro-oral wording; reframed the unit around student-retained records, formative classroom discussion, and final-oral preparation.  
-Corresponding Chinese version: [前導單元 3：條件、迴圈與控制流程](unit-03-control-flow.zh-TW.md)
+Version: 1.0.1  
+Status: Official student material  
+Last updated: 2026-08-05  
+Corresponding Chinese version: [前導單元 P-U03：程式如何選擇與重複？](unit-03-control-flow.zh-TW.md)
 
-## Document Purpose
+## Purpose and Completion Standard
 
-The Chinese preparatory track uses this material across Sessions 2–3; the English preparatory track uses it in Session 3.
+This is a student chapter for independent reading, practice, and review. Completing it means you can turn a requirement into conditions, predict branch and loop paths, diagnose boundary and termination problems, and use tests to show that control flow satisfies the requirement.
 
-## Basic Information
+The activities do not need to be submitted. Keep your predictions, traces, programs, tests, and corrections.
 
-- Requirement IDs: `CAP-C01` through `CAP-C04`, `X-02`, `X-03`, `X-04`
-- Competency IDs: `PC-C01` through `PC-C07`, `PC-V01` through `PC-V04`
-- Target maturity: L2–L4
-- Scope state: `SB-C`
-- Formative tasks: `AT-03`, `AT-05`, `AT-06`, `AT-07`, `AT-08`
-- Final oral preparation: `AT-12`
-- Risk IDs: `R-02`, `R-05`, `R-09`
-- Estimated time: Chinese 180 minutes; English 120 minutes
+## What Question Does This Chapter Answer?
 
-## 1. Learning Objectives
+Program state does not always change in the same way. Sometimes different situations require different paths. Sometimes work must repeat until a condition is no longer true.
 
-Students can:
+> When different situations require different actions, or one action must repeat, how does a program determine the next step?
 
-1. Translate requirements into evaluable conditions.
-2. Predict the path through `if` and `else`.
-3. Define loop initial state, continuation condition, update, and termination.
-4. Diagnose infinite loops and off-by-one errors.
-5. Verify control flow with normal and boundary cases.
+After completing this chapter, you should be able to:
 
-## 2. Prerequisites
+1. Turn requirements into evaluable conditions.
+2. Predict `if`/`else` execution paths.
+3. Explain a loop's initial state, continuation condition, work, and update.
+4. Diagnose off-by-one errors and infinite loops.
+5. Check input success before evaluating conditions.
+6. Verify control flow with normal, boundary, and invalid cases.
 
-- Trace variable state.
-- Build expressions and basic input/output.
-- State expected results before execution.
+Prerequisite: you can trace variable state, build basic expressions, and write an expected result before execution.
 
-When prerequisites are weak, use formative support rather than copied programs or resubmitted homework.
+---
 
-## 3. Tools and Environment
+## 1. Predict the Branch First
 
-- GCC or Clang with C17 support.
-- Compile: `gcc -std=c17 -Wall -Wextra -pedantic control.c -o control`
-- Fallback: an instructor-tested online C compiler.
+```c
+int score = 60;
 
-## 4. Information Priority
+if (score >= 60) {
+    printf("Pass\n");
+} else {
+    printf("Try again\n");
+}
+```
 
-### Must Understand
+Before running it, answer:
 
-- A condition chooses a path from current state.
-- A loop is repeated state update until termination, not merely repeated syntax.
-- Boundary cases often reveal control-flow defects.
+1. What is the result of `score >= 60`?
+2. Which block runs?
+3. What changes if `score` becomes 59?
+4. Why is 60 an important test value?
 
-### Must Complete and Retain
+---
 
-- One conditional-path trace.
-- One iteration-by-iteration loop trace.
-- One diagnosis of an off-by-one or infinite-loop defect.
-- One requirement modification with regression testing.
+## 2. Conditions and Branches
 
-These records are not submitted or individually graded. Students retain them for the next class discussion and final oral preparation.
-
-### May Be Deferred
-
-- Complex nesting, `goto`, large state machines, and optimization techniques.
-
-## 5. Core Question
-
-> How does a program choose the next action from current state and repeat work reliably?
-
-## 6. Visual Model
+A condition is an expression that evaluates to true or false. A branch selects a path from that result.
 
 ```mermaid
 flowchart TD
-    S[Current State] --> Q{Condition True?}
-    Q -->|Yes| A[Path A]
-    Q -->|No| B[Path B]
-    A --> U[Update State]
-    B --> U
-    U --> Q
-    Q -->|Termination Reached| E[End]
+    S[Current State] --> Q{Condition true?}
+    Q -->|Yes| A[Execute A]
+    Q -->|No| B[Execute B]
+    A --> E[Continue]
+    B --> E
 ```
 
-Verification method: record state before and after every condition evaluation in a trace table.
-
-## 7. Conditional Example
+Minimal example:
 
 ```c
 #include <stdio.h>
 
 int main(void) {
     int score;
-    scanf("%d", &score);
+
+    if (scanf("%d", &score) != 1) {
+        fprintf(stderr, "Invalid input\n");
+        return 1;
+    }
 
     if (score >= 60) {
         printf("Pass\n");
@@ -104,9 +87,56 @@ int main(void) {
 }
 ```
 
-Test `59`, `60`, and `61`. Predict the path and output first.
+Test `59`, `60`, and `61`. Write each expected path and output before running. Also test a nonnumeric input and confirm that no branch uses an invalid `score` value.
 
-## 8. Loop Example
+---
+
+## 3. Relational and Logical Operators
+
+| Meaning | C form |
+|---|---|
+| equal | `==` |
+| not equal | `!=` |
+| greater than | `>` |
+| greater than or equal | `>=` |
+| less than | `<` |
+| less than or equal | `<=` |
+
+Logical combinations:
+
+```c
+age >= 18 && age <= 65
+score < 0 || score > 100
+!is_valid
+```
+
+Do not confuse assignment `=` with comparison `==`.
+
+---
+
+## 4. A Loop Is More Than Repeated Syntax
+
+A loop repeatedly changes state until its continuation condition becomes false.
+
+```mermaid
+flowchart TD
+    I[Initial State] --> Q{Continue?}
+    Q -->|Yes| W[Do Work]
+    W --> U[Update State]
+    U --> Q
+    Q -->|No| E[End]
+```
+
+Four elements:
+
+1. Initial state
+2. Continuation condition
+3. Work performed each time
+4. Update
+
+---
+
+## 5. Minimal Loop Example
 
 ```c
 #include <stdio.h>
@@ -125,19 +155,15 @@ int main(void) {
 }
 ```
 
-Expected output: `15`.
+Expected output:
 
-## 9. Four-Part Loop Trace
+```text
+15
+```
 
-| Element | This Example |
-|---|---|
-| Initial state | `i = 1`, `sum = 0` |
-| Continuation condition | `i <= 5` |
-| Work | `sum = sum + i` |
-| Update | `i = i + 1` |
-| Termination | `i` becomes 6 |
+Trace:
 
-| Iteration | `i` Before Test | Condition | `sum` After Work | `i` After Update |
+| Iteration | `i` before test | Condition | `sum` after work | `i` after update |
 |---:|---:|---|---:|---:|
 | 1 | 1 | true | 1 | 2 |
 | 2 | 2 | true | 3 | 3 |
@@ -146,116 +172,165 @@ Expected output: `15`.
 | 5 | 5 | true | 15 | 6 |
 | End | 6 | false | 15 | 6 |
 
-## 10. Common Errors
+---
 
-### Off-by-One
+## 6. `for` and `while`
 
-Change `i <= 5` to `i < 5`; the result becomes `10`. Students identify the missing iteration instead of only saying the answer is wrong.
+The same work can be written as:
 
-### Infinite Loop
+```c
+int sum = 0;
 
-Remove `i = i + 1`. Diagnosis:
+for (int i = 1; i <= 5; i = i + 1) {
+    sum = sum + i;
+}
+```
 
-1. Reproduce the non-terminating behavior.
-2. Identify the condition variable `i`.
-3. Check whether `i` changes inside the loop.
+A `for` loop places initialization, condition, and update together. A `while` loop often emphasizes the continuation condition. You should be able to identify the four loop elements in either form.
+
+---
+
+## 7. Error Case One: Off-by-One
+
+Change:
+
+```c
+i <= 5
+```
+
+to:
+
+```c
+i < 5
+```
+
+The result becomes `10`. Do not stop at saying “5 is missing.” Identify that the iteration where `i == 5` is skipped.
+
+Use boundary values `4`, `5`, and `6` to inspect the condition.
+
+---
+
+## 8. Error Case Two: Infinite Loop
+
+```c
+int i = 1;
+
+while (i <= 5) {
+    printf("%d\n", i);
+}
+```
+
+`i` never changes, so the condition remains true.
+
+Diagnosis:
+
+1. Identify variables used by the continuation condition.
+2. Check whether they change in the loop.
+3. Confirm that the direction of change can eventually make the condition false.
 4. Restore the update and test with a small range.
 
-## 11. Guided Practice
+---
+
+## 9. Error Case Three: A Broader Condition Hides a Later One
+
+```c
+if (score >= 60) {
+    printf("Pass\n");
+} else if (score >= 90) {
+    printf("Excellent\n");
+}
+```
+
+For input 95, the first condition is already true, so the second branch can never be selected.
+
+Correction: test the stricter condition first.
+
+```c
+if (score >= 90) {
+    printf("Excellent\n");
+} else if (score >= 60) {
+    printf("Pass\n");
+} else {
+    printf("Try again\n");
+}
+```
+
+---
+
+## 10. Guided Practice
 
 ### Age Classification
 
-Read an age. Print `Minor` below 18, otherwise `Adult`.
+Read an age. Print `Minor` when it is below 18; otherwise print `Adult`.
 
-Retain a condition table, expected results for `17/18/19`, the program, and actual results.
+Create tests for `17`, `18`, `19`, and invalid input first.
 
 ### Counter
 
-Print 1 through 5. Complete the four loop elements before coding.
+Print 1 through 5. Write the four loop elements before choosing `while` or `for`.
 
-## 12. Independent Practice
+---
 
-### Range Sum
+## 11. Independent Practice: Range Sum
 
 Read a positive integer `n` and print the sum from 1 through `n`.
 
-- Normal case: `n = 5`.
-- Boundary case: `n = 1`.
-- Necessary exceptional case: for `n <= 0`, print `Invalid input`.
-- Retain: trace table, program, three test categories, and diagnostic explanation.
+Requirements:
 
-Homework is not submitted or individually graded. The next class discusses representative errors, tests, and alternative solutions.
+- `n = 5` expects 15.
+- `n = 1` expects 1.
+- `n <= 0` prints `Invalid input`.
+- Nonnumeric input is rejected before the loop.
+- Build an iteration trace.
 
-## 13. Requirement Modification
+---
 
-Change the program from summing 1 through `n` to summing only even values. Students must:
+## 12. Requirement Modification
 
-1. Identify where the new condition belongs.
-2. Change the expected result for `n = 5` to 6.
-3. Retain the `n = 1` and invalid-input tests.
-4. Run regression verification.
+The original program sums 1 through `n`. Change it to sum only even numbers.
 
-## 14. AI Use Rules
+Update expected results first:
 
-Permitted: after completing the trace table, ask AI for additional tests or candidate defect causes.  
-Prohibited: ask AI to calculate the trace table step by step or generate the complete independent-practice answer.  
-Must retain: own four-part loop model, expected results, AI suggestion, verification, and decision.
+| `n` | Expected result |
+|---:|---:|
+| 1 | 0 |
+| 5 | 6 |
+| 6 | 12 |
 
-## 15. Formative Learning Evidence and Classroom Discussion
+Identify where the new condition belongs, modify the program, and preserve both invalid-value and invalid-format tests.
 
-### Understanding-Oriented Evidence
+---
 
-- `EV-TR + EV-EX`
-- Trace conditions and loops iteration by iteration.
-- Explain termination and identify the first incorrect state.
+## 13. Explain the Concept to AI
 
-### Action-Oriented Evidence
+Explain in your own words:
 
-- `EV-IM + EV-TE + EV-DE + EV-MO`
-- Correct a control-flow defect.
-- Complete a requirement change and regression test.
+> How does a condition select a path? How does a loop use state updates to decide whether to continue?
 
-### Formative Prompts
+An AI response may be incomplete or incorrect. If it conflicts with a trace table, boundary test, or reproducible result, judge it again using evidence.
 
-1. Why is `60` an important test?
-2. When does the loop stop?
-3. Which state no longer changes when the update is removed?
+---
 
-These prompts support classroom discussion and participation observation. They are not separate oral exams or per-homework grading.
+## 14. Self-Check
 
-### Participation Modes
+- I can translate a requirement into a condition.
+- I can predict an `if`/`else` path.
+- I can check input success before evaluating a condition.
+- I can identify the four loop elements.
+- I can trace loop state one iteration at a time.
+- I can diagnose off-by-one errors and infinite loops.
+- I can design normal, boundary, and invalid cases.
+- I can run regression tests after a requirement change.
 
-- Complete or revise a trace table.
-- Propose a boundary case.
-- Share a defect and diagnostic hypothesis.
-- Compare alternative loop forms.
-- Participate through writing, anonymous questions, program operation, or group records.
+---
 
-## 16. Instructor and TA Guidance
+## 15. Chapter Summary
 
-- Build the model with tables before syntax.
-- Require students to identify all four loop elements.
-- When time is short, reduce exercise count but retain tracing, boundary testing, and diagnosis.
-- Do not increase difficulty through complex nesting.
-- When tools fail, switch to paper tracing or instructor equipment; do not treat the failure as non-participation.
-
-## 17. Final Oral Preparation
-
-Students should be able to select from their own records:
-
-- One off-by-one defect.
-- One infinite-loop cause.
-- One requirement change with regression testing.
-- One AI suggestion they accepted, modified, or rejected.
-
-This unit prepares capability evidence without fixing final oral question types or procedure in advance.
-
-## 18. Unit Summary
-
-Conditions choose paths; loops repeat work through state updates. The next unit separates responsibilities with functions and integrates testing, modification, debugging, and AI verification.
+Conditions select paths from the current state. Loops repeatedly perform work and update state until a condition becomes false. Reliable control flow requires validated input, path prediction, state tracing, boundary tests, and termination reasoning. The next Unit divides larger work into functions with clear responsibilities.
 
 ## Navigation
 
+- [Previous Unit: How Does a Program Remember Data and Change State?](unit-02-data-state.en.md)
+- [Next Unit: How Can a Large Problem Be Divided into Understandable Work?](unit-04-functions-integration.en.md)
 - [Materials Index](../README.en.md)
-- [Assessment Override](ASSESSMENT-NOTE.en.md)
 - [繁體中文版](unit-03-control-flow.zh-TW.md)
