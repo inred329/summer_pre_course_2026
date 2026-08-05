@@ -1,8 +1,8 @@
 # Formal Unit F-U03: How Does Data Form an Ordered Collection?
 
-Version: 1.0.0  
+Version: 1.0.1  
 Status: Official student material  
-Last updated: 2026-08-04  
+Last updated: 2026-08-05  
 Corresponding Chinese version: [正式單元 F-U03：資料如何形成有順序的集合？](unit-03-arrays.zh-TW.md)
 
 ## Purpose and Completion Standard
@@ -99,10 +99,16 @@ A function usually cannot determine the number of elements from `values[]` alone
 
 ---
 
-## 6. Find the Maximum
+## 6. Find the Maximum Safely
+
+A function that reads `values[0]` must reject an empty collection. Use a status return and an output parameter:
 
 ```c
-int max_array(const int values[], int length) {
+int max_array(const int values[], int length, int *result) {
+    if (values == NULL || result == NULL || length <= 0) {
+        return 0;
+    }
+
     int max = values[0];
 
     for (int i = 1; i < length; i++) {
@@ -111,11 +117,16 @@ int max_array(const int values[], int length) {
         }
     }
 
-    return max;
+    *result = max;
+    return 1;
 }
 ```
 
-This function assumes `length > 0`. Preconditions must be stated and tested.
+Contract:
+
+- return `1` and write the maximum through `result` on success
+- return `0` without reading or writing through invalid pointers when the input is invalid
+- test a normal array, one element, `length == 0`, and a null output pointer
 
 ---
 
@@ -137,11 +148,11 @@ int values[5];
 printf("%d\n", values[0]);
 ```
 
-A local array does not automatically contain reliable zeros.
+A local array does not automatically contain reliable zeros. Reading an uninitialized element is undefined behavior.
 
 ### Reading the First Element of an Empty Collection
 
-`max_array(values, 0)` still tries to access `values[0]`. The interface must reject or represent the absence of a result.
+A function that executes `values[0]` when `length == 0` has undefined behavior. Reject the call before any element access.
 
 ---
 
@@ -185,7 +196,7 @@ If an AI response conflicts with an index diagram, loop trace, or reproducible t
 - I can trace array traversal.
 - I can explain that out-of-bounds access is undefined behavior.
 - I can pass an array and length to a function.
-- I can handle the precondition `length > 0`.
+- I can reject an empty collection before reading its first element.
 - I can design ordered and boundary-focused test data.
 
 ## 13. Chapter Summary
@@ -194,7 +205,7 @@ Arrays organize same-type data into a collection located by index. Reliable oper
 
 ## Navigation
 
-- [Previous Unit: Advanced Control Flow](unit-02-advanced-control.en.md)
+- [Previous Unit: Complex Control Flow](unit-02-complex-control-flow.en.md)
 - [Next Unit: Strings](unit-04-strings.en.md)
 - [Formal-Course Index](README.en.md)
 - [繁體中文版](unit-03-arrays.zh-TW.md)
