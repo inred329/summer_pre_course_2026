@@ -1,13 +1,13 @@
 # Formal Unit F-U07: How Can One Data Object Contain Different Fields?
 
-Version: 1.0.0  
+Version: 1.0.1  
 Status: Official student material  
-Last updated: 2026-08-04  
+Last updated: 2026-08-05  
 Corresponding Chinese version: [正式單元 F-U07：資料結構如何由多個不同欄位組成？](unit-07-structures.zh-TW.md)
 
 ## Purpose and Completion Standard
 
-This chapter is for independent reading, practice, and review. Completing it means you can use `struct` to represent an entity with several fields, trace member access and structure assignment, and design clear data interfaces and tests.
+This chapter is for independent reading, practice, and review. Completing it means you can use `struct` to represent an entity with several fields, trace member access and structure assignment, and design structure interfaces with explicit initialization, pointer, string-capacity, and validation contracts.
 
 ## Core Question
 
@@ -19,7 +19,8 @@ After completing this chapter, you should be able to:
 2. Define and initialize a `struct`.
 3. Access members with `.` and `->`.
 4. Compare passing structures by value and by pointer.
-5. Design arrays of structures and field validation.
+5. Copy string fields without exceeding capacity.
+6. Design arrays of structures and field validation.
 
 ---
 
@@ -58,6 +59,8 @@ Student
 struct Student s;
 ```
 
+This declaration alone does not initialize the fields. Reading `s.id`, `s.average`, or treating `s.name` as a string before initialization is invalid; scalar members have indeterminate values and the character array may lack a terminator.
+
 ---
 
 ## 3. Initialization and Member Access
@@ -75,6 +78,14 @@ printf("%.1f\n", s.average);
 ```c
 s.average = 90.0;
 ```
+
+A zero initializer is useful when an object will be filled later:
+
+```c
+struct Student empty = {0};
+```
+
+This sets scalar members to zero and the first character of `name` to `\0`, creating an empty string.
 
 ---
 
@@ -94,7 +105,7 @@ Student s = {"Amy", 1001, 87.5};
 
 ---
 
-## 5. Structures as Function Parameters
+## 5. Structure Interfaces Need Contracts
 
 By value:
 
@@ -104,34 +115,65 @@ void print_student(Student s) {
 }
 ```
 
-By pointer:
+By pointer with validation:
 
 ```c
-void update_average(Student *s, double value) {
+#include <math.h>
+
+int update_average(Student *s, double value) {
+    if (s == NULL || !isfinite(value) || value < 0.0 || value > 100.0) {
+        return 0;
+    }
+
     s->average = value;
+    return 1;
 }
 ```
 
-`p->member` is equivalent to `(*p).member`.
-
-Use `const Student *s` when the function should not modify the object.
+`p->member` is equivalent to `(*p).member`. Use `const Student *s` when the function should not modify the object, and still define whether `NULL` is allowed.
 
 ---
 
-## 6. Structure Assignment
+## 6. Safely Set a Fixed-Capacity Name
+
+```c
+#include <stdio.h>
+
+int set_name(Student *s, const char *name) {
+    if (s == NULL || name == NULL) {
+        return 0;
+    }
+
+    int written = snprintf(s->name, sizeof s->name, "%s", name);
+    if (written < 0 || (size_t)written >= sizeof s->name) {
+        s->name[0] = '\0';
+        return 0;
+    }
+
+    return 1;
+}
+```
+
+The function reports truncation instead of silently storing a partial name. Its contract states that failure leaves `name` as an empty string. Other policies are possible, but they must be explicit and tested.
+
+---
+
+## 7. Structure Assignment
 
 ```c
 Student a = {"Amy", 1001, 87.5};
 Student b = a;
 ```
 
-Structure assignment copies field values. Changing `b.average` afterward does not change `a.average`.
+Structure assignment copies field values, including every element of an array member. Changing `b.average` or `b.name[0]` afterward does not change `a`.
 
-If a field is itself a pointer, the address is copied; ownership questions are deepened in the dynamic-memory Unit.
+If a field is itself a pointer, only the pointer value is copied; ownership questions are deepened in the dynamic-memory Unit.
+
+C does not provide `a == b` for structures. Compare the required fields individually, and use `strcmp` for string contents.
 
 ---
 
-## 7. Arrays of Structures
+## 8. Arrays of Structures
 
 ```c
 Student students[3] = {
@@ -147,13 +189,20 @@ for (int i = 0; i < 3; i++) {
 }
 ```
 
+The same array boundary rules still apply. Functions should receive the array and its length, and empty-collection behavior must be defined.
+
 ---
 
-## 8. Error Cases
+## 9. Error Cases and Classification
 
-### Parallel Data Becomes Unsynchronized
+### Reading an Uninitialized Structure
 
-Separate arrays for names, IDs, and averages can lose correspondence when only one array is reordered. An array of structures keeps one entity's fields together.
+```c
+Student s;
+printf("%d\n", s.id);
+```
+
+Reading the indeterminate scalar member is undefined behavior.
 
 ### Using `.` on a Pointer
 
@@ -162,59 +211,87 @@ Student *p = &s;
 printf("%d\n", p.id);
 ```
 
-Use `p->id` or `(*p).id`.
+This is a compile-time type error. Use `p->id` or `(*p).id`.
+
+### Dereferencing a Null Structure Pointer
+
+```c
+Student *p = NULL;
+printf("%d\n", p->id);
+```
+
+This compiles, but evaluating `p->id` dereferences a null pointer and is undefined behavior.
 
 ### Ignoring String Capacity
 
-Writing a long name into a fixed array can overflow it. String capacity and termination rules still apply.
+```c
+strcpy(s.name, source);
+```
+
+If `source` is too long, this writes beyond the array and causes undefined behavior. Use a checked interface with a clear truncation policy.
+
+### Comparing Structures with `==`
+
+```c
+if (a == b) { /* ... */ }
+```
+
+For structure operands, this is a compile-time constraint violation. Compare selected members explicitly.
 
 ---
 
-## 9. Guided Practice
+## 10. Guided Practice
 
-1. Define `Point` with `x` and `y`.
-2. Write a function to calculate the distance between two points.
-3. Define `Book` with title, page count, and price.
-4. Create an array of books and find the highest price.
+1. Define `Point` with `x` and `y`, including a zero initializer.
+2. Write a function to calculate the distance between two points and define null-pointer behavior.
+3. Define `Book` with title, page count, and price, then write checked setter functions.
+4. Create an array of books and find the highest price, including empty-array behavior.
 
 ---
 
-## 10. Independent Practice: Student Data Analysis
+## 11. Independent Practice: Student Data Analysis
 
 Create an array of up to ten students. Display the student with the highest average, the class average, and the record matching a requested ID.
 
-Define behavior for a missing ID, an empty collection, and tied highest averages.
+Define and test:
+
+- a missing ID
+- an empty collection
+- tied highest averages
+- an overlong name
+- invalid or non-finite averages
+- null output pointers if helper functions use them
 
 ---
 
-## 11. Requirement Modification
+## 12. Requirement Modification
 
-Add field `char grade`, calculated from the average. Identify all initializers, interfaces, output, and tests that must change.
+Add field `char grade`, calculated from the average. Identify all initializers, validation functions, interfaces, output, structure comparisons, and tests that must change.
 
 ---
 
-## 12. Explain the Concept to AI
+## 13. Explain the Concept to AI
 
 Explain:
 
-> How does a structure combine several fields into one data object? What are the differences among `.`, `->`, passing by value, and passing by pointer?
+> How does a structure combine several fields into one data object? Why do initialization, string capacity, nullability, and field validation remain separate contracts?
 
-If an AI response conflicts with a member trace, function interface, or reproducible result, judge it again using evidence.
+If an AI response conflicts with a member trace, function interface, compiler diagnostic, or reproducible result, judge it again using evidence.
 
 ---
 
-## 13. Self-Check
+## 14. Self-Check
 
-- I can define and initialize a structure.
+- I can define and fully initialize a structure.
 - I can distinguish a type from an object.
-- I can use `.` and `->`.
-- I can explain structure assignment.
-- I can choose value or pointer parameters.
-- I can build and traverse an array of structures.
+- I can use `.` and `->` with valid objects and pointers.
+- I can explain structure assignment, including array and pointer members.
+- I can safely set a fixed-capacity string field.
+- I can validate structure fields and empty collections.
 
-## 14. Chapter Summary
+## 15. Chapter Summary
 
-Structures combine fields that describe one entity into a type, making relationships, interfaces, and traversal clearer. The next Unit allocates storage during execution and manages ownership and lifetime.
+Structures combine fields that describe one entity into a type, making relationships, interfaces, and traversal clearer. Reliable structure use still requires complete initialization, valid pointers, bounded string operations, field validation, and explicit comparison rules. The next Unit allocates storage during execution and manages ownership and lifetime.
 
 ## Navigation
 
