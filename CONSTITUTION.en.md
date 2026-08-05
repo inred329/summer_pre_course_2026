@@ -1,7 +1,7 @@
 # Constitution of the 2026 Summer Preparatory Course
 
-Version: 2.0.0-draft  
-Status: Refactoring draft; does not yet replace the official 1.3.0 baseline  
+Version: 2.0.0  
+Status: Official baseline document  
 Primary audience: Course designers, instructors, and maintainers
 
 ## Preamble
