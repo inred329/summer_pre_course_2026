@@ -1,13 +1,13 @@
 # Preparatory Unit P-U04: How Can a Large Problem Be Divided into Understandable Work?
 
-Version: 1.0.0  
+Version: 1.0.1  
 Status: Official student material  
-Last updated: 2026-08-04  
+Last updated: 2026-08-05  
 Corresponding Chinese version: [前導單元 P-U04：如何把一個大問題拆成可理解的工作？](unit-04-functions-integration.zh-TW.md)
 
 ## Purpose and Completion Standard
 
-This is a student chapter for independent reading, practice, and review. Completing it means you can separate responsibilities with functions, trace parameters and return values, divide a small requirement into testable parts, and run regression tests after a requirement changes.
+This is a student chapter for independent reading, practice, and review. Completing it means you can separate responsibilities with functions, trace parameters and return values, divide a small requirement into testable parts, and define important interface conditions such as valid input and arithmetic range.
 
 The activities do not need to be submitted. Keep your responsibility diagrams, call traces, programs, tests, and corrections.
 
@@ -23,7 +23,8 @@ After completing this chapter, you should be able to:
 2. Distinguish declaration, definition, call, parameter, argument, and return value.
 3. Trace data flow through a function call.
 4. Divide a small requirement into independently testable functions.
-5. Update callers and tests after an interface changes.
+5. State valid-input and failure behavior for a function interface.
+6. Update callers and tests after an interface changes.
 
 Prerequisite: you can use variables, conditions, and loops in small programs and create expected results and tests.
 
@@ -45,17 +46,17 @@ If the calculation rule changes, which part should change? If you want to test t
 
 ## 2. A Function Is a Named Responsibility
 
-A function is not only a way to shorten code. It packages one task as a unit with a name, inputs, and a result.
+A function is not only a way to shorten code. It packages one task as a unit with a name, inputs, a result, and a contract.
 
 ```mermaid
 flowchart LR
     C[Caller] -->|Arguments| F[Function]
-    F -->|Return Value| C
+    F -->|Return Value or Status| C
 ```
 
 A useful responsibility statement is:
 
-> `add_bonus` receives an original score and a bonus and returns the adjusted score.
+> `add_bonus` receives an original score and a bonus and returns an adjusted score when the arithmetic result is representable.
 
 It does not read the keyboard or print the screen.
 
@@ -64,14 +65,31 @@ It does not read the keyboard or print the screen.
 ## 3. Minimal Function Example
 
 ```c
+#include <limits.h>
 #include <stdio.h>
 
-int add_bonus(int score, int bonus) {
-    return score + bonus;
+int add_bonus(int score, int bonus, int *result) {
+    if (result == NULL) {
+        return 0;
+    }
+
+    if ((bonus > 0 && score > INT_MAX - bonus) ||
+        (bonus < 0 && score < INT_MIN - bonus)) {
+        return 0;
+    }
+
+    *result = score + bonus;
+    return 1;
 }
 
 int main(void) {
-    int result = add_bonus(80, 5);
+    int result;
+
+    if (!add_bonus(80, 5, &result)) {
+        printf("Invalid calculation\n");
+        return 1;
+    }
+
     printf("%d\n", result);
     return 0;
 }
@@ -86,28 +104,24 @@ Expected output:
 ### Function Definition
 
 ```c
-int add_bonus(int score, int bonus)
+int add_bonus(int score, int bonus, int *result)
 ```
 
-- first `int`: return type
+- first `int`: status return type
 - `add_bonus`: function name
-- `score`, `bonus`: parameters
+- `score`, `bonus`, `result`: parameters
 
 ### Function Call
 
 ```c
-add_bonus(80, 5)
+add_bonus(80, 5, &result)
 ```
 
-`80` and `5` are arguments. Their values are given to the parameters.
+`80`, `5`, and `&result` are arguments. Their values are given to the parameters.
 
-### Return Value
+### Status and Output
 
-```c
-return score + bonus;
-```
-
-The function gives a result back to the caller.
+The function returns 1 for success and writes the calculation through `result`. It returns 0 without writing when the output pointer is null or the addition would overflow.
 
 ---
 
@@ -115,10 +129,10 @@ The function gives a result back to the caller.
 
 | Step | Location | State or data |
 |---|---|---|
-| 1 | `main` | prepares arguments 80 and 5 |
-| 2 | `add_bonus` | `score = 80`, `bonus = 5` |
-| 3 | `add_bonus` | computes and returns 85 |
-| 4 | `main` | `result = 85` |
+| 1 | `main` | prepares arguments 80, 5, and `&result` |
+| 2 | `add_bonus` | validates output and arithmetic range |
+| 3 | `add_bonus` | writes 85 and returns success |
+| 4 | `main` | observes success and `result = 85` |
 | 5 | `main` | displays 85 |
 
 The caller pauses its current work, and execution continues from the call location after the function completes.
@@ -130,49 +144,35 @@ The caller pauses its current work, and execution continues from the call locati
 When a definition appears after `main`, provide a prototype first:
 
 ```c
-int add_bonus(int score, int bonus);
-```
-
-Complete form:
-
-```c
-#include <stdio.h>
-
-int add_bonus(int score, int bonus);
-
-int main(void) {
-    printf("%d\n", add_bonus(80, 5));
-    return 0;
-}
-
-int add_bonus(int score, int bonus) {
-    return score + bonus;
-}
+int add_bonus(int score, int bonus, int *result);
 ```
 
 - declaration/prototype: tells the compiler the interface
 - definition: provides the work
 - call: uses the function
 
+The declaration and definition must agree exactly in return type and parameter types.
+
 ---
 
-## 6. Error Case One: Ignoring the Return Value
+## 6. Error Case One: Ignoring a Return Value or Status
 
 ```c
 int score = 80;
-add_bonus(score, 5);
-printf("%d\n", score);
+int result;
+add_bonus(score, 5, &result);
+printf("%d\n", result);
 ```
 
-Predict first. `add_bonus` returns 85, but the caller does not store the result, so `score` remains 80.
+If the call fails, `result` is not guaranteed to have been written. The caller must test the status before using the output.
 
-One correction is:
+Correct pattern:
 
 ```c
-score = add_bonus(score, 5);
+if (add_bonus(score, 5, &result)) {
+    printf("%d\n", result);
+}
 ```
-
-Explain the correction with a call trace rather than memorizing the syntax alone.
 
 ---
 
@@ -199,7 +199,7 @@ The goal is not the largest possible number of functions. Each function should h
 
 ---
 
-## 8. Error Case Three: Confusing Parameter Order
+## 8. Error Case Three: Confusing Parameter Order and Preconditions
 
 ```c
 double divide(double numerator, double denominator);
@@ -211,7 +211,7 @@ Call:
 divide(2, 10)
 ```
 
-The result is `0.2`, not `5.0`. Parameter order is part of the interface contract. Meaningful names and tests reduce this risk.
+The result is `0.2`, not `5.0`. Parameter order is part of the interface contract. The contract must also define `denominator == 0.0`; performing floating division by zero may produce infinities or exceptions according to the floating environment and is not a valid result for an interface that requires an ordinary quotient.
 
 ---
 
@@ -232,6 +232,7 @@ Create tests first:
 | 5 | 3 | 5 |
 | 2 | 7 | 7 |
 | 4 | 4 | 4 |
+| `INT_MIN` | `INT_MAX` | `INT_MAX` |
 
 Then write the function and trace one call.
 
@@ -244,9 +245,11 @@ Requirement: read three quiz scores and display the average and `Pass` or `Try a
 Suggested responsibilities:
 
 ```c
-double calculate_average(int a, int b, int c);
-int is_passing(double average);
+int calculate_average(int a, int b, int c, double *average);
+int is_passing(double average, double threshold);
 ```
+
+Define score range, output-pointer behavior, and how the sum avoids signed overflow before implementation.
 
 Process:
 
@@ -254,14 +257,14 @@ Process:
 Understand requirement
 → create tests
 → divide responsibilities
-→ define interfaces
+→ define interfaces and failure behavior
 → implement
 → trace calls
 → run tests
 → correct
 ```
 
-Test an average below 60, exactly 60, above 60, and one combination that produces a fraction.
+Test below 60, exactly 60, above 60, a fractional average, invalid scores, and extreme integer inputs.
 
 ---
 
@@ -279,18 +282,21 @@ Identify:
 
 1. Which interface changes?
 2. Which call sites must be updated?
-3. Which tests must be added?
-4. Which old tests should still pass?
+3. Which valid-range rules apply to the threshold?
+4. Which tests must be added?
+5. Which old tests should still pass?
 
 ---
 
 ## 12. Test Functions, Not Only the Whole Screen
 
-When responsibilities are clear, inputs and return values can be tested directly:
+When responsibilities are clear, inputs, status, and outputs can be tested directly:
 
-| Function | Input | Expected return |
+| Function | Input | Expected result |
 |---|---|---|
-| `add_bonus` | 80, 5 | 85 |
+| `add_bonus` | 80, 5, valid output | success and 85 |
+| `add_bonus` | `INT_MAX`, 1, valid output | failure, output unchanged |
+| `add_bonus` | 80, 5, `NULL` | failure |
 | `max_of_two` | 4, 4 | 4 |
 | `is_passing` | 59.9, 60 | false |
 | `is_passing` | 60.0, 60 | true |
@@ -303,9 +309,9 @@ This makes the error location easier to narrow down.
 
 Explain in your own words:
 
-> What is the relationship among a function's responsibility, parameters, arguments, and return value? Why does separation of responsibility help testing and modification?
+> What is the relationship among a function's responsibility, parameters, arguments, return status, and output values? Why must arithmetic range and invalid-input behavior be part of the interface?
 
-An AI response may be incomplete or incorrect. If it conflicts with a call trace, function test, or reproducible result, judge it again using evidence.
+An AI response may be incomplete or incorrect. If it conflicts with a call trace, type limit, function test, or reproducible result, judge the claim again using evidence.
 
 ---
 
@@ -314,16 +320,16 @@ An AI response may be incomplete or incorrect. If it conflicts with a call trace
 - I can describe a function's responsibility in one sentence.
 - I can distinguish declaration, definition, and call.
 - I can distinguish parameters and arguments.
-- I can trace where a return value goes.
-- I can diagnose an ignored return value.
-- I can divide a small requirement into testable functions.
+- I can trace status and output values.
+- I can diagnose ignored failure status.
+- I can define arithmetic and input contracts.
 - I can update callers and tests after an interface changes.
 
 ---
 
 ## 15. Chapter Summary
 
-Functions organize work into named units with interfaces and responsibilities. Callers provide arguments, parameters receive data, and functions return results. Responsibility separation improves understanding, testing, debugging, and requirement changes. The formal course continues by deepening data representation, control flow, memory, and engineering practices.
+Functions organize work into named units with interfaces and responsibilities. Reliable interfaces state inputs, outputs, failure behavior, and arithmetic limits. Callers provide arguments, inspect status, and use outputs only after success. Responsibility separation improves understanding, testing, debugging, and requirement changes. The formal course continues by deepening data representation, control flow, memory, and engineering practices.
 
 ## Navigation
 
