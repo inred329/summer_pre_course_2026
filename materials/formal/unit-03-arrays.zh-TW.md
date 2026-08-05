@@ -1,8 +1,8 @@
 # 正式單元 F-U03：資料如何形成有順序的集合？
 
-版本：1.0.0  
+版本：1.0.1  
 狀態：正式學生教材  
-最後更新：2026-08-04  
+最後更新：2026-08-05  
 對應英文版本：[Formal Unit F-U03: How Does Data Form an Ordered Collection?](unit-03-arrays.en.md)
 
 ## 文件用途與完成標準
@@ -99,10 +99,16 @@ int sum_array(const int values[], int length) {
 
 ---
 
-## 6. 找最大值
+## 6. 安全找最大值
+
+若函數會讀取 `values[0]`，就必須先拒絕空集合。可用回傳狀態與輸出參數：
 
 ```c
-int max_array(const int values[], int length) {
+int max_array(const int values[], int length, int *result) {
+    if (values == NULL || result == NULL || length <= 0) {
+        return 0;
+    }
+
     int max = values[0];
 
     for (int i = 1; i < length; i++) {
@@ -111,11 +117,16 @@ int max_array(const int values[], int length) {
         }
     }
 
-    return max;
+    *result = max;
+    return 1;
 }
 ```
 
-這個函數假設 `length > 0`。介面與前置條件必須被說明並測試。
+介面規則：
+
+- 成功時回傳 `1`，並透過 `result` 寫出最大值。
+- 輸入無效時回傳 `0`，不得讀取或寫入無效指標。
+- 測試一般陣列、單一元素、`length == 0` 與空輸出指標。
 
 ---
 
@@ -137,11 +148,11 @@ int values[5];
 printf("%d\n", values[0]);
 ```
 
-區域陣列內容未自動成為可靠的 0。
+區域陣列不會自動包含可靠的 0；讀取未初始化元素屬未定義行為。
 
 ### 空集合取第一個元素
 
-`max_array(values, 0)` 仍讀取 `values[0]`，介面需要拒絕或另外表示沒有結果。
+若 `length == 0` 時仍執行 `values[0]`，屬未定義行為。必須在任何元素存取前拒絕呼叫。
 
 ---
 
@@ -190,7 +201,7 @@ AI 回應若與索引圖、迴圈追蹤或可重現測試衝突，應以證據�
 - 我能追蹤陣列走訪。
 - 我能說明越界是未定義行為。
 - 我能把陣列與長度傳給函數。
-- 我能處理長度為 0 的前置條件。
+- 我能在讀取第一個元素前拒絕空集合。
 - 我能設計有順序與邊界特性的測試資料。
 
 ## 13. 本章摘要
@@ -199,7 +210,7 @@ AI 回應若與索引圖、迴圈追蹤或可重現測試衝突，應以證據�
 
 ## 導覽
 
-- [上一單元：複雜控制流程](unit-02-advanced-control.zh-TW.md)
+- [上一單元：複雜控制流程](unit-02-complex-control-flow.zh-TW.md)
 - [下一單元：字串](unit-04-strings.zh-TW.md)
 - [正式課程索引](README.zh-TW.md)
 - [English version](unit-03-arrays.en.md)
