@@ -1,48 +1,37 @@
-# Preparatory Material Assessment Override
+# Preparatory Assessment Wording Migration Note
 
-Version: 1.1.0  
-Status: Official precedence rule  
-Last updated: 2026-08-05  
-Major change summary: Retains the current unsubmitted-homework and single-final-oral policy while making AI-use notes an optional personal review resource.  
-Corresponding Chinese version: [前導教材評量制度補充規則](ASSESSMENT-NOTE.zh-TW.md)
+Version: 2.0.0  
+Status: Migration guidance; no independent normative force  
+Primary audience: Material maintainers  
+Sole authoritative source: [Learning and Assessment Policy](../../design/13-learning-assessment-policy.en.md)  
+Corresponding Chinese version: [前導教材舊評量措辭遷移說明](ASSESSMENT-NOTE.zh-TW.md)
 
-## Scope
+## Purpose
 
-This rule applies to every preparatory Unit under `materials/preparatory/`. When legacy wording in a Unit conflicts with this file, `design/13-learning-assessment-policy`, or `design/07-acceptance-model`, the current design baseline and this file take precedence.
+This file helps maintainers identify legacy assessment wording in preparatory materials and rewrite it to match the current policy.
 
-## Official Interpretation
+It must not override, supplement, or redefine the official assessment policy. When a Unit conflicts with the official policy, the Unit shall be corrected directly and `design/13-learning-assessment-policy.en.md` remains authoritative.
 
-| Legacy wording | Current official interpretation |
+## Legacy-Wording Migration Map
+
+| Legacy wording | Required correction |
 |---|---|
-| Submit / turn in | Students keep the work themselves; it is not turned in for individual marking. |
-| Required evidence | Learning records students create and retain for next-class discussion and final-oral preparation. |
-| Passing criteria | Self-check and capability target, not a separate assignment grade. |
-| Remediation | Targeted formative support during class, not a formal retest after every assignment. |
-| Micro-oral | Formative classroom questioning, not a separately graded oral; the only formal oral is one final one-on-one examination. |
-| Acceptance task `AT-12` | Refers only to the one final one-on-one oral examination. |
+| Submit / turn in | State that students retain the work unless the official policy explicitly requires otherwise. |
+| Required evidence | Describe personal learning records that support learning, discussion, or oral-examination preparation. |
+| Passing criteria | Reframe as self-check or capability targets, not a separate assignment grade. |
+| Remediation | Reframe as formative support or additional practice, not a formal retest after every assignment. |
+| Micro-oral | Reframe as formative classroom questioning, not a separately graded oral examination. |
+| AI-use records | Remove universal requirements; when AI is used, students must still explain and verify adopted content. |
+| Non-use declaration | Delete. Not using AI is not a capability deficit. |
 
-## Current Policy
+## Maintenance Rule
 
-- Independent homework follows every class.
-- Homework is not submitted, graded, or individually marked.
-- The next class reserves 15–25 minutes for discussing the previous homework.
-- Classroom questioning, tracing, testing, and debugging are formative learning activities.
-- Classroom participation and one final one-on-one oral examination make up the official grade.
-- Roll call, attendance percentage, and speaking count are not graded.
-- AI is not an assignment completion requirement, and routine use or saved conversations are not required.
+When legacy wording is found, maintainers should correct the source material rather than rely indefinitely on this file as an override.
 
-## Students May Retain
-
-- Programs and different versions.
-- Predictions before execution.
-- Tests and expected results.
-- State or flow traces.
-- Errors, corrections, and regression results.
-- When AI was used, optional notes about suggestions and verification that help personal review; no declaration is required when AI was not used.
+After migration is complete, this file may be historicized or deleted.
 
 ## Navigation
 
-- [Learning and Assessment Policy](../../design/13-learning-assessment-policy.en.md)
-- [Competency Acceptance Model](../../design/07-acceptance-model.en.md)
-- [Instructor Implementation Guide](../instructor/session-guides.en.md)
+- [Official Learning and Assessment Policy](../../design/13-learning-assessment-policy.en.md)
+- [Constitution 2.0](../../CONSTITUTION.en.md)
 - [繁體中文版](ASSESSMENT-NOTE.zh-TW.md)
