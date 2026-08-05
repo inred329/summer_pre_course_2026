@@ -1,16 +1,16 @@
 # Repository-Wide Constitution 2.0 Compliance Audit
 
-Version: 0.1.0  
-Status: Audit baseline draft  
+Version: 0.2.0  
+Status: Active audit record  
 Authoritative basis: `CONSTITUTION.en.md` 2.0.0  
 Primary audience: Course designers, instructors, and maintainers  
 Normative force: This document records findings and recommendations only; it does not create new rules
 
 ## 1. Purpose
 
-This audit re-examines every official repository document under Constitution 2.0. Its purpose is not to rewrite everything at once, but to establish a traceable, prioritized, and batch-oriented correction process.
+This audit re-examines repository documents under Constitution 2.0 through a traceable, prioritized, batch-oriented correction process.
 
-The audit must determine:
+The audit determines:
 
 1. The document's governance level.
 2. Its primary audience.
@@ -21,181 +21,96 @@ The audit must determine:
 7. Whether AI, assessment, and language-track rules comply with Constitution 2.0.
 8. Whether the document should be retained, rewritten, moved, merged, historicized, or deleted.
 
-## 2. Audit Principles
+## 2. Classification and Ratings
 
-### 2.1 The Constitution is not a checklist substitute
-
-Constitution 2.0 provides highest-level principles only. Formats, templates, and workflows belong in Standards, Guides, or Policies. The audit must not smuggle new operational detail into constitutional interpretation.
-
-### 2.2 Student documents take priority
-
-Problems in student materials take priority over internal governance neatness. Anything that obstructs continuous reading, concept formation, or verification is high priority.
-
-### 2.3 Presence does not equal validity
-
-A file's presence in version control does not mean it is current, publishable, or authoritative. Obsolete reviews, duplicated policies, and undiscoverable documents must have their roles reassessed.
-
-### 2.4 Review documents do not create rules
-
-Corrections must be written back into the actual authoritative source. Audit reports record evidence, judgments, and recommendations only.
-
-## 3. Document Classification Model
-
-Each file shall first be classified into one of these levels:
-
-| Level | Purpose | Typical content |
-|---|---|---|
-| Constitution | Non-negotiable and long-term stable principles | Highest purpose, adjudication principles, governance boundaries |
-| Standards | Consistency requirements and quality baselines | Document types, writing standards, templates, metadata, navigation standards |
-| Guides and Policies | Adaptable procedures and current-term rules | Assessment policy, delivery workflow, publication process, technical validation method |
-| Materials | Actual teaching and learning content | Student materials, instructor guides, activities, code examples |
-| Historical Record | Evidence of decisions and evolution only | Completed reviews, migration reports, historical decision records |
-
-Every official document must have one primary audience: student, instructor, designer or maintainer, or reviewer.
-
-## 4. Compliance Ratings
-
-### A — Compliant
-
-The role is clear, the document serves its primary audience, and no major bilingual or technical issue exists.
-
-### B — Minor revision
-
-The core can remain, but navigation, wording, boundaries, metadata, or local synchronization needs improvement.
-
-### C — Structural revision
-
-The document still has value, but mixes audiences, lacks an authoritative role, weakens student readability, or duplicates rules defined elsewhere.
-
-### D — Non-compliant
-
-The document conflicts with Constitution 2.0, is obsolete, cites the former Constitution as current, is technically unverifiable, or creates a serious barrier to student understanding.
-
-### H — Historicize
-
-The document no longer governs current work but is worth retaining as evidence of evolution or decision-making. It must be clearly marked historical and must not appear in current navigation as an active policy.
-
-## 5. Risk Priority
-
-### P0 — Immediate correction
-
-- Incorrect or obsolete highest-level rules, policies, or assessment requirements.
-- Technical errors or major misdirection in student-visible content.
-- Substantive conflict between language versions.
-- Conflicting authoritative sources.
-
-### P1 — High priority
-
-- Student materials that do not support continuous reading.
-- Instructor and student content mixed together.
-- AI rules that still require use, logs, or declarations by default.
-- Incorrect knowledge-dependency order.
-- Important code or explanation that cannot be verified.
-
-### P2 — Medium priority
-
-- READMEs or indexes that do not let the primary audience reasonably reach a document.
-- Unclear document type or primary audience.
-- Duplicate rules, duplicate definitions, or excessive metadata.
-- Review documents that have not been historicized.
-
-### P3 — General improvement
-
-- Layout, terminology, formatting, or minor bilingual differences that do not affect understanding or decisions.
-
-## 6. Initial Repository-Wide Audit Sequence
-
-### Batch 1: Authoritative sources and navigation
-
-- Root `README.md`
-- `CONSTITUTION.zh-TW.md`
-- `CONSTITUTION.en.md`
-- `classes/zh/README.md`
-- `classes/en/README.md`
-- `design/13-learning-assessment-policy.*`
-- Every file that still references Constitution 1.3.0 or obsolete AI rules
-
-Purpose: establish Constitution 2.0 as the sole highest baseline, remove duplicated or obsolete rules, and create clear entry points for students, instructors, and maintainers.
-
-### Batch 2: Student learning materials
-
-- All student-facing Unit materials
-- Student navigation, homework, and assessment explanations
-- Student-visible code examples and setup documents
-
-Purpose: review prose flow, paragraph transitions, concept-first sequencing, prerequisites, errors and verification, internal-governance pollution, and technical correctness.
-
-### Batch 3: Instructor documents
-
-- Unit instructor guides
-- Classroom execution flows
-- Observation, prompting, misconception, and fallback materials
-
-Purpose: ensure instructor documents are executable without rewriting student materials or prematurely exposing instructor prompts.
-
-### Batch 4: Design and governance documents
-
-- `design/01` onward
-- Concept Tree, Registry, Unit Map, and Traceability Matrix
-- Terminology, Scope, Acceptance, Risk, and Delivery files
-
-Purpose: identify authoritative roles, dependencies, duplicated definitions, and whether each file belongs in Standards, Policies, or Historical Record.
-
-### Batch 5: Review and historical documents
-
-- `design/12-constitution-compliance-review.*`
-- `reviews/constitution-maturity-review.*`
-- Other completed audit, review, and validation documents
-
-Purpose: record audit baselines and dates, historicize reviews based on former constitutions, and prevent them from being mistaken for current policy.
-
-### Batch 6: Technical validation and automation
-
-- `.github/workflows/technical-validation.yml`
-- All code examples and compile manifests
-- Link, bilingual-pairing, and navigation-integrity checks
-
-Purpose: assign automatically verifiable work to CI without delegating readability or pedagogy judgments to automation.
-
-## 7. Required Audit Fields
-
-| Field | Meaning |
+| Level | Purpose |
 |---|---|
-| Path | Document path |
-| Language Pair | Corresponding language version |
-| Governance Level | Constitution / Standards / Guides and Policies / Materials / Historical Record |
-| Primary Audience | Student / Instructor / Designer-Maintainer / Reviewer |
-| Authoritative Role | Whether the file is the unique source for a rule |
-| Constitution Articles | Relevant articles |
-| Rating | A / B / C / D / H |
-| Priority | P0 / P1 / P2 / P3 |
-| Findings | Concrete issues and evidence |
-| Action | Retain / Rewrite / Move / Merge / Historicize / Delete |
-| Validation | Bilingual, technical, navigation, and human-review method |
+| Constitution | Non-negotiable and long-term stable principles |
+| Standards | Consistency requirements, templates, formats, and quality baselines |
+| Guides and Policies | Adaptable procedures, execution methods, and current-term rules |
+| Materials | Actual teaching and learning content |
+| Historical Record | Evidence of decisions and evolution only |
 
-## 8. Known Initial Risks
+Compliance ratings: A compliant, B minor revision, C structural revision, D non-compliant, H historicized.
 
-1. `design/12-constitution-compliance-review.*` was produced under the former Constitution and may no longer be suitable as a current compliance conclusion. It should be historicized or rewritten first.
-2. The root README may still act as a complete legacy index rather than role-based navigation.
-3. The design directory contains many files that may simultaneously act as Standards, Policies, Reviews, and Historical Records; their authoritative boundaries need separation.
-4. Student materials have passed technical validation, but Article 6 still requires human readability review. CI success does not prove fluent prose.
-5. Assessment policy and Unit-level AI, homework, submission, and assessment language may redefine the same rules in multiple places and must return to a single authoritative source.
+Priorities: P0 immediate correction, P1 high priority, P2 medium priority, P3 general improvement.
 
-## 9. Execution Model
+## 3. First-Batch Audit Results
 
-Repository correction shall be split into focused PRs rather than one repository-wide rewrite:
+| Path | Governance Level | Primary Audience | Rating | Priority | Findings | Action | Status |
+|---|---|---|---|---|---|---|---|
+| `README.md` | Guide / routing entry | Students, instructors, designers-maintainers | C → A | P0 | Duplicated assessment policy, design philosophy, progress reporting, and obsolete AI requirements, creating unclear authority boundaries | Rewritten as a role-based routing entry with concise orientation and authoritative links only | Completed |
+| `classes/zh/README.md` | Material entry | Chinese-track students | D → A | P0 | Early TBD draft contradicted the current four 3-hour sessions and completed materials | Rewritten as the current student entry and policy route | Completed |
+| `classes/en/README.md` | Material entry | English-track students | D → A | P0 | Early TBD draft omitted the current five 2-hour sessions and student route | Rewritten as the current student entry and policy route | Completed |
+| `design/13-learning-assessment-policy.*` | Official Policy | Students and instructors | D → A | P0 | Required pre-AI artifacts, AI summaries, and adoption reasons, and treated AI judgment as a fixed oral-exam capability for every student | Updated to 0.2.0; AI is optional by default, non-use is not a deficit, and students remain responsible only for results they adopt | Completed |
+| `design/12-constitution-compliance-review.*` | Historical Record | Designers and maintainers | D → H | P0 | Based on Constitution 1.2.0 and still declared fixed metadata, IDs, and AI records to be mandatory material-development conditions | Reclassified as historical, with an obsolete-policy warning and current-audit links | Completed |
 
-1. PR A: Navigation, document classification, and authoritative sources.
-2. PR B: Assessment and AI policy consistency.
-3. PR C: Student-material readability, processed in Unit batches.
-4. PR D: Instructor-document boundaries and executability.
-5. PR E: Governance levels and historicization of design documents.
-6. PR F: CI, bilingual pairing, links, and technical validation improvements.
+## 4. First-Batch Decisions
 
-Every PR must update Traditional Chinese and English versions together and identify the Constitution 2.0 articles it implements.
+### 4.1 Root README role
 
-## 10. Current Conclusion
+The root README is a routing entry, not a duplicate assessment policy, progress report, or complete design explanation. Official rules belong to Constitution 2.0 and the corresponding authoritative policy files.
 
-Constitution 2.0 is now the sole official baseline. The next step is not an indiscriminate rewrite of every file. The repository must first establish authoritative sources and document roles, then correct files in P0-to-P3 order.
+### 4.2 Track-entry role
 
-This file is the operational baseline for the audit. It is not a new Constitution or policy source.
+Track READMEs serve students by providing current course positioning, material entry points, and policy links. They must not retain internal TODOs, owner fields, or obsolete module plans.
+
+### 4.3 AI in assessment
+
+AI is optional by default. A student who uses AI must still explain, modify, and verify the adopted result. A student who does not use AI needs no declaration and lacks no capability evidence.
+
+### 4.4 Former constitutional reviews
+
+Reviews performed under Constitution 1.2.0 retain historical value only. They may not define current material gates or require obsolete AI, metadata, ID, or template rules.
+
+## 5. Next Scan Scope
+
+### P0: Obsolete AI and assessment rules
+
+Search and review:
+
+- `AI 使用紀錄` and `AI-use log`.
+- `保留 AI 使用前` and `before AI use`.
+- `未使用 AI 聲明` and `non-use declaration`.
+- Whether `AI judgment` is treated as a fixed capability for every student.
+- Whether `ASSESSMENT-NOTE` duplicates or overrides the official assessment policy.
+
+### P1: Student-material readability
+
+Review Units in batches for:
+
+- Concept IDs, capability IDs, maintenance status, or instructor prompts in the student reading flow.
+- Excessive fields, lists, or specification tables replacing explanation and reasoning.
+- Natural movement from problem context to concept, syntax, observation, and verification.
+- Required prerequisites that have not been established.
+
+### P2: Governance levels of design documents
+
+Reclassify `design/01–11`, the Concept Tree, Registry, Unit Map, Traceability Matrix, Acceptance, Risk, and Delivery documents as Standards, Policies, Design Sources, or Historical Records so that not every file claims baseline authority.
+
+### P2: Automated technical and navigation checks
+
+Strengthen:
+
+- Chinese–English pairing checks.
+- Former-Constitution reference scans.
+- Broken-link and orphan-file scans.
+- Compile manifests and technical-validation scope.
+
+## 6. Execution Model
+
+Further corrections will be processed in reviewable batches:
+
+1. Obsolete AI and assessment-rule cleanup.
+2. Student-material readability by Unit group.
+3. Instructor-document boundaries and executability.
+4. Governance levels and authoritative sources for design documents.
+5. CI, bilingual pairing, links, and technical validation.
+
+Every batch must update Traditional Chinese and English together and write official rules back into the true authoritative source.
+
+## 7. Current Conclusion
+
+The first P0 batch is complete: the root README now serves as a routing entry, both track entries reflect the current course, the assessment policy no longer imposes obsolete AI requirements, and the former constitutional review has been historicized.
+
+The next priority is a repository-wide scan for obsolete AI and assessment language so that student materials, instructor documents, or supplemental policies cannot reintroduce requirements that conflict with Constitution 2.0.
