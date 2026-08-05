@@ -1,9 +1,9 @@
 # 教材與活動資源
 
-版本：1.3.1  
-狀態：16 個 Unit 的完整雙語學生教材、前導課教師資源與評量基準已建立  
+版本：1.4.0  
+狀態：16 個 Unit 的完整雙語學生教材、憲法審查與技術驗證均已完成  
 最後更新：2026-08-05  
-重大變更摘要：納入 P-U01 至 P-U04 與 F-U01 至 F-U12 的完整雙語學生教材，統一 AI 為低比重概念對話工具，並新增全文件憲法遵循重審。  
+重大變更摘要：完成全部 16 個 Unit 的雙語技術驗證，修正已確認的 C17 與導覽問題，並新增全 Unit 技術驗證報告。  
 對應英文版本：[Materials and Activity Resources](README.en.md)
 
 ## 文件目的
@@ -88,14 +88,21 @@
 - [P-U01 Constitution Compliance Review](reviews/pu01-constitution-review.en.md)
 - [全文件憲法遵循重審](reviews/all-documents-constitution-review.zh-TW.md)
 - [Repository-Wide Constitution Compliance Review](reviews/all-documents-constitution-review.en.md)
+- [全 Unit 技術驗證報告](reviews/all-units-technical-validation.zh-TW.md)
+- [All-Unit Technical Validation Report](reviews/all-units-technical-validation.en.md)
+
+## 技術驗證狀態
+
+全部 16 個 Unit 已完成目前技術驗證階段。驗證報告記錄 C17 契約、輸入與邊界行為、故意錯誤分類、雙語等值及導覽修正。
+
+後續可增加 Markdown 程式碼自動抽取、CI 編譯、連結檢查與教室 toolchain smoke test。這些屬維護改善，不是目前文件仍存在的未解決缺陷。
 
 ## 下一階段
 
-- 對 16 個 Unit 的 C17 程式進行實際編譯與執行驗證。
-- 建立全 Unit 雙語技術與導覽審查矩陣。
-- 依審查結果補強較複雜的正式 Unit。
-- 更新共用教材模板，使其反映目前的學生教材基準。
-- 完成教材審查後，再將 Unit 切分為實際 Lesson 與週次。
+- 進行教學深度與認知負荷的最終人工審查。
+- 將已驗證 Unit 切分成實際 Lesson 與課程週次。
+- 建立選用的 code-block、雙語檔案與連結 CI 檢查。
+- 在目標教室環境試教並記錄調整。
 
 ## 導覽
 
