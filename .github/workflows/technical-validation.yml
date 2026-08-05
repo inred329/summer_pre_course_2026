@@ -1,0 +1,18 @@
+name: Technical Validation
+
+on:
+  pull_request:
+  push:
+    branches:
+      - agent/complete-remaining-15-units
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        compiler: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run C17 validation
+        run: python3 validation/run_validation.py --compiler ${{ matrix.compiler }}
