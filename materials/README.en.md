@@ -1,9 +1,9 @@
 # Materials and Activity Resources
 
-Version: 1.3.1  
-Status: Complete bilingual student materials for 16 Units, preparatory instructor resources, and assessment baselines established  
+Version: 1.4.0  
+Status: Complete bilingual student materials for 16 Units with constitution and technical validation completed  
 Last updated: 2026-08-05  
-Major change summary: Added complete bilingual student materials for P-U01 through P-U04 and F-U01 through F-U12, standardized AI as a low-weight concept-conversation tool, and added a repository-wide constitution compliance review.  
+Major change summary: Completed bilingual technical validation across all 16 Units, corrected confirmed C17 and navigation defects, and added the all-Unit validation report.  
 Corresponding Chinese version: [教材與活動資源](README.zh-TW.md)
 
 ## Document Purpose
@@ -88,14 +88,21 @@ The existing AI-use log template remains an optional extension resource. It is n
 - [P-U01 Constitution Compliance Review](reviews/pu01-constitution-review.en.md)
 - [全文件憲法遵循重審](reviews/all-documents-constitution-review.zh-TW.md)
 - [Repository-Wide Constitution Compliance Review](reviews/all-documents-constitution-review.en.md)
+- [全 Unit 技術驗證報告](reviews/all-units-technical-validation.zh-TW.md)
+- [All-Unit Technical Validation Report](reviews/all-units-technical-validation.en.md)
+
+## Technical Validation Status
+
+The current technical review stage is complete for all 16 Units. The validation report records C17 contracts, input and boundary behavior, intentional-error classification, bilingual equivalence, and navigation corrections.
+
+Continuous improvements may later add automated Markdown code extraction, CI compilation, link checking, and classroom-toolchain smoke tests. These are maintenance enhancements rather than unresolved document defects.
 
 ## Next Stage
 
-- Compile and execute the C17 code across all 16 Units in the target environments.
-- Build a bilingual technical and navigation review matrix for all Units.
-- Strengthen the more complex formal Units according to review findings.
-- Update the shared material template to reflect the current student-material baseline.
-- Divide Units into actual Lessons and weeks only after material review is complete.
+- Conduct a final human review of teaching depth and cognitive load.
+- Divide the validated Units into actual Lessons and course weeks.
+- Build optional CI checks for code blocks, bilingual pairs, and links.
+- Pilot the materials in the target classroom environments and record teaching adjustments.
 
 ## Navigation
 
