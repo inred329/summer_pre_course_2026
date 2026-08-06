@@ -1,6 +1,6 @@
 # Repository-Wide Constitution 2.0 Compliance Audit
 
-Version: 0.3.0  
+Version: 0.4.0  
 Status: Active audit record  
 Last updated: 2026-08-06  
 Authoritative basis: `CONSTITUTION.en.md` 2.0.0  
@@ -28,16 +28,18 @@ Priorities: P0 immediate correction, P1 high priority, P2 medium priority, P3 ge
 | `materials/preparatory/unit-02-data-state.*` | Student Material | Students | B → A | P1 | AI activity sat in the core numbered flow and implied required work | Marked as skippable optional extension; completion does not depend on AI | Completed |
 | `materials/preparatory/unit-03-control-flow.*` | Student Material | Students | B → A | P1 | AI activity sat in the core numbered flow and implied required work | Marked as skippable optional extension; completion does not depend on AI | Completed |
 | `materials/preparatory/unit-04-functions-integration.*` | Student Material | Students | B → A | P1 | AI activity sat in the core numbered flow and implied required work | Marked as skippable optional extension; completion does not depend on AI | Completed |
-| `materials/assignments/ai-use-log.*` | Optional Learning Resource | Students | A | P1 | Clearly optional, unsubmitted, ungraded, and requires no non-use declaration | Retain; later confirm indexes do not present it as required | Reviewed |
+| `materials/assignments/ai-use-log.*` | Optional Learning Resource | Students | A | P1 | Clearly optional, unsubmitted, ungraded, and requires no non-use declaration | Retain; indexes must not present it as required | Reviewed |
 | `materials/assignments/preparatory-assignments.*` | Student Task Pack | Students and instructors | A | P1 | Homework is unsubmitted and ungraded; AI remains optional and outside core completion | Retain | Reviewed |
 | `materials/assignments/rubric.*` | Assessment Standard | Instructors and assistants | A | P1 | AI explanation and verification are considered only when AI was actually used; non-use does not affect grading | Retain | Reviewed |
 | `materials/assignments/grading-guide.*` | Instructor Guide | Instructors and assistants | A | P1 | AI and external suggestions are not fixed activities; participation and assessment support multiple evidence modes | Retain | Reviewed |
+| `materials/README.*` | Role-based materials index | Students, instructors, authors-maintainers | C → A | P1 | Mixed three audiences, duplicated official policy, claimed review completion, made AI conversation a shared Unit standard, and retained obsolete Override naming | Rewritten as role-based entry points; policy linked rather than copied; AI made optional; prior reviews identified as time-bound records | Completed |
+| `materials/TEMPLATE.*` | Authoring Standard / Guide | Material authors and maintainers | C → A | P1 | Required a fixed AI section and AI self-check and mechanically prescribed the same structure for every Unit | Rewritten as a purpose-driven suggested template; fixed AI section removed; core completion does not depend on AI | Completed |
 
-## 3. Second-Batch Decisions
+## 3. Major Decisions
 
 ### 3.1 Position of AI activities in student materials
 
-AI may be offered as an extension tool, but it must not become implicitly required through placement in the core reading path, completion checklist, or assessment fields. Units 1–4 now state that AI sections may be skipped and that non-use does not affect completion, participation, or assessment.
+AI may be offered as an extension tool, but it must not become implicitly required through placement in the core reading path, completion checklist, fixed template field, or assessment criteria. All reviewed preparatory Units and the material template now present AI only as a clearly labeled, directly skippable optional extension.
 
 ### 3.2 Role of the AI verification-note template
 
@@ -45,7 +47,15 @@ AI may be offered as an extension tool, but it must not become implicitly requir
 
 ### 3.3 Single authoritative source for assessment rules
 
-`design/13-learning-assessment-policy.*` is the sole authoritative source for the official assessment system. Task packs, rubrics, and instructor guides may operationalize that policy but may not redefine grade structure or introduce conflicting AI obligations.
+`design/13-learning-assessment-policy.*` is the sole authoritative source for the official assessment system. READMEs, task packs, rubrics, templates, and instructor guides may provide navigation or operational guidance but may not duplicate the full policy or create conflicting rules.
+
+### 3.4 A template is not a fixed chapter contract
+
+A material template should provide design support rather than require every Unit to reproduce the same mechanical outline. Activities, visuals, defect cases, and requirement modifications should be selected according to the core question, prerequisites, and cognitive load. Essential quality is controlled through the prepublication check.
+
+### 3.5 Force of prior review records
+
+Prior reviews record judgments made at a particular date under a particular constitutional baseline. A filename containing “official,” “complete,” or “compliant” does not make that review a current guarantee. Current decisions follow Constitution 2.0 and this active repository-wide audit.
 
 ## 4. Confirmed Student-Material Quality
 
@@ -57,23 +67,25 @@ Preparatory Units 1–4 currently provide:
 - Requirement modification and multiple test categories.
 - No reliance on compilation success, one output, or tool judgment as proof of understanding.
 - Clear prerequisites, completion standards, and paired bilingual versions.
+- No dependency on AI for core completion.
 
 The Units may still receive P3 prose and pacing refinements after classroom trials, but this review found no P0/P1 technical or instructional defect requiring their use to stop.
 
 ## 5. Next Audit Scope
-
-### P1: Material indexes and templates
-
-- `materials/README.*`
-- `materials/TEMPLATE.*`
-- Whether internal governance fields, competency IDs, or AI templates are exposed as required student reading.
-- Whether student, instructor, and maintainer routes are clearly separated.
 
 ### P1: Instructor-document boundaries
 
 - `materials/instructor/*`
 - Whether guides are directly executable without rewriting student chapters.
 - Whether they include instructor prompts, misconceptions, fallback activities, and fairness support.
+- Whether they still duplicate assessment policy or imply routine AI use.
+
+### P1: Formal-course student materials
+
+- `materials/formal/*`
+- Whether AI activities remain in core completion paths.
+- Whether internal governance fields, instructor prompts, or grading administration pollute student reading.
+- Whether Concept-first sequencing, dependency order, defect diagnosis, and technical verifiability are adequate.
 
 ### P2: Governance levels of design documents
 
@@ -88,4 +100,4 @@ Reclassify `design/01–11`, the Concept Tree, Registry, Unit Map, Traceability,
 
 ## 6. Current Conclusion
 
-All P0 issues identified so far have been corrected. The AI positioning in Units 1–4 and in assignment and assessment documents has been reviewed and aligned with Constitution 2.0. The repository-wide audit is not complete; the next batch covers material indexes, templates, instructor documents, and design governance, so the pull request remains a draft.
+All P0 issues identified so far have been corrected. AI positioning and authoritative-source defects in preparatory Units, assignment and assessment files, materials indexes, and templates have been corrected. The repository-wide audit is not complete; the next batch covers instructor documents, formal-course student materials, design governance, and automated validation, so the pull request remains a draft.
