@@ -1,13 +1,15 @@
 # Formal Unit F-U06: How Can Data Be Manipulated Indirectly Through Addresses?
 
-Version: 1.0.1  
+Version: 1.0.2  
 Status: Official student material  
-Last updated: 2026-08-05  
+Last updated: 2026-08-06  
 Corresponding Chinese version: [正式單元 F-U06：如何透過位址間接操作資料？](unit-06-pointers.zh-TW.md)
 
 ## Purpose and Completion Standard
 
 This chapter is for independent reading, practice, and review. Completing it means you can explain the relationship among addresses, pointers, and dereferencing, trace indirect modification with memory diagrams, and design pointer interfaces with explicit nullability, lifetime, boundary, and aliasing contracts.
+
+AI use is not part of the core completion standard. Not using AI does not affect completion, classroom participation, or assessment. Any AI activity near the end of the chapter is a skippable optional extension.
 
 ## Core Question
 
@@ -160,7 +162,7 @@ int *bad_pointer(void) {
 }
 ```
 
-The lifetime of `local` ends when the function returns. The returned pointer is indeterminate for useful access; dereferencing it later is undefined behavior. Do not rely on the numeric address appearing unchanged.
+The lifetime of `local` ends when the function returns. The returned pointer cannot be used to access that object validly; dereferencing it later is undefined behavior. Do not rely on the numeric address appearing unchanged.
 
 ---
 
@@ -246,7 +248,7 @@ Recommended contract:
 - failure when `length <= 0`
 - no output object is modified on failure
 - success writes both values
-- `min == max` is allowed; the final object receives the maximum after both results are calculated locally
+- `min == max` is allowed; calculate both results locally before writing them in order to the shared output object
 
 Test an empty array, null parameters, one element, all-equal values, and aliasing output pointers.
 
@@ -258,13 +260,17 @@ New rule: allow either output pointer to be `NULL`, meaning that result is not r
 
 ---
 
-## 13. Explain the Concept to AI
+## 13. Optional Extension: Use AI to Check Your Explanation
 
-Explain:
+This section may be skipped without affecting completion, classroom participation, or assessment.
+
+First explain in your own words:
 
 > What is the relationship among an address, pointer, and dereference? Why must a pointer interface define nullability, lifetime, boundaries, and aliasing?
 
-If an AI response conflicts with a memory diagram, function contract, or reproducible result, judge it again using evidence.
+When you choose to use AI, you may ask it to critique your explanation or propose counterexamples. No fixed prompt, saved conversation, submission, or declaration of non-use is required.
+
+If an AI response conflicts with a memory diagram, function contract, C language rule, or reproducible result, judge the claim again using verifiable evidence.
 
 ---
 
