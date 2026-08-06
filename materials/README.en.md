@@ -1,18 +1,26 @@
 # Materials and Activity Resources
 
-Version: 1.4.0  
-Status: Complete bilingual student materials for 16 Units with constitution and technical validation completed  
-Last updated: 2026-08-05  
-Major change summary: Completed bilingual technical validation across all 16 Units, corrected confirmed C17 and navigation defects, and added the all-Unit validation report.  
+Version: 1.5.0  
+Status: Current materials entry point; repository-wide Constitution 2.0 review in progress  
+Last updated: 2026-08-06  
+Major change summary: Reorganized entry points by primary audience, removed duplicated assessment policy and implied mandatory AI use, and clarified the status of prior review records.  
 Corresponding Chinese version: [教材與活動資源](README.zh-TW.md)
 
 ## Document Purpose
 
-This directory provides bilingual student materials for the preparatory and formal courses, together with independent homework, classroom-discussion, instructor-delivery, assessment, and maintenance resources.
+This file is the navigation entry for `materials/`. It does not replace the assessment policy, Course Constitution, or material-writing standards.
 
-Student materials center independent reading, prediction, implementation, tracing, testing, debugging, modification, and explanation. AI appears only as a brief concept-conversation audience at the end of each Unit; fixed prompts, mandatory conversation logs, and treating AI responses as evidence are not required.
+Choose an entry point by role:
 
-## Official Preparatory Materials
+- Students: read preparatory and formal-course materials and use independent-homework and oral-preparation resources.
+- Instructors: use delivery guides, classroom activities, participation-observation guidance, and rubrics.
+- Authors and maintainers: use material templates, technical-validation records, and review records.
+
+AI is optional by default in this course. Not using AI does not affect Unit completion, classroom participation, or assessment. When a material includes an AI activity, it must be clearly marked as a skippable optional extension. Core objectives and self-checks must not depend on AI.
+
+## Student Entry Points
+
+### Preparatory Course
 
 | Unit | Traditional Chinese | English | Central focus |
 |---|---|---|---|
@@ -21,66 +29,59 @@ Student materials center independent reading, prediction, implementation, tracin
 | P-U03 | [程式如何選擇與重複？](preparatory/unit-03-control-flow.zh-TW.md) | [How Does a Program Select and Repeat?](preparatory/unit-03-control-flow.en.md) | conditions, loops, termination, boundaries, and diagnosis |
 | P-U04 | [如何把大問題拆成可理解的工作？](preparatory/unit-04-functions-integration.zh-TW.md) | [How Can a Large Problem Be Divided into Understandable Work?](preparatory/unit-04-functions-integration.en.md) | function responsibility, interfaces, testing, modification, and regression |
 
-## Formal-Course Materials
+### Formal Course
 
-- [正式課程學生教材](formal/README.zh-TW.md)
+- [正式課程學生教材索引](formal/README.zh-TW.md)
 - [Formal Course Student Materials](formal/README.en.md)
 
-The formal course contains F-U01 through F-U12 and covers representation and types, control flow, arrays, strings, call stacks, recursion, pointers, structures, dynamic memory, files, modular programming, testing and debugging, and integrated applications.
+The formal course includes F-U01 through F-U12 and covers representation and types, control flow, arrays, strings, call stacks, recursion, pointers, structures, dynamic memory, files, modular programming, testing and debugging, and integrated applications.
 
-## Shared Standard for Student Materials
-
-Every official Unit should include:
-
-- document purpose and completion standard
-- core question, learning objectives, and prerequisite Concepts
-- appropriate prediction or reasoning activity
-- visual model
-- core Concepts and a minimal example
-- execution, state, or memory tracing
-- a reproducible, diagnosable, and correctable error case
-- guided practice, independent practice, testing, and requirement modification
-- a brief concept explanation to AI
-- a reminder that AI responses still require judgment through programs, tests, and reproducible results
-- self-check, summary, and forward/back navigation
-
-Independent activities in student materials are not submitted, graded, or individually marked. Students may keep predictions, programs, errors, and corrections for classroom discussion and review.
-
-## Instructor Implementation Resources
-
-- [前導課程教師執行指引](instructor/session-guides.zh-TW.md)
-- [Preparatory Course Instructor Implementation Guide](instructor/session-guides.en.md)
-- [前導教材評量制度補充規則](preparatory/ASSESSMENT-NOTE.zh-TW.md)
-- [Preparatory Material Assessment Override](preparatory/ASSESSMENT-NOTE.en.md)
-
-Instructor guides carry pacing, homework discussion, participation observation, fallback strategies, and representative error cases. Student chapters do not carry instructor scheduling or grading administration.
-
-## Independent Homework and Assessment Resources
+### Independent Homework and Oral Preparation
 
 - [自主作業與口試準備包](assignments/preparatory-assignments.zh-TW.md)
 - [Independent Homework and Oral Preparation Pack](assignments/preparatory-assignments.en.md)
+
+Submission, grading, participation, and final-oral rules are defined only by the official learning and assessment policy:
+
+- [學習與評量制度](../design/13-learning-assessment-policy.zh-TW.md)
+- [Learning and Assessment Policy](../design/13-learning-assessment-policy.en.md)
+
+## Instructor Entry Points
+
+- [前導課程教師執行指引](instructor/session-guides.zh-TW.md)
+- [Preparatory Course Instructor Implementation Guide](instructor/session-guides.en.md)
 - [課堂參與與最終口試評分規準](assignments/rubric.zh-TW.md)
 - [Classroom Participation and Final Oral Examination Rubric](assignments/rubric.en.md)
 - [作業討論與課堂參與觀察指引](assignments/grading-guide.zh-TW.md)
 - [Assignment Discussion and Participation Observation Guide](assignments/grading-guide.en.md)
 
-The existing AI-use log template remains an optional extension resource. It is not a completion requirement for every Unit and students are not required to use it routinely.
+Instructor documents carry pacing, homework discussion, misconceptions, representative errors, fallback activities, equitable participation modes, and assessment implementation. Student chapters should not contain instructor scheduling, grading administration, or answer-revealing prompts.
 
-## Official Policy
+`preparatory/ASSESSMENT-NOTE.*` is a non-normative migration note for legacy wording. It is not policy and does not override the official assessment policy:
 
-- Independent homework may follow each class but is not submitted, graded, or individually marked.
-- The next class reserves 15–25 minutes to discuss previous homework, errors, tests, and alternative solutions.
-- Roll call is not graded; attendance is not participation.
-- Participation may be shown verbally, in writing, through anonymous questions, program operation, tracing, testing, or group records.
-- The official grade consists only of classroom participation and one final one-on-one oral examination.
-- Students keep homework and learning records for discussion and oral-examination preparation.
+- [前導教材評量措辭遷移說明](preparatory/ASSESSMENT-NOTE.zh-TW.md)
+- [Preparatory Assessment Wording Migration Note](preparatory/ASSESSMENT-NOTE.en.md)
 
-## Material Templates
+## Author and Maintainer Entry Points
+
+### Material Templates
 
 - [單元教材模板](TEMPLATE.zh-TW.md)
 - [Unit Material Template](TEMPLATE.en.md)
 
-## Review Records
+The template provides a suggested structure and a prepublication check. It does not replace Constitution 2.0, the official assessment policy, or instructional judgment for an individual Unit.
+
+### Technical Validation
+
+- [全 Unit 技術驗證報告](reviews/all-units-technical-validation.zh-TW.md)
+- [All-Unit Technical Validation Report](reviews/all-units-technical-validation.en.md)
+- [C17 Examples and Defect Cases](../examples/README.md)
+
+Technical validation can confirm compilation, execution, test data, and known technical issues. It cannot by itself prove readability, instructional sequencing, or appropriate cognitive load.
+
+### Review Records
+
+The following files record reviews performed at particular times under particular constitutional baselines. When they conflict with Constitution 2.0 or the active repository-wide audit, the current baseline prevails:
 
 - [前導教材憲法遵循審查](reviews/materials-constitution-review.zh-TW.md)
 - [Preparatory Materials Constitution Review](reviews/materials-constitution-review.en.md)
@@ -88,25 +89,28 @@ The existing AI-use log template remains an optional extension resource. It is n
 - [P-U01 Constitution Compliance Review](reviews/pu01-constitution-review.en.md)
 - [全文件憲法遵循重審](reviews/all-documents-constitution-review.zh-TW.md)
 - [Repository-Wide Constitution Compliance Review](reviews/all-documents-constitution-review.en.md)
-- [全 Unit 技術驗證報告](reviews/all-units-technical-validation.zh-TW.md)
-- [All-Unit Technical Validation Report](reviews/all-units-technical-validation.en.md)
 
-## Technical Validation Status
+Active repository-wide audit:
 
-The current technical review stage is complete for all 16 Units. The validation report records C17 contracts, input and boundary behavior, intentional-error classification, bilingual equivalence, and navigation corrections.
+- [Constitution 2.0 全庫符合性審查](../reviews/repository-constitution-2-audit.zh-TW.md)
+- [Repository-Wide Constitution 2.0 Compliance Audit](../reviews/repository-constitution-2-audit.en.md)
 
-Continuous improvements may later add automated Markdown code extraction, CI compilation, link checking, and classroom-toolchain smoke tests. These are maintenance enhancements rather than unresolved document defects.
+## Shared Principles for Student Materials
 
-## Next Stage
+Student materials should select a structure appropriate to their teaching purpose. Every Unit is not required to reproduce an identical mechanical outline. Core principles include:
 
-- Conduct a final human review of teaching depth and cognitive load.
-- Divide the validated Units into actual Lessons and course weeks.
-- Build optional CI checks for code blocks, bilingual pairs, and links.
-- Pilot the materials in the target classroom environments and record teaching adjustments.
+- State the core question, completion standard, and prerequisites clearly.
+- Establish a problem, need, or mental model before introducing syntax.
+- Use prediction, tracing, testing, debugging, and requirement modification when they serve the learning goal.
+- Distinguish complete programs, fragments, pseudocode, and intentionally defective examples.
+- Do not treat successful compilation, correct output, passing an OJ, or tool approval as sole evidence of capability.
+- AI activities may appear only as clearly labeled, directly skippable optional extensions.
+- Core completion standards and self-checks must not require AI use or AI records.
+- Preserve substantive bilingual equivalence while allowing sentence structure and explanatory examples to differ for readability.
 
 ## Navigation
 
-- [Learning and Assessment Policy](../design/13-learning-assessment-policy.en.md)
-- [Back to repository home](../README.md)
+- [Back to Repository Home](../README.md)
 - [Instructional Design Workspace](../design/README.en.md)
+- [Course Constitution 2.0](../CONSTITUTION.en.md)
 - [繁體中文版](README.zh-TW.md)
