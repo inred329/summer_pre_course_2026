@@ -1,94 +1,86 @@
 # Repository-Wide Constitution 2.0 Compliance Audit
 
-Version: 0.7.0  
+Version: 0.8.0  
 Status: Active audit record  
 Last updated: 2026-08-06  
 Authoritative basis: `CONSTITUTION.en.md` 2.0.0  
 Primary audience: Course designers, instructors, and maintainers  
 Normative force: This document records findings and recommendations only; it does not create new rules
 
-## 1. Purpose
+## 1. Purpose and Ratings
 
-This audit re-examines all official repository documents under Constitution 2.0. It records governance level, primary audience, authoritative role, bilingual equivalence, student readability, technical verifiability, and consistency of AI and assessment rules.
+This audit examines governance level, primary audience, authoritative role, bilingual equivalence, student readability, technical verifiability, and consistency of AI and assessment rules under Constitution 2.0.
 
-Compliance ratings: A compliant, B minor revision, C structural revision, D non-compliant, H historicized.  
+Ratings: A compliant, B minor revision, C structural revision, D non-compliant, H historicized.  
 Priorities: P0 immediate correction, P1 high priority, P2 medium priority, P3 general improvement.
 
 ## 2. Completed Audit Matrix
 
 | Path | Governance Level | Primary Audience | Rating | Priority | Findings | Action | Status |
 |---|---|---|---|---|---|---|---|
-| `README.md` | Guide / routing entry | Students, instructors, designers-maintainers | C → A | P0 | Duplicated assessment policy, design philosophy, progress reporting, and obsolete AI requirements | Rewritten as a three-role routing entry | Completed |
+| `README.md` | Guide / routing entry | Students, instructors, designers-maintainers | C → A | P0 | Duplicated policy, progress reporting, and obsolete AI requirements | Rewritten as a three-role routing entry | Completed |
 | `classes/zh/README.md` | Material entry | Chinese-track students | D → A | P0 | Early TBD draft contradicted the current course | Rewritten as the current 4×3-hour entry | Completed |
 | `classes/en/README.md` | Material entry | English-track students | D → A | P0 | Early TBD draft contradicted the current course | Rewritten as the current 5×2-hour entry | Completed |
 | `design/13-learning-assessment-policy.*` | Official Policy | Students and instructors | D → A | P0 | Required pre-AI artifacts, summaries, records, and universal AI oral capability | Made AI optional; non-use is not a deficit | Completed |
-| `design/12-constitution-compliance-review.*` | Historical Record | Designers and maintainers | D → H | P0 | Treated Constitution 1.2.0 as the current baseline | Historicized with obsolete-policy warnings | Completed |
-| `materials/preparatory/ASSESSMENT-NOTE.*` | Migration Note | Maintainers | C → A | P0 | Claimed official precedence and duplicated assessment policy | Removed normative force; retained only legacy-wording migration guidance | Completed |
-| `materials/preparatory/unit-01-execution.*` | Student Material | Students | B → A | P1 | AI activity sat in the core numbered flow and implied required work | Marked as skippable optional extension; completion does not depend on AI | Completed |
-| `materials/preparatory/unit-02-data-state.*` | Student Material | Students | B → A | P1 | AI activity sat in the core numbered flow and implied required work | Marked as skippable optional extension; completion does not depend on AI | Completed |
-| `materials/preparatory/unit-03-control-flow.*` | Student Material | Students | B → A | P1 | AI activity sat in the core numbered flow and implied required work | Marked as skippable optional extension; completion does not depend on AI | Completed |
-| `materials/preparatory/unit-04-functions-integration.*` | Student Material | Students | B → A | P1 | AI activity sat in the core numbered flow and implied required work | Marked as skippable optional extension; completion does not depend on AI | Completed |
-| `materials/assignments/ai-use-log.*` | Optional Learning Resource | Students | A | P1 | Clearly optional, unsubmitted, ungraded, and requires no non-use declaration | Retain; indexes must not present it as required | Reviewed |
-| `materials/assignments/preparatory-assignments.*` | Student Task Pack | Students and instructors | A | P1 | Homework is unsubmitted and ungraded; AI remains optional and outside core completion | Retain | Reviewed |
-| `materials/assignments/rubric.*` | Assessment Standard | Instructors and assistants | A | P1 | AI explanation and verification are considered only when AI was actually used; non-use does not affect grading | Retain | Reviewed |
-| `materials/assignments/grading-guide.*` | Instructor Guide | Instructors and assistants | A | P1 | AI and external suggestions are not fixed activities; participation and assessment support multiple evidence modes | Retain | Reviewed |
-| `materials/README.*` | Role-based materials index | Students, instructors, authors-maintainers | C → A | P1 | Mixed three audiences, duplicated official policy, claimed review completion, made AI conversation a shared Unit standard, and retained obsolete Override naming | Rewritten as role-based entry points; policy linked rather than copied; AI made optional; prior reviews identified as time-bound records | Completed |
-| `materials/TEMPLATE.*` | Authoring Standard / Guide | Material authors and maintainers | C → A | P1 | Required a fixed AI section and AI self-check and mechanically prescribed the same structure for every Unit | Rewritten as a purpose-driven suggested template; fixed AI section removed; core completion does not depend on AI | Completed |
-| `materials/instructor/session-guides.*` | Instructor Guide | Instructors and assistants | A | P1 | Pacing, misconceptions, time-short fallback, fairness supports, and post-class records are directly executable; external or AI suggestions are optional error cases only | Retain; `design/13` remains authoritative for formal assessment | Reviewed |
-| `materials/formal/README.*` | Student-material index | Students | C → A | P1 | Claimed every Unit contained a fixed AI explanation, creating an implied course-wide requirement; completion standard did not exclude AI | Rewrote the main learning path; AI is a skippable extension and does not affect completion, participation, or assessment | Completed |
-| `materials/formal/unit-01-representation-types.*` | Student Material | Students | B → A | P1 | AI explanation sat in the core numbered flow, and the opening did not state that AI was outside completion | Recast as a skippable optional extension and added a non-AI core completion standard | Completed |
-| `materials/formal/unit-02-complex-control-flow.*` | Student Material | Students | B → A | P1 | AI explanation remained in the core numbered flow, and the opening did not state that AI non-use leaves completion and assessment unchanged | Recast as a skippable optional extension; added the non-AI core standard and no-record/no-declaration rule | Completed |
-| `materials/formal/unit-03-arrays.*` | Student Material | Students | B → A | P1 | AI explanation remained in the core path; the accumulation example did not state its signed-overflow assumption; score practice omitted conversion and range validation | Recast AI as a skippable extension; added a non-AI completion standard, representable accumulation range, input validation, and empty-collection contracts | Completed |
+| `design/12-constitution-compliance-review.*` | Historical Record | Designers and maintainers | D → H | P0 | Treated Constitution 1.2.0 as current | Historicized with obsolete-policy warnings | Completed |
+| `materials/preparatory/ASSESSMENT-NOTE.*` | Migration Note | Maintainers | C → A | P0 | Claimed precedence and duplicated assessment policy | Removed normative force; retained migration guidance only | Completed |
+| `materials/preparatory/unit-01*` through `unit-04*` | Student Material | Students | B → A | P1 | AI activities sat in the core path and implied required work | Recast as skippable optional extensions; completion does not depend on AI | Completed |
+| `materials/assignments/ai-use-log.*` | Optional Learning Resource | Students | A | P1 | Optional, unsubmitted, ungraded, and requires no non-use declaration | Retain; indexes must not present it as required | Reviewed |
+| `materials/assignments/preparatory-assignments.*` | Student Task Pack | Students and instructors | A | P1 | Homework is unsubmitted and ungraded; AI is outside core completion | Retain | Reviewed |
+| `materials/assignments/rubric.*` | Assessment Standard | Instructors and assistants | A | P1 | AI is considered only when actually used | Retain | Reviewed |
+| `materials/assignments/grading-guide.*` | Instructor Guide | Instructors and assistants | A | P1 | Supports multiple evidence modes and does not make AI routine | Retain | Reviewed |
+| `materials/README.*` | Role-based materials index | Students, instructors, authors-maintainers | C → A | P1 | Mixed audiences, copied policy, claimed audit completion, and made AI a shared Unit standard | Rewritten as role-based entries that link the authoritative policy | Completed |
+| `materials/TEMPLATE.*` | Authoring Standard / Guide | Material authors and maintainers | C → A | P1 | Required a fixed AI section and mechanical uniformity | Rewritten as a purpose-driven suggested template; AI may appear only as an optional extension | Completed |
+| `materials/instructor/session-guides.*` | Instructor Guide | Instructors and assistants | A | P1 | Pacing, misconceptions, fallback, fairness support, and post-class records are executable | Retain; `design/13` remains authoritative | Reviewed |
+| `materials/formal/README.*` | Student-material index | Students | C → A | P1 | Claimed every Unit contained a fixed AI explanation | Rewrote the path; AI does not affect completion, participation, or assessment | Completed |
+| `materials/formal/unit-01-representation-types.*` | Student Material | Students | B → A | P1 | AI was in the core path; completion did not exclude AI | Recast AI as skippable and added a non-AI completion standard | Completed |
+| `materials/formal/unit-02-complex-control-flow.*` | Student Material | Students | B → A | P1 | AI was in the core path; no no-record/no-declaration rule | Recast as optional and added a non-AI completion standard | Completed |
+| `materials/formal/unit-03-arrays.*` | Student Material | Students | B → A | P1 | AI in core path; insufficient accumulation range and input contracts | Added representable-range, validation, and empty-collection contracts | Completed |
+| `materials/formal/unit-04-strings.*` | Student Material | Students | B → A | P1 | AI in core path; fixed-size input did not fully explain truncation, residual input, and terminator risks | Made AI optional; added truncation detection, buffer, and `\0` contracts | Completed |
+| `materials/formal/unit-05-call-stack-recursion.*` | Student Material | Students | B → A | P1 | AI in core path; recursion depth and representable result range lacked a complete contract | Made AI optional; added base-case, depth, stack, and result-range limits | Completed |
+| `materials/formal/unit-06-pointers.*` | Student Material | Students | B → A | P1 | AI in core path; lifetime, nullability, one-past, and aliasing boundaries needed clarification | Made AI optional; added lifetime, dereference-range, and aliasing contracts | Completed |
 
 ## 3. Major Decisions
 
-### 3.1 Position of AI activities in student materials
+### 3.1 AI activities must not become implicitly required
 
-AI may be offered as an extension tool, but it must not become implicitly required through placement in the core reading path, completion checklist, fixed template field, or assessment criteria. All reviewed preparatory Units, the formal-course index, F-U01, F-U02, F-U03, and the material template now present AI only as a clearly labeled, directly skippable optional extension.
+AI may be offered as an extension, but placement in a core chapter, completion list, fixed template, or assessment field must not turn it into required work. All reviewed preparatory Units, the formal-course index, and F-U01 through F-U06 now make AI directly skippable.
 
-### 3.2 Role of the AI verification-note template
+### 3.2 Assessment has one authoritative source
 
-`ai-use-log.*` is an optional personal review template. It must not become an assignment attachment, required oral-exam evidence, non-use declaration, or routine instructor checklist.
+`design/13-learning-assessment-policy.*` is the sole authoritative source for formal assessment. READMEs, task packs, rubrics, templates, and instructor guides may provide navigation or implementation guidance only.
 
-### 3.3 Single authoritative source for assessment rules
+### 3.3 Student materials must expose technical contracts
 
-`design/13-learning-assessment-policy.*` is the sole authoritative source for the official assessment system. READMEs, task packs, rubrics, templates, and instructor guides may provide navigation or operational guidance but may not duplicate the full policy or create conflicting rules.
+Materials involving arrays, strings, recursion, and pointers must state value ranges, input state, termination conditions, lifetime, dereference boundaries, and undefined-behavior risks. Compilation success or one correct output cannot replace these contracts.
 
-### 3.4 A template is not a fixed chapter contract
+### 3.4 Prior reviews have historical force only
 
-A material template should provide design support rather than require every Unit to reproduce the same mechanical outline. Activities, visuals, defect cases, and requirement modifications should be selected according to the core question, prerequisites, and cognitive load. Essential quality is controlled through the prepublication check.
-
-### 3.5 Force of prior review records
-
-Prior reviews record judgments made at a particular date under a particular constitutional baseline. A filename containing “official,” “complete,” or “compliant” does not make that review a current guarantee. Current decisions follow Constitution 2.0 and this active repository-wide audit.
-
-### 3.6 Technical boundaries for array arithmetic
-
-Correct traversal does not make accumulation automatically safe. When material accumulates with `int`, it must constrain element and total ranges or use a type capable of representing the data and check overflow. Inputs must be validated before entering the array, and empty or one-element requirements need explicit contracts.
+Prior reviews record judgments under a specific date and constitutional baseline. Current decisions follow Constitution 2.0 and this active audit.
 
 ## 4. Confirmed Student-Material Quality
 
-Preparatory Units 1–4 and formal-course F-U01, F-U02, and F-U03 currently provide:
+Preparatory Units 1–4 and formal-course F-U01 through F-U06 now provide:
 
 - Problem context before syntax.
-- Prediction before execution and state or flow tracing.
+- Prediction and state, flow, or memory tracing.
 - Reproducible defects, diagnosis, and regression verification.
 - Requirement modification and multiple test categories.
 - No reliance on compilation success, one output, or tool judgment as proof of understanding.
 - Clear prerequisites, completion standards, and paired bilingual versions.
 - No dependency on AI for core completion.
-- Explicit boundary, range, and undefined-behavior treatment when indexing, input, or arithmetic is involved.
+- Operationally verifiable technical boundaries and failure conditions.
 
-These files may still receive P3 prose and pacing refinements after classroom trials, but this review found no P0/P1 technical or instructional defect requiring their use to stop.
+These files may still receive P3 prose and pacing refinements after classroom trials, but no P0/P1 issue requiring their use to stop remains.
 
 ## 5. Next Audit Scope
 
 ### P1: Formal-course student materials
 
-- `materials/formal/unit-04*` through `unit-12*`
-- Whether AI activities remain in core completion paths.
-- Whether internal governance fields, instructor prompts, or grading administration pollute student reading.
-- Whether Concept-first sequencing, dependency order, defect diagnosis, and technical verifiability are adequate.
+- `materials/formal/unit-07*` through `unit-12*`
+- Whether AI remains in a core completion path.
+- Whether internal governance, instructor prompts, or grading administration pollute student reading.
+- Concept-first sequencing, dependency order, defect diagnosis, and technical verifiability.
 
 ### P2: Governance levels of design documents
 
@@ -103,4 +95,4 @@ Reclassify `design/01–11`, the Concept Tree, Registry, Unit Map, Traceability,
 
 ## 6. Current Conclusion
 
-All P0 issues identified so far have been corrected. The formal-course index and F-U01 through F-U03 have been reviewed. F-U03's AI positioning, integer accumulation range, input validation, and empty-collection contract issues have been corrected. The repository-wide audit is not complete; the next batch continues with F-U04 through F-U12, design governance, and automated validation, so the pull request remains a draft.
+All P0 issues identified so far have been corrected. The formal-course index and F-U01 through F-U06 have been reviewed. F-U04 through F-U06 now include explicit contracts for string truncation, recursion result range, and pointer lifetime/nullability/one-past/aliasing boundaries. The repository-wide audit is not complete; the next batch continues with F-U07 through F-U12, design governance, and automated validation, so the pull request remains a draft.
