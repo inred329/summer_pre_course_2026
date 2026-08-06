@@ -1,116 +1,91 @@
 # 全庫 Constitution 2.0 符合性審查
 
-版本：0.2.0  
+版本：0.3.0  
 狀態：進行中審查紀錄  
+最後更新：2026-08-06  
 權威基準：`CONSTITUTION.zh-TW.md` 2.0.0  
 主要讀者：課程設計者、授課教師與維護者  
 規範效力：本文件只記錄審查結果與修正建議，不自行建立新規範
 
 ## 一、審查目的
 
-本審查依 Constitution 2.0 重新檢視本倉庫所有正式文件，建立可追蹤、可排序、可逐批完成的修正程序。
+本審查依 Constitution 2.0 重新檢視本倉庫所有正式文件，記錄文件層級、主要讀者、權威角色、雙語等值、學生閱讀品質、技術可驗證性，以及 AI 與評量規則是否一致。
 
-審查必須回答：
-
-1. 文件屬於哪一個治理層級。
-2. 文件的主要讀者是誰。
-3. 文件是否有明確且唯一的權威角色。
-4. 中英文版本是否完整且實質等值。
-5. 學生文件是否符合閱讀權與教學原則。
-6. 技術內容是否可驗證。
-7. AI、評量與雙語班規範是否符合 Constitution 2.0。
-8. 文件應保留、改寫、移動、合併、降級為歷史紀錄或刪除。
-
-## 二、文件分類與判定
-
-| 層級 | 目的 |
-|---|---|
-| Constitution | 不可妥協且長期穩定的原則 |
-| Standards | 一致性要求、模板、格式與品質基準 |
-| Guides and Policies | 可調整的流程、執行方式與當期規則 |
-| Materials | 實際教學與學習內容 |
-| Historical Record | 只保留決策與演進證據 |
-
-符合性判定：A 符合、B 小幅修正、C 結構性修正、D 不符合、H 歷史化。
-
+符合性判定：A 符合、B 小幅修正、C 結構性修正、D 不符合、H 歷史化。  
 優先級：P0 立即修正、P1 高優先、P2 中優先、P3 一般改善。
 
-## 三、第一批審查結果
+## 二、已完成審查矩陣
 
 | Path | Governance Level | Primary Audience | Rating | Priority | Findings | Action | Status |
 |---|---|---|---|---|---|---|---|
-| `README.md` | Guide / routing entry | 學生、教師、設計維護者 | C → A | P0 | 同時重複評量政策、設計理念、進度報告與舊 AI 要求，權威邊界混亂 | 重寫為三角色路由入口，只保留簡要定位與權威連結 | 已完成 |
-| `classes/zh/README.md` | Material entry | 中文班學生 | D → A | P0 | 仍是早期 TBD 草案，與現行 4×3 小時課程和已完成教材不符 | 改寫為現行學生入口與正式政策連結 | 已完成 |
-| `classes/en/README.md` | Material entry | 英文班學生 | D → A | P0 | 仍是早期 TBD 草案，缺少現行 5×2 小時課程與學生路徑 | 改寫為現行學生入口與正式政策連結 | 已完成 |
-| `design/13-learning-assessment-policy.*` | Official Policy | 學生與教師 | D → A | P0 | 強制保存 AI 使用前成果、AI 摘要與採用理由，並把 AI 判斷列為所有學生固定口試能力 | 升級至 0.2.0；AI 改為預設選用，未使用不構成缺失，只要求對已採用成果負責 | 已完成 |
-| `design/12-constitution-compliance-review.*` | Historical Record | 設計維護者 | D → H | P0 | 以 Constitution 1.2.0 為基準，仍宣告固定 metadata、ID 與 AI 紀錄為教材強制條件 | 降級為歷史紀錄，加入過時警告與現行審查入口 | 已完成 |
+| `README.md` | Guide / routing entry | 學生、教師、設計維護者 | C → A | P0 | 重複評量政策、設計理念、進度報告與舊 AI 要求 | 重寫為三角色路由入口 | 已完成 |
+| `classes/zh/README.md` | Material entry | 中文班學生 | D → A | P0 | 早期 TBD 草案與現行課程不符 | 改寫為 4×3 小時現行入口 | 已完成 |
+| `classes/en/README.md` | Material entry | 英文班學生 | D → A | P0 | 早期 TBD 草案與現行課程不符 | 改寫為 5×2 小時現行入口 | 已完成 |
+| `design/13-learning-assessment-policy.*` | Official Policy | 學生與教師 | D → A | P0 | 強制 AI 使用前成果、摘要、紀錄與普遍 AI 口試能力 | AI 改為選用；未使用不構成缺失 | 已完成 |
+| `design/12-constitution-compliance-review.*` | Historical Record | 設計維護者 | D → H | P0 | 以 Constitution 1.2.0 為現行基準 | 歷史化並加入過時警告 | 已完成 |
+| `materials/preparatory/ASSESSMENT-NOTE.*` | Migration Note | 維護者 | C → A | P0 | 自稱正式優先規則並複製評量政策 | 取消規範效力，只保留舊措辭遷移說明 | 已完成 |
+| `materials/preparatory/unit-01-execution.*` | Student Material | 學生 | B → A | P1 | AI 活動位於核心編號主線，形成隱性必做 | 標示為可跳過的選用延伸；完成標準不依賴 AI | 已完成 |
+| `materials/preparatory/unit-02-data-state.*` | Student Material | 學生 | B → A | P1 | AI 活動位於核心編號主線，形成隱性必做 | 標示為可跳過的選用延伸；完成標準不依賴 AI | 已完成 |
+| `materials/preparatory/unit-03-control-flow.*` | Student Material | 學生 | B → A | P1 | AI 活動位於核心編號主線，形成隱性必做 | 標示為可跳過的選用延伸；完成標準不依賴 AI | 已完成 |
+| `materials/preparatory/unit-04-functions-integration.*` | Student Material | 學生 | B → A | P1 | AI 活動位於核心編號主線，形成隱性必做 | 標示為可跳過的選用延伸；完成標準不依賴 AI | 已完成 |
+| `materials/assignments/ai-use-log.*` | Optional Learning Resource | 學生 | A | P1 | 已明確為選用、不繳交、不評分，未使用無須聲明 | 保留；後續確認索引不將其列為必備 | 已審查 |
+| `materials/assignments/preparatory-assignments.*` | Student Task Pack | 學生、教師 | A | P1 | 作業不繳交、不計分；AI 僅為選用，核心任務不依賴 AI | 保留 | 已審查 |
+| `materials/assignments/rubric.*` | Assessment Standard | 教師、助教 | A | P1 | AI 只在實際使用時檢查說明與驗證；未使用不影響評分 | 保留 | 已審查 |
+| `materials/assignments/grading-guide.*` | Instructor Guide | 教師、助教 | A | P1 | AI／外部建議不是固定活動；參與與評量方式符合多元證據原則 | 保留 | 已審查 |
 
-## 四、第一批裁決
+## 三、第二批裁決
 
-### 1. 根 README 的角色
+### 1. AI 活動的學生教材位置
 
-根 README 是路由入口，不是評量政策、課程進度報告或完整設計說明的副本。正式規則由 Constitution 2.0 與各自的權威政策文件定義。
+AI 可以作為延伸工具，但不得因位於核心章節主線、完成清單或評量欄位而形成隱性必做。Unit 1–4 已明確標示 AI 段落可跳過，且未使用 AI 不影響完成、參與或評量。
 
-### 2. 班級入口的角色
+### 2. AI 驗證筆記的角色
 
-班級 README 應服務學生，提供現行課程定位、教材入口與政策連結，不應保留內部待辦、負責人欄位或已失效的課程草案。
+`ai-use-log.*` 只是一份學生可自行選用的複習模板。它不得成為作業附件、口試必要證據、未使用聲明或教師逐份檢查項目。
 
-### 3. AI 在評量中的地位
+### 3. 評量規則的單一權威來源
 
-AI 預設為選用。學生若使用 AI，仍需能解釋、修改與驗證最終採用成果；未使用 AI 不需聲明，也不構成能力證據不足。
+`design/13-learning-assessment-policy.*` 是正式評量制度的唯一權威來源。作業包、rubric 與教師指南可以將制度轉成對應任務和觀察方式，但不得重新定義成績結構或建立相衝突的 AI 義務。
 
-### 4. 舊憲法審查的地位
+## 四、已確認的學生教材品質
 
-依 Constitution 1.2.0 產生的審查只保留歷史價值。它不得繼續建立現行教材門檻或要求學生、教師遵守舊 AI、metadata、ID 與模板規則。
+前導 Unit 1–4 目前均具備：
 
-## 五、下一批掃描範圍
+- 以問題脈絡進入概念，而非先列語法。
+- 執行前預測、狀態或流程追蹤。
+- 可重現錯誤、診斷與回歸驗證。
+- 需求修改與多種測試案例。
+- 不以編譯成功、單一輸出或工具判斷取代理解。
+- 清楚的前置知識、完成標準與雙語對應。
 
-### P0：舊 AI 與評量規則
+這些文件仍可在後續試教後進行 P3 文字與節奏微調，但本輪未發現需要停止使用的 P0/P1 技術或教學問題。
 
-搜尋並審查：
+## 五、下一批審查範圍
 
-- `AI 使用紀錄`、`AI-use log`。
-- `保留 AI 使用前`、`before AI use`。
-- `未使用 AI 聲明`、`non-use declaration`。
-- `AI 判斷`、`AI judgment` 是否被列為所有學生固定能力。
-- `ASSESSMENT-NOTE` 是否重複或覆寫正式評量政策。
+### P1：教材入口與模板
 
-### P1：學生教材閱讀品質
+- `materials/README.*`
+- `materials/TEMPLATE.*`
+- 是否把內部治理欄位、能力 ID 或 AI 模板暴露為學生必讀內容。
+- 學生、教師與維護者入口是否清楚分離。
 
-依 Unit 批次檢查：
+### P1：教師文件邊界
 
-- 是否仍含 Concept ID、能力 ID、維護狀態或教師提示。
-- 是否以大量欄位、清單或規格表取代敘述與推理。
-- 是否能從問題脈絡自然進入概念、語法、觀察與驗證。
-- 是否有未建立的必要先備概念。
+- `materials/instructor/*`
+- 是否可直接執行，又不重寫學生教材。
+- 是否包含教師提示、常見誤解、備援活動與公平支架。
 
 ### P2：設計文件治理層級
 
-重新判定 `design/01–11`、Concept Tree、Registry、Unit Map、Traceability Matrix、Acceptance、Risk 與 Delivery 文件究竟屬於 Standards、Policies、Design Source 或 Historical Record，避免所有文件都宣稱自己是正式基準。
+重新判定 `design/01–11`、Concept Tree、Registry、Unit Map、Traceability、Acceptance、Risk 與 Delivery 文件的權威角色，避免多份文件同時宣稱為同一規則的正式基準。
 
 ### P2：技術與導覽自動檢查
 
-補強：
+- 中英文配對與實質等值。
+- 舊憲法版本引用。
+- 失效連結與孤立文件。
+- 可編譯程式清單、GCC／Clang 差異與 CI 覆蓋範圍。
 
-- 中英文配對檢查。
-- 舊憲法版本引用掃描。
-- 失效連結與孤立文件掃描。
-- 可編譯程式清單與技術驗證範圍。
+## 六、本輪結論
 
-## 六、後續執行方式
-
-後續修改分成可審查的小批次：
-
-1. 舊 AI／評量規則清理。
-2. 學生教材閱讀品質，按 Unit 群組進行。
-3. 教師文件邊界與可執行性。
-4. 設計文件治理層級與權威來源。
-5. CI、雙語配對、連結與技術驗證補強。
-
-每批修改都必須同步處理中英文版本，並將正式規則回寫至真正的權威來源。
-
-## 七、本輪結論
-
-第一批 P0 問題已處理：根 README 已回歸路由角色、兩個班級入口已與現況一致、評量政策已移除過時 AI 強制要求、舊憲法審查已歷史化。
-
-下一步優先掃描全庫仍存在的舊 AI／評量規則，避免學生教材、教師文件或補充政策重新引入與 Constitution 2.0 衝突的要求。
+目前已發現的 P0 問題均已修復。Unit 1–4 與作業／評量文件中的 AI 定位已完成審查並符合 Constitution 2.0。全庫審查尚未完成，下一批將處理教材入口、模板、教師文件與設計治理層級，因此 PR 仍維持 Draft。
