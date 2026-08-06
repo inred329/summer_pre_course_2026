@@ -1,15 +1,15 @@
 # Preparatory Unit P-U02: How Does a Program Remember Data and Change State?
 
-Version: 1.0.1  
+Version: 1.0.2  
 Status: Official student material  
-Last updated: 2026-08-05  
+Last updated: 2026-08-06  
 Corresponding Chinese version: [前導單元 P-U02：程式如何記住資料並改變狀態？](unit-02-data-state.zh-TW.md)
 
 ## Purpose and Completion Standard
 
 This is a student chapter for independent reading, practice, and review. Completing the chapter means more than producing correct output. You should be able to explain the relationship among values, types, variables, and state, trace how assignments change state, and use tests to show that a modified program still satisfies its requirement.
 
-The activities do not need to be submitted. Keep your predictions, state tables, programs, tests, and corrections for your own review.
+The activities do not need to be submitted. Keep your predictions, state tables, programs, tests, and corrections for your own review. AI is not required to complete this chapter. The optional AI extension may be skipped without affecting completion, participation, or assessment.
 
 ## What Question Does This Chapter Answer?
 
@@ -280,13 +280,15 @@ Then modify the program and confirm that the original and invalid-input cases st
 
 ---
 
-## 12. Explain the Concept to AI
+## 12. Optional Extension: Use AI to Check Your Explanation
 
-Explain in your own words:
+This section is optional. You may skip it without affecting completion of the chapter.
+
+You may explain in your own words:
 
 > What is the relationship among a variable, a value, a type, and program state? How does assignment change state?
 
-An AI response may be incomplete or incorrect. If it conflicts with a state table, compiler warning, or reproducible execution result, judge the claim again using evidence.
+No fixed prompt is required, and the conversation does not need to be saved or submitted. An AI response may be incomplete or incorrect. If it conflicts with a state table, compiler warning, or reproducible execution result, judge the claim again using evidence.
 
 ---
 
