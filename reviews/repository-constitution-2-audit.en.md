@@ -1,6 +1,6 @@
 # Repository-Wide Constitution 2.0 Compliance Audit
 
-Version: 0.4.0  
+Version: 0.5.0  
 Status: Active audit record  
 Last updated: 2026-08-06  
 Authoritative basis: `CONSTITUTION.en.md` 2.0.0  
@@ -34,12 +34,15 @@ Priorities: P0 immediate correction, P1 high priority, P2 medium priority, P3 ge
 | `materials/assignments/grading-guide.*` | Instructor Guide | Instructors and assistants | A | P1 | AI and external suggestions are not fixed activities; participation and assessment support multiple evidence modes | Retain | Reviewed |
 | `materials/README.*` | Role-based materials index | Students, instructors, authors-maintainers | C → A | P1 | Mixed three audiences, duplicated official policy, claimed review completion, made AI conversation a shared Unit standard, and retained obsolete Override naming | Rewritten as role-based entry points; policy linked rather than copied; AI made optional; prior reviews identified as time-bound records | Completed |
 | `materials/TEMPLATE.*` | Authoring Standard / Guide | Material authors and maintainers | C → A | P1 | Required a fixed AI section and AI self-check and mechanically prescribed the same structure for every Unit | Rewritten as a purpose-driven suggested template; fixed AI section removed; core completion does not depend on AI | Completed |
+| `materials/instructor/session-guides.*` | Instructor Guide | Instructors and assistants | A | P1 | Pacing, misconceptions, time-short fallback, fairness supports, and post-class records are directly executable; external or AI suggestions are optional error cases only | Retain; `design/13` remains authoritative for formal assessment | Reviewed |
+| `materials/formal/README.*` | Student-material index | Students | C → A | P1 | Claimed every Unit contained a fixed AI explanation, creating an implied course-wide requirement; completion standard did not exclude AI | Rewrote the main learning path; AI is a skippable extension and does not affect completion, participation, or assessment | Completed |
+| `materials/formal/unit-01-representation-types.*` | Student Material | Students | B → A | P1 | AI explanation sat in the core numbered flow, and the opening did not state that AI was outside completion | Recast as a skippable optional extension and added a non-AI core completion standard | Completed |
 
 ## 3. Major Decisions
 
 ### 3.1 Position of AI activities in student materials
 
-AI may be offered as an extension tool, but it must not become implicitly required through placement in the core reading path, completion checklist, fixed template field, or assessment criteria. All reviewed preparatory Units and the material template now present AI only as a clearly labeled, directly skippable optional extension.
+AI may be offered as an extension tool, but it must not become implicitly required through placement in the core reading path, completion checklist, fixed template field, or assessment criteria. All reviewed preparatory Units, the formal-course index, F-U01, and the material template now present AI only as a clearly labeled, directly skippable optional extension.
 
 ### 3.2 Role of the AI verification-note template
 
@@ -59,7 +62,7 @@ Prior reviews record judgments made at a particular date under a particular cons
 
 ## 4. Confirmed Student-Material Quality
 
-Preparatory Units 1–4 currently provide:
+Preparatory Units 1–4 and formal-course F-U01 currently provide:
 
 - Problem context before syntax.
 - Prediction before execution and state or flow tracing.
@@ -69,20 +72,13 @@ Preparatory Units 1–4 currently provide:
 - Clear prerequisites, completion standards, and paired bilingual versions.
 - No dependency on AI for core completion.
 
-The Units may still receive P3 prose and pacing refinements after classroom trials, but this review found no P0/P1 technical or instructional defect requiring their use to stop.
+These files may still receive P3 prose and pacing refinements after classroom trials, but this review found no P0/P1 technical or instructional defect requiring their use to stop.
 
 ## 5. Next Audit Scope
 
-### P1: Instructor-document boundaries
-
-- `materials/instructor/*`
-- Whether guides are directly executable without rewriting student chapters.
-- Whether they include instructor prompts, misconceptions, fallback activities, and fairness support.
-- Whether they still duplicate assessment policy or imply routine AI use.
-
 ### P1: Formal-course student materials
 
-- `materials/formal/*`
+- `materials/formal/unit-02*` through `unit-12*`
 - Whether AI activities remain in core completion paths.
 - Whether internal governance fields, instructor prompts, or grading administration pollute student reading.
 - Whether Concept-first sequencing, dependency order, defect diagnosis, and technical verifiability are adequate.
@@ -100,4 +96,4 @@ Reclassify `design/01–11`, the Concept Tree, Registry, Unit Map, Traceability,
 
 ## 6. Current Conclusion
 
-All P0 issues identified so far have been corrected. AI positioning and authoritative-source defects in preparatory Units, assignment and assessment files, materials indexes, and templates have been corrected. The repository-wide audit is not complete; the next batch covers instructor documents, formal-course student materials, design governance, and automated validation, so the pull request remains a draft.
+All P0 issues identified so far have been corrected. The instructor implementation guide has been reviewed, and AI-positioning defects in the formal-course index and F-U01 have been corrected. The repository-wide audit is not complete; the next batch continues with F-U02 through F-U12, design governance, and automated validation, so the pull request remains a draft.
