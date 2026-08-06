@@ -1,15 +1,15 @@
 # Preparatory Unit P-U04: How Can a Large Problem Be Divided into Understandable Work?
 
-Version: 1.0.1  
+Version: 1.0.2  
 Status: Official student material  
-Last updated: 2026-08-05  
+Last updated: 2026-08-06  
 Corresponding Chinese version: [前導單元 P-U04：如何把一個大問題拆成可理解的工作？](unit-04-functions-integration.zh-TW.md)
 
 ## Purpose and Completion Standard
 
 This is a student chapter for independent reading, practice, and review. Completing it means you can separate responsibilities with functions, trace parameters and return values, divide a small requirement into testable parts, and define important interface conditions such as valid input and arithmetic range.
 
-The activities do not need to be submitted. Keep your responsibility diagrams, call traces, programs, tests, and corrections.
+The activities do not need to be submitted. Keep your responsibility diagrams, call traces, programs, tests, and corrections. AI is not required to complete this chapter. The optional AI extension may be skipped without affecting completion, participation, or assessment.
 
 ## What Question Does This Chapter Answer?
 
@@ -305,13 +305,15 @@ This makes the error location easier to narrow down.
 
 ---
 
-## 13. Explain the Concept to AI
+## 13. Optional Extension: Use AI to Check Your Explanation
 
-Explain in your own words:
+This section is optional. You may skip it without affecting completion of the chapter.
+
+You may explain in your own words:
 
 > What is the relationship among a function's responsibility, parameters, arguments, return status, and output values? Why must arithmetic range and invalid-input behavior be part of the interface?
 
-An AI response may be incomplete or incorrect. If it conflicts with a call trace, type limit, function test, or reproducible result, judge the claim again using evidence.
+No fixed prompt is required, and the conversation does not need to be saved or submitted. An AI response may be incomplete or incorrect. If it conflicts with a call trace, type limit, function test, or reproducible result, judge the claim again using evidence.
 
 ---
 
