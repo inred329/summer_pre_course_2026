@@ -1,6 +1,6 @@
 # Repository-Wide Constitution 2.0 Compliance Audit
 
-Version: 1.4.0  
+Version: 1.5.0  
 Status: Active audit record  
 Last updated: 2026-08-07  
 Authoritative basis: `CONSTITUTION.en.md` 2.0.0  
@@ -24,40 +24,31 @@ Priorities: P0 immediate, P1 high, P2 medium, P3 general improvement.
 | `design/12-constitution-compliance-review.*` | Historical Record | Maintainers | D → H | P0 | Treated Constitution 1.2.0 as current | Historicalized with an obsolete warning | Complete |
 | `materials/preparatory/ASSESSMENT-NOTE.*` | Migration Note | Maintainers | C → A | P0 | Claimed precedence and duplicated assessment policy | Removed normative force; retained only migration guidance | Complete |
 | `materials/preparatory/unit-01*` through `unit-04*` | Student Material | Students | B → A | P1 | AI appeared in the core path and implied mandatory use | Converted to skippable optional extensions | Complete |
-| `materials/assignments/ai-use-log.*` | Optional Learning Resource | Students | A | P1 | Already optional, unsubmitted, and ungraded | Retained; indexes must not list it as required | Reviewed |
-| `materials/assignments/preparatory-assignments.*` | Student Task Pack | Students, instructors | A | P1 | Homework is unsubmitted and ungraded; AI is outside core completion | Retained | Reviewed |
-| `materials/assignments/rubric.*`, `grading-guide.*` | Assessment Standard / Instructor Guide | Instructors, TAs | A | P1 | AI is considered only when actually used | Retained | Reviewed |
-| `materials/README.*` | Role-based materials index | Students, instructors, author-maintainers | C → A | P1 | Mixed audiences, copied policy, and premature completion claims | Rewritten as role-based entries linking the authoritative policy | Complete |
-| `materials/TEMPLATE.*` | Authoring Standard / Guide | Authors and maintainers | C → A | P1 | Fixed AI chapter and mechanical structure | Replaced with purpose-driven guidance; AI only as optional extension | Complete |
+| `materials/assignments/*` | Student resources / assessment implementation | Students, instructors | B → A | P1 | Indexing and rubric wording could imply AI was required | Homework remains unsubmitted and ungraded; AI notes optional; rubrics consider AI only when actually used | Complete |
+| `materials/README.*`, `materials/TEMPLATE.*` | Role-based index / authoring guide | Students, instructors, maintainers | C → A | P1 | Mixed audiences, copied policy, fixed AI chapter, and premature completion claims | Rewritten as role-based navigation and purpose-driven authoring guidance | Complete |
 | `materials/instructor/session-guides.*` | Instructor Guide | Instructors, TAs | A | P1 | Executable pacing, misconceptions, fallbacks, fairness supports, and concise records | Retained; `design/13` remains authoritative | Reviewed |
-| `materials/formal/README.*` | Student-material index | Students | C → A | P1 | Claimed every Unit contained a fixed AI explanation | AI no longer affects completion, participation, or assessment | Complete |
-| `materials/formal/unit-01*` through `unit-02*` | Student Material | Students | B → A | P1 | AI in the core path; completion standards did not exclude AI | Converted to optional extensions with non-AI completion standards | Complete |
-| `materials/formal/unit-03-arrays.*` | Student Material | Students | B → A | P1 | Accumulation range, input validation, and empty-set contracts were weak | Added value-range and failure contracts; AI made optional | Complete |
-| `materials/formal/unit-04-strings.*` | Student Material | Students | B → A | P1 | Truncation, residual input, and terminator risks were underexplained | Added line-truncation, buffer, and `\0` contracts | Complete |
-| `materials/formal/unit-05-call-stack-recursion.*` | Student Material | Students | B → A | P1 | Recursion depth and representable-result limits were incomplete | Added base-case, depth, stack, and result-range limits | Complete |
-| `materials/formal/unit-06-pointers.*` | Student Material | Students | B → A | P1 | Lifetime, nullability, one-past, and alias boundaries needed clarity | Added lifetime and dereference-range contracts | Complete |
-| `materials/formal/unit-07-structures.*` | Student Material | Students | B → A | P1 | AI in core path; initialization and bounded-field contracts needed clarity | AI made optional and data contracts strengthened | Complete |
-| `materials/formal/unit-08-dynamic-memory.*` | Student Material | Students | B → A | P1 | Allocation overflow, zero capacity, alias lifetime, and `realloc` contracts were incomplete | Added overflow, ownership, failure-preserving, and alias-invalidating contracts | Complete |
-| `materials/formal/unit-09-files.*` | Student Material | Students | B → A | P1 | AI in core path; line truncation lacked a handling contract | Added complete I/O checks, EOF/error separation, and overlong-line handling | Complete |
-| `materials/formal/unit-10-modular-programming.*` | Student Material | Students | B → A | P1 | AI in core path; `int` accumulation could overflow; `NULL` depended on an indirect include | AI made skippable; accumulation changed to `double`; `<stddef.h>` included directly; numeric-range contract added | Complete |
-| `materials/formal/unit-11-testing-debugging.*` | Student Material | Students | B → A | P1 | AI remained in the core path; Chinese navigation used obsolete F-U10 and F-U12 filenames | AI made directly skippable; non-AI completion clarified; Chinese navigation links corrected | Complete |
-| `materials/formal/unit-12-integrated-application.*` | Student Material | Students | B → A | P1 | AI remained in the core path; `free` depended on a later include; `long long` accumulation left an extreme-overflow contract gap | AI made directly skippable; `<stdlib.h>` included directly; accumulation changed to `double` with scale and precision limits stated | Complete |
+| `materials/formal/README.*`, `materials/formal/unit-01*` through `unit-12*` | Student Material | Students | B → A | P1 | AI in core paths and multiple technical-contract gaps | AI made directly skippable; value, input, lifetime, allocation, stream, dependency, overflow, and failure contracts strengthened | Complete |
+| `design/README.*` | Governance index / guide | All roles | C → A | P2 | Listed all design files as equally "official," duplicated policy text, and contained obsolete development next steps | Rewritten with authority order, governance roles, maintenance workflow, and current navigation | Complete |
 
 ## 3. Governing Decisions
 
 ### 3.1 AI Must Not Become Implicitly Mandatory
 
-AI may be offered as an extension, but it must not become mandatory through placement in the core sequence, completion checklist, fixed template, or assessment field. All preparatory Units and formal Units F-U01 through F-U12 now use directly skippable optional extensions. AI non-use does not affect completion, participation, or assessment.
+AI may be offered as an extension, but it must not become mandatory through placement in the core sequence, completion checklist, fixed template, or assessment field. All preparatory and formal Units now use directly skippable optional extensions. AI non-use does not affect completion, participation, or assessment.
 
 ### 3.2 Assessment Has One Authoritative Source
 
 `design/13-learning-assessment-policy.*` is the sole authoritative assessment policy. READMEs, task packs, rubrics, templates, and instructor guides may provide navigation or implementation guidance only.
 
-### 3.3 Student Materials Must State Technical Contracts
+### 3.3 Design Documents Do Not Share Equal Authority
+
+The design workspace now follows this authority order: Constitution, official policy, approved design standards, planning and traceability models, implementation guides and materials, then historical records. Lower-level files may not override higher-level sources.
+
+### 3.4 Student Materials Must State Technical Contracts
 
 Materials must state value ranges, input states, termination conditions, lifetimes, dereference ranges, allocation sizes, ownership, failure preservation, stream states, module dependencies, compile/link stages, and undefined behavior where relevant. Successful compilation or one correct output cannot replace those contracts.
 
-### 3.4 Earlier Audits Are Historical
+### 3.5 Earlier Audits Are Historical
 
 Earlier reviews record decisions under a particular date and constitutional version. Current decisions follow Constitution 2.0 and this active audit.
 
@@ -76,11 +67,22 @@ Preparatory Units 1–4 and formal Units F-U01 through F-U12 now provide:
 
 No P0/P1 issue requiring the materials to be withdrawn was found in this batch. P3 wording and pacing refinements may follow classroom trials.
 
-## 5. Next Audit Scope
+## 5. Current Design-Governance Classification
 
-### P2: Design-Document Governance
+- Constitution: `CONSTITUTION.*`.
+- Official policy: `design/13-learning-assessment-policy.*`.
+- Design standards: competency, scope, terminology, Concept Tree, Concept Registry, and Unit Map.
+- Planning and traceability models: vision, requirements, domain model, knowledge graph, acceptance, delivery, risk, traceability, and student-material outlines.
+- Historical record: `design/12-constitution-compliance-review.*`.
+- Governance index: `design/README.*`.
 
-Reclassify `design/01–11`, Concept Tree, Registry, Unit Map, Traceability, Acceptance, Risk, and Delivery so multiple files do not claim the same authoritative rule.
+The next design-governance batch must inspect the individual files for duplicated normative claims and align each document header and cross-reference with this classification.
+
+## 6. Next Audit Scope
+
+### P2: Individual Design Documents
+
+Review `design/01–11` and `14–17` for duplicated policy statements, conflicting authority claims, obsolete status text, stale next steps, and bilingual equivalence.
 
 ### P2: Automated Technical and Navigation Checks
 
@@ -89,6 +91,6 @@ Reclassify `design/01–11`, Concept Tree, Registry, Unit Map, Traceability, Acc
 - Broken links and orphan files.
 - Compile manifests, GCC/Clang differences, and CI coverage.
 
-## 6. Current Conclusion
+## 7. Current Conclusion
 
-All P0/P1 issues identified so far have been corrected. Preparatory materials and formal Units F-U01 through F-U12 have completed bilingual review. F-U12 now moves AI outside the core path, adds the direct standard-library dependency for `free`, and removes the example's extreme signed-integer accumulation risk. The repository-wide audit is not complete; design governance and automated validation remain, so PR #10 stays in draft.
+All P0/P1 issues identified so far have been corrected. Preparatory materials and formal Units F-U01 through F-U12 have completed bilingual review. The design workspace now has an explicit authority hierarchy and document classification, removing the earlier claim that every design file was equally official. The repository-wide audit is not complete; individual design-document cleanup and automated validation remain, so PR #10 stays in draft.
