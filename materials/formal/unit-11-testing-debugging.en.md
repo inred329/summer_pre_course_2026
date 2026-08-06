@@ -1,8 +1,8 @@
 # Formal Unit F-U11: How Can Programs Be Tested, Diagnosed, and Improved Systematically?
 
-Version: 1.0.0  
+Version: 1.0.1  
 Status: Student material  
-Last updated: 2026-08-04  
+Last updated: 2026-08-06  
 Corresponding Chinese version: [正式單元 F-U11：如何系統化地測試、診斷與改善程式？](unit-11-testing-debugging.zh-TW.md)
 
 ---
@@ -12,6 +12,8 @@ Corresponding Chinese version: [正式單元 F-U11：如何系統化地測試、
 This chapter is written for students who can already build multi-function C programs. It explains how to decide whether a program is trustworthy, how to reproduce and narrow a defect, and how to improve code without changing required behavior.
 
 Completing the chapter means you can distinguish testing, verification, validation, debugging, regression testing, and refactoring, and can use evidence to explain why a program should or should not be trusted.
+
+Core completion does not depend on AI use. Not using AI does not affect completion, classroom participation, or assessment; Section 12 is a directly skippable optional extension.
 
 No submission is required. Keep your test cases, defect notes, fixes, and explanations for later review.
 
@@ -278,11 +280,11 @@ Before editing code:
 
 ---
 
-## 12. Explain the Concept to AI
+## 12. Optional Extension: Use AI to Check Your Explanation
 
-Explain in your own words the differences among testing, verification, validation, debugging, regression testing, and refactoring.
+This section may be skipped. It is not part of core completion, and no fixed prompt, saved conversation, submission, or non-use declaration is required.
 
-AI responses may be incomplete or incorrect. Compare any claim with the requirement, your test results, and reproducible program behavior.
+If you choose to use AI, first explain in your own words the differences among testing, verification, validation, debugging, regression testing, and refactoring. Then compare the response against the requirement, test table, failure cases, and reproducible program behavior. Treat conflicts as claims to verify, not as answers to accept.
 
 ---
 
