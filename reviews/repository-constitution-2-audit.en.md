@@ -1,6 +1,6 @@
 # Repository-Wide Constitution 2.0 Compliance Audit
 
-Version: 0.5.0  
+Version: 0.6.0  
 Status: Active audit record  
 Last updated: 2026-08-06  
 Authoritative basis: `CONSTITUTION.en.md` 2.0.0  
@@ -37,12 +37,13 @@ Priorities: P0 immediate correction, P1 high priority, P2 medium priority, P3 ge
 | `materials/instructor/session-guides.*` | Instructor Guide | Instructors and assistants | A | P1 | Pacing, misconceptions, time-short fallback, fairness supports, and post-class records are directly executable; external or AI suggestions are optional error cases only | Retain; `design/13` remains authoritative for formal assessment | Reviewed |
 | `materials/formal/README.*` | Student-material index | Students | C → A | P1 | Claimed every Unit contained a fixed AI explanation, creating an implied course-wide requirement; completion standard did not exclude AI | Rewrote the main learning path; AI is a skippable extension and does not affect completion, participation, or assessment | Completed |
 | `materials/formal/unit-01-representation-types.*` | Student Material | Students | B → A | P1 | AI explanation sat in the core numbered flow, and the opening did not state that AI was outside completion | Recast as a skippable optional extension and added a non-AI core completion standard | Completed |
+| `materials/formal/unit-02-complex-control-flow.*` | Student Material | Students | B → A | P1 | AI explanation remained in the core numbered flow, and the opening did not state that AI non-use leaves completion and assessment unchanged | Recast as a skippable optional extension; added the non-AI core standard and no-record/no-declaration rule | Completed |
 
 ## 3. Major Decisions
 
 ### 3.1 Position of AI activities in student materials
 
-AI may be offered as an extension tool, but it must not become implicitly required through placement in the core reading path, completion checklist, fixed template field, or assessment criteria. All reviewed preparatory Units, the formal-course index, F-U01, and the material template now present AI only as a clearly labeled, directly skippable optional extension.
+AI may be offered as an extension tool, but it must not become implicitly required through placement in the core reading path, completion checklist, fixed template field, or assessment criteria. All reviewed preparatory Units, the formal-course index, F-U01, F-U02, and the material template now present AI only as a clearly labeled, directly skippable optional extension.
 
 ### 3.2 Role of the AI verification-note template
 
@@ -62,7 +63,7 @@ Prior reviews record judgments made at a particular date under a particular cons
 
 ## 4. Confirmed Student-Material Quality
 
-Preparatory Units 1–4 and formal-course F-U01 currently provide:
+Preparatory Units 1–4 and formal-course F-U01 and F-U02 currently provide:
 
 - Problem context before syntax.
 - Prediction before execution and state or flow tracing.
@@ -78,7 +79,7 @@ These files may still receive P3 prose and pacing refinements after classroom tr
 
 ### P1: Formal-course student materials
 
-- `materials/formal/unit-02*` through `unit-12*`
+- `materials/formal/unit-03*` through `unit-12*`
 - Whether AI activities remain in core completion paths.
 - Whether internal governance fields, instructor prompts, or grading administration pollute student reading.
 - Whether Concept-first sequencing, dependency order, defect diagnosis, and technical verifiability are adequate.
@@ -96,4 +97,4 @@ Reclassify `design/01–11`, the Concept Tree, Registry, Unit Map, Traceability,
 
 ## 6. Current Conclusion
 
-All P0 issues identified so far have been corrected. The instructor implementation guide has been reviewed, and AI-positioning defects in the formal-course index and F-U01 have been corrected. The repository-wide audit is not complete; the next batch continues with F-U02 through F-U12, design governance, and automated validation, so the pull request remains a draft.
+All P0 issues identified so far have been corrected. The instructor implementation guide, formal-course index, F-U01, and F-U02 have been reviewed, and the F-U02 AI-positioning defect has been corrected. The repository-wide audit is not complete; the next batch continues with F-U03 through F-U12, design governance, and automated validation, so the pull request remains a draft.
