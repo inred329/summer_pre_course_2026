@@ -1,6 +1,6 @@
 # Repository-Wide Constitution 2.0 Compliance Audit
 
-Version: 1.0.0  
+Version: 1.1.0  
 Status: Active audit record  
 Last updated: 2026-08-06  
 Authoritative basis: `CONSTITUTION.en.md` 2.0.0  
@@ -41,12 +41,13 @@ Priorities: P0 immediate correction, P1 high priority, P2 medium priority, P3 ge
 | `materials/formal/unit-06-pointers.*` | Student Material | Students | B → A | P1 | AI in core path; lifetime, nullability, one-past, and aliasing boundaries needed clarification | Made AI optional; added lifetime, dereference-range, and aliasing contracts | Completed |
 | `materials/formal/unit-07-structures.*` | Student Material | Students | B → A | P1 | AI remained in the core path; non-use was not explicitly excluded from completion | Recast AI as directly skippable and added a non-AI completion standard with no record or declaration requirement | Completed |
 | `materials/formal/unit-08-dynamic-memory.*` | Student Material | Students | B → A | P1 | AI remained in the core path; allocation-size overflow, zero-size growth, alias lifetime, and `realloc` metadata contracts were incomplete | Made AI optional; added count-to-byte overflow checks, explicit zero-capacity handling, alias invalidation, and failure-preserving growth contracts | Completed |
+| `materials/formal/unit-09-files.*` | Student Material | Students | B → A | P1 | AI remained in the core path; line-based input mentioned truncation but did not define a detection and response contract | Made AI directly skippable; added newline/EOF truncation detection, fragment handling, malformed/overlong tests, and checked I/O contracts | Completed |
 
 ## 3. Major Decisions
 
 ### 3.1 AI activities must not become implicitly required
 
-AI may be offered as an extension, but placement in a core chapter, completion list, fixed template, or assessment field must not turn it into required work. All reviewed preparatory Units, the formal-course index, and F-U01 through F-U08 now make AI directly skippable.
+AI may be offered as an extension, but placement in a core chapter, completion list, fixed template, or assessment field must not turn it into required work. All reviewed preparatory Units, the formal-course index, and F-U01 through F-U09 now make AI directly skippable.
 
 ### 3.2 Assessment has one authoritative source
 
@@ -54,7 +55,7 @@ AI may be offered as an extension, but placement in a core chapter, completion l
 
 ### 3.3 Student materials must expose technical contracts
 
-Materials involving arrays, strings, recursion, pointers, structures, and dynamic memory must state value ranges, input state, termination conditions, lifetime, dereference boundaries, allocation-size calculations, ownership, release responsibility, failure preservation, and undefined-behavior risks. Compilation success or one correct output cannot replace these contracts.
+Materials involving arrays, strings, recursion, pointers, structures, dynamic memory, and files must state value ranges, input state, termination conditions, lifetime, dereference boundaries, allocation-size calculations, ownership, release responsibility, failure preservation, stream state, format failure, buffer fragmentation, and undefined-behavior risks. Compilation success or one correct output cannot replace these contracts.
 
 ### 3.4 Prior reviews have historical force only
 
@@ -62,10 +63,10 @@ Prior reviews record judgments under a specific date and constitutional baseline
 
 ## 4. Confirmed Student-Material Quality
 
-Preparatory Units 1–4 and formal-course F-U01 through F-U08 now provide:
+Preparatory Units 1–4 and formal-course F-U01 through F-U09 now provide:
 
 - Problem context before syntax.
-- Prediction and state, flow, or memory tracing.
+- Prediction and state, flow, memory, or stream tracing.
 - Reproducible defects, diagnosis, and regression verification.
 - Requirement modification and multiple test categories.
 - No reliance on compilation success, one output, or tool judgment as proof of understanding.
@@ -79,7 +80,7 @@ These files may still receive P3 prose and pacing refinements after classroom tr
 
 ### P1: Formal-course student materials
 
-- `materials/formal/unit-09*` through `unit-12*`
+- `materials/formal/unit-10*` through `unit-12*`
 - Whether AI remains in a core completion path.
 - Whether internal governance, instructor prompts, or grading administration pollute student reading.
 - Concept-first sequencing, dependency order, defect diagnosis, and technical verifiability.
@@ -97,4 +98,4 @@ Reclassify `design/01–11`, the Concept Tree, Registry, Unit Map, Traceability,
 
 ## 6. Current Conclusion
 
-All P0 issues identified so far have been corrected. The formal-course index and F-U01 through F-U08 have been reviewed. F-U08 now places AI outside the core path and states operational contracts for element-count validation, allocation-size overflow, ownership, aliases, release, zero-capacity handling, and failure-preserving `realloc`. The repository-wide audit is not complete; the next batch continues with F-U09 through F-U12, design governance, and automated validation, so the pull request remains a draft.
+All P0 issues identified so far have been corrected. The formal-course index and F-U01 through F-U09 have been reviewed. F-U09 now places AI outside the core path and states operational contracts for checked open/read/write/close behavior, EOF versus format and I/O failure, overlong-line detection, buffer fragments, and malformed-file tests. The repository-wide audit is not complete; the next batch continues with F-U10 through F-U12, design governance, and automated validation, so the pull request remains a draft.
