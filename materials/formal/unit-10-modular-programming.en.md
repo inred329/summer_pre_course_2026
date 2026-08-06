@@ -1,13 +1,15 @@
 # Formal Unit F-U10: How Can a Program Be Divided into Independently Maintainable Modules?
 
-Version: 1.0.1  
+Version: 1.0.2  
 Status: Official student material  
-Last updated: 2026-08-05  
+Last updated: 2026-08-06  
 Corresponding Chinese version: [正式單元 F-U10：程式如何分成可獨立維護的模組？](unit-10-modular-programming.zh-TW.md)
 
 ## Purpose and Completion Standard
 
 This chapter is for independent reading, practice, and review. Completing it means you can separate interfaces from implementations, create `.h` and `.c` files, explain separate compilation and linking, and diagnose duplicate definitions, missing declarations, invalid interface use, and link errors.
+
+AI use is not part of the chapter's core completion standard. The AI activity near the end is a directly skippable optional extension; not using AI does not affect completion, participation, or assessment.
 
 ## Core Question
 
@@ -49,6 +51,7 @@ The interface states that `calculate_average` reports success or failure through
 `score.c`:
 
 ```c
+#include <stddef.h>
 #include "score.h"
 
 int calculate_average(const int values[], int length, double *result) {
@@ -56,12 +59,12 @@ int calculate_average(const int values[], int length, double *result) {
         return 0;
     }
 
-    int sum = 0;
+    double sum = 0.0;
     for (int i = 0; i < length; i++) {
         sum += values[i];
     }
 
-    *result = (double)sum / length;
+    *result = sum / length;
     return 1;
 }
 
@@ -69,6 +72,8 @@ int is_passing(double average, double threshold) {
     return average >= threshold;
 }
 ```
+
+Accumulating in `double` avoids signed overflow from first summing many or extreme values in `int`. This does not mean arbitrary input sizes have unlimited precision; the interface should still define acceptable data size and precision for its application.
 
 `main.c` depends only on the interface:
 
@@ -141,8 +146,8 @@ Compilation handles each translation unit. Linking combines required definitions
 Place only caller-required interfaces in the header. Internal helpers can remain private in the `.c` file:
 
 ```c
-static int sum_values(const int values[], int length) {
-    int sum = 0;
+static double sum_values(const int values[], int length) {
+    double sum = 0.0;
     for (int i = 0; i < length; i++) {
         sum += values[i];
     }
@@ -190,7 +195,7 @@ An undefined reference may appear. This is a link-stage failure, not a syntax er
 
 ### Incomplete Header Dependencies
 
-A header should include or declare what it needs instead of relying on the caller to include another file first.
+A header should include or declare what it needs instead of relying on the caller to include another file first. The same principle applies to a `.c` file: this example includes `<stddef.h>` directly, so the source of `NULL` is explicit rather than dependent on an indirect include.
 
 ---
 
@@ -213,7 +218,7 @@ student.c
 main.c
 ```
 
-The interface should support initialization, average update, and formatted output. Expose only types and functions needed by callers. Define what each function does for invalid pointers or invalid counts.
+The interface should support initialization, average update, and formatted output. Expose only types and functions needed by callers. Define what each function does for invalid pointers, invalid counts, or results that cannot be represented under the chosen contract.
 
 ---
 
@@ -223,13 +228,15 @@ Add a second front end, `batch_report.c`, that reuses the same student module. C
 
 ---
 
-## 10. Explain the Concept to AI
+## 10. Optional Extension: Use AI to Check Your Explanation
 
-Explain:
+This section can be skipped directly and is not part of the chapter's core completion standard.
+
+First explain in your own words:
 
 > What is the relationship among a module, interface, implementation, separate compilation, and linking? Why must an interface define failure behavior as well as successful behavior?
 
-If an AI response conflicts with compile commands, file dependencies, function contracts, or reproducible errors, judge it again using evidence.
+If you choose to use AI, you may ask it to identify parts your explanation may have missed. No fixed prompt, saved or submitted conversation, or non-use declaration is required. If an AI response conflicts with compile commands, file dependencies, function contracts, or reproducible errors, judge it again using evidence.
 
 ---
 
@@ -239,13 +246,13 @@ If an AI response conflicts with compile commands, file dependencies, function c
 - I can create headers and source files.
 - I can use include guards.
 - I can explain compile and link stages.
-- I can define interface preconditions and failure behavior.
+- I can define interface preconditions, numeric range, and failure behavior.
 - I can diagnose undefined references and duplicate definitions.
 - I expose only necessary interfaces.
 
 ## 12. Chapter Summary
 
-Modules use clear interfaces to isolate implementation, allowing parts to be understood, compiled, tested, and replaced independently. A reliable interface describes valid input, failure behavior, and output responsibility. Separate compilation produces object files, and linking combines definitions into a program. The next Unit builds systematic testing, verification, and debugging evidence.
+Modules use clear interfaces to isolate implementation, allowing parts to be understood, compiled, tested, and replaced independently. A reliable interface describes valid input, numeric range, failure behavior, and output responsibility. Separate compilation produces object files, and linking combines definitions into a program. The next Unit builds systematic testing, verification, and debugging evidence.
 
 ## Navigation
 
