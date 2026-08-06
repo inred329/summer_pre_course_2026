@@ -1,8 +1,8 @@
 # 正式單元 F-U12：如何完成跨 Concept 的整合程式？
 
-版本：1.0.1  
+版本：1.0.2  
 狀態：正式學生教材  
-最後更新：2026-08-05  
+最後更新：2026-08-07  
 對應英文版本：[Formal Unit F-U12: How Can Concepts Across the Course Be Integrated into One Application?](unit-12-integrated-application.en.md)
 
 ## 文件用途與完成標準
@@ -11,7 +11,7 @@
 
 完成本章代表你能設計並實作小型整合程式，說明責任分解與資料流，測試正常與邊界行為，修改需求，並以證據說明修改結果。
 
-本章活動不需繳交；請自行保留設計、程式、測試、缺陷與說明，供複習與討論。
+本章活動不需繳交；請自行保留設計、程式、測試、缺陷與說明，供複習與討論。AI 不是本章的完成條件；不使用 AI 不影響本章完成、課堂參與或評量。文末 AI 活動是可直接跳過的選用延伸。
 
 ---
 
@@ -68,6 +68,7 @@
 
 ```c
 #include <stddef.h>
+#include <stdlib.h>
 
 #define NAME_SIZE 50
 
@@ -181,7 +182,6 @@ void list_destroy(StudentList *list) {
 
 ```c
 #include <stdint.h>
-#include <stdlib.h>
 
 int list_add(StudentList *list, const Student *student) {
     if (list == NULL || student == NULL) {
@@ -237,17 +237,17 @@ int list_average(const StudentList *list, double *average) {
         return 0;
     }
 
-    long long sum = 0;
+    double sum = 0.0;
     for (size_t i = 0; i < list->count; i++) {
-        sum += list->items[i].score;
+        sum += (double)list->items[i].score;
     }
 
-    *average = (double)sum / (double)list->count;
+    *average = sum / (double)list->count;
     return 1;
 }
 ```
 
-因每筆成績已限制在 0～100，最大總和為 `100 * count`。實際產品仍需考慮 `count > LLONG_MAX / 100`；本教材可定義實際最大紀錄數，或加入 checked accumulation。
+每筆成績限制在 0～100，使用 `double` 累加可避免有號整數總和溢位。非常大的集合仍可能受浮點精度影響，因此實際產品應定義最大紀錄數與可接受誤差，並以測試確認介面承諾。
 
 空集合回傳失敗且不寫入輸出，不會除以零。
 
@@ -391,11 +391,11 @@ Append、replace、reject 是不同需求。失敗後留下部分替換資料是
 
 ---
 
-## 16. 向 AI 解釋概念
+## 16. 選用延伸：使用 AI 檢查整合說明
 
-請說明需求、invariant、nullability、capacity arithmetic、ownership、檔案、模組與測試如何共同支撐應用程式。
+這一節可直接跳過，不屬於本章完成、自我檢核、課堂參與或評量條件。若你選擇使用 AI，可以先用自己的話說明需求、invariant、nullability、capacity arithmetic、ownership、檔案、模組與測試如何共同支撐應用程式，再請 AI 指出可能遺漏的限制或反例。
 
-AI 回應若省略限制或假設不同設計，應與實際介面、型別上限、圖、測試與可重現行為比較。
+不需要固定 Prompt、保存或繳交對話，也不需要未使用聲明。AI 回應若省略限制或假設不同設計，應與實際介面、型別上限、圖、測試與可重現行為比較；是否採納建議，仍由你的工程證據決定。
 
 ---
 
