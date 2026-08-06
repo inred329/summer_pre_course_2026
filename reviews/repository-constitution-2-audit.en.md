@@ -1,8 +1,8 @@
 # Repository-Wide Constitution 2.0 Compliance Audit
 
-Version: 1.3.0  
+Version: 1.4.0  
 Status: Active audit record  
-Last updated: 2026-08-06  
+Last updated: 2026-08-07  
 Authoritative basis: `CONSTITUTION.en.md` 2.0.0  
 Primary audience: Course designers, instructors, and maintainers  
 Normative force: This document records findings and recommendations only; it does not create new rules
@@ -41,12 +41,13 @@ Priorities: P0 immediate, P1 high, P2 medium, P3 general improvement.
 | `materials/formal/unit-09-files.*` | Student Material | Students | B → A | P1 | AI in core path; line truncation lacked a handling contract | Added complete I/O checks, EOF/error separation, and overlong-line handling | Complete |
 | `materials/formal/unit-10-modular-programming.*` | Student Material | Students | B → A | P1 | AI in core path; `int` accumulation could overflow; `NULL` depended on an indirect include | AI made skippable; accumulation changed to `double`; `<stddef.h>` included directly; numeric-range contract added | Complete |
 | `materials/formal/unit-11-testing-debugging.*` | Student Material | Students | B → A | P1 | AI remained in the core path; Chinese navigation used obsolete F-U10 and F-U12 filenames | AI made directly skippable; non-AI completion clarified; Chinese navigation links corrected | Complete |
+| `materials/formal/unit-12-integrated-application.*` | Student Material | Students | B → A | P1 | AI remained in the core path; `free` depended on a later include; `long long` accumulation left an extreme-overflow contract gap | AI made directly skippable; `<stdlib.h>` included directly; accumulation changed to `double` with scale and precision limits stated | Complete |
 
 ## 3. Governing Decisions
 
 ### 3.1 AI Must Not Become Implicitly Mandatory
 
-AI may be offered as an extension, but it must not become mandatory through placement in the core sequence, completion checklist, fixed template, or assessment field. All reviewed preparatory Units, the formal-course index, and F-U01 through F-U11 now use directly skippable optional extensions.
+AI may be offered as an extension, but it must not become mandatory through placement in the core sequence, completion checklist, fixed template, or assessment field. All preparatory Units and formal Units F-U01 through F-U12 now use directly skippable optional extensions. AI non-use does not affect completion, participation, or assessment.
 
 ### 3.2 Assessment Has One Authoritative Source
 
@@ -62,7 +63,7 @@ Earlier reviews record decisions under a particular date and constitutional vers
 
 ## 4. Confirmed Student-Material Quality
 
-Preparatory Units 1–4 and formal Units F-U01 through F-U11 now provide:
+Preparatory Units 1–4 and formal Units F-U01 through F-U12 now provide:
 
 - concept-first entry through a problem context;
 - prediction and state, flow, memory, stream, or module-dependency tracing;
@@ -77,11 +78,6 @@ No P0/P1 issue requiring the materials to be withdrawn was found in this batch. 
 
 ## 5. Next Audit Scope
 
-### P1: Formal-Course Student Materials
-
-- `materials/formal/unit-12*`
-- AI positioning, readability, governance leakage, dependency order, defect diagnosis, and technical verifiability.
-
 ### P2: Design-Document Governance
 
 Reclassify `design/01–11`, Concept Tree, Registry, Unit Map, Traceability, Acceptance, Risk, and Delivery so multiple files do not claim the same authoritative rule.
@@ -95,4 +91,4 @@ Reclassify `design/01–11`, Concept Tree, Registry, Unit Map, Traceability, Acc
 
 ## 6. Current Conclusion
 
-All P0 issues identified so far have been corrected. The formal-course index and F-U01 through F-U11 are reviewed. F-U11 now moves AI outside the core path, explicitly excludes AI use from completion and assessment, and fixes obsolete Chinese navigation links. The repository-wide audit is not complete; F-U12, design governance, and automated validation remain, so PR #10 stays in draft.
+All P0/P1 issues identified so far have been corrected. Preparatory materials and formal Units F-U01 through F-U12 have completed bilingual review. F-U12 now moves AI outside the core path, adds the direct standard-library dependency for `free`, and removes the example's extreme signed-integer accumulation risk. The repository-wide audit is not complete; design governance and automated validation remain, so PR #10 stays in draft.
