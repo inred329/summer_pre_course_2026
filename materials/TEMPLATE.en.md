@@ -1,82 +1,63 @@
 # Unit Material Template
 
-Version: 1.0.0  
-Status: Official template  
-Last updated: 2026-08-05  
-Major change summary: Rewritten to match the current 16-Unit student-material baseline and remove per-Unit acceptance, remediation, micro-orals, and mandatory AI records.  
+Version: 1.1.0  
+Status: Suggested template for material authors  
+Last updated: 2026-08-06  
+Major change summary: Removed the fixed AI section and mechanical chapter requirements. The template now centers teaching purpose, primary audience, and core capability; AI may appear only as a skippable optional extension.  
 Corresponding Chinese version: [單元教材模板](TEMPLATE.zh-TW.md)
 
-## Document Purpose and Completion Standard
+## Document Purpose
 
-This template is for authors creating official Units that students can read independently, practice with, review, and consult later. Instructor scheduling, classroom observation, grading administration, and final-oral procedures belong in instructor or assessment documents rather than student chapters.
+This template helps authors create Unit materials that students can read independently, practice with, review, and consult later. It provides a suggested structure and prepublication checks; it is not a fixed outline that every Unit must copy section by section.
 
-Completing a Unit means more than producing output. Students should be able to explain the central Concept, predict or trace behavior, implement a minimal case, diagnose a representative error, test results, and handle a small requirement change.
+Instructor scheduling, classroom observation, grading administration, answer-revealing prompts, and final-oral procedures belong in instructor or assessment documents rather than student chapters.
 
-Activities are normally unsubmitted, ungraded, and not individually marked. Students may keep predictions, programs, errors, and corrections for classroom discussion and review.
+Official assessment rules are defined only by `design/13-learning-assessment-policy.*`. This template must not create submission, grading, attendance, AI-record, or oral-examination rules.
+
+## Completion Standard
+
+Completing a Unit means more than producing output. According to the Unit's teaching purpose, students should demonstrate an appropriate combination of capabilities such as:
+
+- explaining the central Concept or mental model
+- predicting or tracing program behavior
+- reading, modifying, or completing a minimal implementation
+- diagnosing a representative error
+- building tests and responding to a small requirement change
+- validating a judgment with code, tests, compiler behavior, or other reproducible evidence
+
+Every Unit does not need every activity. Selection should serve the core question and control cognitive load.
+
+AI is optional by default. Not using AI does not affect Unit completion, participation, or assessment. When an AI activity is included, it must be marked as a directly skippable optional extension. Core completion standards and self-checks must not depend on AI.
 
 ## Basic Information
 
 - Unit title:
+- Primary audience: students
 - Core question:
 - Prerequisite Concepts:
 - Concepts introduced or deepened:
+- Intentionally deferred content:
 - Related later Units:
-- Tools and C standard: C17
+- Tools and language standard:
 
-## 1. Learning Objectives
+## Suggested Structure
 
-After completing the Unit, students should be able to:
+Use, merge, omit, or reorder the following sections according to teaching need.
 
-1. Explain the central Concept.
-2. Predict or trace program behavior.
-3. Complete a minimal implementation.
-4. Diagnose and correct one representative error.
-5. Build tests and respond to a small requirement change.
+### 1. Before Starting
 
-Objectives must be concrete and observable. Avoid vague wording such as “become familiar with” or “understand.”
+- What question does the Unit answer?
+- What should students already be able to do?
+- Which observable behaviors demonstrate completion?
+- What may be skipped for now?
 
-## 2. Prerequisites and Content That May Be Deferred
+Objectives should be concrete and observable. Avoid vague wording such as “become familiar with” or “understand.”
 
-### Students Should Already Be Able To
+### 2. Problem, Need, or Observable Phenomenon
 
-- 
+Establish a problem, requirement, contradiction, error symptom, or prediction task before introducing syntax.
 
-### Must Understand in This Unit
-
-- 
-
-### Must Be Able To Do
-
-- 
-
-### Recommended Practice
-
-- 
-
-### Extension Exploration
-
-- 
-
-### May Be Deferred
-
-- 
-
-## 3. Required Tools and Environment
-
-- Compiler and version:
-- Compile command:
-- Execution method:
-- Fallback environment:
-
-When tools fail, paper tracing, instructor equipment, or an equivalent environment may be used for the core activity. Tool problems must not replace understanding and verification.
-
-## 4. Core Question and Prediction First
-
-Begin with a problem, requirement, or observable phenomenon.
-
-> What question does this Unit answer?
-
-Before revealing the result, ask students to predict at least one of the following:
+Students may first predict:
 
 - output
 - state
@@ -85,20 +66,22 @@ Before revealing the result, ask students to predict at least one of the followi
 - memory relationship
 - error category
 
-## 5. Visual Model
+### 3. Mental Model and Visual Representation
 
-Include a flowchart, state diagram, memory diagram, relationship diagram, sequence diagram, or trace table that directly supports the learning objective.
+Use a flowchart, state diagram, memory diagram, relationship diagram, sequence diagram, or trace table when it supports the learning goal.
 
 For each visual, explain:
 
 - what students should observe
 - what nodes, arrows, locations, or states mean
 - how the visual corresponds to program behavior
-- how students can verify it through tracing, execution, or testing
+- how it can be verified through tracing, execution, or testing
 
-## 6. Core Concepts and Language Logic
+Decorative visuals without instructional value are unnecessary.
 
-Use an order appropriate to the Unit:
+### 4. Core Concepts and Language Logic
+
+A useful sequence is:
 
 ```text
 Problem or need
@@ -109,88 +92,65 @@ Problem or need
 → Verification method
 ```
 
-Use the approved terminology in `design/11-terminology-glossary`. Provide both language forms for important terms on first use when appropriate.
+Use consistent terminology, but do not place requirement IDs, competency IDs, traceability matrices, or maintenance metadata into the student reading flow merely for internal governance.
 
-## 7. Minimal Example
+### 5. Minimal Example
 
-Clearly label whether the content is a complete program, fragment, pseudocode, or intentionally incorrect example.
+Clearly identify whether content is a:
+
+- complete program
+- program fragment
+- pseudocode example
+- deliberately defective example
 
 ```c
 /* code */
 ```
 
-### Expected Input
+Provide as needed:
 
-```text
+- expected input
+- expected output
+- compile command
+- execution method
+- verified tool and version
 
-```
+Introduce only currently necessary concepts. Do not overload one example with techniques that have not been established.
 
-### Expected Output
+### 6. Tracing, Diagnosis, and Verification
 
-```text
-
-```
-
-### Compile and Run
-
-```bash
-
-```
-
-Introduce only the new concepts currently needed. Do not overload one example with unestablished techniques.
-
-## 8. Execution, State, or Memory Trace
-
-Require prediction before tracing key states.
+Choose activities that serve the learning objective:
 
 | Step | Statement / Condition | Current State | Expected or Observed Result |
 |---|---|---|---|
 | 1 |  |  |  |
 
-Explain key transitions, termination, lifetime, or the first likely point of failure.
+A representative error case should include:
 
-## 9. Representative Error and Diagnosis
-
-Include at least one reproducible, diagnosable, and correctable error case:
-
-- observed symptom
+- a reproducible symptom
 - possible cause
 - diagnostic steps
 - reason for the correction
 - test after correction
-- regression check
+- necessary regression confirmation
 
-Do not provide only the corrected answer.
+Do not provide only the corrected answer, and do not treat accidental output as technical evidence.
 
-## 10. Guided Practice
+### 7. Practice and Requirement Modification
 
-### Task
+According to the Unit, use reading, prediction, completion, tracing, modification, testing, or independent implementation.
 
-- What to do:
-- Why it is being done:
-- Permitted resources:
-- Completion standard:
+A task should state at least:
 
-Begin with reading, prediction, completion, tracing, or modification before a larger implementation.
-
-## 11. Independent Practice
-
-### Task
-
-- Requirement:
-- Input:
-- Output:
-- Constraints:
-- Normal case:
-- Boundary case:
-- Necessary exceptional case:
-- Completion standard:
+- what to do
+- why it is being done
+- permitted resources
+- constraints or safety conditions
+- completion standard
 
 Permit alternative reasonable solutions that satisfy the specification, current scope, safety, and readability.
 
-## 12. Testing and Requirement Modification
-
-Students establish expected results before execution.
+A test table may be used when useful:
 
 | Type | Input or Action | Expected Result | Actual Result | Judgment |
 |---|---|---|---|---|
@@ -199,59 +159,66 @@ Students establish expected results before execution.
 | Necessary exceptional |  |  |  |  |
 | Regression |  |  |  |  |
 
-Provide at least one small requirement change and ask students to:
+A requirement change may ask students to:
 
 1. Identify affected parts.
-2. Update expectations and tests.
+2. Update expected results and tests.
 3. Modify the program or model.
 4. Run regression verification.
 5. Explain the reason for the change.
 
-## 13. Explain the Concept to AI
+### 8. Optional Extensions
 
-Use one brief activity, for example:
+Extensions must be clearly separated from core work and directly skippable.
 
-> Explain the Unit's central Concept to AI in your own words.
+An AI extension may use wording such as:
 
-No fixed prompt, specific tool, saved conversation, or submission is required. AI responses may be incomplete or incorrect. When they conflict with code, compiler behavior, tests, or reproducible results, students should judge again using evidence.
+> Optional: Give AI an explanation you have already written, note whether it raises a new question, and judge its claims using code, compiler behavior, tests, or reproducible results.
 
-## 14. Self-Check
+Do not require:
 
-Students should confirm that:
+- a fixed prompt
+- a particular AI tool
+- saving or submitting a full conversation
+- a declaration of non-use
+- treating an AI response as an authoritative answer or core capability evidence
+
+### 9. Self-Check and Summary
+
+Self-checks should contain only core capabilities, for example:
 
 - I can explain the central Concept in my own words.
 - I can make a reasonable prediction before execution.
 - I can trace the key state or flow.
-- I can reproduce and diagnose one representative error.
-- I can build tests and complete one requirement change.
-- When I use AI, I can judge whether its response matches reproducible evidence.
+- I can reproduce and diagnose a representative error.
+- I can build tests and respond to a requirement change.
 
-## 15. Unit Summary and Next Step
+The summary should state:
 
-Summarize briefly:
+- what problem the Unit solved
+- which capabilities were established
+- which content was intentionally deferred
+- how a later Unit uses these Concepts
 
-- What problem the Unit solved.
-- Which new capabilities were established.
-- Which content was intentionally deferred.
-- How the next Unit uses these Concepts.
+## Prepublication Check
 
-## 16. Prepublication Check
-
-- [ ] Chinese and English versions are substantively equivalent.
-- [ ] The purpose, reader, and completion standard are clear.
-- [ ] Prerequisite Concepts, new Concepts, and deferred content are explicit.
-- [ ] Problem and Concept appear before syntax.
-- [ ] Appropriate prediction and visual representation are included.
+- [ ] Primary audience, core question, and completion standard are clear.
+- [ ] Chinese and English versions are substantively equivalent and naturally readable in each language.
+- [ ] Prerequisite, new, and deferred Concepts are explicit.
+- [ ] A problem, need, or mental model appears before syntax.
+- [ ] The number of activities and new concepts respects cognitive load.
 - [ ] Complete programs were compiled and executed in the specified environment.
 - [ ] Code, input, output, and test data are consistent.
-- [ ] Correct cases and reproducible error-diagnosis cases are included.
-- [ ] Guided practice, independent practice, testing, and requirement modification are included.
-- [ ] AI remains a low-weight concept conversation, not a completion requirement or authoritative evidence.
-- [ ] Instructor scheduling, per-Unit grading, micro-orals, and remediation administration are absent.
+- [ ] Intentional defect cases are clearly labeled and safely reproducible.
+- [ ] Correct output, successful compilation, OJ results, or tool approval are not sole capability evidence.
+- [ ] Any AI activity is marked as a skippable optional extension.
+- [ ] Core completion standards and self-checks do not depend on AI.
+- [ ] Instructor scheduling, grading administration, answer prompts, and internal-governance content do not pollute the student flow.
 - [ ] Navigation and language-switch links are complete.
 
 ## Navigation
 
 - [Materials and Activity Resources](README.en.md)
-- [Instructional Design Workspace](../design/README.en.md)
+- [Learning and Assessment Policy](../design/13-learning-assessment-policy.en.md)
+- [Course Constitution 2.0](../CONSTITUTION.en.md)
 - [繁體中文版](TEMPLATE.zh-TW.md)
