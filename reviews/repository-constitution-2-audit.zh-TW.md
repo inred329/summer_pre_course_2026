@@ -1,6 +1,6 @@
 # 全庫 Constitution 2.0 符合性審查
 
-版本：1.4.0  
+版本：1.5.0  
 狀態：進行中審查紀錄  
 最後更新：2026-08-07  
 權威基準：`CONSTITUTION.zh-TW.md` 2.0.0  
@@ -23,41 +23,32 @@
 | `design/13-learning-assessment-policy.*` | Official Policy | 學生與教師 | D → A | P0 | 強制 AI 前置成果、摘要、紀錄與普遍 AI 口試能力 | AI 改為選用；未使用不構成缺失 | 已完成 |
 | `design/12-constitution-compliance-review.*` | Historical Record | 設計維護者 | D → H | P0 | 以 Constitution 1.2.0 為現行基準 | 歷史化並加入過時警告 | 已完成 |
 | `materials/preparatory/ASSESSMENT-NOTE.*` | Migration Note | 維護者 | C → A | P0 | 自稱正式優先規則並複製評量政策 | 取消規範效力，只保留遷移說明 | 已完成 |
-| `materials/preparatory/unit-01*` 至 `unit-04*` | Student Material | 學生 | B → A | P1 | AI 位於核心主線，形成隱性必做 | 改為可跳過選用延伸；完成標準不依賴 AI | 已完成 |
-| `materials/assignments/ai-use-log.*` | Optional Learning Resource | 學生 | A | P1 | 已為選用、不繳交、不評分 | 保留；索引不得列為必備 | 已審查 |
-| `materials/assignments/preparatory-assignments.*` | Student Task Pack | 學生、教師 | A | P1 | 作業不繳交、不計分；AI 不屬核心完成條件 | 保留 | 已審查 |
-| `materials/assignments/rubric.*`、`grading-guide.*` | Assessment Standard / Instructor Guide | 教師、助教 | A | P1 | AI 只在實際使用時檢查說明與驗證 | 保留 | 已審查 |
-| `materials/README.*` | Role-based materials index | 學生、教師、作者維護者 | C → A | P1 | 混合讀者、複製政策、宣稱審查完成 | 改寫為角色入口並只連結權威政策 | 已完成 |
-| `materials/TEMPLATE.*` | Authoring Standard / Guide | 教材作者與維護者 | C → A | P1 | 固定要求 AI 章節與機械式同構 | 改為目的導向建議模板；AI 僅可作選用延伸 | 已完成 |
+| `materials/preparatory/unit-01*` 至 `unit-04*` | Student Material | 學生 | B → A | P1 | AI 位於核心主線，形成隱性必做 | 改為可跳過選用延伸 | 已完成 |
+| `materials/assignments/*` | Student resources / assessment implementation | 學生、教師 | B → A | P1 | 索引與 rubric 文字可能暗示 AI 為必做 | 作業維持不繳交、不計分；AI 筆記為選用；rubric 只在實際使用 AI 時檢查 | 已完成 |
+| `materials/README.*`、`materials/TEMPLATE.*` | Role-based index / authoring guide | 學生、教師、維護者 | C → A | P1 | 混合讀者、複製政策、固定 AI 章節與過早完成宣告 | 改寫為角色導覽與目的導向教材寫作指南 | 已完成 |
 | `materials/instructor/session-guides.*` | Instructor Guide | 教師、助教 | A | P1 | 節奏、常見錯誤、備援、公平支架與課後紀錄可執行 | 保留；評量仍以 `design/13` 為權威 | 已審查 |
-| `materials/formal/README.*` | Student-material index | 學生 | C → A | P1 | 宣稱每個 Unit 固定包含 AI 解釋 | AI 不影響完成、參與或評量 | 已完成 |
-| `materials/formal/unit-01*` 至 `unit-02*` | Student Material | 學生 | B → A | P1 | AI 位於核心主線；完成標準未排除 AI | 改為選用延伸並補非 AI 完成標準 | 已完成 |
-| `materials/formal/unit-03-arrays.*` | Student Material | 學生 | B → A | P1 | 累加範圍、輸入驗證與空集合契約不足 | 補值域與失敗契約；AI 改為選用 | 已完成 |
-| `materials/formal/unit-04-strings.*` | Student Material | 學生 | B → A | P1 | 未充分說明截斷、殘留輸入與終止字元風險 | 補行截斷偵測、緩衝區與 `\0` 契約 | 已完成 |
-| `materials/formal/unit-05-call-stack-recursion.*` | Student Material | 學生 | B → A | P1 | 遞迴深度與結果可表示範圍不完整 | 補基底案例、深度、堆疊與結果範圍限制 | 已完成 |
-| `materials/formal/unit-06-pointers.*` | Student Material | 學生 | B → A | P1 | 生命週期、空指標、one-past 與別名界線不足 | 補有效生命週期與可解參照範圍 | 已完成 |
-| `materials/formal/unit-07-structures.*` | Student Material | 學生 | B → A | P1 | AI 位於核心主線；初始化與有界欄位需明確 | AI 改為選用並補資料契約 | 已完成 |
-| `materials/formal/unit-08-dynamic-memory.*` | Student Material | 學生 | B → A | P1 | 配置大小溢位、零容量、alias 與 `realloc` 契約不完整 | 補溢位、所有權、失敗保留與 alias 失效契約 | 已完成 |
-| `materials/formal/unit-09-files.*` | Student Material | 學生 | B → A | P1 | AI 在核心主線；行截斷未形成處置契約 | 補完整 I/O 檢查、EOF／錯誤區分與超長行處理 | 已完成 |
-| `materials/formal/unit-10-modular-programming.*` | Student Material | 學生 | B → A | P1 | AI 在核心主線；`int` 累加可能有號溢位；`NULL` 來源依賴間接 include | AI 改為可跳過延伸；改用 `double` 累加；直接包含 `<stddef.h>`；補數值範圍契約 | 已完成 |
-| `materials/formal/unit-11-testing-debugging.*` | Student Material | 學生 | B → A | P1 | AI 位於核心主線；中文版前後單元導覽連結使用過時檔名 | AI 改為可直接跳過的選用延伸；補非 AI 完成標準；修正 F-U10/F-U12 導覽連結 | 已完成 |
-| `materials/formal/unit-12-integrated-application.*` | Student Material | 學生 | B → A | P1 | AI 位於核心主線；`free` 的宣告依賴後續 include；`long long` 累加存在極端溢位契約缺口 | AI 改為可直接跳過的選用延伸；直接包含 `<stdlib.h>`；改用 `double` 累加並揭露精度與規模限制 | 已完成 |
+| `materials/formal/README.*`、`materials/formal/unit-01*` 至 `unit-12*` | Student Material | 學生 | B → A | P1 | AI 位於核心路徑，且多處技術契約不足 | AI 改為可直接跳過；補強值域、輸入、生命週期、配置、stream、依賴、溢位與失敗契約 | 已完成 |
+| `design/README.*` | Governance index / guide | 所有角色 | C → A | P2 | 將全部設計文件列為同等「正式」、重複政策文字，且下一步已過時 | 重寫權威順序、治理角色、維護流程與現行導覽 | 已完成 |
 
 ## 三、主要裁決
 
 ### 1. AI 活動不得形成隱性必做
 
-AI 可以作為延伸工具，但不得因位於核心章節、完成清單、固定模板或評量欄位而成為隱性必做。所有前導 Unit 與正式課程 F-U01 至 F-U12 均已改為可直接跳過的選用延伸；不使用 AI 不影響完成、參與或評量。
+AI 可以作為延伸工具，但不得因位於核心章節、完成清單、固定模板或評量欄位而成為隱性必做。所有前導與正式 Unit 均已改為可直接跳過的選用延伸；不使用 AI 不影響完成、參與或評量。
 
 ### 2. 評量規則維持單一權威來源
 
 `design/13-learning-assessment-policy.*` 是正式評量制度的唯一權威來源。README、作業包、rubric、模板與教師指南只能提供導覽或執行方式。
 
-### 3. 學生教材必須揭露技術契約
+### 3. 設計文件不具有相同權威
+
+設計區現在依序區分 Constitution、正式政策、已核定設計標準、規劃與追蹤模型、執行指南與教材，以及歷史紀錄。下位文件不得覆寫上位來源。
+
+### 4. 學生教材必須揭露技術契約
 
 教材必須交代值域、輸入狀態、終止條件、生命週期、可解參照範圍、配置大小、所有權、失敗保留、stream 狀態、模組依賴、編譯／連結階段與未定義行為。成功編譯或單次正確輸出不能取代這些契約。
 
-### 4. 舊審查只具有歷史效力
+### 5. 舊審查只具有歷史效力
 
 舊審查只記錄特定日期與憲法版本下的判斷。現行裁決以 Constitution 2.0 與本審查為準。
 
@@ -76,11 +67,22 @@ AI 可以作為延伸工具，但不得因位於核心章節、完成清單、�
 
 本輪未發現需要停止使用的 P0/P1 問題；試教後仍可進行 P3 文字與節奏微調。
 
-## 五、下一批審查範圍
+## 五、現行設計治理分類
 
-### P2：設計文件治理層級
+- Constitution：`CONSTITUTION.*`。
+- 正式政策：`design/13-learning-assessment-policy.*`。
+- 設計標準：能力、範圍、術語、Concept Tree、Concept Registry 與 Unit Map。
+- 規劃與追蹤模型：願景、需求、領域模型、知識圖、驗收、交付、風險、追蹤與學生教材大綱。
+- 歷史紀錄：`design/12-constitution-compliance-review.*`。
+- 治理索引：`design/README.*`。
 
-重新判定 `design/01–11`、Concept Tree、Registry、Unit Map、Traceability、Acceptance、Risk 與 Delivery 的權威角色，避免多份文件同時宣稱同一規則的正式基準。
+下一批設計治理工作需逐份檢查文件是否仍重複宣稱規範效力，並讓文件標頭及交叉引用符合這套分類。
+
+## 六、下一批審查範圍
+
+### P2：個別設計文件
+
+審查 `design/01–11` 與 `14–17` 是否仍有重複政策、衝突的權威宣告、過時狀態、陳舊下一步及雙語不等值。
 
 ### P2：技術與導覽自動檢查
 
@@ -89,6 +91,6 @@ AI 可以作為延伸工具，但不得因位於核心章節、完成清單、�
 - 失效連結與孤立文件。
 - 可編譯程式清單、GCC／Clang 差異與 CI 覆蓋範圍。
 
-## 六、本輪結論
+## 七、本輪結論
 
-目前已發現的 P0/P1 問題均已修復。前導教材與正式課程 F-U01 至 F-U12 已完成雙語審查；F-U12 已把 AI 移出核心路徑，補上直接標準函式庫依賴，並消除極端整數累加溢位的示範風險。全庫審查尚未完成，下一批將處理設計治理層級與自動驗證，因此 PR 仍維持 Draft。
+目前已發現的 P0/P1 問題均已修復。前導教材與正式課程 F-U01 至 F-U12 已完成雙語審查。設計工作區現在具有明確的權威階層與文件分類，已移除所有設計文件同等正式的舊宣告。全庫審查尚未完成，仍需逐份清理設計文件並補上自動驗證，因此 PR #10 繼續維持 Draft。
