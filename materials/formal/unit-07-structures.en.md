@@ -1,13 +1,15 @@
 # Formal Unit F-U07: How Can One Data Object Contain Different Fields?
 
-Version: 1.0.1  
+Version: 1.0.2  
 Status: Official student material  
-Last updated: 2026-08-05  
+Last updated: 2026-08-06  
 Corresponding Chinese version: [正式單元 F-U07：資料結構如何由多個不同欄位組成？](unit-07-structures.zh-TW.md)
 
 ## Purpose and Completion Standard
 
 This chapter is for independent reading, practice, and review. Completing it means you can use `struct` to represent an entity with several fields, trace member access and structure assignment, and design structure interfaces with explicit initialization, pointer, string-capacity, and validation contracts.
+
+Core completion does not require AI use. The AI activity near the end is a directly skippable optional extension; not using AI does not affect completion, participation, or assessment.
 
 ## Core Question
 
@@ -270,13 +272,15 @@ Add field `char grade`, calculated from the average. Identify all initializers, 
 
 ---
 
-## 13. Explain the Concept to AI
+## 13. Optional Extension: Use AI to Check Your Explanation
 
-Explain:
+This section may be skipped directly. Not using AI does not affect completion, participation, or assessment.
+
+When choosing to use AI, first explain in your own words:
 
 > How does a structure combine several fields into one data object? Why do initialization, string capacity, nullability, and field validation remain separate contracts?
 
-If an AI response conflicts with a member trace, function interface, compiler diagnostic, or reproducible result, judge it again using evidence.
+No fixed prompt, saved conversation, submission, or non-use declaration is required. If an AI response conflicts with a member trace, function interface, compiler diagnostic, or reproducible result, judge it again using evidence.
 
 ---
 
