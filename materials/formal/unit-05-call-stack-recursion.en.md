@@ -1,13 +1,15 @@
 # Formal Unit F-U05: How Does a Function Call Create a New Execution Environment?
 
-Version: 1.0.1  
+Version: 1.0.2  
 Status: Official student material  
-Last updated: 2026-08-05  
+Last updated: 2026-08-06  
 Corresponding Chinese version: [正式單元 F-U05：函數呼叫如何建立新的執行環境？](unit-05-call-stack-recursion.zh-TW.md)
 
 ## Purpose and Completion Standard
 
 This chapter is for independent reading, practice, and review. Completing it means you can explain call frames, scope, and lifetime, trace the call stack, and diagnose recursion that lacks a reachable base case, moves away from termination, or produces a value outside the selected integer type.
+
+AI use is not part of the core completion standard. Not using AI does not affect completion, classroom participation, or assessment. Any AI activity near the end of the chapter is a skippable optional extension.
 
 ## Core Question
 
@@ -242,13 +244,17 @@ Change the factorial contract to use a caller-selected maximum input. Update the
 
 ---
 
-## 11. Explain the Concept to AI
+## 11. Optional Extension: Use AI to Check Your Explanation
 
-Explain:
+This section may be skipped without affecting completion, classroom participation, or assessment.
+
+First explain in your own words:
 
 > What is the relationship among the call stack, call frames, scope, and lifetime? Why are a reachable base case, valid input domain, and representable result range separate requirements?
 
-If an AI response conflicts with a call trace, type limit, or reproducible result, judge it again using evidence.
+When you choose to use AI, you may ask it to critique your explanation or propose counterexamples. No fixed prompt, saved conversation, submission, or declaration of non-use is required.
+
+If an AI response conflicts with a call trace, type limit, or reproducible result, judge it again using verifiable evidence.
 
 ---
 
