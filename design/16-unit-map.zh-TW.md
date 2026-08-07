@@ -1,200 +1,184 @@
 # Concept 驅動的 Unit Map
 
-版本：0.2.0  
-狀態：完整 Unit 組合草案  
-最後更新：2026-08-04  
+版本：0.2.1  
+狀態：現行設計標準  
+治理說明：本標準定義 Unit 識別碼、核心問題、Concept 組合與核心證據方向；不自行定義評分、週次或工具必用規則。  
 對應英文版本：[Concept-Driven Unit Map](16-unit-map.en.md)
 
 ## 文件目的
 
-本文件依據 Concept Tree 與 Concept Registry，將跨語言的程式設計 Concept 組合成可教學、可閱讀、可追蹤的 Unit。
+本文件將 Concept Tree 與 Concept Registry 中的穩定 Concept 組合成前導與銜接正式 C 課程的可教學、可閱讀、可追蹤 Units。
 
-Unit 不是章節名稱或語法清單，而是由以下元素構成：
+一個 Unit 應包含：
 
 1. 一個學生能理解的核心問題。
-2. 一條主要 Concept 依賴鏈。
-3. 少量首次引入的 Concept。
+2. 一條連貫的主要 Concept chain／cluster。
+3. 受控制數量的首次引入 Concept。
 4. 需要深化或重用的既有 Concept。
-5. 至少一項預測、追蹤、測試、除錯或驗證活動。
-6. 對應的 C 語言工具與語法。
-7. 一個簡短的課後概念解釋活動。
+5. 至少一項預測、追蹤、測試、除錯、修改或驗證活動。
+6. 技術邊界明確的 C 具體映射。
+7. 不依賴選用外部工具的核心完成／證據方向。
 
-本文件先定義 Unit 骨架，不決定每週節奏，也不取代最終學生教材。
+Unit 不自動等於一堂課或一週；實際 delivery slice 另由交付規劃決定。
 
-## AI 的定位
+## Constitution 2.0 對齊原則
 
-AI 不是獨立 Unit，也不是教材主體。
+- Unit 由 Concept、依賴、範圍與能力證據產生，不只依語法章節順序。
+- 學生教材可比本骨架更長或更短，但必須保留核心問題、技術契約與能力方向。
+- AI 與其他外部協助預設為選用。核心完成不得要求 AI 對話、AI 概念解釋、AI log、固定 prompt 或未使用聲明。
+- 學生若實際使用選用外部協助，仍須自己理解並技術驗證被採用結果。
+- 具體工具鏈／runtime 主張必須指出目標環境，不能把常見實作模型寫成 C 語言保證。
 
-每個 Unit 結尾只安排一個簡短活動：請學生用自己的話，向 AI 解釋本 Unit 的核心 Concept，並從對話中確認自己的理解是否清楚。
+## 組合 Marker
 
-此活動：
-
-- 不提供固定 Prompt。
-- 不要求繳交對話紀錄。
-- 不要求使用特定 AI 工具。
-- 不取代執行前預測、程式實作、測試、除錯與驗證。
-- 不要求 AI 直接提供答案或程式。
-
-核心原則是：**學生向 AI 解釋，而不是先請 AI 替學生解釋。**
-
-## Unit 組合標記
-
-- `N`：本 Unit 首次引入的新 Concept。
-- `D`：本 Unit 深化的 Concept。
-- `R`：本 Unit 重用的 Concept。
+- `N`：本 Unit 首次引入。
+- `D`：本 Unit 深化。
+- `R`：本 Unit 重用。
 - `P`：前導課程範圍。
 - `F`：正式課程範圍。
+- `X`：選用／條件式外部協助活動；不屬普遍完成條件。
 
 ---
 
-# 前導課程 Unit
+# 前導課程 Units
 
-## P-U01　程式如何從文字變成執行結果？
+## P-U01 — 程式文字如何成為執行結果？
 
-核心問題：**人類可讀的程式文字，如何變成電腦真正執行的行為？**
+核心問題：**人類可閱讀的程式文字，如何在指定環境中成為電腦可執行的行為？**
 
-主要 Concept 鏈：
+主要 Concept chain：
 
 ```text
 CT-C01 Problem
 → CT-C02 Requirement
-→ CT-C03 Algorithm
+→ CT-C03 Algorithm / Design Procedure
 → CT-C04 Program
 → CT-C05 Source Code
-→ CT-C06 Translation
-→ CT-C07 Compiler
-→ CT-C08 Executable
+→ CT-C06 C Translation
+→ CT-C07 C Implementation / Compiler Tool
+→ CT-C08 Executable / Loadable Program Representation
 → CT-C09 Execution
 → CT-X02 Output
-→ CT-E01 Expected Result
+→ CT-E01 Expected Result / Property
+→ CT-E04 Verification
 ```
 
 Concept 使用：
 
-- `N`：Problem、Requirement、Program、Source Code、Translation、Compiler、Executable、Execution、Output、Expected Result
-- `D`：Algorithm
-- `R`：無
+- `N`：Problem、Requirement、Program、Source Code、C Translation、C Implementation／Compiler Tool、Executable／Loadable Representation、Execution、Output、Expected Result／Property、Diagnostic。
+- `D`：Algorithm／Design Procedure。
+- `R`：無。
 
-C 語言映射：
+C 映射與技術邊界：
 
-- 最小 `main` 程式
-- `#include <stdio.h>`
-- `printf`
-- GCC／Clang 編譯指令
-- 可執行檔與終端機執行
-- `return 0`
+- 最小 `main` 程式。
+- `#include <stdio.h>`、`printf` 與 return status。
+- 課程指定環境實際使用的 GCC／Clang 或其他建置命令。
+- 實際觀察到的 diagnostics 與產物。
+- 明確指出不同實作可能以不同方式暴露 preprocessing／compilation／code generation／assembly／linking。
 
-學生必須經歷：
+核心證據：
 
-- 執行前預測輸出
-- 區分編譯與執行
-- 製造並診斷一個編譯錯誤
-- 修改原始碼後比較「未重新編譯」與「重新編譯」的差異
-
-課後概念解釋：
-
-> 請向 AI 解釋原始碼、編譯器、可執行檔與執行之間的關係。
+- 執行前預測輸出。
+- 區分 source text、translation／build、產生的 program representation 與 execution。
+- 重現並診斷一個 translation／build error。
+- 解釋修改 source 後，為何已建置的程式在重新建置前不會自行改變。
+- 比較 expected 與 actual evidence。
 
 ---
 
-## P-U02　程式如何記住資料並改變狀態？
+## P-U02 — 程式如何表示資料並改變狀態？
 
-核心問題：**程式如何保存目前的資料，並在每一步執行後產生新的狀態？**
+核心問題：**程式如何表示目前資料，又如何在每個相關執行步驟後產生新狀態？**
 
-主要 Concept 鏈：
+主要 chain：
 
 ```text
 CT-I01 Data
 → CT-I02 Value
 → CT-I04 Type
+→ CT-M04 Object / Storage
 → CT-S01 State
-→ CT-S03 Variable
+→ CT-S03 Variable / Named Object
 → CT-S06 Initialization
 → CT-S07 Assignment
-→ CT-S08 Update
+→ CT-S02 State Change
 → CT-I07 Expression
 → CT-I09 Evaluation
+→ CT-E12 Trace
 ```
 
 Concept 使用：
 
-- `N`：Data、Value、Type、State、Variable、Initialization、Assignment、Update、Expression、Evaluation
-- `D`：Expected Result、Output
-- `R`：Program、Execution
+- `N`：Data、Value、Type、Object／Storage、State、Variable／Named Object、Initialization、Assignment、State Change、Expression、Evaluation、Trace。
+- `D`：Expected Result／Property、Output。
+- `R`：Program、Execution。
 
-C 語言映射：
+C 映射：
 
-- `int`、`double`、`char`
-- 變數宣告與初始化
-- 指派運算子
-- 算術運算子
-- `scanf` 與 `printf`
-- 整數除法與型別轉換的初步觀察
+- `int`、`double`、`char`。
+- declaration 與 initialization。
+- assignment 與 arithmetic expressions。
+- 基本 standard input／output 與 format／type matching。
+- 入門 integer division 與 conversion 觀察。
 
-學生必須經歷：
+核心證據：
 
-- 建立變數狀態表
-- 逐行追蹤舊值與新值
-- 預測運算式結果
-- 比較整數與浮點表示
-- 診斷未初始化、型別不合或錯誤格式的案例
-
-課後概念解釋：
-
-> 請向 AI 解釋變數、值、型別與狀態之間的關係。
+- 建立 state table。
+- 逐行追蹤 old／new value。
+- 執行前預測 expression result。
+- 指出 invalid／uninitialized-state assumption 與 input／format 問題。
+- 只在明確值域契約內比較 integer 與 floating behavior。
 
 ---
 
-## P-U03　程式如何選擇與重複？
+## P-U03 — 程式如何可靠地選擇與重複？
 
-核心問題：**當不同狀況需要不同動作，或同一動作需要重複時，程式如何決定下一步？**
+核心問題：**當不同情況需要不同動作，或工作需要反覆進行時，程式如何決定下一步並知道何時停止？**
 
-主要 Concept 鏈：
+主要 chain：
 
 ```text
 CT-F01 Sequence
 → CT-F02 Condition
-→ CT-F03 Decision
+→ CT-F03 Selection / Decision
 → CT-F05 Repetition
 → CT-F06 Iteration
 → CT-F07 Loop Condition
 → CT-F08 Boundary
-→ CT-F11 Infinite Execution
+→ CT-F11 Nontermination
+→ CT-E03 Testing
+→ CT-E10 Regression Verification
 ```
 
 Concept 使用：
 
-- `N`：Sequence、Condition、Decision、Repetition、Iteration、Loop Condition、Boundary、Infinite Execution
-- `D`：Expression、Evaluation、State Change、Update
-- `R`：Input、Output、Expected Result
+- `N`：Sequence、Condition、Selection／Decision、Repetition、Iteration、Loop Condition、Boundary、Nontermination。
+- `D`：Expression、Evaluation、State Change、Update、Testing。
+- `R`：Input、Output、Expected Result／Property。
 
-C 語言映射：
+C 映射：
 
-- 比較與邏輯運算子
-- `if`、`else`
-- `while`、`for`
-- `break`、`continue` 作為延伸映射
-- 計數器、累加器與 sentinel
+- relational／logical operators。
+- `if`、`else`、`while`、`for`。
+- 只有在符合控制目的時使用 `break`／`continue`。
+- counter、accumulator、sentinel／end condition。
 
-學生必須經歷：
+核心證據：
 
-- 預測分支路徑
-- 逐次追蹤迴圈狀態
-- 比較 `<` 與 `<=` 的邊界差異
-- 診斷無窮迴圈與 off-by-one
-- 修改需求後進行回歸檢查
-
-課後概念解釋：
-
-> 請向 AI 解釋條件判斷與重複執行的差異，以及兩者如何一起控制程式流程。
+- 預測 branch path。
+- 逐 iteration 追蹤 loop state。
+- 比較 `<` 與 `<=` 等 boundary choice。
+- 診斷 nontermination 與 off-by-one defect。
+- 修改需求後重跑相關 regression check。
 
 ---
 
-## P-U04　如何把一個大問題拆成可理解的工作？
+## P-U04 — 較大的問題如何拆成可理解的工作？
 
-核心問題：**當程式開始變長時，如何把責任分開，讓每一部分可以理解、測試與修改？**
+核心問題：**當程式變大時，如何分離責任，讓每一部分都能被理解、測試與修改？**
 
-主要 Concept 鏈：
+主要 chain：
 
 ```text
 CT-A01 Decomposition
@@ -212,353 +196,241 @@ CT-A01 Decomposition
 
 Concept 使用：
 
-- `N`：Decomposition、Responsibility、Function、Interface、Parameter、Argument、Return Value、Call
-- `D`：Test Case、Testing、Verification、Requirement
-- `R`：State、Decision、Repetition、Expected Result
+- `N`：Decomposition、Responsibility、Function、Interface、Parameter、Argument、Return Value、Call。
+- `D`：Test Case、Testing、Verification、Requirement。
+- `R`：State、Selection、Repetition、Expected Result／Property。
 
-C 語言映射：
+C 映射：
 
-- 函數宣告、定義與呼叫
-- 參數與回傳值
-- 區域變數
-- 函數原型
-- 小型整合程式
+- function declaration／prototype、definition、call。
+- parameters 與 return values。
+- local objects 與基本 scope。
+- 小型整合程式及 caller-side tests。
 
-學生必須經歷：
+核心證據：
 
-- 為函數寫一句責任說明
-- 預測參數與回傳值
-- 追蹤呼叫前後狀態
-- 為函數設計正常、邊界與回歸案例
-- 比較不同函數切分方式
+- 用一句話說明 function responsibility。
+- 預測 argument、parameter 與 return value。
+- 追蹤 call 前／中／後的相關 state。
+- 依情境設計 normal、boundary、invalid 或 failure cases。
+- 比較不同 decomposition 並修改需求。
 
-課後概念解釋：
-
-> 請向 AI 解釋函數為什麼能幫助我們分解問題，以及參數與回傳值各自扮演什麼角色。
+選用 `X` 延伸：學生若自行使用 AI 或其他外部協助，以同一套核心 testing／trace evidence 驗證被採用建議；跳過此延伸不改變核心完成要求。
 
 ---
 
-# 正式課程 Unit
+# 正式課程 Units
 
-正式課程不重置前導課程。前導 Concept 會持續深化並與新的 Concept 組合。
+正式課程深化前導 Concept，而不是從零重置。現行 F-U01–F-U12 學生教材是這些 Unit skeleton 的具體實作，可包含額外已驗證細節。
 
-## F-U01　表示、型別與運算為什麼會影響結果？
+## F-U01 — 為什麼表示、型別與操作會影響結果？
 
-核心問題：**同一個數值或運算，為什麼可能因表示方式與型別而產生不同結果？**
+核心問題：**為什麼同一數學想法，會因資料表示、型別與操作規則得到不同程式結果？**
 
-主要 Concept：Representation、Type、Operator、Evaluation、Conversion、Format。
+主要 Concepts：CT-I03 Representation、CT-I04 Type、CT-I08 Operator、CT-I09 Evaluation、CT-I10 Conversion、CT-X04 Format、CT-E01 Expected Result／Property。
 
-深化：Value、Expression、Expected Result、Testing。
+C 映射：
 
-C 映射：整數範圍、二進位表示、MSB、LSB、浮點誤差、字元編碼、隱式與顯式轉換、格式化輸出。
+- 以 `<limits.h>` 說明 integer range，而不是假設固定 bit width。
+- 使用 binary example 時明確指定 width。
+- 只有在 representation 已指定時談 MSB／LSB 位置。
+- floating-point approximation 與 `<float.h>`／目標環境觀察。
+- character representation 與 conversions。
+- 正確 formatted I/O specifier。
 
-學生必須經歷：
+核心證據：
 
-- 比較十進位與二進位表示
-- 判斷 MSB 與 LSB 的位置與意義
-- 預測整數與浮點運算結果
-- 觀察轉型與格式化造成的差異
-- 用邊界值驗證型別假設
-
-課後概念解釋：
-
-> 請向 AI 解釋 MSB 與 LSB 是什麼，以及兩者的差異。
-
----
-
-## F-U02　如何建立可靠的多分支與重複流程？
-
-核心問題：**當條件、邊界與重複規則變複雜時，如何仍能證明流程正確？**
-
-主要 Concept：Branch、Nested Control、Sentinel、Invariant。
-
-深化：Decision、Repetition、Boundary、State Change、Verification。
-
-C 映射：`switch`、巢狀控制、複合條件、sentinel loop、loop invariant。
-
-學生必須經歷：
-
-- 繪製複合流程路徑
-- 建立迴圈不變量的初步描述
-- 比較不同 sentinel 設計
-- 尋找邊界與路徑遺漏
-- 修改流程後重新驗證
-
-課後概念解釋：
-
-> 請向 AI 解釋 sentinel、迴圈條件與邊界之間的關係。
+- 在明確契約內預測 type／conversion 結果。
+- 區分數學預期與可表示 domain 行為。
+- 測試 boundary values 與 formatting assumptions。
+- 指出哪些主張由標準保證，哪些屬 implementation-specific。
 
 ---
 
-## F-U03　資料如何形成有順序的集合？
+## F-U02 — 複雜控制流程如何維持可解釋與可測試？
 
-核心問題：**當多個同類資料需要一起保存與處理時，程式如何組織、定位與走訪它們？**
+核心問題：**當條件、邊界與重複變複雜時，需要什麼證據支持正確性？**
 
-主要 Concept：Collection、Object、Layout、Boundary、Iteration、Memory Safety。
+主要 Concepts：CT-F03 Selection、CT-F05 Repetition、CT-F09 Sentinel／End Condition、CT-F10 Nested Control、CT-S11 Invariant、CT-E03 Testing、CT-E10 Regression Verification。
 
-組合 Concept：`CT-K01 Array`。
+C 映射：`switch`、nested control、compound conditions、sentinel／end-condition loops、以 invariant 作為 reasoning tool。
 
-C 映射：一維陣列、索引、長度、走訪、越界、陣列作為函數參數。
-
-學生必須經歷：
-
-- 繪製陣列元素與索引關係
-- 預測走訪順序
-- 比較有效與無效索引
-- 診斷越界與 off-by-one
-- 修改陣列長度後重新測試
-
-課後概念解釋：
-
-> 請向 AI 解釋陣列、索引、長度與邊界之間的關係。
+核心證據：畫／追蹤 path、找出 missing／overlapping case、提出適當 invariant、測試 boundaries、需求變更後重新驗證。
 
 ---
 
-## F-U04　文字資料如何被表示與處理？
+## F-U03 — 資料如何形成有順序的集合？
 
-核心問題：**電腦如何把文字保存成資料，又如何知道文字在哪裡結束？**
+核心問題：**需要一起保存與處理多個相關值時，如何組織、索引並維持有效邊界？**
 
-主要 Concept：Representation、Collection、Layout、Sentinel、Buffer、Format。
+主要 Concepts：CT-I11 Collection、CT-M04 Object／Storage、CT-M05 Layout、CT-F08 Boundary、CT-F06 Iteration、CT-M15 Memory Safety；Composite CT-K01 Array。
 
-組合 Concept：`CT-K02 String`。
+C 映射：one-dimensional arrays、indexes、明確 length／capacity contract、traversal、arrays passed to functions、範圍允許時的 introductory multidimensional arrays。
 
-C 映射：`char` 陣列、空字元、字串常值、`fgets`、字串函式與緩衝區安全。
-
-學生必須經歷：
-
-- 畫出字串在陣列中的配置
-- 說明空字元的作用
-- 比較字元數與陣列空間
-- 診斷缺少終止字元與緩衝區不足
-- 以輸入案例驗證字串處理
-
-課後概念解釋：
-
-> 請向 AI 解釋字元陣列與 C 字串的差異，以及空字元為什麼重要。
+核心證據：追蹤 element／index relationship、測試 valid／invalid bounds、診斷 out-of-bounds／off-by-one、修改 length／capacity requirement 並重新驗證。
 
 ---
 
-## F-U05　函數呼叫如何建立新的執行環境？
+## F-U04 — 文字如何被表示與處理成 C 資料？
 
-核心問題：**函數呼叫時，參數、區域狀態與未完成工作如何被保存？**
+核心問題：**C 如何表示 string、如何判定其結束，又需要哪些 capacity／boundary 條件才能安全操作？**
 
-主要 Concept：Call Stack、Scope、Lifetime、Stack Storage、Recursion。
+主要 Concepts：CT-I03 Representation、CT-K01 Array、CT-K02 String、CT-F09 Sentinel／End Condition、CT-X05 Buffer、CT-X04 Format、CT-M15 Memory Safety。
 
-深化：Function、Call、Parameter、Return Value、Invariant。
+C 映射：`char` arrays、null terminator、string literals、`fgets`、選定 `<string.h>` functions、明確 capacity／length contract。
 
-C 映射：自動區域變數、呼叫框架、遞迴、base case、stack overflow 概念。
-
-學生必須經歷：
-
-- 繪製函數呼叫堆疊
-- 追蹤參數與區域變數
-- 比較 scope 與 lifetime
-- 辨認遞迴 base case
-- 診斷無限遞迴
-
-課後概念解釋：
-
-> 請向 AI 解釋函數呼叫堆疊、scope 與 lifetime 之間的關係。
+核心證據：區分 character array 與 valid string、追蹤 terminator／capacity state、測試 input boundary、診斷 unterminated／insufficient-buffer case；談 multibyte encoding 時說明 byte-vs-character 限制。
 
 ---
 
-## F-U06　如何透過位址間接操作資料？
+## F-U05 — 函數呼叫如何形成暫時執行狀態？
 
-核心問題：**程式如何用一個值指向另一個物件，並透過位址存取或修改它？**
+核心問題：**在 nested／recursive calls 中，parameter、local object、control return、scope 與 lifetime 如何互相作用？**
 
-主要 Concept：Address、Pointer、Indirection、Aliasing、Null Reference、Lifetime、Memory Safety。
+主要 Concepts：CT-A09 Call、CT-A10 Activation Model、CT-S09 Scope、CT-S10 Lifetime、CT-M10 Storage Duration、CT-M11 Automatic Storage、CT-A11 Recursion。
 
-C 映射：`&`、`*`、pointer parameter、null pointer、pointer arithmetic 的受限使用。
+C 映射：automatic local objects、nested calls、recursion、base／termination conditions。
 
-學生必須經歷：
+核心證據：
 
-- 畫出物件、位址與指標關係
-- 預測解參照結果
-- 比較指標本身與指向物件
-- 觀察 aliasing 導致的共享修改
-- 診斷 null、dangling 與無效解參照
-
-課後概念解釋：
-
-> 請向 AI 解釋位址、指標、解參照與指向物件之間的關係。
+- 追蹤 implementation-neutral activation model。
+- 區分 scope 與 lifetime。
+- 推理 recursive progress／termination。
+- 診斷 invalid returned address 或 nonterminating recursion。
+- 只有目標實作確實使用時，才把 physical call stack／stack overflow 連結到具體環境。
 
 ---
 
-## F-U07　資料結構如何由多個不同欄位組成？
+## F-U06 — 如何透過指標間接存取資料？
 
-核心問題：**當一個實體包含多種不同資料時，如何把它們組合成一個有意義的物件？**
+核心問題：**pointer 如何指定另一個 object，又需要哪些條件才可有效進行 indirect access？**
 
-主要 Concept：Collection、Object、Layout、Type、Interface。
+主要 Concepts：CT-M03 Address、CT-M06 Pointer、CT-M07 Indirection／Dereference、CT-M08 Aliasing、CT-M09 Null Pointer、CT-S10 Lifetime、CT-M15 Memory Safety。
 
-組合 Concept：`CT-K03 Structure`。
+C 映射：`&`、`*`、pointer parameters、null pointer values、array／pointer relationship 與 array object 規則內的有限 pointer arithmetic。
 
-C 映射：`struct`、member access、nested structure、structure assignment、`typedef`。
-
-學生必須經歷：
-
-- 從需求辨認資料欄位
-- 比較多個獨立變數與一個 structure
-- 觀察成員配置
-- 傳遞與修改 structure
-- 為 structure 設計有效資料條件
-
-課後概念解釋：
-
-> 請向 AI 解釋 structure 如何把不同型別的欄位組成一個有意義的物件。
+核心證據：畫 pointer／object relationship、預測 alias effect、指出 dereference preconditions、診斷 null、dangling、one-past misuse 與 invalid access。
 
 ---
 
-## F-U08　程式如何在執行期間取得與釋放空間？
+## F-U07 — 一個實體如何包含不同欄位？
 
-核心問題：**當資料大小或生命週期無法預先固定時，程式如何管理儲存空間？**
+核心問題：**當一個實體需要多種不同資料時，如何把欄位建模成一個有意義的 record？**
 
-主要 Concept：Dynamic Allocation、Ownership、Lifetime、Pointer、Memory Safety。
+主要 Concepts：CT-I11 Collection、CT-M04 Object／Storage、CT-M05 Layout、CT-I04 Type、CT-A04 Interface；Composite CT-K03 Structure／Record。
 
-C 映射：`malloc`、`calloc`、`realloc`、`free`、memory leak、dangling pointer、double free。
+C 映射：`struct`、member access、initialization／assignment、structure pointers、nested structures、arrays of structures、提高 interface clarity 時的 `typedef`。
 
-學生必須經歷：
-
-- 繪製配置、使用與釋放流程
-- 判斷資源 ownership
-- 檢查配置失敗
-- 診斷 leak、dangling pointer 與 double free
-- 修改容量需求後重新驗證
-
-課後概念解釋：
-
-> 請向 AI 解釋動態記憶體、ownership、lifetime 與 `free` 之間的關係。
+核心證據：從 requirement 推導 fields、比較 separate variables 與 record、區分 semantic field 與 implementation padding／layout、透過清楚 interface 修改 structure、測試 validity constraint。
 
 ---
 
-## F-U09　程式如何與檔案及持久資料互動？
+## F-U08 — 程式如何管理執行時才決定大小或生命週期的儲存空間？
 
-核心問題：**當資料需要在程式結束後仍存在，程式如何讀取、寫入並判斷錯誤？**
+核心問題：**當需求無法在 translation time 固定時，如何安全取得、調整、管理與釋放 storage？**
 
-主要 Concept：Stream、File、End of Input、Format、Buffer、Protocol、Error Channel。
+主要 Concepts：CT-M13 Allocated Storage／Dynamic Allocation、CT-M14 Ownership／Release Responsibility、CT-S10 Lifetime、CT-M06 Pointer、CT-M15 Memory Safety。
 
-組合 Concept：`CT-K04 File I/O`。
+C 映射：`malloc`、`calloc`、`realloc`、`free`、overflow-safe size reasoning、allocation failure、leak／dangling／double-free prevention。
 
-C 映射：`FILE *`、`fopen`、`fclose`、文字檔讀寫、EOF、函式回傳值檢查。
-
-學生必須經歷：
-
-- 區分 stream 與 file
-- 檢查開檔與讀寫結果
-- 追蹤讀取位置與 EOF
-- 診斷格式或檔案錯誤
-- 驗證關閉資源與資料保存
-
-課後概念解釋：
-
-> 請向 AI 解釋 stream、file、EOF 與錯誤檢查之間的關係。
+核心證據：畫 allocate-use-resize-release path、`realloc` failure 時保留原 allocation、指出 ownership／release responsibility、測試 failure path、診斷 lifetime error。
 
 ---
 
-## F-U10　程式如何分成可獨立維護的模組？
+## F-U09 — 程式如何與檔案及持久資料互動？
 
-核心問題：**如何把介面與實作分開，使不同程式部分可以獨立理解、編譯與替換？**
+核心問題：**資料需要跨一次執行保存時，程式如何讀寫，又如何區分正常 input end、error 與 malformed data？**
 
-主要 Concept：Module、Interface、Implementation、Translation、Compiler、Responsibility。
+主要 Concepts：CT-X03 Stream、CT-X06 File、CT-X07 End of Input、CT-X04 Format、CT-X05 Buffer、CT-X10 Protocol、CT-X08 Error State；Composite CT-K04 File I/O。
 
-組合 Concept：`CT-K05 Modular Programming`。
+C 映射：`FILE *`、`fopen`、`fclose`、text I/O、return-value check、只有依 API 語意使用 `feof`／`ferror`、partial failure 重要時採 transactional loading。
 
-C 映射：`.h`、`.c`、include guard、separate compilation、linking。
-
-學生必須經歷：
-
-- 區分 interface 與 implementation
-- 建立 header 與 source file
-- 追蹤分別編譯與 linking
-- 診斷 declaration、definition 與 linker 錯誤
-- 替換實作而不改變使用者程式
-
-課後概念解釋：
-
-> 請向 AI 解釋 module、interface、implementation 與 linking 之間的關係。
+核心證據：檢查 open／read／write／close state、區分 EOF 與 error、測試 malformed／missing data、失敗載入時維持 invariant、驗證 persisted results。
 
 ---
 
-## F-U11　如何系統化地證明、診斷與改善程式？
+## F-U10 — 程式如何拆成可獨立維護的模組？
 
-核心問題：**除了看到正確輸出之外，還需要什麼證據才能信任程式？**
+核心問題：**如何分離 interface 與 implementation，讓各部分能在受控 dependency 下被理解、翻譯、連結、測試與替換？**
 
-主要 Concept：Testing、Verification、Validation、Debugging、Error Diagnosis、Regression、Refactoring、Code Reading、Code Review。
+主要 Concepts：CT-A12 Module、CT-A04 Interface、CT-A05 Implementation、CT-C06 C Translation、CT-A02 Responsibility、CT-E14 Documentation；Composite CT-K05 Modular Programming。
 
-C 映射：測試表、錯誤重現、逐步縮小範圍、修正後回歸、程式比較與重構。
+C 映射：`.h`／`.c`、declaration vs definition、include guard、direct standard-library dependencies、separate translation、適用的 linkage、compile-vs-link diagnostics。
 
-學生必須經歷：
-
-- 先寫 expected result
-- 設計正常、邊界與錯誤案例
-- 重現並縮小問題
-- 修正後執行 regression
-- 比較重構前後行為
-
-課後概念解釋：
-
-> 請向 AI 解釋 testing、verification、validation 與 debugging 的差異。
+核心證據：設計 interface、拆分 source、建置所有必要 translation units、診斷 declaration／definition／link error、在 client contract 不變下替換 implementation。
 
 ---
 
-## F-U12　如何完成跨 Concept 的整合程式？
+## F-U11 — 如何系統化測試、診斷與改善程式？
 
-核心問題：**如何把需求、資料、流程、函數、記憶體、互動與工程方法整合成一個可驗證的程式？**
+核心問題：**除了單一次正確輸出之外，需要什麼證據才能信任程式或技術主張？**
 
-主要 Concept：Requirement、Algorithm、Decomposition、Module、Protocol、Testing、Validation、Maintenance。
+主要 Concepts：CT-E01 Expected Result／Property、CT-E02 Test Case、CT-E03 Testing、CT-E04 Verification、CT-E05 Validation、CT-E06 Debugging、CT-E10 Regression Verification、CT-E11 Code Reading、CT-E13 Refactoring、CT-E17 Evidence、CT-E18 Judgment。
 
-本 Unit 不大量引入新語法，而要求學生整合、修改、診斷、驗證與解釋。
+C 映射／活動：test table／harness、diagnostics、defect reproduction／narrowing、behavior-preserving refactoring、適當 compiler warning 與其他 tool。
 
-學生必須經歷：
+核心證據：先定義 expectation、設計 normal／boundary／invalid／failure cases、以證據縮小 fault、執行 regression verification、說明目前信心的限制。
 
-- 將需求轉成可觀察行為
-- 建立資料、流程與模組設計
-- 逐步完成最小可執行版本
-- 建立測試與回歸案例
-- 處理修改需求
-- 解釋設計與驗證證據
-
-課後概念解釋：
-
-> 請向 AI 解釋你的整合程式如何把需求、資料、流程、函數、記憶體與測試連結起來。
+選用 `X` 延伸：實際使用外部協助時，條件式加入 CT-E16／19／20 並驗證被採用主張；未使用者不需任何外部協助 artifact。
 
 ---
 
-## Unit 與 Lesson 的關係
+## F-U12 — 如何把全課程 Concept 整合成一個可驗證程式？
 
-Unit 不等於一堂課。Lesson 是 Unit 的授課切片。
+核心問題：**如何整合 requirement、data、control、function、memory／lifetime、interaction、module 與 verification，又不失去清楚 responsibility 或 evidence？**
 
-同一個 Unit 可以：
+主要 Concepts：CT-C02 Requirement、CT-C03 Algorithm／Design、CT-A01 Decomposition、CT-A12 Module、CT-X10 Protocol、CT-E03 Testing、CT-E05 Validation、CT-E10 Regression Verification、CT-E18 Judgment。
 
-- 在中文班以較長的整合區塊教學。
-- 在英文班拆成更多 Lesson，增加術語、閱讀與表達支架。
-- 在正式課程跨多週逐步深化。
+本 Unit 幾乎不引入新 syntax，而是透過 requirement clarification、architecture／data-flow decision、incremental implementation、failure handling、change impact、testing、diagnosis 與 explanation 整合既有能力。
 
-Lesson 不得改變 Unit 的核心問題、Concept 鏈或能力標準。
+核心證據：
 
-## 完整數量結論
+- 把 requirement 轉成 observable behavior 與 technical contract。
+- 設計 data／control／module responsibility。
+- 逐步建立 minimal working slice。
+- 建立並執行相關 normal／boundary／invalid／failure／regression cases。
+- 處理 changed requirement 又不破壞未受影響行為。
+- 說明 design decision、assumption、limitation 與 verification evidence。
 
-目前建議：
+---
 
-- 前導課程：4 個 Unit。
-- 正式課程：12 個 Unit。
-- 合計：16 個 Unit 骨架。
+## Unit 與 Delivery 的關係
 
-AI 不另設 Unit。它只以簡短課後概念解釋活動，低比重地出現在各 Unit 中。
+Unit 是 capability／concept skeleton，不是固定 class meeting。
 
-此數量並非憲法固定。後續仍可依 Concept 邊界、試教結果與課程時數合併或拆分，但不得以週數取代 Concept 推導。
+- 中文前導班可把一個 Unit 放在較長 block。
+- 英文前導班可使用較多 delivery slice 與語言支架。
+- 正式 Unit 可依核定交付規劃跨一週以上。
+- Delivery slice 可調整 example 與 pacing，但不得默默改變 Unit core question、technical standard 或 core evidence expectation。
 
-## 下一步
+## Unit Set
 
-1. 檢查每個 Unit 的 Concept 依賴鏈是否完整。
-2. 確認每個 Unit 的新 Concept 數量適合初學者。
-3. 對照目前前導 Unit 1–4，決定保留、拆分、合併或重寫內容。
-4. 為全部 16 個 Unit 建立雙語學生教材大綱。
-5. 從 P-U01 開始撰寫可獨立閱讀的正式學生教材。
-6. 最後才切分中文班、英文班與正式課程的 Lessons。
+目前核定 skeleton：
 
-## 導覽
+- 前導課程：P-U01 至 P-U04。
+- 正式課程：F-U01 至 F-U12。
+- 合計：16 個 Unit identifier。
+
+此數量是可維護的設計決策，不是 constitution 常數。任何 merge／split 都必須同步 Concept Registry reference、scope／competency traceability、material path、中英文版本與 active audit。
+
+## 維護規則
+
+1. 中英文版本維持實質等值。
+2. Unit identifier 保持穩定，除非執行有文件紀錄的 migration。
+3. 變更核心 Unit 內容時檢查 Concept Registry dependency 與 competency／scope standard。
+4. AI／external-assistance activity 維持可直接跳過；除非明確核准活動本身就是 tool judgment 目標。
+5. 具體 C／toolchain／runtime 敘述依指定 standard 與 target environment 驗證。
+6. 對應學生教材持續保持可讀、技術可測試且沒有過時 Unit requirement。
+7. 實質變更記錄到 repository-wide active audit。
+
+## 相關文件
 
 - [程式設計 Concept Tree](14-programming-concept-tree.zh-TW.md)
 - [程式設計 Concept Registry](15-programming-concept-registry.zh-TW.md)
+- [程式設計能力地圖](05-competency-map.zh-TW.md)
+- [課程範圍邊界](06-scope-boundary.zh-TW.md)
+- [課程交付地圖](08-delivery-map.zh-TW.md)
+- [正式教材索引](../materials/formal/README.zh-TW.md)
+- [前導教材索引](../materials/preparatory/README.zh-TW.md)
 - [教學內容設計區](README.zh-TW.md)
 - [English version](16-unit-map.en.md)
