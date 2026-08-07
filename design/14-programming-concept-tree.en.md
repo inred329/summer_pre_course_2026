@@ -1,33 +1,33 @@
 # Programming Concept Tree
 
-Version: 0.1.0  
-Status: Concept inventory draft  
-Last updated: 2026-08-04  
+Version: 0.1.1  
+Status: Active design standard  
+Governance note: This standard inventories stable programming concepts and C mappings. It does not independently decide scope, grading, delivery order, or AI/tool policy.  
 Corresponding Chinese version: [程式設計 Concept Tree](14-programming-concept-tree.zh-TW.md)
 
 ## Document Purpose
 
-This document inventories the core programming concepts that may be used by the course. It establishes a shared knowledge source for the later concept-dependency graph, competency mapping, unit composition, and student-facing teaching materials.
+This document inventories the cross-language programming concepts used by the course and provides a stable concept source for the Concept Registry, competency/scope standards, Unit composition, and student materials.
 
-At this stage, the document answers only:
+It answers:
 
-1. Which concepts does the course need?
-2. How should the concepts be classified?
-3. How does each concept appear in C?
+1. Which concepts does this course system need to name consistently?
+2. How are those concepts grouped?
+3. How may each concept map to C without confusing a conceptual model with one implementation?
 
-This stage does not determine the number of units, teaching order, weekly schedule, or final chapter structure.
+The tree does not determine Unit count, teaching order, weekly pacing, grading, or whether an optional external tool is used.
 
-## Criteria for a Core Concept
+## Concept Criteria
 
-An item should ordinarily satisfy all of the following conditions before it is treated as a core concept:
+A concept is a good candidate for this tree when it:
 
-1. It answers a “why” question or establishes a mental model rather than merely describing syntax.
-2. It does not depend entirely on one programming language’s specific keyword.
-3. It remains meaningful across multiple languages or computational environments.
-4. It can serve as prerequisite knowledge for other concepts.
-5. Students can build understanding through observation, prediction, tracing, implementation, or verification.
+- answers a meaningful “why/what relationship” question rather than merely naming syntax;
+- remains useful beyond one keyword or one IDE;
+- can participate in prerequisite or composition relationships;
+- supports observable reasoning through explanation, prediction, tracing, implementation, testing, debugging, or verification;
+- can be mapped to C precisely enough to avoid misleading implementation folklore.
 
-Syntax and library functions such as `if`, `for`, and `malloc` are not treated as top-level concepts. They are listed as C-language implementations of broader concepts.
+C syntax and library functions such as `if`, `for`, `malloc`, and `fopen` are concrete mappings of broader concepts rather than first-level concepts by themselves.
 
 ## Overall Structure
 
@@ -39,325 +39,245 @@ flowchart TD
     P --> S[State]
     P --> F[Control Flow]
     P --> A[Abstraction]
-    P --> M[Memory]
+    P --> M[Memory and Lifetime]
     P --> X[Interaction]
-    P --> E[Engineering]
+    P --> E[Engineering and Verification]
 ```
 
 ---
 
 # 1. Computation
 
-Core question: **How does a program transform a problem into executable computation?**
+Core question: **How is a problem represented as computation that an implementation can execute?**
 
-| Concept | Core meaning | C-language mapping |
+| Concept | Core meaning | C mapping / boundary |
 |---|---|---|
-| Problem | A situation that needs to be solved, transformed, or automated | Task statement and input/output specification |
-| Requirement | A precise description of behavior, data, and constraints | Comments, specifications, and test cases |
-| Algorithm | A finite process that transforms input into output | Natural language, flowchart, pseudocode, or C program |
-| Program | An executable description of computation | C source code and the executable built from it |
-| Source Code | A human-readable and editable program representation | `.c` and `.h` files |
-| Translation | Conversion from one program representation to another | Preprocessing, compilation, assembly, and linking |
-| Compiler | A tool that checks and translates source code | GCC and Clang |
-| Executable | A program image that an operating system can start | `a.out` or `.exe` |
-| Execution | The process by which instructions produce behavior | Running `main` and evaluating statements |
-| Process | A running program together with its resources and state | Operating-system process model |
-| Termination | How one computation ends normally or abnormally | `return`, `exit`, or execution failure |
-
-Primary relationship:
+| Problem | Situation or need to be solved, transformed, or automated | Task/use context |
+| Requirement | Observable behavior, data, constraints, and failure expectations | Specification, contracts, tests |
+| Algorithm | Finite computational procedure or strategy | Natural language, pseudocode, flow/state model, C implementation |
+| Program | Representation of computation intended for execution | C translation units plus required environment/resources |
+| Source Code | Human-readable program text | `.c`, `.h`, generated or included source as applicable |
+| Translation | C implementation's transformation of preprocessing translation units toward executable behavior | May involve preprocessing, compilation, code generation, assembly, linking, or fused equivalents; physical stages vary |
+| Diagnostic | Implementation feedback about translation/build or execution conditions | Compiler/linker/runtime/tool messages as applicable |
+| Program Image | Representation the target environment can load or otherwise execute | Executable file is common but not universal |
+| Execution | Evaluation/execution of program behavior in the target environment | C abstract-machine semantics plus implementation behavior |
+| Process / Runtime Instance | Running-program environment and resources | OS process is common but not universal across C targets |
+| Termination | End of intended or abnormal execution | `return` from `main`, `exit`, environment termination, failures |
 
 ```mermaid
 flowchart LR
-    R[Requirement] --> A[Algorithm]
-    A --> S[Source Code]
-    S --> T[Translation]
-    T --> E[Executable]
-    E --> X[Execution]
-    X --> P[Process]
-    P --> O[Observable Result]
+    R[Requirement] --> A[Algorithm / Design]
+    A --> S[Source Representation]
+    S --> T[C Implementation Translation]
+    T --> P[Executable / Loadable Representation]
+    P --> X[Execution Environment]
+    X --> O[Observable Evidence]
 ```
+
+The diagram is conceptual. It must not be used to claim that every implementation exposes the same preprocessor/compiler/assembler/linker programs or intermediate files.
 
 ---
 
 # 2. Information
 
-Core question: **What information does a program process, and how is that information represented and interpreted?**
+Core question: **What information does a program process, and how is it represented and interpreted?**
 
-| Concept | Core meaning | C-language mapping |
+| Concept | Core meaning | C mapping / boundary |
 |---|---|---|
-| Data | Information that can be stored, transmitted, or processed | Numbers, characters, arrays, and structures |
-| Value | Content that can be observed or computed at a point in time | `10`, `3.14`, or `'A'` |
-| Representation | The encoding used to store or communicate information | Binary, two’s complement, floating point, and character encoding |
-| Type | A constraint and interpretation for a set of values and valid operations | `int`, `double`, `char`, and structure types |
-| Identifier | A name used to refer to a program entity | Variable, function, and type names |
-| Constant | A value or named entity that should not change during execution | Literals, `const`, enumeration constants, and macro constants |
-| Expression | A description that combines values, names, and operations to produce a value | `a + b * 2` |
-| Operator | An operation applied to one or more values | Arithmetic, relational, logical, and bitwise operators |
-| Evaluation | The process by which an expression produces a value and possible side effects | Precedence, short-circuit evaluation, and function calls |
-| Conversion | Transformation between representations or types | Implicit and explicit conversion |
-| Collection | An organization of multiple related values | Arrays, strings, and structures |
-
-Important distinctions:
-
-- A `Value` is content.
-- A `Type` determines how content is interpreted and operated on.
-- A `Representation` is the machine form of that content.
-- An `Expression` describes how a new value is produced.
+| Data | Information processed, stored, or communicated | Values, objects, streams, files |
+| Value | Information content associated with an expression/object | Integer, floating, character, pointer, structure values as applicable |
+| Representation | Encoding of information | Binary object representation, character encoding, floating representation; implementation/standard constraints matter |
+| Type | Defines/limits values, operations, conversions, and interpretation | C basic, derived, structure/union/enumerated types |
+| Identifier | Name token designating entities according to C rules | Variable/function/type/member names as applicable |
+| Literal / Constant Form | Source-level representation of values or constant expressions | Integer/floating/character/string literals, enumeration constants; distinguish from `const` objects |
+| Expression | Construct evaluated under C rules | Arithmetic, comparison, logical, pointer, function-call expressions |
+| Operator | Operation applied to operands | Arithmetic, relational, logical, bitwise, assignment, etc. |
+| Evaluation | Producing values/side effects under C sequencing rules | Do not assume unspecified evaluation order |
+| Conversion | Transformation/interpretation between types/representations | Integer promotions, usual arithmetic conversions, casts, assignment conversion |
+| Collection | Conceptual organization of multiple related elements | Arrays, strings, records depending on mapping |
 
 ---
 
 # 3. State
 
-Core question: **How does a program remember its current situation and change during execution?**
+Core question: **How does execution preserve and change information over time?**
 
-| Concept | Core meaning | C-language mapping |
+| Concept | Core meaning | C mapping / boundary |
 |---|---|---|
-| State | The combination of relevant information at one point in time | Current variable values, input position, and control position |
-| State Change | A difference in state caused by one execution step | Assignment, increment, input, and function side effects |
-| Variable | A named program object whose value may change | Variable declaration and use |
-| Declaration | Introduction of a name, type, and permitted form of use | `int count;` and function prototypes |
-| Definition | Creation of an entity or provision of its complete implementation | Variable definitions and function definitions |
-| Initialization | Establishment of an object’s initial state when its lifetime begins | `int count = 0;` |
-| Assignment | Writing a new value into an existing object | `count = count + 1;` |
-| Update | Computing and storing new state from old state | `count++` and accumulators |
-| Scope | The region of program text in which a name is visible | Block, function, and file scope |
-| Lifetime | The period during which an object exists | Automatic, static, and allocated storage duration |
-| Invariant | A condition that should remain true throughout part of execution | Loop invariants and data-validity conditions |
-
-Typical state transition:
-
-```text
-Old state: count = 3
-Execute: count = count + 1
-New state: count = 4
-```
+| State | Relevant values, object contents, stream state, and control position at an observation point | Trace tables, debugger observations, program variables |
+| State Change | Difference caused by an evaluation/execution step | Assignment, input, mutation, side effects |
+| Object | Region of data storage in the C abstract machine | Variables, array elements, structure objects, allocated objects |
+| Variable | Course-friendly name for a named object whose value may change | Distinguish identifier from object when precision matters |
+| Declaration | Introduces identifiers/types and properties | Object/function declarations, prototypes |
+| Definition | Declaration that also defines the entity/storage/function body as specified by C | Object definitions, function definitions |
+| Initialization | Establishes initial stored value/state when an object begins its lifetime | Initializers, zero initialization where rules apply |
+| Assignment | Stores a value into a modifiable object | `=` and compound assignments |
+| Update | Computes and stores new state | Increment, accumulation, explicit assignment |
+| Scope | Region of program text where an identifier is visible | Block/function/file scope as applicable |
+| Lifetime | Portion of execution during which an object exists | Related to storage duration, allocation/deallocation |
+| Invariant | Property expected to hold at defined points | Loop/data validity reasoning |
 
 ---
 
 # 4. Control Flow
 
-Core question: **How does a program decide which action executes next?**
+Core question: **How is the next action determined, and how can termination be reasoned about?**
 
-| Concept | Core meaning | C-language mapping |
+| Concept | Core meaning | C mapping / boundary |
 |---|---|---|
-| Sequence | Actions execute in a defined order | Ordinary statement order |
-| Condition | A state or expression that can be judged true or false | Integer truth values, comparisons, and logical expressions |
-| Decision | Selection of different paths based on a condition | `if`, `else`, and `switch` |
-| Branch | Transfer from the current control position to another path | Conditional branches, `break`, and `continue` |
-| Repetition | Repeated execution controlled by a condition or range | `while`, `do-while`, and `for` |
-| Iteration | One repetition cycle and its state transition | Loop body, update, and repeated test |
-| Loop Condition | The condition that determines whether repetition continues | `while (condition)` |
-| Boundary | The dividing line that determines inclusion and exclusion | Start, end, `<`, and `<=` |
-| Sentinel | A special input or state that represents termination | `-1` to stop input or EOF |
-| Nested Control | A control structure placed inside another control structure | Nested decisions and loops |
-| Infinite Execution | Execution that cannot reach a termination condition | Infinite loops and missing updates |
-
-`if`, `switch`, `while`, and `for` are C-language mappings. The underlying concepts are Decision and Repetition.
+| Sequence | Ordered relation among evaluations/actions | Statement/control sequencing; do not infer order C does not guarantee |
+| Condition | Value/expression used for a decision | Scalar expression interpreted as false/true according to C rules |
+| Selection | Choosing an execution path | `if`, `else`, `switch` |
+| Branch / Transfer | Control moves to another point | `break`, `continue`, `return`, `goto` when in scope |
+| Repetition | Repeated computation under a continuation rule | `while`, `do`, `for` |
+| Iteration | One pass through repeated work and its state transition | Loop body/update/test reasoning |
+| Loop Condition | Continuation/termination decision | Loop controlling expression |
+| Boundary | Inclusion/exclusion or valid-range limit | Index ranges, `<` vs `<=`, capacities |
+| Sentinel | Distinguished data/state used to indicate termination/end | Sentinel values, input-return conditions; `EOF` use must match API semantics |
+| Nested Control | Control structure inside another | Nested decisions/loops |
+| Nontermination | Intended computation fails to reach termination | Missing progress, impossible exit condition, recursion without reachable base condition |
 
 ---
 
 # 5. Abstraction
 
-Core question: **How can unnecessary detail be hidden so programs remain understandable, reusable, and composable?**
+Core question: **How are responsibilities separated behind interfaces so programs remain understandable and modifiable?**
 
-| Concept | Core meaning | C-language mapping |
+| Concept | Core meaning | C mapping / boundary |
 |---|---|---|
-| Decomposition | Division of a large problem into understandable responsibilities | Multiple functions and modules |
-| Responsibility | The single task that one program part should perform | Function purpose and module responsibility |
-| Function | A callable unit that packages computation or behavior | Function declaration, definition, and call |
-| Interface | The inputs, outputs, and constraints that a user needs to know | Function prototypes and header files |
-| Implementation | The internal method that fulfills an interface | Function body and source file |
-| Parameter | A named position that receives data in a function definition | Formal parameter |
-| Argument | The actual value or expression supplied during a call | Actual argument |
-| Return Value | The mechanism by which a function gives a result back to its caller | `return expression;` |
-| Call | Suspension of the current flow to enter another computational unit | Function call |
-| Call Stack | Unfinished function calls and their local state | Call frames and local variables |
-| Recursion | A computational unit using itself directly or indirectly | Recursive functions and base cases |
-| Module | A program unit with a clear interface and responsibility | `.h` and `.c` files and separate compilation |
+| Decomposition | Break a larger problem into responsibilities | Functions/modules |
+| Responsibility | Coherent purpose owned by a program part | Function/module contract |
+| Function | Callable unit with a type/interface and implementation | Declaration/prototype, definition, call |
+| Interface | What a caller must know | Name/type, parameters, return, preconditions, postconditions, lifetime/ownership rules where relevant |
+| Implementation | Internal mechanism satisfying an interface | Function body/source file |
+| Parameter | Declared function input object/identifier | Formal parameter |
+| Argument | Expression supplied by caller | Function-call argument |
+| Return Value | Result returned through function interface | `return expression` for non-void functions |
+| Call | Transfer of control/data according to function semantics | Function-call expression |
+| Activation Model | Conceptual temporary state associated with active calls | Often visualized as stack frames; physical call stack is implementation-dependent |
+| Recursion | Direct/indirect recurrence through calls | Recursive functions with termination/base reasoning |
+| Module | Related interface and implementation responsibilities | Header/source organization, translation units, separate compilation when applicable |
 
 ---
 
-# 6. Memory
+# 6. Memory and Lifetime
 
-Core question: **Where do program objects exist, and how are they located and managed?**
+Core question: **Where do C objects exist, how are they referenced, and when is access valid?**
 
-| Concept | Core meaning | C-language mapping |
+| Concept | Core meaning | C mapping / boundary |
 |---|---|---|
-| Bit | The smallest information unit that can represent two states | Binary representation and bitwise operations |
-| Byte | The basic addressable storage unit | `sizeof(char) == 1` |
-| Address | A value that identifies a memory location | `&object` and pointer values |
-| Object | A data entity that occupies storage during execution | Variables, array elements, and structure objects |
-| Layout | The arrangement of objects or members in memory | Array contiguity and structure layout |
-| Pointer | A value that stores or represents the address of an object or function | `int *p` |
-| Indirection | Indirect access to another object through an address | `*p` and `p->member` |
-| Aliasing | Multiple names or pointers referring to the same object | Pointer parameters and shared modification |
-| Null Reference | An explicit indication that no valid target currently exists | Null pointer and `NULL` |
-| Storage Duration | The period during which storage exists | Automatic, static, and allocated storage |
-| Stack Storage | Storage typically created and released with function calls | Automatic local variables and call frames |
-| Static Storage | Storage that persists for the program’s execution | Global variables and `static` objects |
-| Dynamic Allocation | Obtaining and releasing storage during execution | `malloc`, `calloc`, `realloc`, and `free` |
-| Ownership | Responsibility for maintaining, transferring, and releasing a resource | API contracts and dynamic-memory responsibility |
-| Memory Safety | Ensuring that locations and lifetimes are valid when accessed | Out-of-bounds access, dangling pointers, double free, and leaks |
-
-Arrays and strings are not separate top-level domains. They emerge where Information concepts such as Collection meet Memory concepts such as Layout, Address, Boundary, and Safety.
+| Bit | Binary information unit in conceptual/representation reasoning | Bitwise operations/object representation; exact representation constraints matter |
+| Byte | C addressable storage unit | `sizeof(char) == 1`; `CHAR_BIT` gives bits per byte |
+| Address | Representation/value designating storage/object/function locations under the relevant model | Pointer values; integer representation is not universally portable |
+| Object | Data-storage region with type/value representation and lifetime | Automatic/static/allocated objects, array elements, members |
+| Layout | Relative arrangement/alignment/padding of objects/members | Array contiguity is guaranteed; structure padding/layout has constraints but is implementation-dependent |
+| Pointer | Typed pointer value/object | Object/function pointers, null pointer values |
+| Indirection / Dereference | Access through a pointer | `*p`, `p->m`; requires valid pointer, lifetime, bounds/type/alignment preconditions |
+| Aliasing | Multiple access paths designate the same/overlapping object | Pointer parameters; C aliasing/effective-type rules matter |
+| Null Pointer | Pointer value that does not point to an object/function | `NULL`, `0`/null pointer constant in relevant contexts; distinguish value from representation |
+| Storage Duration | Language category governing minimum object lifetime/storage association | automatic, static, thread if supported, allocated |
+| Automatic Storage | Objects with automatic storage duration | Often implemented with a stack, but not guaranteed physically |
+| Static Storage | Objects with static storage duration | Exists for program execution per C rules; actual section/layout implementation-dependent |
+| Allocated Storage | Storage obtained by allocation functions until deallocation | `malloc`, `calloc`, `realloc`, `free`; “heap” is informal implementation language |
+| Ownership / Release Responsibility | Design/API responsibility for use, transfer, and deallocation | Not language-enforced in C |
+| Memory Safety | Valid lifetime, bounds, alignment, provenance/access preconditions and resource management | Out-of-bounds, dangling use, invalid free, double free, leaks, undefined behavior |
 
 ---
 
 # 7. Interaction
 
-Core question: **How does a program receive information from the outside world and produce observable results?**
+Core question: **How does a program exchange information with its environment?**
 
-| Concept | Core meaning | C-language mapping |
+| Concept | Core meaning | C mapping / boundary |
 |---|---|---|
-| Input | External data entering a program | `scanf`, `fgets`, and command-line arguments |
-| Output | Information produced by a program for the outside world | `printf`, `puts`, and file output |
-| Stream | An ordered flow of data with a current read/write position | `stdin`, `stdout`, `stderr`, and `FILE *` |
-| Format | The way data is converted to or parsed from text | Format strings, field width, and precision |
-| Buffer | A region that temporarily accumulates input or output | Standard-I/O buffering and character arrays |
-| File | Persisted data accessible by name | `fopen`, `fclose`, and file operations |
-| End of Input | The state in which a source has no more data | EOF and input-function return values |
-| Error Channel | Diagnostic information separated from ordinary results | `stderr` and compiler diagnostics |
-| Command Line | Parameters and environment supplied when a program starts | `argc` and `argv` |
-| Protocol | Shared rules for data and interaction order | Input format, function contracts, and file formats |
+| Input | Data entering a program/function | `fgets`, `scanf`, command-line arguments, file reads |
+| Output | Observable data/result leaving a program/function | `printf`, `puts`, file writes, return status |
+| Stream | Ordered character I/O abstraction | `stdin`, `stdout`, `stderr`, `FILE *`; stream state/errors matter |
+| Format | Rules for text representation/parsing | `printf`/`scanf` conversion specifications, file formats |
+| Buffer | Temporary storage with capacity and valid-content bounds | Character arrays, stdio buffering, read/write buffers |
+| File | External data source/destination | `fopen`/`fclose` and other file operations; distinguish pathname from stream object |
+| End of Input | No more input available through an interface | Function return values/`EOF` conventions; not a literal EOF character in every file |
+| Error Channel / Error State | Distinguishes normal results from diagnostics/failure | `stderr`, return values, `ferror`, `errno` where specified |
+| Command-Line Input | Environment-provided startup arguments | `argc`, `argv` hosted-environment model |
+| Protocol | Shared structure/order/meaning of exchanged data | Function contracts, text formats, simple file protocols |
 
 ---
 
-# 8. Engineering
+# 8. Engineering and Verification
 
-Core question: **How do we judge whether a program is trustworthy, understandable, modifiable, and supported by responsible tool use?**
+Core question: **What evidence is needed to trust, diagnose, modify, and maintain a program or technical claim?**
 
-| Concept | Core meaning | C-language mapping or course activity |
+| Concept | Core meaning | C mapping / course activity |
 |---|---|---|
-| Expected Result | A predicted behavior available for comparison before execution | Manual calculation, output prediction, and state tables |
-| Test Case | Concrete input and expected behavior used to check a program | Normal, boundary, error, and regression cases |
-| Testing | Systematic execution of cases and comparison of results | Compile, run, and record results |
-| Verification | Evidence that an implementation satisfies a technical specification | Expected/actual comparison, tracing, and testing |
-| Validation | Evidence that a result solves the actual need | Re-reading requirements and checking use scenarios |
-| Debugging | Locating symptoms and causes and verifying a correction | Reproduction, narrowing, hypothesis, and testing |
-| Error Classification | Identification of the stage at which a problem occurs | Compile, execution, logic, formatting, and boundary errors |
-| Regression | Rechecking previous behavior after a correction or change | Rerunning existing tests |
-| Refactoring | Improving internal structure without changing external behavior | Function extraction, naming, and duplication removal |
-| Readability | Making program intent and structure understandable to people | Naming, indentation, and separation of responsibility |
-| Documentation | Preserving requirements, interfaces, decisions, and usage | README, comments, and test records |
-| Code Reading | Inferring structure and behavior from an existing program | Tracing, prediction, and explanation |
-| Comparison | Evaluating differences among multiple reasonable solutions | Correctness, readability, and modifiability |
-| Maintenance | Continuing to modify and verify a program as requirements change | Requirement changes and regression testing |
-| Tool Use | Understanding the role, input, and limits of a tool | Compiler, terminal, IDE, and debugger |
-| AI Collaboration | Treating AI as a source of claims that require verification | Preserving pre-AI thought, testing, and acceptance/rejection rationale |
+| Expected Result / Property | Predicted behavior derived from requirements/contracts before relying on observation | Manual calculation, state/property prediction |
+| Test Case | Concrete condition/input plus expectation | Normal, boundary, invalid, and failure cases as relevant |
+| Testing | Evaluate selected cases against expectations | Build/run, inspect outputs/state/files, test harnesses |
+| Verification | Evidence that implementation/claim satisfies stated technical requirements | Tests, tracing, compiler diagnostics, reliable references |
+| Validation | Evidence that behavior addresses the intended need/use context | Requirement/use-scenario review |
+| Debugging | Reproduce, narrow, hypothesize, test cause, correct, regress | Diagnostic workflow |
+| Error Classification | Categorize failure using evidence | Translation/build, linkage where applicable, runtime/precondition, logic, boundary, requirement |
+| Regression Verification | Recheck prior required behavior after changes | Rerun relevant tests/properties |
+| Refactoring | Improve internal structure while preserving required observable behavior | Function extraction, naming, modularization |
+| Readability | Human ability to understand intent/structure | Naming, formatting, responsibilities, contracts |
+| Documentation | Records requirements/interfaces/decisions/usage | README, comments, API notes, test records as appropriate |
+| Code Reading | Infer behavior/structure from existing code | Prediction, trace, explanation |
+| Comparison | Evaluate multiple plausible solutions or sources | Correctness, readability, modifiability, evidence quality |
+| Maintenance | Modify and reverify as requirements change | Change impact and regression |
+| Tool Use | Use a compiler, debugger, IDE, terminal, documentation, analyzer, etc. with awareness of role and limits | Tool fluency supports but does not replace programming capability |
+| External Assistance | Advice/content from AI, documentation, peers, instructors, or tools | Optional source of claims; adopted results remain learner responsibility |
+| Human Review | Evaluate relevance, assumptions, limitations, and fit before adoption | Especially relevant to external suggestions |
+| Technical Verification | Reproducible evidence for adopted technical claims | Program/test/diagnostic/reference/trace evidence |
+| Contextual Disclosure | Tool-use attribution/record when a specific approved rule requires it | No universal AI log or non-use declaration |
+
+External assistance, including AI, is intentionally not a first-level prerequisite domain. It is optional and conditional: the Engineering concepts of review and verification apply whenever such assistance is actually adopted.
 
 ---
 
 # 9. Cross-Domain Composite Concepts
 
-The following topics are important but arise from multiple foundational concepts, so they are not treated as first-level domains.
-
 ## Array
 
-Composed from:
-
-- Collection
-- Type
-- Object
-- Layout
-- Address
-- Index
-- Boundary
-- Traversal
-- Memory Safety
-
-C mapping: array declaration, indexing, `sizeof`, conversion behavior when passed to functions, and multidimensional arrays.
+Composed from collection, type, object, layout, index, boundary, iteration, and memory-safety concepts. C mapping includes array types, indexing, `sizeof` where applicable, and function-parameter adjustment rules.
 
 ## String
 
-Composed from:
+Composed from character representation, array, sentinel/termination, buffer, format, boundary, and memory safety. In C, a string is a null-terminated character sequence; not every character array is a valid string.
 
-- Character Representation
-- Collection
-- Array
-- Sentinel
-- Buffer
-- Format
-- Boundary
-- Memory Safety
+## Structure / Record
 
-C mapping: character arrays, string literals, null terminators, `<string.h>`, safe input, and length management.
-
-## Structure
-
-Composed from:
-
-- Type
-- Collection
-- Object
-- Layout
-- Member
-- Interface
-- Assignment
-
-C mapping: `struct`, member access, structure assignment, pointers to structures, and `typedef`.
+Composed from type, object, member, layout, interface, and assignment. C mapping includes `struct`, member access, assignment, pointers to structures, and `typedef` usage.
 
 ## File I/O
 
-Composed from:
-
-- File
-- Stream
-- Buffer
-- Format
-- Protocol
-- End of Input
-- Error Handling
-- Resource Lifetime
-
-C mapping: `FILE *`, opening modes, read/write functions, EOF, and closing files.
+Composed from stream, file, buffer, format/protocol, end-of-input, error state, and resource lifetime. C mapping includes `FILE *`, open/read/write/close APIs and return-state checks.
 
 ## Modular Programming
 
-Composed from:
-
-- Decomposition
-- Responsibility
-- Interface
-- Implementation
-- Module
-- Translation
-- Linking
-- Documentation
-
-C mapping: header files, source files, include guards, separate compilation, and linking.
+Composed from decomposition, responsibility, interface, implementation, module, translation/build dependencies, and documentation. C mapping includes headers/source files, declarations/definitions, include guards, separate translation, and linkage where applicable.
 
 ---
 
-# 10. Current Boundary
+# 10. Boundary and Maintenance Rules
 
-This Concept Tree currently covers:
+This Concept Tree covers concepts required to support the approved preparatory/formal C course scope and its cross-cutting testing/debugging/verification practices. It does not by itself add advanced data structures, object-oriented programming, generic programming, concurrency, networking, compiler internals, or platform-specific IDE operation to the core.
 
-- Core concepts required by an introductory university C programming course.
-- Foundational knowledge connecting the preparatory course to the formal course.
-- Cross-unit abilities such as testing, debugging, requirement modification, and AI verification.
+When changing this standard:
 
-It does not yet expand:
+1. Preserve concept meaning across both language versions.
+2. Update the Concept Registry and Unit Map when a stable concept is added/removed/renamed.
+3. Check scope/competency standards before turning a concept into a core deliverable.
+4. Keep optional external assistance conditional rather than creating an AI-required concept chain.
+5. Mark implementation-specific claims and verify them against the target C standard/toolchain/environment.
+6. Record material changes in the active repository audit.
 
-- Advanced data structures and algorithm analysis.
-- Object-oriented programming, generics, and exception mechanisms typical of other languages.
-- Deep operating-system, compiler, networking, or concurrency theory.
-- Detailed operation of a specific IDE or platform.
+## Related Documents
 
-These topics are not rejected. They may become extension layers of the Concept Tree when needed.
-
-## Next Steps
-
-1. Assign a unique ID to every concept.
-2. Distinguish core concepts, composite concepts, and C-language mappings.
-3. Build a Concept Dependency Graph.
-4. Mark target maturity for the preparatory and formal courses.
-5. Compose Units from dependency relationships rather than dividing knowledge by week first.
-6. Only then write student-facing materials for each Unit.
-
-## Navigation
-
-- [Course Constitution](../CONSTITUTION.en.md)
 - [Instructional Design Workspace](README.en.md)
-- [Knowledge Dependency Design](04-knowledge-dependencies.en.md)
-- [Competency Definitions](05-competencies.en.md)
+- [Programming Domain Model](03-programming-domain-model.en.md)
+- [Programming Language Knowledge Dependency Graph](04-programming-language-knowledge-graph.en.md)
+- [Programming Competency Map](05-competency-map.en.md)
+- [Course Scope Boundary](06-scope-boundary.en.md)
+- [Terminology Glossary](11-terminology-glossary.en.md)
+- [Programming Concept Registry](15-programming-concept-registry.en.md)
+- [Concept-Driven Unit Map](16-unit-map.en.md)
 - [繁體中文版](14-programming-concept-tree.zh-TW.md)
