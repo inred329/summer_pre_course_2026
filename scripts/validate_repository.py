@@ -4,7 +4,8 @@
 Mechanically checks:
 - local Markdown links resolve;
 - bilingual Markdown pairs exist and paired version metadata matches;
-- obsolete Constitution 1.x references occur only in historical/audit records;
+- obsolete Constitution 1.x references occur only in historical/audit records or
+  governance indexes that explicitly identify those records as historical;
 - ordinary C17 translation units compile with the selected compiler.
 
 Intentional defect sources are not treated as ordinary reference programs. Their
@@ -31,13 +32,19 @@ FENCE_RE = re.compile(r"```.*?```", re.DOTALL)
 VERSION_EN_RE = re.compile(r"^Version:\s*([^\s]+)", re.MULTILINE)
 VERSION_ZH_RE = re.compile(r"^版本[：:]\s*([^\s]+)", re.MULTILINE)
 OLD_CONSTITUTION_RE = re.compile(
-    r"(?:Constitution\s+1\.[0-9]|Constitution[^\n]{0,30}1\.2\.0|憲法[^\n]{0,30}1\.2\.0)",
+    r"(?:Constitution\s+1\.[0-9]|Constitution[^\n]{0,30}1\.2\.0|憲法[^\n]{0,30}1\.[0-9])",
     re.IGNORECASE,
 )
-HISTORICAL_PREFIXES = (
+OLD_CONSTITUTION_ALLOWED_PREFIXES = (
     "design/12-constitution-compliance-review.",
+    "materials/reviews/materials-constitution-review.",
+    "reviews/constitution-maturity-review.",
     "reviews/repository-constitution-2-audit.",
 )
+OLD_CONSTITUTION_ALLOWED_EXACT = {
+    "design/README.en.md",
+    "design/README.zh-TW.md",
+}
 
 
 def relative(path: Path, root: Path) -> str:
@@ -134,7 +141,9 @@ def check_old_constitution_references(root: Path, files: list[Path]) -> list[str
     errors: list[str] = []
     for path in files:
         rel = relative(path, root)
-        if rel.startswith(HISTORICAL_PREFIXES):
+        if rel in OLD_CONSTITUTION_ALLOWED_EXACT or rel.startswith(
+            OLD_CONSTITUTION_ALLOWED_PREFIXES
+        ):
             continue
         text = strip_fenced_code(path.read_text(encoding="utf-8"))
         if OLD_CONSTITUTION_RE.search(text):
