@@ -1,6 +1,6 @@
 # Repository-Wide Constitution 2.0 Compliance Audit
 
-Version: 1.5.0  
+Version: 1.6.0  
 Status: Active audit record  
 Last updated: 2026-08-07  
 Authoritative basis: `CONSTITUTION.en.md` 2.0.0  
@@ -29,6 +29,7 @@ Priorities: P0 immediate, P1 high, P2 medium, P3 general improvement.
 | `materials/instructor/session-guides.*` | Instructor Guide | Instructors, TAs | A | P1 | Executable pacing, misconceptions, fallbacks, fairness supports, and concise records | Retained; `design/13` remains authoritative | Reviewed |
 | `materials/formal/README.*`, `materials/formal/unit-01*` through `unit-12*` | Student Material | Students | B → A | P1 | AI in core paths and multiple technical-contract gaps | AI made directly skippable; value, input, lifetime, allocation, stream, dependency, overflow, and failure contracts strengthened | Complete |
 | `design/README.*` | Governance index / guide | All roles | C → A | P2 | Listed all design files as equally "official," duplicated policy text, and contained obsolete development next steps | Rewritten with authority order, governance roles, maintenance workflow, and current navigation | Complete |
+| `design/01-product-vision.*` | Revisable planning model | Course designers and maintainers | C → A | P1 | Claimed governing authority and made AI use part of universal success evidence | Reclassified as planning context; external-assistance verification made conditional; AI non-use explicitly neutral | Complete |
 
 ## 3. Governing Decisions
 
@@ -76,13 +77,17 @@ No P0/P1 issue requiring the materials to be withdrawn was found in this batch. 
 - Historical record: `design/12-constitution-compliance-review.*`.
 - Governance index: `design/README.*`.
 
-The next design-governance batch must inspect the individual files for duplicated normative claims and align each document header and cross-reference with this classification.
+`design/01-product-vision.*` now matches this classification. The next design-governance batch must apply the recorded corrections for `design/02–04` and continue inspecting the remaining individual files for duplicated normative claims, stale metadata, and bilingual equivalence.
 
 ## 6. Next Audit Scope
 
+### P1: Recorded Design Corrections
+
+Apply the existing paired findings for `design/02–04`, including authority conflicts, universal AI requirements, mandatory AI records, domain-model mixing, stale status text, and bilingual metadata differences.
+
 ### P2: Individual Design Documents
 
-Review `design/01–11` and `14–17` for duplicated policy statements, conflicting authority claims, obsolete status text, stale next steps, and bilingual equivalence.
+Review `design/05–11` and `14–17` for duplicated policy statements, conflicting authority claims, obsolete status text, stale next steps, and bilingual equivalence.
 
 ### P2: Automated Technical and Navigation Checks
 
@@ -93,4 +98,4 @@ Review `design/01–11` and `14–17` for duplicated policy statements, conflict
 
 ## 7. Current Conclusion
 
-All P0/P1 issues identified so far have been corrected. Preparatory materials and formal Units F-U01 through F-U12 have completed bilingual review. The design workspace now has an explicit authority hierarchy and document classification, removing the earlier claim that every design file was equally official. The repository-wide audit is not complete; individual design-document cleanup and automated validation remain, so PR #10 stays in draft.
+All identified P0 issues have been corrected. Preparatory materials and formal Units F-U01 through F-U12 have completed bilingual review, and the paired `design/01` P1 findings are now resolved. Recorded P1 corrections remain in `design/02–04`, and the repository-wide audit is not complete. Individual design-document cleanup, audit-matrix expansion, and automated validation remain, so PR #10 stays in draft.
