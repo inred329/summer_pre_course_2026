@@ -1,4 +1,4 @@
-# 2026 大專暑期前導課程｜2026 Summer Preparatory Course
+# 2026 程式設計課程｜前導與正式課程｜2026 Programming Course: Preparatory and Formal
 
 本倉庫包含 2026 大專暑期 C 語言前導課程，以及與其銜接的正式程式設計課程設計、教材、教師文件、評量政策與技術範例。
 
@@ -45,6 +45,6 @@ The Chinese-taught and English-taught tracks use different pacing while preservi
 
 The course prioritizes correct, verifiable, and transferable understanding and capability. It establishes problem context, concepts, and mental models before syntax and tools; correct output, successful compilation, or passing an Online Judge cannot independently prove full capability.
 
-完整規範以 [Constitution 2.0](CONSTITUTION.en.md) 及正式雙語政策文件為準。本 README 僅提供入口與簡要定位，不重複定義政策。
+完整規範以 [課程憲法（繁體中文）](CONSTITUTION.zh-TW.md)、[Course Constitution (English)](CONSTITUTION.en.md) 及正式雙語政策文件為準。本 README 僅提供入口與簡要定位，不重複定義政策。
 
-The complete rules are defined by [Constitution 2.0](CONSTITUTION.en.md) and the authoritative bilingual policy documents. This README provides navigation and a concise orientation only; it does not redefine policy.
+The complete rules are defined by the [Course Constitution (Traditional Chinese)](CONSTITUTION.zh-TW.md), [Course Constitution (English)](CONSTITUTION.en.md), and the authoritative bilingual policy documents. This README provides navigation and a concise orientation only; it does not redefine policy.
