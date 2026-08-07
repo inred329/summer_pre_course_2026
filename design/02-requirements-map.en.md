@@ -1,14 +1,14 @@
 # Instructional Requirements Map
 
-Version: 0.1.0  
-Status: Initial requirements baseline  
+Version: 0.1.1  
+Status: Revisable planning and traceability model  
 Corresponding Chinese version: `02-requirements-map.zh-TW.md`
 
 ## Document Purpose
 
 This document uses a requirements-engineering approach to decompose the course vision into educational requirements, stakeholder needs, core capability requirements, quality requirements, and assessable acceptance conditions.
 
-It is not a lesson schedule or a table of C-language chapters. The later competency map, scope boundaries, delivery plans, materials, and assessments must all trace back to requirements in this document.
+It is not a lesson schedule, a table of C-language chapters, or a governing policy source. Later competency maps, scope boundaries, delivery plans, materials, and assessments may trace to and refine requirements in this document, but the Constitution and official assessment policy take precedence whenever a conflict exists.
 
 ## 1. Requirements Levels
 
@@ -54,11 +54,11 @@ Students should treat reading, predicting, implementing, testing, debugging, mod
 
 Acceptance direction: Students can state expected results, design tests, compare actual results, locate problems, and explain why a correction works.
 
-### EDU-04 — Build Responsible AI Collaboration Capability
+### EDU-04 — Retain Responsibility When Using External Assistance
 
-Students should be able to use AI for explanations, hints, test suggestions, or debugging support while retaining responsibility for understanding the problem, designing the core solution, and verifying results.
+AI and other external assistance are optional learning tools rather than required course capabilities. When a student chooses to adopt an external explanation, hint, test suggestion, debugging suggestion, or generated fragment, the student remains responsible for understanding the problem, making the core design decision, and verifying the adopted result.
 
-Acceptance direction: Students can explain the AI suggestion, why they accepted or rejected it, and what evidence they used to verify it.
+Acceptance direction when external assistance is actually adopted: Students can explain what they used, why they accepted or modified it, and what evidence they used to verify it. Choosing not to use AI or other optional assistance does not reduce completion, participation, assessment, or success.
 
 ## 4. Core Capability Requirements
 
@@ -186,15 +186,15 @@ Students can read error messages or observe incorrect behavior, narrow the probl
 
 Students can explain their solution, limitations, basis for testing, and remaining uncertainties.
 
-### X-06 — AI Literacy
+### X-06 — Verification of Adopted External Assistance
 
-Students can use AI according to activity rules, avoid requesting or submitting answers they cannot understand, and retain required records of use.
+When students choose to adopt AI-generated or other external suggestions, they can explain the adopted contribution and verify it using appropriate technical evidence. This requirement is conditional on actual use; students are not required to interact with AI, retain AI records, or make a non-use declaration.
 
 ## 6. Instructional Delivery Requirements
 
 ### DEL-01 — Shared Core Capabilities
 
-The Chinese-taught and English-taught preparatory classes must deliver the same core capability requirements, acceptance standards, and AI rules.
+The Chinese-taught and English-taught preparatory classes must deliver the same core capability requirements and acceptance standards and must follow the same official assessment and optional-AI policy.
 
 ### DEL-02 — Different Pacing, One Requirements Baseline
 
@@ -217,7 +217,7 @@ The course schedule must be generated from capability dependencies and acceptanc
 
 ### DEL-05 — Formative Evidence First
 
-The preparatory course primarily identifies risks, establishes foundations, and provides feedback. Unless otherwise decided, high-stakes summative assessment should not be its primary delivery method.
+The preparatory course primarily identifies risks, establishes foundations, and provides feedback. Unless otherwise decided in the official assessment policy, high-stakes summative assessment should not be its primary delivery method.
 
 ## 7. Quality and Non-Functional Requirements
 
@@ -243,7 +243,7 @@ Documents must use consistent identifiers, versions, paired language filenames, 
 
 ### NFR-06 — Technical Accuracy
 
-Code examples, tool procedures, test data, and terminology must be reviewed by a human. AI-generated content must not be published directly.
+Code examples, tool procedures, test data, and terminology must be technically verified before publication. AI-generated or other externally generated content must not be published merely because a tool produced it.
 
 ### NFR-07 — Adaptability
 
@@ -257,8 +257,9 @@ The following priorities are used:
 - P1: Core to the formal course; the preparatory course may target a lower maturity level.
 - P2: Important extension; scheduled according to available time and student readiness.
 - P3: Deferred to a future version or another course.
+- Conditional: Applies only when the corresponding optional tool or activity is actually adopted.
 
-Initial classification:
+Current classification:
 
 | Requirement | Preparatory Course | Formal Course |
 |---|---|---|
@@ -269,11 +270,12 @@ Initial classification:
 | CAP-F01 | P0 | P0 |
 | CAP-F02 | P1 | P0 |
 | CAP-F03–F04 | P2 | P0/P1 |
-| X-02–X-06 | P0 | P0 |
+| X-02–X-05 | P0 | P0 |
+| X-06 adopted external assistance verification | Conditional | Conditional |
 | DEL-01–DEL-05 | P0 | P0 |
 | NFR-01–NFR-07 | P0 | P0 |
 
-This table is an initial priority baseline and does not yet define the instructional depth of the preparatory course.
+This table is a planning baseline and does not independently override the Constitution, official assessment policy, scope standard, or approved competency standard.
 
 ## 9. Definition of Done for a Requirement
 
@@ -286,14 +288,14 @@ A requirement is considered designed only when all of the following are true:
 5. At least one type of acceptance evidence is specified.
 6. Corresponding Chinese and English versions exist.
 7. It can be traced to teaching material, an activity, or an assessment.
-8. It does not conflict with the Constitution.
+8. It does not conflict with the Constitution or official assessment policy.
 
-## 10. Next Stage
+## 10. Maintenance and Navigation
 
-The next document should create `03-competency-map`, converting these requirements into a directed capability-dependency map and marking for every capability:
+This requirements map is maintained alongside the related domain model, knowledge dependency graph, competency standard, scope boundary, delivery models, materials, and assessments. Changes should be made by dependency impact rather than by an assumed sequential document stage.
 
-- Target maturity in the preparatory course.
-- Target maturity in the formal course.
-- Prerequisite capabilities.
-- Common learning risks.
-- Recommended acceptance methods.
+- [Instructional Design Workspace](README.en.md)
+- [Programming Domain Model](03-programming-domain-model.en.md)
+- [Programming Language Knowledge Dependency Graph](04-programming-language-knowledge-graph.en.md)
+- [Programming Competency Map](05-competency-map.en.md)
+- [繁體中文版](02-requirements-map.zh-TW.md)
