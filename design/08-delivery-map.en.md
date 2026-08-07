@@ -1,147 +1,165 @@
 # Course Delivery Map
 
-Version: 0.2.0  
-Status: Official delivery baseline  
-Last updated: 2026-08-03  
-Major change summary: Added previous-homework discussion, participation observation, and one final one-on-one oral examination; removed per-session micro-orals as formal acceptance.  
+Version: 0.2.1  
+Status: Revisable planning model  
+Governance note: This document plans pacing and activity placement. The [Learning and Assessment Policy](13-learning-assessment-policy.en.md) is authoritative for homework, participation, attendance, grade structure, the final oral examination, and AI/tool rules.  
 Corresponding Chinese version: [課程交付地圖](08-delivery-map.zh-TW.md)
 
 ## Document Purpose
 
-This document arranges three delivery paths: Chinese preparatory 4 × 3 hours, English preparatory 5 × 2 hours, and the connected 16-week formal course.
+This document plans three connected delivery paths: Chinese preparatory 4 × 3 hours, English preparatory 5 × 2 hours, and the connected formal C course.
 
-Every class follows the shared cycle:
+A typical class cycle is:
 
 ```text
-Discuss previous homework for 15–25 minutes
-→ Core question
-→ Visual model and prediction
-→ Minimal implementation
-→ Testing, debugging, and modification
-→ Assign the next independent homework
+Discuss previous practice when applicable
+→ Core question and mental model
+→ Prediction or tracing
+→ Minimal implementation / reasoning
+→ Testing, debugging, and requirement modification
+→ Independent follow-up practice
 ```
 
-Homework is not submitted or graded; classroom questions are formative learning activities; only the final one-on-one oral examination is summative acceptance.
+The official assessment policy determines whether practice is submitted or graded, how participation is observed, and how the final oral examination functions. This delivery map implements that policy; it does not redefine it.
 
 ## 1. Shared Delivery Principles
 
-- Both language tracks use the same core competencies, maturity targets, and final oral-exam standards.
-- The Chinese track's extra two hours support more tracing, discussion, remediation, and diagnosis rather than additional core requirements.
-- Roll call is not graded; attendance is not participation.
-- Each class provides multiple participation modes, including speaking, writing, anonymous questions, diagrams, program operation, and group records.
-- Homework discussion prioritizes authentic errors, alternative solutions, and testing blind spots rather than replacing reasoning with one model answer.
-- Every unit intentionally includes an error that can be reproduced, diagnosed, and corrected.
+- Both preparatory language tracks deliver the same core capabilities and technical depth, while pacing and language support may differ.
+- The Chinese track's additional time supports more tracing, discussion, remediation, and diagnosis rather than extra core requirements.
+- Each class should provide multiple participation modes consistent with the official policy.
+- Practice discussion should prioritize authentic errors, alternative solutions, boundary cases, and testing blind spots rather than replacing reasoning with one model answer.
+- Every unit should include opportunities to predict, observe, diagnose, correct, modify, and verify.
+- AI and other external tools are optional by default. Optional-tool activities must be directly skippable without reducing core completion or participation evidence.
 
 ## 2. Shared Preparatory Capability Baseline
 
-By the end of either track, students should be able to:
+By the end of either preparatory track, students should be able to:
 
-- Explain the relationship among source code, compilation, and execution.
-- Trace basic data, conditions, and loop state.
-- Complete a small input–process–output program.
+- Explain, at an appropriate conceptual level, how C source text is translated/built and then executed in the specified environment.
+- Trace basic data/state, conditions, and loop behavior.
+- Complete and explain a small input–process–output program.
 - Explain function responsibility and perform simple decomposition.
-- Create normal, boundary, and necessary exceptional tests.
-- Reproduce, diagnose, and correct one defect.
-- Verify an AI suggestion instead of accepting it directly.
+- Create expected results plus normal, boundary, and relevant invalid/failure cases.
+- Reproduce, diagnose, correct, and retest at least one defect.
+- Modify a small requirement and explain what changed.
 
-These capabilities accumulate through independent homework, are observed formatively through participation, and are verified collectively in the final oral examination.
+If a student chooses to use AI or another external assistant, the student remains responsible for understanding and verifying any adopted result. Tool use itself is not part of this shared baseline.
 
 ## 3. Chinese Preparatory Track: Four Three-Hour Sessions
 
 ### Session 1: How a Program Begins to Run
 
-- No prior-homework discussion; introduce the learning and assessment policy.
-- Core: toolchain, minimal program, prediction, and compile errors.
-- Assign Homework 1, From Source Code to Execution.
+- Entry: introduce course navigation, environment, and current learning/assessment policy.
+- Core: conceptual translation/build responsibilities, the specified toolchain, minimal program, prediction, and basic diagnostic interpretation.
+- Follow-up practice: From Source Code to Execution.
 
 ### Session 2: Data, Types, and Program State
 
-- Discuss Homework 1 for 15–25 minutes.
-- Core: values, variables, types, expressions, input/output, and state tracing.
-- Assign Homework 2, Data and State Tracing.
+- Discuss representative issues from previous practice when available.
+- Core: values, objects/variables, types, expressions, input/output, state tracing, and input assumptions.
+- Follow-up practice: Data and State Tracing.
 
 ### Session 3: Conditions, Loops, and Reliable Termination
 
-- Discuss Homework 2 for 15–25 minutes.
-- Core: conditions, the four loop elements, boundaries, off-by-one errors, and infinite loops.
-- Assign Homework 3, Conditions and Loops.
+- Discuss representative issues from previous practice.
+- Core: conditions, loop state, termination, boundaries, off-by-one defects, and non-termination diagnosis.
+- Follow-up practice: Conditions and Loops.
 
-### Session 4: Functions, Integration, and AI Verification
+### Session 4: Functions and Integrated Verification
 
-- Discuss Homework 3 for 15–25 minutes.
-- Core: function responsibility, decomposition, requirement change, regression testing, and AI review.
-- Assign Homework 4 and the integrated practice as final oral-exam preparation.
-- Explain how to organize saved homework and learning records; do not conduct the formal oral examination in this session.
+- Discuss representative issues from previous practice.
+- Core: function responsibility, decomposition, requirement change, testing, debugging, and regression verification.
+- Follow-up practice: Function/integration practice and a small integrated development cycle.
+- Optional extension: review an AI or other external suggestion and verify any adopted claim with reproducible evidence. Students who skip this extension complete the same core session.
 
 ## 4. English Preparatory Track: Five Two-Hour Sessions
 
 ### Session 1: Execution and First Program
 
-- Introduce the learning and assessment policy.
-- Core: toolchain, minimal program, prediction, and compile errors.
-- Assign Homework 1.
+- Introduce course navigation, environment, and current learning/assessment policy.
+- Core: conceptual translation/build responsibilities, the specified toolchain, minimal program, prediction, and basic diagnostics.
+- Follow-up practice: Execution and first-program work.
 
 ### Session 2: Data, Types, and Program State
 
-- Discuss Homework 1 for 15–25 minutes.
-- Core: values, variables, types, expressions, input/output, and state tracing.
-- Assign Homework 2.
+- Discuss representative issues from previous practice.
+- Core: values, objects/variables, types, expressions, input/output, and state tracing.
+- Follow-up practice: Data and state.
 
 ### Session 3: Conditions and Repetition
 
-- Discuss Homework 2 for 15–25 minutes.
-- Core: conditions, loop elements, boundaries, and defect diagnosis.
-- Assign Homework 3.
+- Discuss representative issues from previous practice.
+- Core: conditions, loop state, termination, boundaries, and defect diagnosis.
+- Follow-up practice: Conditions and loops.
 
 ### Session 4: Functions and Decomposition
 
-- Discuss Homework 3 for 15–25 minutes.
-- Core: function responsibility, interfaces, calls, and decomposition.
-- Assign Homework 4.
+- Discuss representative issues from previous practice.
+- Core: function responsibility, interfaces, calls, decomposition, and small caller-side tests.
+- Follow-up practice: Functions and decomposition.
 
-### Session 5: Integrated Cycle and AI Verification
+### Session 5: Integrated Development Cycle
 
-- Discuss Homework 4 for 15–25 minutes.
-- Core: integrated development cycle, requirement change, regression testing, and AI review.
-- Assign the integrated practice as final oral-exam preparation.
-- Explain how students should organize saved work; no formal oral examination occurs during this session.
+- Discuss representative issues from previous practice.
+- Core: requirement change, integrated reasoning, testing, debugging, regression verification, and reflection.
+- Follow-up practice: integrated development-cycle work.
+- Optional extension: review an AI or other external suggestion and verify any adopted claim. Skipping the extension does not affect core completion.
 
-## 5. Recommended Homework-Discussion Flow
+## 5. Practice-Discussion Flow
+
+A useful implementation pattern is:
 
 ```text
-Students raise questions or anonymous blockers
-→ Instructor selects representative errors
-→ Class predicts and traces first
-→ Compare solutions or tests
-→ Students revise their understanding
-→ Instructor connects the discussion to the new concept
+Learners surface questions, defects, or anonymous blockers
+→ Instructor selects representative cases
+→ Class predicts or traces before correction
+→ Compare tests, solutions, or diagnostics
+→ Learners revise reasoning
+→ Instructor connects the evidence to the new concept
 ```
 
-Recommended time: 15–25 minutes. When there are many questions, prioritize conceptual gaps that affect later learning instead of presenting full solutions to every item.
+The official policy currently recommends dedicated discussion time; the precise minutes belong to that policy and instructor implementation, not to the normative scope of this planning model.
 
 ## 6. Classroom Participation Delivery
 
-Instructors or TAs keep only lightweight observation notes, such as:
+Instructors or TAs may keep lightweight evidence notes compatible with the official policy, for example:
 
-- Asked a specific question.
-- Participated in tracing, testing, or debugging.
-- Shared an error and correction.
-- Extended, corrected, or compared a solution.
-- Made a visible contribution through a nonverbal mode.
+- raised a specific question or blocker;
+- participated in tracing, testing, debugging, or comparison;
+- shared an error, test, correction, or alternative solution;
+- revised an earlier explanation;
+- contributed through writing, diagrams, code operation, anonymous input, or group work.
 
-A roll-call sheet or attendance percentage may not replace participation evidence, and students are not required to speak publicly in every class.
+This map does not convert attendance, speaking speed, or a particular artifact into a grading rule.
 
-## 7. Connected 16-Week Formal Course
+## 7. Connected Formal Course
 
-The formal course may retain the same learning cycle and assessment philosophy while raising maturity toward L4–L6. Previous independent practice or project progress may still open each week. Whether the formal course also uses only one final oral examination must be confirmed by its own assessment policy and is not assumed by this preparatory delivery map.
+The connected formal course may retain the same learning cycle while raising maturity toward implementation, diagnosis, transfer, modular reasoning, memory/lifetime responsibility, and stronger testing.
 
-## 8. Final Oral-Exam Transition
+The formal-course delivery plan must remain consistent with the same official learning and assessment policy unless that authoritative policy is deliberately amended through the repository's governance process. This delivery map must not create a separate conflicting assessment regime.
 
-After the preparatory course, schedule one final one-on-one oral examination. Question types, duration, selection, resource use, make-up arrangements, and inter-rater consistency will be defined in a later official document.
+## 8. Final-Oral-Examination Handoff
 
-## Navigation
+The official learning and assessment policy establishes the role of the final one-to-one oral examination. Delivery materials should prepare students to explain, trace, modify, test, diagnose, and justify their own work.
+
+This planning model does not independently set the examination date, duration, question count, permitted resources, make-up procedure, or scoring method. Those details belong in an approved bilingual examination procedure when created.
+
+## Maintenance Rules
+
+When changing this delivery map:
+
+1. Preserve substantive equivalence between language tracks and language versions.
+2. Check the competency map and scope boundary before adding core content.
+3. Check the official assessment policy before changing homework, participation, attendance, oral-exam, or tool-use statements.
+4. Keep optional AI/tool activities explicitly conditional and directly skippable.
+5. Verify concrete compiler/toolchain claims against the specified environment.
+6. Record material governance findings in the active repository audit.
+
+## Related Documents
 
 - [Competency Acceptance Model](07-acceptance-model.en.md)
 - [Learning and Assessment Policy](13-learning-assessment-policy.en.md)
+- [Course Scope Boundary](06-scope-boundary.en.md)
 - [Materials Index](../materials/README.en.md)
+- [Instructional Design Workspace](README.en.md)
 - [繁體中文版](08-delivery-map.zh-TW.md)
