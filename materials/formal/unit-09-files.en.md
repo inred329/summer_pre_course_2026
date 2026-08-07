@@ -1,13 +1,15 @@
 # Formal Unit F-U09: How Does a Program Interact with Files and Persistent Data?
 
-Version: 1.0.1  
+Version: 1.0.2  
 Status: Official student material  
-Last updated: 2026-08-05  
+Last updated: 2026-08-06  
 Corresponding Chinese version: [正式單元 F-U09：程式如何與檔案及持久資料互動？](unit-09-files.zh-TW.md)
 
 ## Purpose and Completion Standard
 
 This chapter is for independent reading, practice, and review. Completing it means you can open, read, write, and close text files, check I/O return values and EOF, and diagnose mode, format, write, close, and resource-release errors.
+
+AI is not required to complete this Unit. Any AI activity is an optional extension that may be skipped without affecting completion, participation, or assessment.
 
 ## Core Question
 
@@ -142,7 +144,19 @@ if (ferror(file)) {
 }
 ```
 
-Line-based reading is useful when preserving or parsing a format. Consider what happens when a line exceeds the buffer: one physical line may arrive in several `fgets` calls.
+Line-based reading is useful when preserving or parsing a format. A successful `fgets` call does not necessarily contain one complete physical line. When the buffer fills before a newline is read, the remaining characters stay in the stream and arrive in later calls.
+
+A simple truncation check is:
+
+```c
+#include <string.h>
+
+if (strchr(line, '\n') == NULL && !feof(file)) {
+    fprintf(stderr, "Line exceeds buffer\n");
+}
+```
+
+This check distinguishes an overlong line from a final line that legitimately ends at EOF without a newline. A real parser must then define whether to discard the remainder, combine fragments, or report failure; it must not silently treat one fragment as a complete record.
 
 ---
 
@@ -181,6 +195,10 @@ EOF is set only after a failed read attempt, so the last item may be processed i
 
 A malformed token can stop `fscanf` with return value `0`. The invalid bytes remain unread, so retrying the same conversion without consuming or reporting them can cause an infinite loop.
 
+### Treating a Buffer Fragment as a Complete Line
+
+If `fgets` fills the buffer without reading a newline, the current text may be only the first part of one physical line. Parsing it as a complete record can split one record into several false records.
+
 ### Not Closing the File
 
 Resources may not be released promptly, and buffered output may not be fully written. Every successful open path should have a corresponding checked close.
@@ -193,6 +211,7 @@ Resources may not be released promptly, and buffered output may not be fully wri
 2. Read them back, sum them, and classify why reading stops.
 3. Compare `"w"` and `"a"`.
 4. Add one malformed line and confirm that it is reported as a format failure rather than normal EOF.
+5. Add an overlong line and verify that the program does not accept a buffer fragment as a complete record.
 
 ---
 
@@ -200,7 +219,7 @@ Resources may not be released promptly, and buffered output may not be fully wri
 
 Read student ID, name, and score records from a text file. Display count, average, and highest score.
 
-Test a missing file, empty file, normal records, one malformed record, a line longer than the buffer, and a final line without a newline. Define whether malformed input stops the program, skips a record, or reports an error; do not leave the behavior implicit.
+Test a missing file, empty file, normal records, one malformed record, a line longer than the buffer, and a final line without a newline. Define whether malformed or overlong input stops the program, skips a record, or reports an error; do not leave the behavior implicit.
 
 ---
 
@@ -210,13 +229,15 @@ Write the analysis result to `report.txt`. Decide whether to overwrite or append
 
 ---
 
-## 11. Explain the Concept to AI
+## 11. Optional Extension: Use AI to Challenge Your Explanation
 
-Explain:
+You may skip this section. Not using AI does not affect Unit completion, participation, or assessment.
 
-> What is the relationship among streams, file modes, EOF, formats, and error checking? Why should `feof` not be the only loop condition?
+Explain in your own words:
 
-If an AI response conflicts with function return rules or reproducible file tests, judge it again using evidence.
+> What is the relationship among streams, file modes, EOF, formats, buffer boundaries, and error checking? Why should `feof` not be the only loop condition?
+
+You may ask an AI system to challenge that explanation or propose a counterexample. No fixed prompt, saved conversation, submission, or non-use declaration is required. If an AI response conflicts with function return rules or reproducible file tests, judge it again using evidence.
 
 ---
 
@@ -226,12 +247,13 @@ If an AI response conflicts with function return rules or reproducible file test
 - I check `fopen`, write results, and `fclose`.
 - I control loops with read results.
 - I can distinguish EOF, format failure, and I/O error.
+- I can detect when `fgets` returned only part of a physical line.
 - I close every successfully opened file on every exit path.
 - I can test empty, malformed, and overlong input.
 
 ## 13. Chapter Summary
 
-Files allow data to persist after program termination. Reliable file processing requires a clear format, correct modes, checked open/read/write/close operations, EOF reasoning, and resource closure. The next Unit separates interfaces and implementations into maintainable modules.
+Files allow data to persist after program termination. Reliable file processing requires a clear format, correct modes, checked open/read/write/close operations, EOF reasoning, buffer-boundary handling, and resource closure. The next Unit separates interfaces and implementations into maintainable modules.
 
 ## Navigation
 

@@ -1,72 +1,52 @@
-# 前導教材憲法遵循審查
+# 前導教材憲法遵循審查—歷史紀錄
 
-版本：0.1.0  
-狀態：正式審查紀錄  
-最後更新：2026-08-03  
-重大變更摘要：完成所有前導單元、作業、rubric、AI 紀錄與教師指引的憲法逐項檢查。  
-對應英文版本：[Preparatory Materials Constitution Compliance Review](materials-constitution-review.en.md)
+版本：0.2.0  
+狀態：歷史審查紀錄—已被取代  
+最後更新：2026-08-07  
+歷史審查基準：`CONSTITUTION.zh-TW.md`／`CONSTITUTION.en.md` 1.2.0  
+規範效力：無  
+對應英文版本：[Preparatory Materials Constitution Review — Historical Record](materials-constitution-review.en.md)
 
-## 審查範圍
+> **已被取代：** 本文件記錄 2026-08-03 依 Constitution 1.2.0 所做的審查，只保留作為歷史證據。不得再由本文件推導現行評量、AI／工具使用、教材結構或發布要求。現行判斷以 Constitution 2.0、正式學習／評量制度與 active repository audit 為準。
 
-- `materials/TEMPLATE.*`
-- `materials/preparatory/unit-01-execution.*`
-- `materials/preparatory/unit-02-data-state.*`
-- `materials/preparatory/unit-03-control-flow.*`
-- `materials/preparatory/unit-04-functions-integration.*`
-- `materials/assignments/preparatory-assignments.*`
-- `materials/assignments/rubric.*`
-- `materials/assignments/ai-use-log.*`
-- `materials/assignments/grading-guide.*`
-- `materials/README.*`
+## 歷史審查範圍
 
-## 審查基準
+原審查涵蓋當時版本的前導教材模板、Unit 1–4、作業資源、rubric、AI 相關紀錄、教師指引與教材索引。
 
-重新讀取並對照：
+## 歷史結果
 
-- `CONSTITUTION.zh-TW.md` 1.2.0
-- `CONSTITUTION.en.md` 1.2.0
+當時紀錄顯示：雙語配對、導覽、術語、C17 範例、視覺／追蹤支援、認知負荷、測試／除錯、多元合理解法、雙語班等值，以及版本／變更 metadata 等項目通過審查。
 
-## 結果摘要
+原審查也記錄一項整合作業修正：刪除三個成績中的最低分不應暗示必須使用陣列；前導階段可使用三個獨立成績變數。
 
-| 憲法要求 | 結果 | 說明 |
-|---|---|---|
-| 雙語成對與實質一致 | 通過 | 所有正式教材與教師文件都有中英文版本，核心結構、程式、測試與標準一致。 |
-| 文件目的與可獨立閱讀 | 通過 | 教材說明讀者、目標、前置、工具、任務、完成與補驗標準。 |
-| 導覽可發現性 | 通過 | 根 README 經教材索引可抵達所有正式教材。 |
-| 術語一致 | 通過 | 使用 `design/11-terminology-glossary` 的正式術語。 |
-| 結構一致 | 通過 | 四個單元依共用模板建立；作業與 rubric 採固定結構。 |
-| 程式與文字一致 | 通過 | 範例使用 C17、GCC/Clang 指令、相同中英文程式與測試資料。 |
-| 視覺化 | 通過 | 工具鏈、狀態、控制流程與責任分解均提供對應圖或追蹤表。 |
-| 認知負荷 | 通過 | 每單元限制新概念並明列可延後內容；不加入進階資料結構。 |
-| 理解優先 | 通過 | 所有作業均要求預測、追蹤、測試、修改、除錯或口試。 |
-| 錯誤與測試核心化 | 通過 | 每單元含可重現錯誤與正常、邊界、必要異常案例。 |
-| 多元合理解法 | 通過 | rubric 明確禁止因與範例不同而扣分。 |
-| AI 不取代思考 | 通過 | 每份教材與作業明列允許、禁止、必須保留與驗證責任。 |
-| 雙語公平 | 通過 | 核心能力與通過標準相同；只允許節奏與語言支架差異。 |
-| 補驗針對能力 | 通過 | 補驗對應缺失能力，不要求無差別重做。 |
-| 版本與變更追蹤 | 通過 | 所有新增正式文件都有版本、日期、重大變更與對應語言。 |
+## 為何本審查不再是現行判斷
 
-## 審查中修正
+Constitution 2.0 與現行正式政策刻意改變了 1.2.0 審查所依賴的若干假設，包括：
 
-發現整合作業的「刪除最低分後重算平均」可能讓學生誤以為需要尚未教授的陣列。已同步修改中英文作業包，明確規定：
+- 每個活動都要求固定 AI 允許／禁止／紀錄欄位；
+- 一般性要求 AI 使用 log 或保存 AI 工件；
+- 過度固定的教材結構；
+- 後來集中到 `design/13-learning-assessment-policy.*` 的評量規則；
+- 在目前全庫技術驗證建立之前做出的發布前結論。
 
-- 使用三個獨立成績變數即可。
-- 可用三數總和減最低分，再除以 2。
-- 不要求也不鼓勵陣列或其他尚未教授的資料結構。
+因此，舊文件中「目前所有教材均符合憲法並可作為正式基準」的結論只具有歷史意義。
 
-## 剩餘限制
+## 現行來源
 
-- 教材中的程式碼為人工審查的短小 C17 範例；倉庫目前尚未建立自動編譯 CI。發布前仍須由教師在指定環境實際編譯。
-- 作業截止日期與實際班級行事曆尚未填入；在班級發布版本中必須同步補上中英文相同條件。
-- 教師提供的缺陷程式與錯誤 AI 建議需在實際授課前建立雙語等值版本。
+現行判斷請使用：
 
-上述為執行前待辦，不構成目前教材內容與憲法的衝突。
+- [課程憲法](../../CONSTITUTION.zh-TW.md)
+- [正式學習與評量制度](../../design/13-learning-assessment-policy.zh-TW.md)
+- [Constitution 2.0 全庫審查](../../reviews/repository-constitution-2-audit.zh-TW.md)
+- [教材索引](../README.zh-TW.md)
+- [C17 範例驗證](../../examples/README.md)
 
-## 最終結論
+## 歷史保存規則
 
-目前所有已建立的前導課程教材、作業與評量文件均符合課程憲法，可作為後續課堂版本與發布版本的正式基準。
+若本歷史紀錄與現行來源衝突，不要把舊結論直接修改成新政策；應遵循現行高權威來源，必要時把遷移決策記錄到 active audit。
 
 ## 導覽
 
 - [教材索引](../README.zh-TW.md)
+- [Constitution 2.0 全庫審查](../../reviews/repository-constitution-2-audit.zh-TW.md)
 - [English version](materials-constitution-review.en.md)

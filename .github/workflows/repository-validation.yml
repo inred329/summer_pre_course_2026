@@ -1,0 +1,32 @@
+name: Repository validation
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - agent/constitution-2-repository-audit
+
+permissions:
+  contents: read
+
+jobs:
+  documentation:
+    name: Documentation and governance structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate links, bilingual pairs, versions, and Constitution references
+        run: python3 scripts/validate_repository.py --skip-c
+
+  c17:
+    name: C17 translation units (${{ matrix.compiler }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate repository and compile C translation units
+        run: python3 scripts/validate_repository.py --compiler "${{ matrix.compiler }}"

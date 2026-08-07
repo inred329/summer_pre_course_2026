@@ -1,13 +1,15 @@
 # Formal Unit F-U03: How Does Data Form an Ordered Collection?
 
-Version: 1.0.1  
+Version: 1.0.2  
 Status: Official student material  
-Last updated: 2026-08-05  
+Last updated: 2026-08-06  
 Corresponding Chinese version: [正式單元 F-U03：資料如何形成有順序的集合？](unit-03-arrays.zh-TW.md)
 
 ## Purpose and Completion Standard
 
 This chapter is for independent reading, practice, and review. Completing it means you can use arrays to store same-type values, trace indexes and traversal, prevent out-of-bounds access, and pass arrays to functions for testing and modification.
+
+AI use is not part of the core completion standard. Not using AI does not affect completion, classroom participation, or assessment. Any AI activity near the end of the chapter is a skippable optional extension.
 
 ## Core Question
 
@@ -97,6 +99,8 @@ int sum_array(const int values[], int length) {
 
 A function usually cannot determine the number of elements from `values[]` alone, so the interface includes the length.
 
+This minimal example assumes the complete sum is representable as `int`. When a larger data range is possible, the interface must use an adequate type or check each addition before it occurs. Signed integer overflow is undefined behavior.
+
 ---
 
 ## 6. Find the Maximum Safely
@@ -162,7 +166,7 @@ A function that executes `values[0]` when `length == 0` has undefined behavior. 
 2. Replace every negative value with zero.
 3. Count elements greater than or equal to 60.
 
-Draw indexes and values before writing each loop.
+Draw indexes and values before writing each loop. When calculating a total, define the allowed element range first and confirm that the accumulated result is representable by the selected type.
 
 ---
 
@@ -170,23 +174,27 @@ Draw indexes and values before writing each loop.
 
 Read a fixed set of ten scores and display average, maximum, minimum, and passing count.
 
-Test all-equal, increasing, decreasing, and boundary values 59/60.
+Define the valid score range first. Every input operation must be checked for both successful conversion and range validity; invalid data must not enter the analysis array. Test all-equal, increasing, decreasing, boundary values 59/60, invalid text, and out-of-range values.
 
 ---
 
 ## 10. Requirement Modification
 
-New requirement: calculate the average after removing one lowest score. You do not need to physically modify the array. Define what “remove” means for total and count, then update tests.
+New requirement: calculate the average after removing one lowest score. You do not need to physically modify the array. Define what “remove” means for total and count, then update tests. If the array may be empty or contain only one element, define whether the requirement is valid and what failure behavior applies.
 
 ---
 
-## 11. Explain the Concept to AI
+## 11. Optional Extension: Use AI to Check Your Explanation
 
-Explain:
+This section may be skipped without affecting completion, classroom participation, or assessment.
+
+First explain in your own words:
 
 > What is the relationship among an array, index, length, and boundary? Why does a function usually need both an array and its length?
 
-If an AI response conflicts with an index diagram, loop trace, or reproducible test, judge it again using evidence.
+When you choose to use AI, you may ask it to critique your explanation or propose counterexamples. No fixed prompt, saved conversation, submission, or declaration of non-use is required.
+
+If an AI response conflicts with an index diagram, loop trace, C language rule, or reproducible test, judge the claim again using verifiable evidence.
 
 ---
 
@@ -197,11 +205,12 @@ If an AI response conflicts with an index diagram, loop trace, or reproducible t
 - I can explain that out-of-bounds access is undefined behavior.
 - I can pass an array and length to a function.
 - I can reject an empty collection before reading its first element.
-- I can design ordered and boundary-focused test data.
+- I can define input and accumulation ranges that avoid unvalidated data and integer overflow.
+- I can design ordered, boundary, invalid-format, and empty-collection tests.
 
 ## 13. Chapter Summary
 
-Arrays organize same-type data into a collection located by index. Reliable operations require an explicit length, legal boundaries, and traceable traversal. The next Unit shows how strings represent text with character arrays and a terminator.
+Arrays organize same-type data into a collection located by index. Reliable operations require an explicit length, legal boundaries, valid input, representable arithmetic, and traceable traversal. The next Unit shows how strings represent text with character arrays and a terminator.
 
 ## Navigation
 

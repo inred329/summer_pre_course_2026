@@ -1,35 +1,35 @@
 # 程式設計 Concept Tree
 
-版本：0.1.0  
-狀態：概念盤點草案  
-最後更新：2026-08-04  
+版本：0.1.1  
+狀態：現行設計標準  
+治理說明：本標準盤點穩定程式概念與 C 對應，不自行決定範圍、評分、交付順序或 AI／工具政策。  
 對應英文版本：[Programming Concept Tree](14-programming-concept-tree.en.md)
 
 ## 文件目的
 
-本文件盤點本課程可能使用的程式設計核心概念，建立後續 Concept 依賴圖、能力對應、Unit 組合與學生教材的共同知識來源。
+本文件盤點本課程使用的跨語言程式設計概念，提供 Concept Registry、能力／範圍標準、Unit 組合與學生教材共用的穩定概念來源。
 
-本文件目前只回答：
+本文件回答：
 
-1. 課程需要哪些 Concept？
-2. Concept 之間如何分類？
-3. 每個 Concept 在 C 語言中如何呈現？
+1. 本課程體系需要一致命名哪些 Concept？
+2. 這些 Concept 如何分類？
+3. 每個 Concept 如何對應到 C，又不把概念模型誤寫成單一實作保證？
 
-本階段不決定 Unit 數量、授課順序、週次或最終教材章節。
+本樹不決定 Unit 數量、授課順序、週次、評分，也不決定是否使用任何選用外部工具。
 
 ## Concept 判定原則
 
-一個項目原則上應同時符合以下條件，才列為核心 Concept：
+適合納入本樹的概念通常：
 
-1. 能回答一個「為什麼」或建立一個心智模型，而不只是說明語法怎麼寫。
-2. 不完全依賴某一種程式語言的特定關鍵字。
-3. 可跨多種程式語言或運算環境成立。
-4. 能成為其他知識的前置概念。
-5. 學生能透過觀察、預測、追蹤、實作或驗證建立理解。
+- 回答有意義的「為什麼／關係是什麼」，而非只命名語法。
+- 不依賴單一 keyword 或 IDE 才有意義。
+- 可參與先備或組合關係。
+- 能透過解釋、預測、追蹤、實作、測試、除錯或驗證建立可觀察證據。
+- 能精確對應 C，避免把實作慣例當成語言事實。
 
-`if`、`for`、`malloc` 等語法或函式不單獨視為最高層 Concept，而列為概念在 C 語言中的實作方式。
+`if`、`for`、`malloc`、`fopen` 等 C 語法或函式庫函式，是較廣概念的具體映射，不單獨作為第一層 Concept。
 
-## 整體架構
+## 整體結構
 
 ```mermaid
 flowchart TD
@@ -39,325 +39,245 @@ flowchart TD
     P --> S[State 狀態]
     P --> F[Control Flow 控制流程]
     P --> A[Abstraction 抽象]
-    P --> M[Memory 記憶體]
+    P --> M[Memory and Lifetime 記憶體與生命週期]
     P --> X[Interaction 互動]
-    P --> E[Engineering 工程實務]
+    P --> E[Engineering and Verification 工程與驗證]
 ```
 
 ---
 
-# 一、Computation｜計算
+# 一、Computation 計算
 
-核心問題：**程式如何把問題轉換成可執行的計算？**
+核心問題：**問題如何被表示成可由實作執行的計算？**
 
-| Concept | 核心意義 | C 語言映射 |
+| Concept | 核心意義 | C 對應／邊界 |
 |---|---|---|
-| Problem | 需要被解決、轉換或自動化的情境 | 題目需求、輸入輸出規格 |
-| Requirement | 對行為、資料與限制的明確描述 | 註解、規格、測試案例 |
-| Algorithm | 從輸入得到輸出的有限步驟 | 自然語言、流程圖、虛擬碼、C 程式 |
-| Program | 對計算過程的可執行描述 | C 原始碼與其建立出的可執行程式 |
-| Source Code | 人類可閱讀與修改的程式表示 | `.c`、`.h` 檔案 |
-| Translation | 將一種程式表示轉為另一種表示 | 預處理、編譯、組譯、連結 |
-| Compiler | 檢查並翻譯原始碼的工具 | GCC、Clang |
-| Executable | 可由作業系統啟動的程式映像 | `a.out`、`.exe` |
-| Execution | 指令實際依序產生行為的過程 | 執行 `main`、敘述求值 |
-| Process | 正在執行中的程式及其資源與狀態 | 作業系統中的程序概念 |
-| Termination | 一次計算如何正常或異常結束 | `return`、`exit`、執行錯誤 |
-
-主要關係：
+| Problem | 需要被解決、轉換或自動化的情境／需求 | 題目／使用情境 |
+| Requirement | 可觀察行為、資料、限制與失敗期待 | 規格、契約、測試 |
+| Algorithm | 有限的計算程序或策略 | 自然語言、pseudocode、流程／狀態模型、C 實作 |
+| Program | 以執行為目的的計算表示 | C translation units 加上必要環境／資源 |
+| Source Code | 人類可閱讀程式文字 | `.c`、`.h` 與適用的產生／引入來源 |
+| Translation | C 實作把 preprocessing translation unit 轉向可執行行為的過程 | 可能包含前置處理、編譯、code generation、組譯、連結或合併等價步驟；實體階段依實作而異 |
+| Diagnostic | 實作針對翻譯／建置或執行條件提供的回饋 | compiler／linker／runtime／tool 訊息（依環境） |
+| Program Image | 目標環境可載入或以其他方式執行的程式表示 | executable file 很常見但不是唯一形式 |
+| Execution | 程式在目標環境中的求值／執行行為 | C abstract-machine 語意加上實作行為 |
+| Process / Runtime Instance | 執行中程式的環境、資源與狀態 | OS process 常見但不是所有 C 目標都必然具有 |
+| Termination | 預期或異常執行的終止 | `main` return、`exit`、環境終止、失敗 |
 
 ```mermaid
 flowchart LR
-    R[Requirement] --> A[Algorithm]
-    A --> S[Source Code]
-    S --> T[Translation]
-    T --> E[Executable]
-    E --> X[Execution]
-    X --> P[Process]
-    P --> O[Observable Result]
+    R[Requirement] --> A[Algorithm / Design]
+    A --> S[Source Representation]
+    S --> T[C Implementation Translation]
+    T --> P[Executable / Loadable Representation]
+    P --> X[Execution Environment]
+    X --> O[Observable Evidence]
 ```
 
+此圖是概念模型，不可用來宣稱每個 C 實作都有相同的獨立 preprocessor／compiler／assembler／linker 程式或中介檔案。
+
 ---
 
-# 二、Information｜資訊
+# 二、Information 資訊
 
-核心問題：**程式處理的資料是什麼，又如何被表示與解讀？**
+核心問題：**程式處理什麼資訊，以及如何表示與解讀？**
 
-| Concept | 核心意義 | C 語言映射 |
+| Concept | 核心意義 | C 對應／邊界 |
 |---|---|---|
-| Data | 可被儲存、傳遞或處理的資訊 | 數值、字元、陣列、結構 |
-| Value | 某一時刻可被觀察或計算出的內容 | `10`、`3.14`、`'A'` |
-| Representation | 相同資訊在電腦中的編碼方式 | 二進位、補數、浮點表示、字元編碼 |
-| Type | 對值集合及允許操作的約束與解讀方式 | `int`、`double`、`char`、結構型別 |
-| Identifier | 程式中用來指稱實體的名稱 | 變數名、函數名、型別名 |
-| Constant | 執行期間不應被改變的值或名稱 | 常值、`const`、列舉常數、巨集常數 |
-| Expression | 由值、名稱與運算組合出的求值描述 | `a + b * 2` |
-| Operator | 對一個或多個值執行的操作 | 算術、關係、邏輯、位元運算子 |
-| Evaluation | 運算式產生值及可能副作用的過程 | 運算優先序、短路求值、函數呼叫 |
-| Conversion | 值在不同表示或型別間的轉換 | 隱式轉型、顯式轉型 |
-| Collection | 多個相關值的組織方式 | 陣列、字串、結構 |
-
-重要區分：
-
-- `Value` 是內容。
-- `Type` 決定內容如何被解讀與操作。
-- `Representation` 是內容在機器中的形式。
-- `Expression` 是產生新值的描述。
+| Data | 被處理、儲存或傳遞的資訊 | values、objects、streams、files |
+| Value | 與 expression／object 相關的資訊內容 | integer、floating、character、pointer、structure values（依型別） |
+| Representation | 資訊的編碼方式 | binary object representation、字元編碼、浮點表示；需注意標準／實作限制 |
+| Type | 定義／限制值、操作、轉換與解讀 | C basic、derived、structure／union／enumerated types |
+| Identifier | 依 C 規則指定 entity 的名稱 token | variable／function／type／member names 等 |
+| Literal / Constant Form | 原始碼中的值或常數運算式形式 | integer／floating／character／string literals、enumeration constants；應與 `const` object 區分 |
+| Expression | 依 C 規則求值的構造 | 算術、比較、邏輯、pointer、function-call expressions |
+| Operator | 對 operands 執行操作 | arithmetic、relational、logical、bitwise、assignment 等 |
+| Evaluation | 依 C sequencing rules 產生值／side effect | 不假設標準未指定的 evaluation order |
+| Conversion | 型別／表示之間的轉換／解讀 | integer promotions、usual arithmetic conversions、casts、assignment conversion |
+| Collection | 多個相關元素的概念性組織 | arrays、strings、records 等映射 |
 
 ---
 
-# 三、State｜狀態
+# 三、State 狀態
 
-核心問題：**程式如何記住目前情況，並在執行中改變？**
+核心問題：**執行如何隨時間保存並改變資訊？**
 
-| Concept | 核心意義 | C 語言映射 |
+| Concept | 核心意義 | C 對應／邊界 |
 |---|---|---|
-| State | 某一時刻所有相關資訊的組合 | 變數目前值、輸入位置、控制位置 |
-| State Change | 執行一步後狀態產生差異 | 指派、遞增、輸入、函數副作用 |
-| Variable | 可透過名稱存取、其值可能改變的程式物件 | 變數宣告與使用 |
-| Declaration | 告知名稱、型別及可用方式 | `int count;`、函數原型 |
-| Definition | 建立實體或提供完整實作 | 變數定義、函數定義 |
-| Initialization | 在物件生命開始時建立初始狀態 | `int count = 0;` |
-| Assignment | 在既有物件中寫入新值 | `count = count + 1;` |
-| Update | 根據舊狀態計算並寫入新狀態 | `count++`、累加器 |
-| Scope | 名稱在程式文字中的可見範圍 | 區塊、函數、檔案範圍 |
-| Lifetime | 物件從存在到消失的時間範圍 | 自動、靜態、動態儲存期 |
-| Invariant | 執行過程中應持續成立的條件 | 迴圈不變量、資料有效條件 |
-
-典型狀態變化：
-
-```text
-舊狀態：count = 3
-執行：count = count + 1
-新狀態：count = 4
-```
+| State | 某觀察點下相關值、object 內容、stream 狀態與控制位置 | trace table、debugger、程式變數 |
+| State Change | 求值／執行一步所造成的差異 | assignment、input、mutation、side effects |
+| Object | C abstract machine 中的資料儲存區域 | variables、array elements、structure objects、allocated objects |
+| Variable | 可改變值的具名 object 之課程友善用語 | 精確討論時區分 identifier 與 object |
+| Declaration | 引入 identifier／type 與相關屬性 | object／function declarations、prototypes |
+| Definition | 依 C 規則同時完成 entity／storage／function body 定義的 declaration | object definitions、function definitions |
+| Initialization | object lifetime 開始時建立初始 stored value／state | initializers、規則適用時的 zero initialization |
+| Assignment | 將值存進 modifiable object | `=`、compound assignments |
+| Update | 由舊狀態計算並儲存新狀態 | increment、accumulation、explicit assignment |
+| Scope | identifier 在程式文字中可見的區域 | block／function／file scope（依情境） |
+| Lifetime | object 存在於執行中的時間 | 與 storage duration、allocation／deallocation 相關 |
+| Invariant | 在指定觀察點預期維持成立的性質 | loop／data validity reasoning |
 
 ---
 
-# 四、Control Flow｜控制流程
+# 四、Control Flow 控制流程
 
-核心問題：**程式如何決定下一步要執行什麼？**
+核心問題：**下一個動作如何決定，又如何推理終止？**
 
-| Concept | 核心意義 | C 語言映射 |
+| Concept | 核心意義 | C 對應／邊界 |
 |---|---|---|
-| Sequence | 動作按照既定次序執行 | 一般敘述順序 |
-| Condition | 可判定真假的狀態或運算式 | 整數真值、比較與邏輯運算式 |
-| Decision | 根據條件選擇不同路徑 | `if`、`else`、`switch` |
-| Branch | 從目前控制位置移到另一條路徑 | 條件分支、`break`、`continue` |
-| Repetition | 在條件或範圍控制下重複執行 | `while`、`do-while`、`for` |
-| Iteration | 一次重複循環及其狀態變化 | 迴圈本體、更新、重新判斷 |
-| Loop Condition | 決定重複是否繼續的條件 | `while (condition)` |
-| Boundary | 決定包含與排除位置的界線 | 起點、終點、`<` 與 `<=` |
-| Sentinel | 以特殊輸入或狀態表示停止 | `-1` 結束輸入、EOF |
-| Nested Control | 控制結構內再包含控制結構 | 巢狀條件、巢狀迴圈 |
-| Infinite Execution | 無法抵達終止條件的執行 | 無窮迴圈、未更新狀態 |
-
-`if`、`switch`、`while`、`for` 是 C 語言映射；核心 Concept 分別是 Decision 與 Repetition。
+| Sequence | evaluations／actions 的有序關係 | statement／control sequencing；不得推論 C 未保證的順序 |
+| Condition | 用於控制決策的值／expression | scalar expression 依 C 規則解讀為 false／true |
+| Selection | 根據條件選擇執行路徑 | `if`、`else`、`switch` |
+| Branch / Transfer | 控制移至另一位置 | `break`、`continue`、`return`、必要時的 `goto` |
+| Repetition | 在持續條件下反覆計算 | `while`、`do`、`for` |
+| Iteration | 一次重複及其狀態轉移 | loop body／update／test reasoning |
+| Loop Condition | 持續／終止判斷 | loop controlling expression |
+| Boundary | 包含／排除或有效範圍界線 | index range、`<`／`<=`、capacity |
+| Sentinel | 用於表示終止／結束的特殊資料或狀態 | sentinel value、input return condition；`EOF` 必須依 API 語意使用 |
+| Nested Control | 控制結構內再包含控制結構 | nested decisions／loops |
+| Nontermination | 預期計算無法抵達終止 | 缺少 progress、不可達 exit、recursion 無可達 base case |
 
 ---
 
-# 五、Abstraction｜抽象
+# 五、Abstraction 抽象
 
-核心問題：**如何隱藏不必要細節，讓程式能被理解、重用與組合？**
+核心問題：**如何把責任隔離在介面後，使程式保持可理解與可修改？**
 
-| Concept | 核心意義 | C 語言映射 |
+| Concept | 核心意義 | C 對應／邊界 |
 |---|---|---|
-| Decomposition | 將大型問題拆成可理解的責任 | 分解成多個函數與模組 |
-| Responsibility | 一個程式部分應完成的單一任務 | 函數用途、模組職責 |
-| Function | 將計算或行為包裝成可呼叫單位 | 函數宣告、定義與呼叫 |
-| Interface | 使用者需要知道的輸入、輸出與約束 | 函數原型、標頭檔 |
-| Implementation | 完成介面承諾的內部做法 | 函數本體、來源檔 |
-| Parameter | 函數定義中接收資料的名稱與位置 | 形式參數 |
-| Argument | 呼叫函數時提供的實際值或運算式 | 實際引數 |
-| Return Value | 函數將結果交回呼叫端的方式 | `return expression;` |
-| Call | 暫停目前流程並進入另一個計算單位 | 函數呼叫 |
-| Call Stack | 尚未完成的函數呼叫及其區域狀態 | 呼叫框架、區域變數 |
-| Recursion | 計算單位直接或間接使用自身 | 遞迴函數與基底情況 |
-| Module | 具有明確介面與責任的程式單位 | `.h` 與 `.c`、分離編譯 |
+| Decomposition | 把大問題拆成責任 | functions／modules |
+| Responsibility | 某程式部分負責的凝聚目的 | function／module contract |
+| Function | 具 type／interface 與實作的可呼叫單位 | declaration／prototype、definition、call |
+| Interface | caller 必須知道的資訊 | name／type、parameters、return、pre/postconditions、適用的 lifetime／ownership rules |
+| Implementation | 滿足介面的內部機制 | function body／source file |
+| Parameter | 函數宣告的輸入 object／identifier | formal parameter |
+| Argument | caller 提供的 expression | function-call argument |
+| Return Value | 由函數介面傳回的結果 | non-void function 的 `return expression` |
+| Call | 依函數語意移交控制／資料 | function-call expression |
+| Activation Model | active calls 相關暫時狀態的概念模型 | 常用 stack frame 視覺化；實體 call stack 依實作而異 |
+| Recursion | 透過 call 直接／間接重複 | recursive functions 與 termination／base reasoning |
+| Module | 相關 interface 與 implementation responsibility | headers／sources、translation units、適用時的 separate compilation |
 
 ---
 
-# 六、Memory｜記憶體
+# 六、Memory and Lifetime 記憶體與生命週期
 
-核心問題：**程式物件存在於何處，又如何被定位與管理？**
+核心問題：**C object 在哪裡存在、如何被參照，以及何時存取才有效？**
 
-| Concept | 核心意義 | C 語言映射 |
+| Concept | 核心意義 | C 對應／邊界 |
 |---|---|---|
-| Bit | 可表示兩種狀態的最小資訊單位 | 位元運算與二進位表示 |
-| Byte | 可定址的基本儲存單位 | `sizeof(char) == 1` |
-| Address | 記憶體位置的識別值 | `&object`、指標值 |
-| Object | 執行期間佔有儲存空間的資料實體 | 變數、陣列元素、結構物件 |
-| Layout | 多個物件或成員如何排列 | 陣列連續性、結構配置 |
-| Pointer | 保存或表示物件／函數位址的值 | `int *p` |
-| Indirection | 透過位址間接存取另一個物件 | `*p`、`p->member` |
-| Aliasing | 多個名稱或指標指向同一物件 | 指標參數、共享修改 |
-| Null Reference | 明確表示目前沒有有效目標 | null pointer、`NULL` |
-| Storage Duration | 儲存空間存在的期間 | automatic、static、allocated |
-| Stack Storage | 隨函數呼叫建立與釋放的典型儲存 | 區域自動變數、呼叫框架 |
-| Static Storage | 程式執行期間持續存在的儲存 | 全域變數、`static` 物件 |
-| Dynamic Allocation | 執行期間依需求取得與釋放儲存 | `malloc`、`calloc`、`realloc`、`free` |
-| Ownership | 誰負責維持、傳遞與釋放資源 | API 約定、動態記憶體責任 |
-| Memory Safety | 確保存取位置與生命週期有效 | 越界、懸空指標、重複釋放、洩漏 |
-
-陣列與字串不是獨立的最高層領域，而是 Information 的 Collection 與 Memory 的 Layout、Address、Bounds 等概念交會後形成的 C 語言資料組織方式。
+| Bit | 表示／推理中的二元資訊單位 | bitwise operations／object representation；實際表示需依標準／實作 |
+| Byte | C 可定址儲存單位 | `sizeof(char) == 1`；每 byte bit 數由 `CHAR_BIT` 表示 |
+| Address | 在相關模型中指定 storage／object／function location 的表示／值 | pointer values；不可把整數表示視為普遍可攜 |
+| Object | 具有 type／value representation 與 lifetime 的 data-storage region | automatic／static／allocated objects、array elements、members |
+| Layout | objects／members 的相對排列、alignment、padding | array contiguity 有保證；structure padding／layout 受限制但具實作相依性 |
+| Pointer | 具型別的 pointer value／object | object/function pointers、null pointer values |
+| Indirection / Dereference | 透過 pointer 存取 | `*p`、`p->m`；需滿足 pointer validity、lifetime、bounds／type／alignment 等前提 |
+| Aliasing | 多個存取路徑指定同一／重疊 object | pointer parameters；需注意 C aliasing／effective-type rules |
+| Null Pointer | 不指向 object／function 的 pointer value | `NULL`、相關 context 的 null pointer constant；value 與 representation 不同 |
+| Storage Duration | 語言對 object 最低 lifetime／storage association 的分類 | automatic、static、thread（若支援）、allocated |
+| Automatic Storage | automatic storage duration objects | 常以 stack 實作，但實體結構不受 C 保證 |
+| Static Storage | static storage duration objects | 依 C 規則跨程式執行期間存在；實際 section／layout 依實作 |
+| Allocated Storage | allocation functions 取得、直到 deallocation 的 storage | `malloc`、`calloc`、`realloc`、`free`；「heap」只是常見實作用語 |
+| Ownership / Release Responsibility | 誰可使用、轉移、釋放資源的設計／API 責任 | C 不在語言層級強制 ownership |
+| Memory Safety | 有效 lifetime、bounds、alignment、provenance／access 前提與資源管理 | out-of-bounds、dangling use、invalid free、double free、leak、undefined behavior |
 
 ---
 
-# 七、Interaction｜互動
+# 七、Interaction 互動
 
-核心問題：**程式如何接收外部資訊並產生可觀察結果？**
+核心問題：**程式如何與外部環境交換資訊？**
 
-| Concept | 核心意義 | C 語言映射 |
+| Concept | 核心意義 | C 對應／邊界 |
 |---|---|---|
-| Input | 外部資料進入程式 | `scanf`、`fgets`、命令列參數 |
-| Output | 程式將資訊提供給外部 | `printf`、`puts`、檔案寫入 |
-| Stream | 有順序的資料流與目前讀寫位置 | `stdin`、`stdout`、`stderr`、`FILE *` |
-| Format | 資料如何轉成文字或由文字解析 | 格式字串、欄位寬度、精度 |
-| Buffer | 暫時累積輸入或輸出的區域 | 標準 I/O 緩衝、字元陣列 |
-| File | 可持久保存並依名稱存取的資料 | `fopen`、`fclose`、讀寫函數 |
-| End of Input | 外部資料來源已無更多內容 | EOF、輸入函數回傳值 |
-| Error Channel | 與一般結果分離的診斷資訊 | `stderr`、編譯器訊息 |
-| Command Line | 啟動程式時提供參數與環境 | `argc`、`argv` |
-| Protocol | 互動雙方共同遵守的資料與順序規則 | 輸入格式、函數契約、檔案格式 |
+| Input | 進入程式／函數的外部資料 | `fgets`、`scanf`、command-line arguments、file reads |
+| Output | 離開程式／函數的可觀察資料／結果 | `printf`、`puts`、file writes、return status |
+| Stream | 有序字元 I/O 抽象 | `stdin`、`stdout`、`stderr`、`FILE *`；stream state／error 重要 |
+| Format | 文字表示／解析規則 | `printf`／`scanf` conversion specifications、file formats |
+| Buffer | 具有容量與有效內容界線的暫存 storage | character arrays、stdio buffering、read/write buffers |
+| File | 外部資料來源／目的地 | `fopen`／`fclose` 等；應區分 pathname 與 opened stream |
+| End of Input | 介面沒有更多輸入 | function return values／`EOF` conventions；不是每個檔案都真的存一個 EOF 字元 |
+| Error Channel / Error State | 區分正常結果與診斷／失敗 | `stderr`、return values、`ferror`、規範適用時的 `errno` |
+| Command-Line Input | 執行環境在啟動時提供的 arguments | hosted environment 的 `argc`、`argv` |
+| Protocol | 交換資料的共同結構、順序與意義 | function contracts、text formats、simple file protocols |
 
 ---
 
-# 八、Engineering｜工程實務
+# 八、Engineering and Verification 工程與驗證
 
-核心問題：**如何判斷程式可信、可理解、可修改，並負責任地使用工具？**
+核心問題：**需要什麼證據才能信任、診斷、修改與維護程式或技術主張？**
 
-| Concept | 核心意義 | C 語言映射或課程活動 |
+| Concept | 核心意義 | C 對應／課程活動 |
 |---|---|---|
-| Expected Result | 執行前可被比較的預期行為 | 手算、輸出預測、狀態表 |
-| Test Case | 用具體輸入與期待結果檢查行為 | 正常、邊界、錯誤與回歸案例 |
-| Testing | 系統性執行案例並比較結果 | 編譯、執行、測試表 |
-| Verification | 以證據確認實作符合技術規格 | 預期／實際比較、追蹤、測試 |
-| Validation | 確認成果解決真正需求 | 需求重新閱讀、使用情境檢查 |
-| Debugging | 找出症狀、原因並驗證修正 | 重現、縮小範圍、假設、測試 |
-| Error Classification | 判斷問題發生在哪一階段 | 編譯、執行、邏輯、格式、邊界 |
-| Regression | 修正或修改後重新確認原功能 | 重跑既有測試 |
-| Refactoring | 不改外部行為而改善內部結構 | 函數拆分、命名、重複移除 |
-| Readability | 讓人能理解程式意圖與結構 | 命名、縮排、責任分離 |
-| Documentation | 保存需求、介面、判斷與使用方式 | README、註解、測試紀錄 |
-| Code Reading | 從既有程式推論結構與行為 | Trace、預測、解釋 |
-| Comparison | 評估多種合理解法的差異 | 正確性、可讀性、可修改性 |
-| Maintenance | 在需求改變後持續修改與驗證 | 需求變更與回歸測試 |
-| Tool Use | 理解工具的角色、輸入與限制 | 編譯器、終端機、IDE、除錯器 |
-| AI Collaboration | 將 AI 視為待驗證的建議來源 | 保存原始思考、測試、接受或拒絕理由 |
+| Expected Result / Property | 在依賴觀察前，依需求／契約預測的行為 | 手算、state／property prediction |
+| Test Case | 明確條件／輸入與 expectation | 適用的 normal、boundary、invalid、failure cases |
+| Testing | 使用選定案例對照 expectation | build／run、inspect outputs／state／files、test harness |
+| Verification | 證據顯示實作／主張符合技術需求 | tests、tracing、compiler diagnostics、reliable references |
+| Validation | 證據顯示行為符合實際需求／使用情境 | requirement／use-scenario review |
+| Debugging | 重現、縮小範圍、假設、驗證原因、修正、回歸 | diagnostic workflow |
+| Error Classification | 用證據分類失敗 | translation/build、適用時 linkage、runtime/precondition、logic、boundary、requirement |
+| Regression Verification | 修改後重查先前必要行為 | rerun relevant tests／properties |
+| Refactoring | 不改必要可觀察行為下改善內部結構 | function extraction、naming、modularization |
+| Readability | 人能理解意圖與結構 | naming、formatting、responsibility、contracts |
+| Documentation | 保留 requirement／interface／decision／usage | README、comments、API notes、適當 test records |
+| Code Reading | 從既有程式推理行為／結構 | prediction、trace、explanation |
+| Comparison | 比較多個合理解法／來源 | correctness、readability、modifiability、evidence quality |
+| Maintenance | 需求改變後修改並重新驗證 | change impact、regression |
+| Tool Use | 理解 compiler、debugger、IDE、terminal、documentation、analyzer 等角色與限制 | 工具熟練支援但不取代程式能力 |
+| External Assistance | 來自 AI、文件、同儕、教師或工具的建議／內容 | 選用 claim source；採用結果仍由學生負責 |
+| Human Review | 採用前檢查 relevance、assumption、limitation、fit | 外部建議尤其重要 |
+| Technical Verification | 對採用技術主張提供可重現證據 | program／test／diagnostic／reference／trace evidence |
+| Contextual Disclosure | 特定核准規則要求時的工具使用標註／紀錄 | 不普遍要求 AI log 或未使用聲明 |
+
+External Assistance（含 AI）刻意不放在第一層必備領域。它是選用且條件式的；只有學生實際採用外部協助時，Engineering 中的審查與驗證責任才適用。
 
 ---
 
-# 九、跨領域組合概念
+# 九、跨領域組合 Concept
 
-以下項目非常重要，但由多個基礎 Concept 組合而成，因此不另設為第一層領域。
+## Array 陣列
 
-## Array｜陣列
+由 collection、type、object、layout、index、boundary、iteration、memory safety 組合。C 對應包含 array type、indexing、適用時的 `sizeof` 與 function parameter adjustment rules。
 
-由以下概念組成：
+## String 字串
 
-- Collection
-- Type
-- Object
-- Layout
-- Address
-- Index
-- Boundary
-- Traversal
-- Memory Safety
+由 character representation、array、sentinel／termination、buffer、format、boundary、memory safety 組合。C string 是 null-terminated character sequence；不是每個 character array 都是有效 string。
 
-C 映射：陣列宣告、索引、`sizeof`、傳遞給函數時的轉換行為、多維陣列。
+## Structure / Record 結構／記錄
 
-## String｜字串
+由 type、object、member、layout、interface、assignment 組合。C 對應包含 `struct`、member access、assignment、structure pointer 與 `typedef` 用法。
 
-由以下概念組成：
+## File I/O
 
-- Character Representation
-- Collection
-- Array
-- Sentinel
-- Buffer
-- Format
-- Boundary
-- Memory Safety
+由 stream、file、buffer、format／protocol、end-of-input、error state、resource lifetime 組合。C 對應包含 `FILE *`、open／read／write／close API 與 return-state check。
 
-C 映射：字元陣列、字串常值、null terminator、`<string.h>`、安全輸入與長度管理。
+## Modular Programming 模組化
 
-## Structure｜結構
-
-由以下概念組成：
-
-- Type
-- Collection
-- Object
-- Layout
-- Member
-- Interface
-- Assignment
-
-C 映射：`struct`、member access、structure assignment、pointer-to-structure、`typedef`。
-
-## File I/O｜檔案輸入輸出
-
-由以下概念組成：
-
-- File
-- Stream
-- Buffer
-- Format
-- Protocol
-- End of Input
-- Error Handling
-- Resource Lifetime
-
-C 映射：`FILE *`、開啟模式、讀寫函數、EOF 與關閉檔案。
-
-## Modular Programming｜模組化程式設計
-
-由以下概念組成：
-
-- Decomposition
-- Responsibility
-- Interface
-- Implementation
-- Module
-- Translation
-- Linking
-- Documentation
-
-C 映射：標頭檔、來源檔、include guard、分離編譯與連結。
+由 decomposition、responsibility、interface、implementation、module、translation／build dependency、documentation 組合。C 對應包含 header／source、declaration／definition、include guard、separate translation 與適用的 linkage。
 
 ---
 
-# 十、目前邊界
+# 十、範圍與維護規則
 
-本 Concept Tree 目前涵蓋：
+本 Concept Tree 涵蓋支援已核定前導／正式 C 課程範圍與橫向 testing／debugging／verification 所需概念。它不會自行把進階資料結構、OOP、generic programming、concurrency、networking、compiler internals 或 platform-specific IDE operation 納入核心。
 
-- 大學入門 C 程式設計課程所需核心概念。
-- 可由前導課程銜接至正式課程的基礎知識。
-- 測試、除錯、修改需求與 AI 驗證等跨單元能力。
+修改本標準時：
 
-目前暫不展開：
+1. 中英文版本維持概念實質等值。
+2. 穩定 Concept 新增／移除／改名時同步 Concept Registry 與 Unit Map。
+3. 將 Concept 變成核心交付前先檢查 scope／competency standards。
+4. 外部協助維持選用／條件式，不建立 AI 必做 Concept chain。
+5. 實作相依主張要標示並依目標 C standard／toolchain／environment 驗證。
+6. 重大變更記錄到全庫 active audit。
 
-- 進階資料結構與演算法分析。
-- 物件導向、泛型與例外處理等其他語言典型機制。
-- 作業系統、編譯器、網路或並行程式設計的深入理論。
-- 特定 IDE 或平台操作細節。
+## 相關文件
 
-這些內容未被否定；它們將在需要時作為後續 Concept Tree 的延伸層。
-
-## 下一步
-
-1. 為每個 Concept 建立唯一 ID。
-2. 區分核心 Concept、組合 Concept 與 C 語言映射。
-3. 建立 Concept Dependency Graph。
-4. 標記前導課程與正式課程的目標成熟度。
-5. 依依賴關係組成 Unit，而不是先用週次切割知識。
-6. 最後才為每個 Unit 撰寫學生教材。
-
-## 導覽
-
-- [課程憲法](../CONSTITUTION.zh-TW.md)
 - [教學內容設計區](README.zh-TW.md)
-- [知識依賴設計](04-knowledge-dependencies.zh-TW.md)
-- [能力定義](05-competencies.zh-TW.md)
+- [程式設計領域模型](03-programming-domain-model.zh-TW.md)
+- [程式語言知識依賴圖](04-programming-language-knowledge-graph.zh-TW.md)
+- [程式設計能力地圖](05-competency-map.zh-TW.md)
+- [課程範圍邊界](06-scope-boundary.zh-TW.md)
+- [中英文術語對照表](11-terminology-glossary.zh-TW.md)
+- [程式設計 Concept Registry](15-programming-concept-registry.zh-TW.md)
+- [Concept 驅動的 Unit Map](16-unit-map.zh-TW.md)
 - [English version](14-programming-concept-tree.en.md)

@@ -1,158 +1,50 @@
 # 2026 大專暑期前導課程｜2026 Summer Preparatory Course
 
-本倉庫用於規劃 2026 大專暑期 C 語言前導課程，以及與其銜接的 16 週正式程式設計課程。
+本倉庫包含 2026 大專暑期 C 語言前導課程，以及與其銜接的正式程式設計課程設計、教材、教師文件、評量政策與技術範例。
 
-This repository contains the design of the 2026 Summer C Programming Preparatory Course and the connected 16-week formal programming course.
+This repository contains the design, learning materials, instructor resources, assessment policy, and technical examples for the 2026 Summer C Programming Preparatory Course and its connected formal programming course.
 
-課程包含兩個前導班別：
+中文班與英文班採不同授課節奏，但維持相同的核心能力、技術深度與評量標準。
 
-The preparatory course includes two tracks:
+The Chinese-taught and English-taught tracks use different pacing while preserving the same core capabilities, technical depth, and assessment standards.
 
-- 中文班：4 堂，每堂 3 小時，共 12 小時
-- English-taught class: five 2-hour sessions, totaling 10 hours
+## 從這裡開始｜Start Here
 
-兩班具有相同的核心學習成果、難度與評量標準，只以不同節奏交付共同能力。
+### 學生｜Students
 
-Both classes share the same core outcomes, difficulty, and assessment standards, delivered through different pacing.
+- [教材與學習活動（繁體中文）](materials/README.zh-TW.md)
+- [Materials and Learning Activities (English)](materials/README.en.md)
+- [中文班入口](classes/zh/README.md)
+- [English Track Entry](classes/en/README.md)
+- [正式學習與評量制度（繁體中文）](design/13-learning-assessment-policy.zh-TW.md)
+- [Official Learning and Assessment Policy (English)](design/13-learning-assessment-policy.en.md)
 
----
+### 教師｜Instructors
 
-## 文件導覽｜Document Navigation
+- [教師執行指引（繁體中文）](materials/instructor/session-guides.zh-TW.md)
+- [Instructor Implementation Guide (English)](materials/instructor/session-guides.en.md)
+- [教材與活動資源（繁體中文）](materials/README.zh-TW.md)
+- [Materials and Activity Resources (English)](materials/README.en.md)
+- [C17 程式範例與缺陷案例](examples/README.md)
+- [籌備與執行規劃](planning/README.md)
 
-### 最高規範｜Governing Documents
+### 課程設計與維護｜Course Design and Maintenance
 
 - [課程憲法（繁體中文）](CONSTITUTION.zh-TW.md)
 - [Course Constitution (English)](CONSTITUTION.en.md)
-
-### 教學設計基準｜Instructional Design Baseline
-
 - [教學內容設計區（繁體中文）](design/README.zh-TW.md)
 - [Instructional Design Workspace (English)](design/README.en.md)
-- [學習與評量制度](design/13-learning-assessment-policy.zh-TW.md)
-- [Learning and Assessment Policy](design/13-learning-assessment-policy.en.md)
+- [Constitution 2.0 全庫審查（繁體中文）](reviews/repository-constitution-2-audit.zh-TW.md)
+- [Repository Audit Against Constitution 2.0 (English)](reviews/repository-constitution-2-audit.en.md)
+- [課程籌備與開課檢查清單](planning/checklist.md)
+- [Repository / CI 技術驗證](validation/README.md)
 
-正式設計基準包含 `01–13`：願景、需求、領域模型、知識依賴、能力、範圍、驗收、交付、風險、追蹤矩陣、術語、憲法審查，以及學習與評量制度。
+## 課程核心
 
-The official design baseline includes stages `01–13`: vision, requirements, domain model, knowledge dependencies, competencies, scope, acceptance, delivery, risks, traceability, terminology, constitutional review, and the learning and assessment policy.
+本課程以學生建立正確、可驗證且可遷移的理解與能力為最高目的。課程先建立問題脈絡、概念與心智模型，再介紹語法與工具；正確輸出、成功編譯或通過 Online Judge 都不能單獨證明完整能力。
 
-### 教材、自主作業與評量｜Materials, Independent Homework, and Assessment
+The course prioritizes correct, verifiable, and transferable understanding and capability. It establishes problem context, concepts, and mental models before syntax and tools; correct output, successful compilation, or passing an Online Judge cannot independently prove full capability.
 
-- [教材與活動資源（繁體中文）](materials/README.zh-TW.md)
-- [Materials and Activity Resources (English)](materials/README.en.md)
-- [自主作業與口試準備包](materials/assignments/preparatory-assignments.zh-TW.md)
-- [Independent Homework and Oral Preparation Pack](materials/assignments/preparatory-assignments.en.md)
-- [課堂參與與最終口試評分規準](materials/assignments/rubric.zh-TW.md)
-- [Classroom Participation and Final Oral Examination Rubric](materials/assignments/rubric.en.md)
+完整規範以 [Constitution 2.0](CONSTITUTION.en.md) 及正式雙語政策文件為準。本 README 僅提供入口與簡要定位，不重複定義政策。
 
-### 教師執行與程式範例｜Instructor Delivery and Code Examples
-
-- [前導課程教師執行指引](materials/instructor/session-guides.zh-TW.md)
-- [Preparatory Course Instructor Implementation Guide](materials/instructor/session-guides.en.md)
-- [前導教材評量制度補充規則](materials/preparatory/ASSESSMENT-NOTE.zh-TW.md)
-- [Preparatory Material Assessment Override](materials/preparatory/ASSESSMENT-NOTE.en.md)
-- [C17 範例與缺陷案例｜C17 Examples and Defect Cases](examples/README.md)
-- [測試案例與錯誤 AI 建議](examples/TESTS-AND-AI.zh-TW.md)
-- [Test Cases and Incorrect AI Suggestions](examples/TESTS-AND-AI.en.md)
-
-## 正式學習與評量制度｜Official Learning and Assessment Policy
-
-- 每次課後都有自主作業，但不繳交、不計分、不逐份批改。
-- 下一堂課保留 15–25 分鐘討論前次作業、錯誤、測試與不同解法。
-- 不以點名或出席率計分；出席不等於參與。
-- 課堂參與可透過提問、回答、追蹤、測試、除錯、書面、匿名提問、程式操作或小組紀錄展現。
-- 不以發言次數排名，亦不要求每位學生每堂公開發言。
-- 正式成績只由課堂參與與一次最終一對一口試構成。
-- 建議比例範圍：課堂參與 20–30%，最終口試 70–80%。
-- 口試內容與流程將在後續討論後另立雙語正式文件。
-
-- Independent homework follows each class but is not submitted, graded, or individually marked.
-- The next class reserves 15–25 minutes to discuss the previous homework, errors, tests, and alternative solutions.
-- Roll call and attendance percentage are not graded; attendance is not participation.
-- Participation may be demonstrated through questions, answers, tracing, testing, debugging, writing, anonymous questions, program operation, or group records.
-- Speaking frequency is not ranked, and students are not required to speak publicly in every class.
-- The official grade consists only of classroom participation and one final one-on-one oral examination.
-- Recommended range: participation 20–30%; final oral examination 70–80%.
-- Detailed oral content and procedure will be defined in a later bilingual official document after further discussion.
-
----
-
-## 核心設計理念｜Core Design Philosophy
-
-本課程不把 C 視為需要死背的語法集合，而是用 C 幫助學生建立可遷移的程式設計能力。
-
-The course does not treat C as a collection of syntax to memorize. It uses C to build transferable programming competency.
-
-每個主要概念依下列邏輯展開：
-
-Each major concept develops through:
-
-> 需求｜Need → 設計目的｜Design Purpose → 語言邏輯｜Language Logic → 語法｜Syntax → 實作｜Implementation → 驗證｜Verification
-
-教材與活動同等重視：
-
-Materials and activities give equal importance to:
-
-- 閱讀與預測｜Reading and prediction
-- 狀態與流程追蹤｜State and flow tracing
-- 實作與需求修改｜Implementation and requirement modification
-- 測試、除錯與回歸驗證｜Testing, debugging, and regression verification
-- 說明、反思與解法比較｜Explanation, reflection, and solution comparison
-- AI 建議的技術驗證｜Technical verification of AI suggestions
-
-每個單元應刻意設計可犯錯、可重現、可診斷與可修正的學習機會。正確輸出、成功編譯、OJ 通過或 AI 的正面評價都不能單獨證明能力。
-
-Every unit should deliberately provide opportunities to make, reproduce, diagnose, and correct errors. Correct output, successful compilation, passing OJ, or positive AI feedback cannot independently establish capability.
-
-資料組織維持在前導課程所需的抽象層，不預設進階資料結構為核心內容。
-
-Data organization remains at the abstraction level needed by the preparatory course; advanced data structures are not presumed core content.
-
----
-
-## 目前工作階段｜Current Work Stage
-
-已完成：
-
-Completed:
-
-- 課程憲法與 `01–13` 正式設計鏈
-- 雙語前導單元 1–4
-- 自主作業與口試準備包
-- 課堂參與與最終口試 rubric
-- 作業討論與參與觀察教師指引
-- 雙語教師執行包
-- 教材評量制度補充規則
-- 單元 1–4 雙語舊評量措辭清理
-- 第一批單元 1–4 C17 正確範例與缺陷程式
-- 雙語測試案例與錯誤 AI 建議文件
-- AI 使用紀錄模板
-- 教材憲法遵循審查
-
-- Course Constitution and the official `01–13` design chain
-- Bilingual Preparatory Units 1–4
-- Independent homework and oral-preparation pack
-- Classroom-participation and final-oral rubric
-- Assignment-discussion and participation-observation guide
-- Bilingual instructor implementation pack
-- Material-assessment precedence rule
-- Legacy-assessment wording cleanup for Units 1–4 in both languages
-- First C17 correct examples and defect cases for Units 1–4
-- Bilingual test cases and incorrect-AI-suggestion documents
-- AI-use log template
-- Materials constitution review
-
-下一階段：
-
-Next stage:
-
-- 在實際教室環境記錄 GCC 與 Clang 版本、編譯指令、警告差異與執行結果。
-- 擴充每個單元的正常、邊界、錯誤與回歸案例。
-- 增加更多看似合理但技術上錯誤的 AI 建議，並附學生驗證提示。
-- 依實際試教結果微調教師節奏、備援活動與學生常見誤解。
-- 最終口試內容與流程仍待後續討論後另立正式雙語文件。
-
-- Record GCC and Clang versions, compile commands, warning differences, and execution results in the actual classroom environment.
-- Expand normal, boundary, error, and regression cases for each unit.
-- Add more plausible but technically incorrect AI suggestions with student verification prompts.
-- Refine instructor pacing, fallback activities, and misconception guidance after classroom trials.
-- The final oral-examination content and procedure will still be defined later in a separate bilingual official document.
+The complete rules are defined by [Constitution 2.0](CONSTITUTION.en.md) and the authoritative bilingual policy documents. This README provides navigation and a concise orientation only; it does not redefine policy.

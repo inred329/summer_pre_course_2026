@@ -1,13 +1,15 @@
 # Formal Unit F-U04: How Is Text Represented and Processed as Data?
 
-Version: 1.0.1  
+Version: 1.0.2  
 Status: Official student material  
-Last updated: 2026-08-05  
+Last updated: 2026-08-06  
 Corresponding Chinese version: [正式單元 F-U04：文字資料如何被表示與處理？](unit-04-strings.zh-TW.md)
 
 ## Purpose and Completion Standard
 
 This chapter is for independent reading, practice, and review. Completing it means you can explain how C strings use character arrays and a null terminator, read and traverse strings safely, and diagnose terminator, buffer, truncation, and formatting errors.
+
+AI use is not part of the core completion standard. Not using AI does not affect completion, classroom participation, or assessment. Any AI activity near the end of the chapter is a skippable optional extension.
 
 ## Core Question
 
@@ -230,13 +232,17 @@ New rule: ignore newlines and punctuation and count only English letters. Update
 
 ---
 
-## 12. Explain the Concept to AI
+## 12. Optional Extension: Use AI to Check Your Explanation
 
-Explain:
+This section may be skipped without affecting completion, classroom participation, or assessment.
+
+First explain in your own words:
 
 > What is the relationship among a C string, character array, capacity, length, and the null terminator? How can `fgets` succeed while still reading only part of a line?
 
-If an AI response conflicts with an index diagram, function specification, or reproducible result, judge it again using evidence.
+When you choose to use AI, you may ask it to critique your explanation or propose counterexamples. No fixed prompt, saved conversation, submission, or declaration of non-use is required.
+
+If an AI response conflicts with an index diagram, function specification, or reproducible result, judge it again using verifiable evidence.
 
 ---
 

@@ -23,6 +23,6 @@ int main(void) {
         return 1;
     }
 
-    printf("Max: %d\n", max_of_three(a, b, c));
+    printf("Maximum: %d\n", max_of_three(a, b, c));
     return 0;
 }

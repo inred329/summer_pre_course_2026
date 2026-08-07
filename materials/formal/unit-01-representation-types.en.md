@@ -1,13 +1,15 @@
 # Formal Unit F-U01: Why Do Representation, Type, and Operations Affect Results?
 
-Version: 1.0.1  
+Version: 1.0.2  
 Status: Official student material  
-Last updated: 2026-08-05  
+Last updated: 2026-08-06  
 Corresponding Chinese version: [正式單元 F-U01：表示、型別與運算為什麼會影響結果？](unit-01-representation-types.zh-TW.md)
 
 ## Purpose and Completion Standard
 
 This chapter is for independent reading, practice, and review. Completing it means you can explain how the same bits may have different meanings under different types and interpretation rules, predict conversions and operations, and diagnose overflow, integer division, floating-point error, and formatted-I/O mismatches with tests.
+
+The AI extension in this chapter is optional and may be skipped. Not using AI does not affect chapter completion, classroom participation, or assessment. The core completion standard depends only on the programming capabilities stated above.
 
 ## Core Question
 
@@ -184,13 +186,15 @@ New rule: when the divisor is zero, do not divide; print `Undefined`. Update the
 
 ---
 
-## 12. Explain the Concept to AI
+## 12. Optional Extension: Use AI to Check Your Explanation
 
-Explain:
+This section may be skipped and is not part of the chapter completion standard.
+
+First explain in your own words:
 
 > What are MSB and LSB, and how does type affect the interpretation of the same bits, operations, and formatted arguments?
 
-If an AI response conflicts with type rules, compiler warnings, or reproducible results, judge it again using evidence.
+When you choose to use AI, you may ask it to respond to your explanation. No fixed prompt, saved conversation, submission, or no-AI declaration is required. If an AI response conflicts with type rules, compiler warnings, or reproducible results, judge it again using evidence.
 
 ---
 

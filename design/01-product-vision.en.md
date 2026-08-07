@@ -1,14 +1,14 @@
 # Instructional Product Vision
 
-Version: 0.1.0  
-Status: Discussion baseline  
+Version: 0.1.2  
+Status: Revisable planning model  
 Corresponding Chinese version: `01-product-vision.zh-TW.md`
 
 ## Document Purpose
 
 This document defines the educational problem, target audience, core value, and definition of success shared by the 2026 Summer C Programming Preparatory Course and the subsequent 16-week formal course.
 
-It serves as the governing reference for the requirements map, competency map, scope boundaries, delivery plan, and teaching-material design.
+It provides planning context for the requirements map, competency map, scope boundaries, delivery plan, and teaching-material design. It is not an authoritative policy source and does not override the Constitution, the official learning and assessment policy, or approved design standards. Where any conflict exists, those higher-authority sources govern and this planning model must be revised accordingly.
 
 ## 1. Educational Problem to Solve
 
@@ -20,14 +20,14 @@ When beginners enter a formal programming course, they often face several source
 - They may treat programming as syntax memorization or answer assembly.
 - They may form disconnected understandings of variables, control flow, and functions.
 - They lack experience reading, tracing, testing, modifying, and debugging programs.
-- They may use AI in ways that bypass understanding, reasoning, and verification.
+- When they use AI or other external assistance, they may bypass understanding, reasoning, and verification.
 - Different instructional languages and contact hours may create learning gaps between the Chinese-taught and English-taught classes.
 
 The course system must therefore solve more than “students do not know C.” It must address the fact that students do not yet possess a stable mental model for learning programming.
 
 ## 2. Product Vision Statement
 
-For beginners who are about to begin university-level programming study, provide a continuous learning system that uses C as the implementation medium and organizes programming around data and variables, control flow, and functions and problem decomposition, while integrating the execution model, input/output, testing, debugging, and AI literacy.
+For beginners who are about to begin university-level programming study, provide a continuous learning system that uses C as the implementation medium and organizes programming around data and variables, control flow, and functions and problem decomposition, while integrating the execution model, input/output, testing, debugging, and responsible verification of any adopted external assistance.
 
 The preparatory course delivers the minimum viable capabilities needed to begin formal study. The 16-week formal course then develops programming capability that students can understand, implement, test, modify, explain, and transfer.
 
@@ -69,7 +69,7 @@ The following cross-cut all three pillars:
 - Program reading and explanation.
 - Testing and verification.
 - Debugging and modification.
-- AI-assisted learning and responsible judgment.
+- Responsible understanding and verification when external assistance is adopted.
 
 ## 5. Role of the Preparatory Course
 
@@ -81,7 +81,7 @@ It acts as the Minimum Viable Preparation and should:
 - Establish a basic mental model of sequential execution and changing program state.
 - Introduce the three core pillars and their relationships.
 - Establish basic workflows for reading, predicting, modifying, testing, and debugging programs.
-- Establish habits that prevent students from replacing learning with direct AI-generated answers.
+- Establish habits that prevent students from replacing learning with unverified externally generated answers.
 - Allow instructors to identify major learning risks before the formal course begins.
 
 ## 6. Role of the Formal Course
@@ -94,8 +94,10 @@ The 16-week formal course should fully develop students’ ability to solve basi
 - Decompose and organize programs with functions.
 - Read, trace, test, debug, and modify programs.
 - Explain design choices and the basis for verification.
-- Use AI within defined rules and judge whether its suggestions are trustworthy.
+- When choosing to adopt AI or another external suggestion, understand it, verify it, and remain responsible for the result.
 - Build a foundation for later study in data structures, object-oriented programming, algorithms, and other computing courses.
+
+AI use is optional. Non-use does not reduce Unit completion, classroom participation, or assessment outcomes.
 
 ## 7. Definition of Success
 
@@ -110,7 +112,7 @@ Evidence of success must include at least the following:
 5. Students can read and modify existing programs rather than only starting from a blank file.
 6. Students can design tests and explain why results should be trusted.
 7. Students can use error messages and observed behavior to locate problems.
-8. Students can explain what assistance AI provided and how they verified it.
+8. Students remain responsible for the correctness of work they submit. If they choose to adopt AI or another external suggestion, they can explain the adopted result and how they technically verified it; students who do not use such assistance satisfy this criterion through their own reasoning and verification.
 9. The Chinese-taught and English-taught classes meet the same standards for shared core capabilities.
 10. Other instructors or teaching assistants can understand, deliver, and maintain the materials.
 

@@ -1,17 +1,17 @@
 # Formal Course Student Materials
 
-Version: 1.0.0  
+Version: 1.0.2  
 Status: Complete bilingual student-material set  
-Last updated: 2026-08-04  
+Last updated: 2026-08-06  
 Corresponding Chinese version: [正式課程學生教材](README.zh-TW.md)
 
 ## Purpose
 
 This directory contains the 12 formal-course student Units that follow the four preparatory Units. Each Unit is designed for independent reading, review, experimentation, diagnosis, and explanation.
 
-The materials use C as the instructional language while emphasizing transferable programming Concepts. Each Unit includes a core question, mental model, minimal examples, prediction or tracing, reproducible errors, practice, requirement modification, a brief concept explanation to AI, self-check, and summary.
+The materials use C as the instructional language while emphasizing transferable programming Concepts. Each Unit builds its main learning path from a core question, mental model, minimal examples, prediction or tracing, reproducible errors, practice, requirement modification, self-check, and summary.
 
-AI remains a low-weight conversational tool. It does not replace prediction, implementation, testing, debugging, or evidence-based judgment.
+Some Units also provide clearly marked optional AI extensions. These activities may be skipped. Not using AI does not affect Unit completion, classroom participation, or assessment. When a student chooses to use AI, its claims must still be judged through code, compiler behavior, tracing, testing, or other reproducible evidence.
 
 ## Units
 
@@ -51,7 +51,7 @@ Completing a Unit means more than producing one correct output. Students should 
 - modify a requirement and identify affected parts
 - support decisions with observable evidence
 
-Activities are independent practice unless another official course document explicitly states otherwise.
+AI use is not part of the core completion standard. Activities are independent practice unless another official course document explicitly states otherwise.
 
 ## Navigation
 

@@ -1,13 +1,15 @@
 # 正式單元 F-U11：如何系統化地證明、診斷與改善程式？
 
-版本：1.0.0  
+版本：1.0.1  
 狀態：正式學生教材  
-最後更新：2026-08-04  
+最後更新：2026-08-06  
 對應英文版本：[Formal Unit F-U11: How Can Programs Be Proven, Diagnosed, and Improved Systematically?](unit-11-testing-debugging.en.md)
 
 ## 文件用途與完成標準
 
 本章供學生獨立閱讀、練習與複習。完成本章代表你能區分 testing、verification、validation 與 debugging，能建立可重現錯誤、縮小範圍、修正並回歸測試，也能用 code review 與 refactoring 改善程式而不改變需求行為。
+
+本章的核心完成標準不依賴 AI。未使用 AI 不影響本章完成、課堂參與或評量；第 14 節是可直接跳過的選用延伸活動。
 
 ## 核心問題
 
@@ -208,13 +210,15 @@ Refactoring 改善程式結構但不改變外部可觀察行為，例如：
 
 ---
 
-## 14. 向 AI 解釋概念
+## 14. 選用延伸：使用 AI 檢查自己的解釋
 
-請向 AI 解釋：
+本節可以直接跳過，不屬於核心完成條件，也不需要固定 Prompt、保存或繳交對話，未使用時不需要任何聲明。
+
+若你選擇使用 AI，可以先用自己的話解釋：
 
 > Testing、verification、validation 與 debugging 有什麼差異？為什麼一次正確輸出不足以證明程式可靠？
 
-AI 回應若與規格、測試表或可重現結果衝突，應以證據重新判斷。
+再把 AI 回應與規格、測試表、失敗案例及可重現結果逐項比較。若內容衝突，應以可驗證證據重新判斷，而不是把 AI 回應視為答案。
 
 ---
 
@@ -234,7 +238,7 @@ AI 回應若與規格、測試表或可重現結果衝突，應以證據重新�
 
 ## 導覽
 
-- [上一單元：模組化程式設計](unit-10-modules.zh-TW.md)
-- [下一單元：跨 Concept 整合](unit-12-integration.zh-TW.md)
+- [上一單元：模組化程式設計](unit-10-modular-programming.zh-TW.md)
+- [下一單元：跨 Concept 整合](unit-12-integrated-application.zh-TW.md)
 - [正式課程索引](README.zh-TW.md)
 - [English version](unit-11-testing-debugging.en.md)

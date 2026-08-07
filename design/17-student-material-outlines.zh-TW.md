@@ -1,919 +1,290 @@
 # 16 個 Unit 的學生教材大綱
 
-版本：0.1.0  
-狀態：學生教材大綱草案  
-最後更新：2026-08-04  
+版本：0.2.0  
+狀態：可修訂的規劃與追蹤模型  
+最後更新：2026-08-07  
+治理說明：本文件規劃學生教材結構，不自行建立評分、完成、AI／工具使用或繳交規則。若有衝突，以 Constitution、正式學習與評量制度、設計標準與現行學生教材為準。  
 對應英文版本：[Student Material Outlines for 16 Units](17-student-material-outlines.en.md)
 
 ## 文件目的
 
-本文件把 Concept-driven Unit Map 轉換成可撰寫、可審查、可逐章展開的學生教材大綱。
+本文件依據 [Concept 驅動的 Unit Map](16-unit-map.zh-TW.md)，整理 4 個前導 Unit 與 12 個正式課程 Unit 的可維護教材大綱。它是規劃模型，不是學生教材本身的權威來源。
 
-每個 Unit 都以學生可獨立閱讀為目標，原則上依循：
+每個大綱原則上支援學生獨立閱讀，常見結構為：
 
-> 核心問題 → 預測 → 視覺模型 → Concept → C 語言映射 → 執行追蹤 → 錯誤診斷 → 練習 → 課後概念解釋 → 摘要
+> 核心問題 → 預測 → 視覺／執行模型 → Concept 與 C 映射 → 追蹤／實作 → 錯誤診斷 → 測試／修改 → 核心反思 → 摘要
 
-AI 只作為課後簡短的概念對話對象，不是教材主體，也不取代學生自己的預測、實作、測試與除錯。
+若不同結構更有利於閱讀，可調整章節數量；但核心學習證據必須在不依賴 AI 或其他外部協助的情況下仍可完成。
+
+## Constitution 2.0 對齊原則
+
+- AI 與其他外部協助預設為選用。
+- 任何大綱都不得把 AI 對話、固定 Prompt、保存對話、AI 使用紀錄或未使用聲明列為核心完成條件。
+- 核心反思要求學生用自己的話說明核心關係，並以程式、追蹤、圖示、測試或其他證據支持；不需要外部工具也能完成。
+- 若提供外部協助延伸，必須可直接跳過；只有在學生實際採用外部建議時，才需要理解、審查與技術驗證。
+- 具體 C／工具鏈敘述必須交代必要技術契約，並區分語言保證與實作相依行為。
+- 中英文版本使用相同 Unit ID、核心問題、技術深度與證據方向。
+
+## 共通教材撰寫要求
+
+完成版學生 Unit 在適用時應清楚呈現：
+
+1. 學生在觀察結果前應先預測什麼；
+2. 正確推理所需的輸入／狀態／流程／生命週期／stream／module 技術契約；
+3. 至少一個可重現的錯誤或失敗案例；
+4. 與主題相符的正常、邊界、無效或失敗測試；
+5. 一個需求修改或程式修改任務；
+6. 哪些證據支持目前信心，以及仍有哪些限制；
+7. 一條不依賴選用外部工具的核心完成路徑。
 
 ---
 
 # 前導課程
 
-## P-U01　程式如何從文字變成執行結果？
+## P-U01 — 程式文字如何變成執行結果？
 
-### 核心問題
+核心問題：**人類可讀的程式文字，如何在指定環境中變成電腦可執行的行為？**
 
-人類可讀的程式文字，如何變成電腦真正執行的行為？
+大綱重點：
 
-### 學習目標
+- Problem、Requirement、Algorithm／Design、Source Code、translation/build、diagnostic、executable/loadable representation、execution、output；
+- 最小 `main`、`stdio`、return status，以及經驗證的建置／執行指令；
+- 執行前預測與 translation/build 缺陷診斷；
+- 明確區分概念性的建置責任模型與目標工具鏈實際暴露的步驟／產物。
 
-學生完成本 Unit 後，應能：
+核心證據：輸出預測、建置／執行觀察、診斷分類、修改原始碼後重新建置，以及對實際 source-to-execution 流程的說明。
 
-- 區分問題、需求、演算法、原始碼、可執行檔與執行中的程式。
-- 說明編譯與執行是不同階段。
-- 預測最小 C 程式的輸出。
-- 讀取基本編譯錯誤訊息。
-- 說明修改原始碼後為何必須重新編譯。
-
-### 建議教材順序
-
-1. 一段文字為什麼不能直接被電腦理解？
-2. 問題、需求與演算法。
-3. 原始碼是什麼。
-4. 編譯器做了什麼。
-5. 可執行檔與執行中的 Process。
-6. `main`、`printf` 與 `return 0`。
-7. 執行前先預測輸出。
-8. 修改原始碼但不重新編譯。
-9. 缺少分號與其他最小編譯錯誤。
-10. 從錯誤訊息形成可驗證的猜測。
-
-### 視覺模型
-
-- Problem → Requirement → Algorithm → Source Code → Compiler → Executable → Execution → Output。
-- 原始碼檔、可執行檔與執行中的程式三者分離圖。
-
-### 最小範例
-
-- 第一個 `Hello, world!`。
-- 修改輸出文字後重新編譯。
-- 同一份舊執行檔與新原始碼的對照。
-
-### 錯誤案例
-
-- 缺少分號。
-- 字串缺少結尾引號。
-- 修改原始碼後直接執行舊檔案。
-- 把編譯錯誤誤認為執行錯誤。
-
-### 練習方向
-
-- 預測三個微小程式的輸出。
-- 把編譯與執行步驟重新排序。
-- 根據錯誤訊息指出可能問題並驗證。
-- 修改輸出需求並完成重新編譯。
-
-### 課後概念解釋
-
-請向 AI 解釋原始碼、編譯器、可執行檔與執行之間的關係。
-
-### Unit 摘要
-
-程式不是單一檔案，而是一條從需求到執行結果的轉換流程。
+核心反思：說明原始碼、translation/build、目標程式表示、執行與可觀察證據之間的關係。
 
 ---
 
-## P-U02　程式如何記住資料並改變狀態？
+## P-U02 — 程式如何記住資料並改變狀態？
 
-### 核心問題
+核心問題：**程式如何保存目前資料，並在每一步執行後產生新的狀態？**
 
-程式如何保存目前的資料，並在每一步執行後產生新的狀態？
+大綱重點：
 
-### 學習目標
+- Data、Value、Type、Object／Name、Initialization、Assignment、Expression、Evaluation、Input／Output、State Change；
+- 狀態表與執行前預期結果；
+- 基本型別／值域／格式假設與輸入狀態邊界；
+- 以安全且契約明確的例子診斷未初始化、轉換、輸入或格式錯誤。
 
-- 區分資料、值、型別與變數。
-- 說明初始化、指派與更新的差異。
-- 使用狀態表逐行追蹤程式。
-- 預測簡單運算式結果。
-- 初步辨識未初始化、型別與格式錯誤。
+核心證據：逐步狀態追蹤、運算式結果預測、錯誤修正，以及小型需求修改與重新測試。
 
-### 建議教材順序
-
-1. 程式為什麼需要記住資料。
-2. 值與型別。
-3. 變數是名稱、物件與目前值的關係。
-4. 宣告與初始化。
-5. 指派不是數學等式。
-6. 舊狀態如何變成新狀態。
-7. 運算式與求值。
-8. `int`、`double`、`char`。
-9. 輸入與輸出如何改變或顯示狀態。
-10. 整數除法與初步型別轉換。
-
-### 視覺模型
-
-- 變數狀態表。
-- `x = x + 1` 的舊值、求值、新值流程。
-- 型別作為值的解讀規則。
-
-### 最小範例
-
-- 宣告、初始化與輸出一個整數。
-- 讀入兩個數並計算。
-- 同一運算在整數與浮點數下的差異。
-
-### 錯誤案例
-
-- 使用未初始化變數。
-- 把 `=` 當成數學相等。
-- `scanf`／`printf` 格式不匹配。
-- 以整數進行除法卻期待小數結果。
-
-### 練習方向
-
-- 完成變數狀態追蹤表。
-- 預測連續指派後的值。
-- 比較不同型別的運算結果。
-- 修正輸入輸出格式錯誤。
-
-### 課後概念解釋
-
-請向 AI 解釋值、型別、變數與程式狀態之間的關係。
-
-### Unit 摘要
-
-程式執行就是狀態持續被讀取、計算與更新的過程。
+核心反思：說明值、型別、具名物件、運算式求值與狀態改變之間的關係。
 
 ---
 
-## P-U03　程式如何選擇與重複？
+## P-U03 — 程式如何選擇與重複？
 
-### 核心問題
+核心問題：**當不同狀況需要不同動作，或同一動作需要重複時，程式如何決定下一步？**
 
-當不同狀況需要不同動作，或同一動作需要重複時，程式如何決定下一步？
+大綱重點：
 
-### 學習目標
+- Sequence、Condition、Selection、Repetition、Loop State、Update、Boundary、Termination／Nontermination；
+- `if`／`else`、`while`、`for` 與範圍明確的流程轉移；
+- 分支預測、逐次迴圈追蹤、off-by-one 與終止條件；
+- 邊界或需求改變後的回歸驗證。
 
-- 說明循序、條件、決策與重複。
-- 預測分支路徑與迴圈執行次數。
-- 追蹤計數器、累加器與迴圈條件。
-- 辨識 off-by-one 與無窮迴圈。
-- 修改需求後重新驗證控制流程。
+核心證據：路徑追蹤、迴圈狀態表、邊界測試、非終止／off-by-one 診斷，以及修正後驗證。
 
-### 建議教材順序
-
-1. 預設的循序執行。
-2. 條件如何產生真假結果。
-3. 決策與 `if`／`else`。
-4. 多個條件與邏輯運算。
-5. 為什麼需要重複。
-6. `while` 的條件驅動模型。
-7. `for` 的計數模型。
-8. 每次 iteration 的狀態變化。
-9. 邊界、`<` 與 `<=`。
-10. 無窮迴圈與停止條件。
-
-### 視覺模型
-
-- 分支流程圖。
-- 迴圈狀態表。
-- 開始值、繼續條件、更新與結束的循環圖。
-
-### 最小範例
-
-- 判斷正負數。
-- 計算 1 到 n 的總和。
-- sentinel 輸入迴圈。
-
-### 錯誤案例
-
-- 條件寫反。
-- 忘記更新迴圈變數。
-- 邊界多跑或少跑一次。
-- 複合條件的邏輯錯誤。
-
-### 練習方向
-
-- 預測分支路徑。
-- 逐次填寫迴圈狀態。
-- 修正 off-by-one。
-- 把固定次數迴圈改成 sentinel 迴圈。
-
-### 課後概念解釋
-
-請向 AI 解釋條件、決策、重複與邊界之間的關係。
-
-### Unit 摘要
-
-控制流程決定程式下一步執行哪一段，以及何時停止。
+核心反思：說明條件、狀態更新、重複、邊界與終止如何共同作用。
 
 ---
 
-## P-U04　如何把一個大問題拆成可理解的工作？
+## P-U04 — 如何把大問題拆成可理解的工作？
 
-### 核心問題
+核心問題：**當程式變長時，如何分離責任，使各部分可以理解、測試與修改？**
 
-當程式開始變長時，如何把責任分開，讓每一部分可以理解、測試與修改？
+大綱重點：
 
-### 學習目標
+- Decomposition、Responsibility、Function、Interface、Parameter、Argument、Return Value、Call；
+- caller／callee 狀態與基本函數契約；
+- 小函數的正常／邊界測試；
+- 比較不同分解方式，並在不重寫無關責任的前提下修改需求。
 
-- 說明分解、責任與函數的關係。
-- 區分參數、引數與回傳值。
-- 閱讀函數介面並預測呼叫結果。
-- 為函數設計基本測試。
-- 把重複或複雜邏輯抽成函數。
+核心證據：責任描述、呼叫追蹤、經測試的函數、分解比較，以及需求修改。
 
-### 建議教材順序
-
-1. 長程式為什麼難以理解。
-2. 問題分解與單一責任。
-3. 函數是可呼叫的計算單位。
-4. 介面與實作。
-5. 參數與引數。
-6. 回傳值。
-7. 區域變數。
-8. 函數宣告、定義與呼叫。
-9. 追蹤呼叫前後的資料。
-10. 為函數建立正常、邊界與回歸測試。
-
-### 視覺模型
-
-- 大問題拆成子問題的責任圖。
-- Caller → Argument → Parameter → Function → Return Value。
-
-### 最小範例
-
-- `max` 函數。
-- 溫度轉換函數。
-- 把重複計算抽成函數。
-
-### 錯誤案例
-
-- 函數責任不清。
-- 參數順序錯誤。
-- 忘記回傳值。
-- 呼叫端與函數原型不一致。
-
-### 練習方向
-
-- 為函數寫一句責任描述。
-- 判斷哪些程式片段適合抽成函數。
-- 預測參數與回傳值。
-- 為函數補上邊界測試。
-
-### 課後概念解釋
-
-請向 AI 解釋函數、參數、引數、回傳值與責任之間的關係。
-
-### Unit 摘要
-
-函數讓大型問題能被拆成具明確責任、可測試與可重用的部分。
+核心反思：說明責任、介面、參數、引數、回傳值與測試證據如何連結。
 
 ---
 
 # 正式課程
 
-## F-U01　表示、型別與運算為什麼會影響結果？
+## F-U01 — 表示、型別與運算為什麼會影響結果？
 
-### 核心問題
+核心問題：**同一個數學想法或原始碼運算式，為什麼會因表示、型別與轉換而產生不同程式行為？**
 
-同一個數值或運算，為什麼可能因表示方式與型別而產生不同結果？
+大綱重點：整數範圍、bit／byte、signed／unsigned 邊界、字元表示、浮點近似、型別轉換與格式化 I/O。必須區分可攜的 C 保證與 implementation-defined／implementation-specific 觀察。
 
-### 學習目標
+核心證據：結果預測、適合目標實作的邊界實驗、轉換／格式錯誤診斷，以及表示限制的說明。
 
-- 說明值、表示方式與型別的差異。
-- 理解位元、位元組、MSB 與 LSB。
-- 觀察整數範圍、字元編碼與浮點誤差。
-- 預測隱式與顯式轉換的結果。
-- 選擇正確的輸入輸出格式。
-
-### 建議教材順序
-
-1. 同一資訊可以有不同表示。
-2. Bit、Byte 與位元位置。
-3. MSB 與 LSB。
-4. 無號整數與有號整數的範圍。
-5. 字元與編碼。
-6. 浮點數是近似表示。
-7. 運算子的型別規則。
-8. 整數提升與型別轉換。
-9. 格式化輸入輸出。
-10. 由測試觀察表示限制。
-
-### 視覺模型
-
-- 位元序列中的 MSB／LSB。
-- 相同位元在不同型別下的解讀。
-- 浮點數可表示點與實數線的差異。
-
-### 錯誤案例
-
-- 溢位後仍把結果當成數學整數。
-- 混用 signed／unsigned。
-- 浮點數直接判斷相等。
-- 格式指定錯誤。
-
-### 練習方向
-
-- 判斷 MSB／LSB。
-- 手算小型二進位值。
-- 預測轉型結果。
-- 設計程式觀察浮點誤差。
-
-### 課後概念解釋
-
-請向 AI 解釋 MSB 與 LSB 的差異，以及它們在位元表示中的位置。
-
-### Unit 摘要
-
-型別決定如何解讀位元，而表示方式會限制程式可以得到的結果。
+核心反思：說明表示、型別、轉換與運算規則如何限制可觀察結果。
 
 ---
 
-## F-U02　如何建立可靠的多分支與重複流程？
+## F-U02 — 如何建立可靠的多分支與重複流程？
 
-### 核心問題
+核心問題：**當條件、邊界與重複規則變複雜時，如何仍能證明流程正確？**
 
-當條件、邊界與重複規則變複雜時，如何仍能說明流程為什麼正確？
+大綱重點：多路選擇、巢狀控制、sentinel、invariant、路徑覆蓋、複合條件，以及控制流程修改後的回歸。
 
-### 學習目標
+核心證據：路徑表／圖、不變量或迴圈狀態說明、邊界／sentinel 測試、邏輯錯誤診斷，以及修正後驗證。
 
-- 組織多分支與巢狀控制。
-- 使用 sentinel 與 invariant 描述迴圈。
-- 設計涵蓋正常與邊界情況的測試。
-- 比較不同控制流程寫法。
-- 修正複雜流程中的邏輯錯誤。
-
-### 建議教材順序
-
-1. 多分支問題的分類。
-2. `else if` 與 `switch`。
-3. 巢狀決策。
-4. 巢狀迴圈。
-5. sentinel 與資料結束。
-6. invariant：每次迴圈前後應保持什麼。
-7. 狀態、條件與更新的一致性。
-8. 控制流程測試表。
-9. 重構複雜條件。
-10. 修改需求後的回歸驗證。
-
-### 錯誤案例
-
-- 分支重疊或遺漏。
-- `switch` fall-through 誤用。
-- sentinel 被當成一般資料。
-- 巢狀迴圈更新錯誤。
-
-### 練習方向
-
-- 補齊分支分類表。
-- 為 sentinel loop 建立狀態追蹤。
-- 找出 invariant 被破壞的位置。
-- 比較兩種等價流程。
-
-### 課後概念解釋
-
-請向 AI 解釋 sentinel、loop condition、boundary 與 invariant 的差異。
-
-### Unit 摘要
-
-可靠控制流程需要完整分類、清楚邊界與可持續驗證的狀態條件。
+核心反思：說明路徑覆蓋、迴圈條件、邊界、sentinel 與 invariant 如何提供互補證據。
 
 ---
 
-## F-U03　資料如何形成有順序的集合？
+## F-U03 — 資料如何形成有順序的集合？
 
-### 核心問題
+核心問題：**當多個相關值需要一起保存與處理時，如何安全地組織、定位與走訪它們？**
 
-當多個同類資料需要一起保存與處理時，程式如何組織、定位與走訪它們？
+大綱重點：Array、Index、Length／Capacity、連續元素配置、Traversal、函數參數中的陣列行為，以及越界風險。
 
-### 學習目標
+核心證據：索引／配置圖、走訪追蹤、有效／無效邊界案例、安全的索引錯誤診斷，以及大小修改後重新測試。
 
-- 說明 collection、array、index、length 與 boundary。
-- 理解陣列元素在記憶體中的排列。
-- 安全走訪一維陣列。
-- 將陣列傳入函數。
-- 辨識越界與長度遺失問題。
-
-### 建議教材順序
-
-1. 多個相同型別變數的問題。
-2. Collection 與 Array。
-3. 索引從零開始的意義。
-4. 長度與合法範圍。
-5. 連續排列的記憶體模型。
-6. 走訪、搜尋與累計。
-7. 陣列作為函數參數。
-8. 長度必須另行傳遞。
-9. 多維陣列的初步模型。
-10. 越界與 memory safety。
-
-### 錯誤案例
-
-- 使用 `index == length`。
-- 忘記初始化所有元素。
-- 函數內誤以為可取得陣列長度。
-- 走訪條件與實際長度不一致。
-
-### 練習方向
-
-- 手動標示索引與值。
-- 完成搜尋、最大值與平均值。
-- 修正越界程式。
-- 將重複陣列處理抽成函數。
-
-### 課後概念解釋
-
-請向 AI 解釋陣列、索引、長度與邊界之間的關係。
-
-### Unit 摘要
-
-陣列把同型別資料依序排列，但安全使用必須始終知道合法索引範圍。
+核心反思：說明陣列配置、索引、有效邊界與迭代之間的關係。
 
 ---
 
-## F-U04　文字資料如何被表示與處理？
+## F-U04 — 文字資料如何被表示與處理？
 
-### 核心問題
+核心問題：**C 如何表示文字，又如何知道有效內容與容量邊界？**
 
-電腦如何把文字保存成資料，又如何知道文字在哪裡結束？
+大綱重點：`char` 陣列、null termination、string literal、容量與長度、`fgets`、輸入換行／狀態、選定字串函式與 buffer 邊界。
 
-### 學習目標
+核心證據：字元陣列／字串圖、容量／終止測試、截斷或輸入處理問題診斷，以及修正後重新測試。
 
-- 說明 character、encoding、character array 與 string。
-- 理解 null terminator 的作用。
-- 安全讀取與處理文字。
-- 區分容量、內容長度與輸入限制。
-- 辨識 buffer overflow 與缺少終止字元。
-
-### 建議教材順序
-
-1. 字元如何成為數值。
-2. 字元陣列與字串。
-3. Null terminator。
-4. 字串常值。
-5. 容量與字串長度。
-6. `fgets` 與輸入換行。
-7. 基本字串函式。
-8. 自行走訪字串。
-9. Buffer 與安全邊界。
-10. 編碼與 UTF-8 的概念性限制。
-
-### 錯誤案例
-
-- 忘記保留終止字元空間。
-- 使用未終止字元陣列當字串。
-- 輸入超過 buffer。
-- 把位元組數等同於字元數。
-
-### 練習方向
-
-- 手動標示字串每個位置。
-- 計算字串長度。
-- 移除 `fgets` 留下的換行。
-- 修正危險的文字輸入程式。
-
-### 課後概念解釋
-
-請向 AI 解釋字元陣列、字串、buffer 與 null terminator 的關係。
-
-### Unit 摘要
-
-C 字串是以特殊終止值標記結尾的字元陣列，安全處理必須同時考慮容量與邊界。
+核心反思：說明為什麼不是每個 `char` 陣列都是有效 C 字串，以及容量與終止為何是不同問題。
 
 ---
 
-## F-U05　函數呼叫如何建立新的執行環境？
+## F-U05 — 巢狀與遞迴函數呼叫期間有哪些狀態？
 
-### 核心問題
+核心問題：**在巢狀或遞迴呼叫中，如何理解參數、區域物件、回傳位置、scope 與 lifetime，而不把單一實體 runtime 表示當成語言保證？**
 
-函數呼叫時，參數、區域狀態與未完成工作如何被保存？
+大綱重點：Activation Model、Scope、Lifetime、Automatic Storage Duration、Nested Calls、Recursion、Base／Termination Condition 與資源影響。Call-stack 圖可以作為特定實作／教學模型，但不得表述為 C 語言保證。
 
-### 學習目標
+核心證據：activation／lifetime 追蹤、scope 與 lifetime 比較、遞迴追蹤，以及非終止或錯誤生命週期推理的診斷。
 
-- 說明 call stack 與 stack frame。
-- 連結 scope、lifetime 與 automatic storage。
-- 追蹤巢狀函數呼叫。
-- 理解遞迴的 base case 與 recursive case。
-- 辨識無限遞迴與 stack overflow。
-
-### 建議教材順序
-
-1. 呼叫函數時原函數為何能稍後繼續。
-2. Stack frame 的內容。
-3. 參數與區域變數的 lifetime。
-4. Scope 與 lifetime 不相同。
-5. 巢狀呼叫追蹤。
-6. Recursion 是函數呼叫自己。
-7. Base case。
-8. Recursive case 與問題縮小。
-9. 展開與回傳階段。
-10. Stack overflow。
-
-### 錯誤案例
-
-- 缺少 base case。
-- 遞迴問題沒有縮小。
-- 回傳後使用已結束生命週期的區域資料。
-- 混淆 scope 與 lifetime。
-
-### 練習方向
-
-- 畫出多層呼叫堆疊。
-- 追蹤遞迴參數。
-- 比較 iterative 與 recursive 寫法。
-- 修正不會終止的遞迴。
-
-### 課後概念解釋
-
-請向 AI 解釋 call stack、stack frame、scope 與 lifetime 的關係。
-
-### Unit 摘要
-
-每次函數呼叫都建立暫時的執行環境，遞迴則讓多個同函數環境同時存在。
+核心反思：說明 scope、物件 lifetime、activation state 與目標實作可能使用的 call-stack 視覺化有何不同。
 
 ---
 
-## F-U06　如何透過位址間接操作資料？
+## F-U06 — 如何透過指標值間接存取資料？
 
-### 核心問題
+核心問題：**指標值如何指向物件，又必須滿足哪些前提才能合法地間接存取？**
 
-程式如何用一個值指向另一個物件，並透過位址存取或修改它？
+大綱重點：Object、Address、Pointer Type／Value、Null Pointer、Dereference Preconditions、Aliasing、Pointer Parameter、Lifetime、Bounds 與有限的 Array 關係。
 
-### 學習目標
+核心證據：物件－指標圖、aliasing 追蹤、有效／無效前提分類、透過 pointer parameter 修改 caller 資料，以及 null／dangling／out-of-bounds 風險的安全診斷。
 
-- 區分 object、address、pointer 與 pointee。
-- 使用 `&` 與 `*`。
-- 說明 indirection 與 aliasing。
-- 使用 pointer parameter 修改呼叫端資料。
-- 辨識 null、dangling 與越界指標。
-
-### 建議教材順序
-
-1. 物件位於記憶體中的某個位置。
-2. 位址是一個可被保存的值。
-3. Pointer 的型別與目標。
-4. Address-of 與 dereference。
-5. Pointer 與 pointee 的狀態圖。
-6. Aliasing。
-7. Pointer parameter。
-8. Null pointer。
-9. Pointer arithmetic 與陣列的關係。
-10. Lifetime 與 memory safety。
-
-### 錯誤案例
-
-- 解參照未初始化指標。
-- 解參照 null pointer。
-- 指標指向已結束生命週期物件。
-- 指標運算超出陣列範圍。
-
-### 練習方向
-
-- 畫出指標與物件關係。
-- 預測別名修改結果。
-- 使用 pointer parameter 交換兩個值。
-- 修正無效指標案例。
-
-### 課後概念解釋
-
-請向 AI 解釋位址、指標、解參照與 pointee 之間的關係。
-
-### Unit 摘要
-
-指標保存位址，解參照讓程式透過位址間接存取另一個物件。
+核心反思：說明 pointer type／value、被指向物件、lifetime、bounds 與 dereference 前提如何連結。
 
 ---
 
-## F-U07　資料結構如何由多個不同欄位組成？
+## F-U07 — 一個資料物件如何包含不同欄位？
 
-### 核心問題
+核心問題：**當一個實體包含多種不同資料時，如何把欄位表示並操作成一個有意義的 record？**
 
-當一個實體包含多種不同資料時，如何把它們組合成一個有意義的物件？
+大綱重點：從需求辨識欄位、`struct` 型別／物件、member access、initialization、assignment、passing、nested structure、layout caveat 與 record validity。
 
-### 學習目標
+核心證據：依需求設計 record、member 更新、函數互動、無效資料測試，以及兩種資料設計比較。
 
-- 說明 structure type、object 與 member。
-- 建立與初始化結構物件。
-- 存取與更新成員。
-- 傳遞結構或結構指標。
-- 理解 nested structure 與 layout。
-
-### 建議教材順序
-
-1. 同一實體需要不同型別欄位。
-2. `struct` 定義新型別。
-3. Structure object。
-4. Member access。
-5. 初始化與指派。
-6. 結構作為函數參數與回傳值。
-7. 結構指標與 `->`。
-8. Nested structure。
-9. Array of structures。
-10. `typedef` 與介面可讀性。
-
-### 錯誤案例
-
-- 混淆型別定義與物件建立。
-- 使用 `.`／`->` 錯誤。
-- 忘記初始化欄位。
-- 結構指標生命週期錯誤。
-
-### 練習方向
-
-- 建立學生、座標或日期結構。
-- 以函數更新或比較結構。
-- 走訪結構陣列。
-- 追蹤 nested structure 的成員路徑。
-
-### 課後概念解釋
-
-請向 AI 解釋 structure type、structure object、member 與 member access 的關係。
-
-### Unit 摘要
-
-結構讓多個不同型別欄位共同描述一個有意義的實體。
+核心反思：說明 structure type、structure object、members 與圍繞該 record 的 interface responsibility 有何不同。
 
 ---
 
-## F-U08　程式如何在執行期間取得與釋放空間？
+## F-U08 — 程式如何管理執行期間才決定大小或生命週期的儲存空間？
 
-### 核心問題
+核心問題：**當所需空間無法事先固定時，如何安全處理配置、調整大小、ownership／release responsibility、失敗與 lifetime？**
 
-當資料大小或生命週期無法預先固定時，程式如何管理儲存空間？
+大綱重點：`malloc`、`calloc`、`realloc`、`free`、size arithmetic、allocation failure、保留舊指標的 resize 模式、ownership／release responsibility、dangling use、leak 與 double release。
 
-### 學習目標
+核心證據：配置／使用／釋放圖、大小／邊界推理、明確失敗路徑、ownership 說明、安全 resize 實作，以及容量修改後回歸。
 
-- 說明 dynamic allocation 的需求。
-- 使用 `malloc`、`calloc`、`realloc` 與 `free`。
-- 理解 ownership 與 lifetime。
-- 辨識 leak、dangling pointer 與 double free。
-- 建立配置、使用、重新配置與釋放的完整流程。
-
-### 建議教材順序
-
-1. 固定大小資料的限制。
-2. 動態配置的空間與 pointer。
-3. `malloc` 與配置失敗。
-4. `calloc`。
-5. `realloc` 的成功與失敗處理。
-6. `free`。
-7. Ownership：誰負責釋放。
-8. Memory leak。
-9. Dangling pointer 與 double free。
-10. 以工具或測試觀察記憶體問題。
-
-### 錯誤案例
-
-- 未檢查配置結果。
-- 覆蓋唯一指標造成 leak。
-- 釋放後繼續使用。
-- 重複釋放。
-- `realloc` 失敗後遺失原指標。
-
-### 練習方向
-
-- 動態建立整數陣列。
-- 擴充資料容量。
-- 標註 ownership。
-- 診斷配置與釋放錯誤。
-
-### 課後概念解釋
-
-請向 AI 解釋 dynamic allocation、ownership、lifetime 與 `free` 的關係。
-
-### Unit 摘要
-
-動態記憶體提供彈性，但程式必須明確管理所有權與釋放責任。
+核心反思：說明配置成功、pointer ownership、lifetime、resize 與 release responsibility 如何連結。
 
 ---
 
-## F-U09　程式如何與檔案及持久資料互動？
+## F-U09 — 程式如何與檔案及持久資料互動？
 
-### 核心問題
+核心問題：**從外部檔案讀寫資料時，程式如何區分有效資料、輸入結束與失敗，同時維持正確資源狀態？**
 
-當資料需要在程式結束後仍存在，程式如何讀取、寫入並判斷錯誤？
+大綱重點：pathname／file 與 opened stream 的差異、`FILE *`、open／read／write／close 結果、end-of-input indication、stream error state、text format／protocol，以及適用時的 transactional／failure-preserving loading。
 
-### 學習目標
+核心證據：狀態／錯誤追蹤、open／read／write 失敗案例、持久資料驗證、資源關閉推理，以及格式／錯誤處理修正。
 
-- 說明 stream、file、position 與 EOF。
-- 開啟、讀寫並關閉檔案。
-- 檢查檔案操作結果。
-- 區分資料格式與程式內部表示。
-- 設計可重現的檔案錯誤處理。
-
-### 建議教材順序
-
-1. 暫時輸入輸出與持久資料。
-2. Stream model。
-3. `FILE *`。
-4. `fopen` 模式。
-5. 文字寫入。
-6. 文字讀取。
-7. EOF 與函數回傳值。
-8. Format 與 protocol。
-9. 關閉檔案與資源責任。
-10. 錯誤通道與診斷訊息。
-
-### 錯誤案例
-
-- 開檔失敗後仍使用 stream。
-- 使用 `feof` 的錯誤模式。
-- 忘記關檔。
-- 寫入格式與讀取格式不一致。
-
-### 練習方向
-
-- 寫入並讀回紀錄。
-- 設計簡單文字檔格式。
-- 處理不存在或格式錯誤的檔案。
-- 比較正常結束與讀取錯誤。
-
-### 課後概念解釋
-
-請向 AI 解釋 stream、file、EOF、format 與 protocol 的關係。
-
-### Unit 摘要
-
-檔案互動是有狀態的資料流操作，必須處理格式、結束條件與錯誤。
+核心反思：說明 pathname／file、opened stream、end-of-input indication 與 error state 有何不同。
 
 ---
 
-## F-U10　程式如何分成可獨立維護的模組？
+## F-U10 — 如何把程式分成可獨立維護的模組？
 
-### 核心問題
+核心問題：**如何分離 interface 與 implementation，使程式各部分能以明確依賴被修改與建置？**
 
-如何把介面與實作分開，使不同程式部分可以獨立理解、編譯與替換？
+大綱重點：header／source、declaration／definition、include guard、translation unit、目標工具鏈建置步驟、適用時的 linkage、dependency tracing，以及 compile 與 link 證據。
 
-### 學習目標
+核心證據：interface／implementation 分離、dependency graph、目標工具鏈建置、declaration／definition／linkage 問題診斷，以及在穩定介面下替換 implementation。
 
-- 說明 module、interface 與 implementation。
-- 區分 header file 與 source file。
-- 理解 separate compilation 與 linking。
-- 使用 include guard。
-- 設計清楚的模組責任。
-
-### 建議教材順序
-
-1. 單一來源檔的限制。
-2. Module 與 responsibility。
-3. Interface 應揭露什麼。
-4. Implementation 應隱藏什麼。
-5. Header file。
-6. Source file。
-7. `#include` 與 include guard。
-8. Separate compilation。
-9. Linking 與 unresolved symbol。
-10. 修改實作而不改介面。
-
-### 錯誤案例
-
-- 在 header 中放置不適當定義。
-- 缺少 include guard。
-- 宣告與定義不一致。
-- 忘記連結某個 source file。
-
-### 練習方向
-
-- 把單檔程式拆成模組。
-- 設計函數介面。
-- 修正 linking error。
-- 替換模組實作並執行回歸測試。
-
-### 課後概念解釋
-
-請向 AI 解釋 module、interface、implementation、separate compilation 與 linking 的關係。
-
-### Unit 摘要
-
-模組化讓介面保持穩定，實作則可以被獨立理解、測試與替換。
+核心反思：說明 interface、implementation、translation unit、dependency 與 linkage／build evidence 有何不同。
 
 ---
 
-## F-U11　如何系統化地證明、診斷與改善程式？
+## F-U11 — 如何系統化測試、診斷與改善程式？
 
-### 核心問題
+核心問題：**除了單次正確輸出之外，還需要哪些證據才能信任程式或技術主張？**
 
-除了看到正確輸出之外，還需要什麼證據才能信任程式？
+大綱重點：Expected Result、正常／邊界／無效／失敗測試、Reproducibility、Symptom／Cause／Hypothesis、Debugging、Verification、Validation、Regression、Refactoring、Evidence Quality 與 Confidence Limit。
 
-### 學習目標
+核心證據：先寫預期結果的測試設計、可重現錯誤、假設驗證、修正、回歸，以及證據強度比較。
 
-- 區分 testing、verification 與 validation。
-- 系統化重現與縮小錯誤範圍。
-- 設計正常、邊界、錯誤與回歸測試。
-- 閱讀與審查既有程式。
-- 在保持行為下進行重構。
-
-### 建議教材順序
-
-1. 一次正確輸出為何不足。
-2. Expected result 與 test case。
-3. 正常、邊界、錯誤案例。
-4. Verification 與 validation。
-5. Reproduce、isolate、hypothesize、test。
-6. Error diagnosis。
-7. Regression testing。
-8. Code reading。
-9. Code review。
-10. Refactoring 與行為保持。
-
-### 錯誤案例
-
-- 只測一個案例。
-- 修正症狀但沒有找到原因。
-- 修改後不做回歸。
-- 重構時偷偷改變行為。
-
-### 練習方向
-
-- 為既有程式補測試。
-- 從症狀縮小錯誤範圍。
-- 比較修正前後行為。
-- 審查另一份可執行但不可靠的程式。
-
-### 課後概念解釋
-
-請向 AI 解釋 testing、verification、validation、debugging 與 regression 的差異。
-
-### Unit 摘要
-
-可信程式需要可重現的測試、診斷過程與修正後證據，而不只是一次看似正確的輸出。
+核心反思：說明 Testing、Verification、Validation、Debugging 與 Regression Verification 的差異與關係。
 
 ---
 
-## F-U12　如何完成跨 Concept 的整合程式？
+## F-U12 — 如何整合整門課的程式設計 Concept？
 
-### 核心問題
+核心問題：**如何把需求、資料、流程、函數、memory／lifetime、interaction 與 engineering evidence 整合成一個可維護程式？**
 
-如何把需求、資料、控制、函數、記憶體、互動與工程能力整合成一個可維護的程式？
+大綱重點：Requirement Contract、Decomposition、Data／Control／Module Design、Incremental Implementation、Failure Handling、Testing、Modification、Validation、Maintenance 與 Trade-off Explanation。
 
-### 學習目標
+核心證據：從 requirement 到 implementation／test evidence 的端到端追蹤、需求修改、已診斷的 defect 或 failure path、regression verification，以及剩餘限制說明。
 
-- 從需求建立資料與功能模型。
-- 將程式分成模組與責任。
-- 選擇適當的資料表示與儲存方式。
-- 建立測試、錯誤處理與回歸流程。
-- 解釋設計決策與限制。
-
-### 建議教材順序
-
-1. 讀取並澄清需求。
-2. 定義輸入、輸出與限制。
-3. 建立資料模型。
-4. 建立功能與模組責任。
-5. 規劃控制流程。
-6. 決定記憶體與資源責任。
-7. 設計介面與檔案格式。
-8. 建立最小可執行版本。
-9. 測試、除錯、修改與回歸。
-10. 說明與反思設計選擇。
-
-### 建議整合題型
-
-- 小型學生或會員紀錄系統。
-- 文字檔資料分析工具。
-- 簡易庫存或成績管理系統。
-- 具有查詢、修改、儲存與錯誤處理的小型程式。
-
-### 錯誤案例
-
-- 未先釐清需求便開始寫程式。
-- 所有責任集中在 `main`。
-- 資料格式與模組介面不一致。
-- 沒有測試與錯誤處理。
-- 修改功能後破壞既有行為。
-
-### 練習方向
-
-- 將需求轉成 Concept 與責任清單。
-- 建立模組圖與資料流程圖。
-- 分階段實作與測試。
-- 對需求變更進行回歸驗證。
-- 口頭解釋整體設計。
-
-### 課後概念解釋
-
-請向 AI 解釋你的整合程式如何把資料、控制、函數、記憶體、互動與測試連結在一起。
-
-### Unit 摘要
-
-整合程式不是把語法堆在一起，而是讓多個 Concept 依照清楚責任共同解決需求。
+核心反思：說明 requirement、design、implementation、tests、failure handling 與 maintenance evidence 如何形成一個完整開發循環。
 
 ---
 
-## 大綱完成後的教材開發順序
+## 選用外部協助延伸模式
 
-1. 先完成 P-U01 的中英文完整學生教材。
-2. 依 P-U01 實際寫作經驗修正共同章節模板。
-3. 依序完成 P-U02、P-U03、P-U04。
-4. 試教前導 Unit 並記錄學生閱讀與理解問題。
-5. 再依正式課程順序展開 F-U01 至 F-U12。
-6. 每個完整 Unit 都必須回查 Concept Registry、Unit Map 與憲法 1.3.0。
+Unit 可以在核心路徑之後選擇加入短延伸，例如：
 
-## 導覽
+1. 學生先陳述自己的推理或預期結果；
+2. 學生選擇是否取得外部建議；
+3. 找出值得檢查的主張；
+4. 以程式、測試、diagnostics、可靠參考資料、追蹤或其他可重現方式驗證；
+5. 接受、修改或拒絕該建議。
 
-- [Concept Tree](14-programming-concept-tree.zh-TW.md)
-- [Concept Registry](15-programming-concept-registry.zh-TW.md)
-- [Unit Map](16-unit-map.zh-TW.md)
+此模式永遠不是普遍必做。除非特定已核准活動或學術誠信規則明確要求，否則不要求固定 Prompt、完整對話紀錄、前後版本工件、AI 摘要或未使用聲明。
+
+## 維護規則
+
+修改本規劃模型時：
+
+- 中英文版本必須一起更新；
+- 保留 Unit ID 與現行 Unit Map 的核心問題／證據方向；
+- 在宣稱實作完成前，必須把大綱變更與目前實際學生教材比對；
+- 不重複正式評量政策；
+- 選用外部協助必須可直接跳過；
+- 具體技術敘述必須依指定 C 標準／工具鏈／環境驗證；
+- 重要治理修正必須記錄於現行 Constitution 2.0 審查。
+
+## 相關文件
+
+- [Concept 驅動的 Unit Map](16-unit-map.zh-TW.md)
+- [程式設計 Concept Registry](15-programming-concept-registry.zh-TW.md)
+- [正式學習與評量制度](13-learning-assessment-policy.zh-TW.md)
+- [正式學生教材](../materials/formal/README.zh-TW.md)
+- [前導學生教材](../materials/preparatory/)
 - [教學內容設計區](README.zh-TW.md)
 - [English version](17-student-material-outlines.en.md)

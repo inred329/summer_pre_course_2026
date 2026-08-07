@@ -1,13 +1,15 @@
 # Formal Unit F-U02: How Can Reliable Multi-Branch and Repetitive Flows Be Built?
 
-Version: 1.0.1  
+Version: 1.0.2  
 Status: Official student material  
-Last updated: 2026-08-05  
+Last updated: 2026-08-06  
 Corresponding Chinese version: [正式單元 F-U02：如何建立可靠的多分支與重複流程？](unit-02-complex-control-flow.zh-TW.md)
 
 ## Purpose and Completion Standard
 
 This chapter is for independent reading, practice, and review. Completing it means you can design multi-branch and nested flows, explain the roles of sentinels and invariants, and use path, boundary, input-status, and termination tests to show that a flow is reliable.
+
+AI use is not part of the core completion standard. Not using AI does not affect chapter completion, classroom participation, or assessment; the AI activity near the end is a skippable optional extension.
 
 ## Core Question
 
@@ -224,13 +226,13 @@ New rule: ignore numeric values outside 0–100 without terminating. Update the 
 
 ---
 
-## 11. Explain the Concept to AI
+## 11. Optional Extension: Use AI to Check Your Explanation
 
-Explain:
+You may skip this activity. Not using AI does not affect chapter completion, classroom participation, or assessment. When you choose to use AI, first explain in your own words:
 
 > Why does branch order matter? How are a sentinel, EOF, invalid input, and a loop invariant different?
 
-If an AI response conflicts with a path table, read-result rule, trace, or reproducible result, judge it again using evidence.
+No fixed prompt, saved or submitted conversation, or non-use declaration is required. If an AI response conflicts with a path table, read-result rule, trace, or reproducible result, judge it again using evidence.
 
 ---
 

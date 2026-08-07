@@ -1,60 +1,60 @@
 # Learning and Assessment Policy
 
-Version: 0.1.0  
+Version: 0.2.0  
 Status: Official policy baseline  
-Last updated: 2026-08-03  
-Major change summary: Established that assignments are not submitted or graded; attendance is not graded; every class discusses the previous assignment; final grades consist of classroom participation and one final one-to-one oral examination.  
+Last updated: 2026-08-05  
+Major change summary: Removed mandatory AI-use records and fixed AI-assessment requirements under Constitution 2.0 while preserving student responsibility for understanding, testing, modification, and explanation.  
 Corresponding Chinese version: [學習與評量制度](13-learning-assessment-policy.zh-TW.md)
 
 ## Document Purpose
 
-This document defines the official learning and assessment policy for the Chinese preparatory class, English preparatory class, and connected formal course.
+This document defines the official learning and assessment policy for the Chinese-taught preparatory track, English-taught preparatory track, and connected formal course.
 
 It answers:
 
-1. What role do assignments play?
-2. Must assignments be submitted or graded?
+1. What role does homework play?
+2. Must homework be submitted or graded?
 3. How is classroom participation demonstrated?
-4. Is attendance taken for grading?
-5. What components determine the course grade?
-6. What is the role of the final one-to-one oral examination?
+4. Is attendance graded?
+5. What determines the formal course grade?
+6. What role does the final one-to-one oral examination play?
 
 ## 1. Core Policy
 
 The course uses the following policy:
 
-- Every learning unit includes an assignment or practice task.
-- Assignments are formative learning tools. They are not submitted and do not receive direct grades.
-- Students retain their programs, tests, traces, errors, and reflections for later discussion and the final oral examination.
-- Each class begins with a fixed period for discussing the previous assignment.
+- Every learning unit includes homework or practice.
+- Homework is a formative learning tool. It is not submitted and does not receive direct points.
+- Students should retain their own programs, tests, traces, errors, and reflections for later discussion and the final oral examination.
+- Each class begins with dedicated time to discuss the previous homework.
 - Attendance is not graded, and presence alone is not treated as capability evidence.
 - The formal grade consists only of classroom participation and one final one-to-one oral examination.
 - The final oral examination is the only summative capability assessment.
 
 ```text
-Assignments and practice
+Homework and practice
 → Independent completion and revision
 → Discussion, questions, and sharing in the next class
 → Continuous formative learning
 → Final one-to-one oral examination
 ```
 
-## 2. Role of Assignments
+## 2. Role of Homework
 
-Assignments are neither submission artifacts nor sources of routine points.
+Homework is neither a submission artifact nor a source of routine points.
 
-Their purpose is to help students:
+Its purpose is to help students:
 
-- Practice reading, predicting, tracing, implementing, testing, debugging, and modifying.
-- Use materials, peers, documentation, and AI at an appropriate pace.
-- Accumulate programs and learning records for discussion and the final oral examination.
+- Practise reading, predicting, tracing, implementing, testing, debugging, and modifying.
+- Use materials, peers, documentation, and optional tools at an appropriate pace.
+- Accumulate programs and learning records for class discussion and the final oral examination.
 - Discover genuine gaps in understanding and turn them into questions for the next class.
 
-Instructors must not deduct points because an assignment was not submitted, because submission is not required. Student engagement and capability are instead observed through classroom discussion, live activity, and the final oral examination.
+Instructors must not deduct points because homework was not submitted, because submission is not required. Engagement and capability are instead observed through classroom discussion, live activity, and the final oral examination.
 
-## 3. Assignment Discussion at the Start of Each Class
+## 3. Homework Discussion at the Start of Each Class
 
-Each class should ordinarily reserve 15–25 minutes for discussing the previous assignment.
+Each class should ordinarily reserve 15–25 minutes for discussing the previous homework.
 
 This may include:
 
@@ -62,7 +62,7 @@ This may include:
 - Students sharing errors, tests, or alternative solutions.
 - The instructor selecting representative errors for class tracing and debugging.
 - Peers comparing designs and trade-offs.
-- The instructor using questions rather than immediately giving the answer.
+- The instructor using questions instead of immediately giving a complete answer.
 - Testing the corrected version again.
 
 When no student volunteers a question, the instructor should use a prepared anonymous error case, common defect, or alternative solution to begin the discussion. Silence must not be treated as proof that everyone understands.
@@ -108,63 +108,54 @@ The formal grade consists of two components:
 | Classroom participation | 20–30% | Ongoing formative engagement |
 | Final one-to-one oral examination | 70–80% | Sole summative capability assessment |
 
-The announced course percentage may vary, but it must satisfy:
+The announced percentage may vary, but it must satisfy:
 
 - The final oral examination is the primary grade source.
-- Assignments themselves are ungraded.
+- Homework itself is ungraded.
 - Attendance counts are not graded directly.
 - Participation is not calculated from speaking frequency alone.
 
 ## 7. Final One-to-One Oral Examination
 
-This document establishes the institutional role of the oral examination but does not yet freeze its detailed content and procedure.
+This document establishes the role of the oral examination but does not freeze its detailed content or procedure.
 
 Confirmed principles:
 
 - There is one formal final oral examination for the course.
-- The student's own assignments, programs, tests, errors, and learning records are the primary examination materials.
-- The oral examination must assess explanation, tracing, modification, testing, debugging, communication, and AI judgment.
+- The student's own homework, programs, tests, errors, and learning records are the primary examination materials.
+- The examination must assess understanding, tracing, modification, testing, debugging, and explanation.
 - Memorized answers or successful output alone are insufficient.
+- When a student used AI or another tool to assist a result, the instructor may require the student to explain, modify, and verify the relevant content through evidence; not using AI is not evidence of missing capability.
 - Duration, question selection, permitted tools, and AI rules will be defined separately.
 
-## 8. AI Use
+## 8. AI and Other Tools
 
-The lack of assignment submission does not remove AI expectations.
+AI use is optional by default. Students who do not use AI do not need to submit a non-use declaration and are not missing capability evidence.
 
-Students may use AI to:
+When students use AI or another tool, they remain responsible for the adopted result and must be able to:
 
-- Explain a concept.
-- Provide staged hints.
-- Interpret an error message.
-- Add candidate tests after the student first proposes tests.
-- Compare approaches already proposed by the student.
+- Explain its role and limitations.
+- Verify it through programs, tests, compiler diagnostics, reliable sources, or other reproducible evidence.
+- Modify it when requirements change or the instructor asks follow-up questions.
 
-Students remain responsible for retaining:
-
-- Understanding or an initial approach before AI use.
-- Self-created expected results or tests.
-- A summary of the AI suggestion.
-- Verification methods.
-- Reasons for accepting, modifying, or rejecting it.
-
-The final oral examination may check whether students can explain, modify, and verify content that AI helped produce.
+The course does not universally require fixed prompts, full conversation logs, before-and-after comparisons, or standardized usage summaries. Additional rules are required only when an activity explicitly targets AI judgment or collaboration as a learning objective, or when AI use materially affects academic integrity or assessment fairness.
 
 ## 9. Instructor Implementation Principles
 
-- Reserve assignment-discussion time in each class rather than repeatedly removing it to cover more content.
+- Reserve homework-discussion time in each class rather than repeatedly removing it to cover more content.
 - Guide reasoning with questions instead of immediately providing a complete correction.
 - Encourage students to show errors without shame.
 - Deliberately design opportunities to make, trace, correct, and verify mistakes.
-- Do not use a single model answer as the main learning method; compare multiple reasonable solutions.
+- Do not use a single model answer as the primary learning method; compare multiple reasonable solutions.
 - Provide multiple participation modes for introverted students, students carrying language load, and students who need more thinking time.
 
 ## 10. Relationship to Other Documents
 
-- `07-acceptance-model`: revise around formative evidence and the final oral examination.
-- `08-delivery-map`: add a previous-assignment discussion segment to each class.
-- Assignment pack: revise as unsubmitted, ungraded learning work.
-- Rubric: replace assignment grading with participation and final oral assessment criteria.
-- Instructor guide: replace routine assignment marking with discussion facilitation and participation observation.
+- `07-acceptance-model`: align with formative evidence and the final oral examination.
+- `08-delivery-map`: include a previous-homework discussion segment in each class.
+- Homework pack: serve as unsubmitted, ungraded learning work.
+- Rubric: serve as the basis for classroom participation and final oral assessment.
+- Instructor guide: use discussion facilitation and participation observation instead of routine homework marking.
 
 ## Navigation
 

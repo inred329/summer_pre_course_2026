@@ -1,8 +1,8 @@
 # Formal Unit F-U12: How Can Concepts Across the Course Be Integrated into One Application?
 
-Version: 1.0.1  
+Version: 1.0.2  
 Status: Official student material  
-Last updated: 2026-08-05  
+Last updated: 2026-08-07  
 Corresponding Chinese version: [正式單元 F-U12：如何完成跨 Concept 的整合程式？](unit-12-integrated-application.zh-TW.md)
 
 ## Document Purpose and Completion Standard
@@ -11,7 +11,7 @@ This chapter is written for students who have completed the earlier Units. It gu
 
 Completing the Unit means you can design and implement a small integrated program, explain its decomposition and data flow, test normal and boundary behavior, modify a requirement, and justify the resulting changes with evidence.
 
-No submission is required by this material. Keep your design, program, tests, defects, and explanations for review and discussion.
+No submission is required by this material. Keep your design, program, tests, defects, and explanations for review and discussion. AI is not a completion requirement. Choosing not to use AI does not affect Unit completion, classroom participation, or assessment. The AI activity near the end is a directly skippable optional extension.
 
 ---
 
@@ -72,6 +72,7 @@ A feature is not complete merely because a function exists. Its required behavio
 
 ```c
 #include <stddef.h>
+#include <stdlib.h>
 
 #define NAME_SIZE 50
 
@@ -185,7 +186,6 @@ After `list_destroy`, the list returns to the empty invariant and may be initial
 
 ```c
 #include <stdint.h>
-#include <stdlib.h>
 
 int list_add(StudentList *list, const Student *student) {
     if (list == NULL || student == NULL) {
@@ -241,17 +241,17 @@ int list_average(const StudentList *list, double *average) {
         return 0;
     }
 
-    long long sum = 0;
+    double sum = 0.0;
     for (size_t i = 0; i < list->count; i++) {
-        sum += list->items[i].score;
+        sum += (double)list->items[i].score;
     }
 
-    *average = (double)sum / (double)list->count;
+    *average = sum / (double)list->count;
     return 1;
 }
 ```
 
-Because every score is validated in 0–100, the maximum sum is `100 * count`. A production interface should still consider whether `count` can exceed `LLONG_MAX / 100`; for this small application, define and enforce a practical maximum record count or add a checked accumulation strategy.
+Each score is constrained to 0–100. Accumulating in `double` avoids signed-integer sum overflow. Extremely large collections can still be affected by floating-point precision, so a production interface should define a maximum record count and acceptable error and verify that contract with tests.
 
 Empty lists return failure and do not write the output. They never divide by zero.
 
@@ -399,11 +399,11 @@ Before coding, identify changes to the data model, nested ownership, allocation 
 
 ---
 
-## 16. Explain the Concept to AI
+## 16. Optional Extension: Use AI to Check the Integration Explanation
 
-Explain how requirements, invariants, nullability, capacity arithmetic, ownership, files, modules, and testing cooperate in your application.
+This section may be skipped directly. It is not part of Unit completion, the core self-check, classroom participation, or assessment. If you choose to use AI, first explain in your own words how requirements, invariants, nullability, capacity arithmetic, ownership, files, modules, and testing cooperate in the application, then ask the AI to identify a missing constraint or counterexample.
 
-AI responses may omit constraints or assume a different design. Compare every suggestion with your actual interfaces, type limits, diagrams, tests, and reproducible program behavior.
+No fixed prompt, saved conversation, submission, or non-use declaration is required. AI responses may omit constraints or assume a different design. Compare every suggestion with your actual interfaces, type limits, diagrams, tests, and reproducible program behavior; adoption remains governed by your engineering evidence.
 
 ---
 

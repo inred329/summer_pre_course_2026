@@ -1,13 +1,15 @@
 # 正式單元 F-U10：程式如何分成可獨立維護的模組？
 
-版本：1.0.1  
+版本：1.0.2  
 狀態：正式學生教材  
-最後更新：2026-08-05  
+最後更新：2026-08-06  
 對應英文版本：[Formal Unit F-U10: How Can a Program Be Divided into Independently Maintainable Modules?](unit-10-modular-programming.en.md)
 
 ## 文件用途與完成標準
 
 本章供學生獨立閱讀、練習與複習。完成本章代表你能把介面與實作分離，能建立 `.h` 與 `.c` 檔案、理解分開編譯與連結，並能診斷重複定義、缺少宣告、介面使用錯誤與連結錯誤。
+
+本章核心完成標準不包含 AI 使用。文末的 AI 活動是可直接跳過的選用延伸；不使用 AI 不影響本章完成、課堂參與或評量。
 
 ## 核心問題
 
@@ -49,6 +51,7 @@ int is_passing(double average, double threshold);
 `score.c`：
 
 ```c
+#include <stddef.h>
 #include "score.h"
 
 int calculate_average(const int values[], int length, double *result) {
@@ -56,12 +59,12 @@ int calculate_average(const int values[], int length, double *result) {
         return 0;
     }
 
-    int sum = 0;
+    double sum = 0.0;
     for (int i = 0; i < length; i++) {
         sum += values[i];
     }
 
-    *result = (double)sum / length;
+    *result = sum / length;
     return 1;
 }
 
@@ -69,6 +72,8 @@ int is_passing(double average, double threshold) {
     return average >= threshold;
 }
 ```
+
+使用 `double` 累加，避免大量或極端整數先在 `int` 中相加而造成有號溢位。這不代表任意長度都沒有精度限制；介面仍應依應用需求定義可接受的資料規模與精度。
 
 `main.c` 只依賴介面：
 
@@ -143,8 +148,8 @@ main.o + score.o ──link──► report
 只把呼叫者需要的介面放在 header。模組內部輔助函數可在 `.c` 中使用 `static`：
 
 ```c
-static int sum_values(const int values[], int length) {
-    int sum = 0;
+static double sum_values(const int values[], int length) {
+    double sum = 0.0;
     for (int i = 0; i < length; i++) {
         sum += values[i];
     }
@@ -192,7 +197,7 @@ double calculate_average(int values[], int length) { /* ... */ }
 
 ### Header 依賴不完整
 
-若 header 使用某型別，應自行包含必要宣告，而不是依賴呼叫者剛好先包含其他檔案。
+若 header 使用某型別，應自行包含必要宣告，而不是依賴呼叫者剛好先包含其他檔案。相同原則也適用於 `.c` 檔：本例直接包含 `<stddef.h>`，因此 `NULL` 的來源清楚且不依賴間接 include。
 
 ---
 
@@ -215,7 +220,7 @@ student.c
 main.c
 ```
 
-介面至少提供初始化、更新平均與格式化輸出。只公開呼叫者需要的型別與函數，並定義各函數遇到無效指標或無效筆數時的行為。
+介面至少提供初始化、更新平均與格式化輸出。只公開呼叫者需要的型別與函數，並定義各函數遇到無效指標、無效筆數或無法表示的結果時的行為。
 
 ---
 
@@ -225,13 +230,15 @@ main.c
 
 ---
 
-## 10. 向 AI 解釋概念
+## 10. 選用延伸：使用 AI 檢查自己的解釋
 
-請向 AI 解釋：
+這一節可直接跳過，不屬於本章核心完成條件。
+
+你可以先用自己的話解釋：
 
 > 模組、介面、實作、分開編譯與連結之間有什麼關係？為什麼介面除了成功行為，也必須定義失敗行為？
 
-AI 回應若與編譯指令、檔案依賴、函數契約或可重現錯誤衝突，應以證據重新判斷。
+若選擇使用 AI，可請它指出你的解釋中可能缺少的部分。你不需要使用固定 Prompt、保存或繳交對話，也不需要在未使用時提出聲明。AI 回應若與編譯指令、檔案依賴、函數契約或可重現錯誤衝突，應以證據重新判斷。
 
 ---
 
@@ -241,13 +248,13 @@ AI 回應若與編譯指令、檔案依賴、函數契約或可重現錯誤衝�
 - 我能建立 header 與 source file。
 - 我能使用 include guard。
 - 我能說明編譯與連結階段。
-- 我能定義介面的前置條件與失敗行為。
+- 我能定義介面的前置條件、數值範圍與失敗行為。
 - 我能診斷 undefined reference 與重複定義。
 - 我只公開必要介面。
 
 ## 12. 本章摘要
 
-模組以清楚介面隔離實作，使不同部分可獨立理解、編譯、測試與替換。可靠介面必須說明有效輸入、失敗行為與輸出責任。分開編譯產生 object files，連結把定義組合成程式。下一章將系統化建立測試、驗證與除錯證據。
+模組以清楚介面隔離實作，使不同部分可獨立理解、編譯、測試與替換。可靠介面必須說明有效輸入、數值範圍、失敗行為與輸出責任。分開編譯產生 object files，連結把定義組合成程式。下一章將系統化建立測試、驗證與除錯證據。
 
 ## 導覽
 

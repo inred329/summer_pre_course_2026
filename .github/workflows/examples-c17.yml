@@ -1,0 +1,31 @@
+name: Verify C17 examples
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - agent/constitution-2-repository-audit
+
+permissions:
+  contents: read
+
+jobs:
+  verify-examples:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [gcc, clang]
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Show compiler version
+        run: ${{ matrix.compiler }} --version
+
+      - name: Verify correct examples and intentional defect contracts
+        env:
+          CC: ${{ matrix.compiler }}
+        run: bash examples/verify.sh

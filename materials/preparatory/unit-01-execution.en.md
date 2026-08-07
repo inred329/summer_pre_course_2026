@@ -1,8 +1,8 @@
 # Preparatory Unit P-U01: How Does Program Text Become an Execution Result?
 
-Version: 1.0.1  
+Version: 1.0.2  
 Status: Student-material trial version  
-Last updated: 2026-08-04  
+Last updated: 2026-08-06  
 Corresponding Chinese version: [前導單元 P-U01：程式如何從文字變成執行結果？](unit-01-execution.zh-TW.md)
 
 ---
@@ -14,6 +14,8 @@ This is a student-facing chapter for independent reading, practice, review, and 
 Completing the chapter means more than making a program run. You should be able to explain how source code is compiled into an executable, predict a result before execution, and use compiler messages and observed behavior to revise your understanding.
 
 The activities in this chapter do not need to be submitted. You are encouraged to keep your predictions, programs, errors, and corrections for later review or classroom discussion.
+
+AI is optional in this chapter. Skipping every AI-related activity does not affect chapter completion, and the core self-check does not assess whether AI was used.
 
 ## What Question Does This Chapter Answer?
 
@@ -468,13 +470,15 @@ Understand the requirement
 
 ---
 
-## 14. Explain the Concept to AI
+## 14. Optional Extension: Use AI to Check Your Explanation
+
+This section is optional and may be skipped without affecting chapter completion.
 
 Explain the following in your own words to an AI system:
 
 > What is the relationship among source code, a compiler, an executable, and program execution?
 
-You do not need a fixed prompt, and you do not need to save or submit the conversation. This activity simply gives you a chance to state your understanding and notice whether the conversation reveals anything that is still unclear.
+You do not need a fixed prompt, and you do not need to save or submit the conversation. No declaration is required when you skip this activity. Its only purpose is to help you notice whether your own explanation contains a gap.
 
 An AI response may still be incomplete or incorrect. If it conflicts with the chapter diagram, compiler behavior, or reproducible execution results, judge it using observable evidence rather than accepting it as an answer.
 

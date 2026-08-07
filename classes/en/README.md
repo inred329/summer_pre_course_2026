@@ -1,32 +1,22 @@
-# English Track Plan
+# English Track Entry
 
-## Track Positioning
+The English-taught track is delivered in English with terminology and learning support appropriate to students' language backgrounds.
 
-Instruction is delivered in English. Key terminology, examples, and learning support should be appropriate for the students' language proficiency and academic backgrounds.
+The track consists of five 2-hour sessions, totaling 10 hours. It preserves the same core capabilities, technical depth, and assessment standards as the Chinese-taught track. Differences in pacing and language support do not lower the common capability standard.
 
-## To Confirm
+## Student Start Here
 
-- Student profiles and prerequisites
-- Enrollment size and grouping
-- Instructors and teaching assistants
-- Language support needs
-- Pre-course learning resources
+- [Materials and Learning Activities](../../materials/README.en.md)
+- [Independent Homework and Oral Preparation Pack](../../materials/assignments/preparatory-assignments.en.md)
+- [Official Learning and Assessment Policy](../../design/13-learning-assessment-policy.en.md)
+- [Course Constitution](../../CONSTITUTION.en.md)
 
-## Draft Modules
+## How Learning Works
 
-| Module | Topic | Learning outcome | Hours | Owner |
-|---|---|---|---:|---|
-| 1 | Orientation and baseline check | TBD | TBD | TBD |
-| 2 | Core concepts | TBD | TBD | TBD |
-| 3 | Guided practice | TBD | TBD | TBD |
-| 4 | Integrated task / project | TBD | TBD | TBD |
-| 5 | Showcase and feedback | TBD | TBD | TBD |
+The course establishes a problem context, concepts, and mental models before syntax and code. Students build capability through expectation, tracing, implementation, testing, debugging, modification, and explanation.
 
-## Material Checklist
+Homework is an independent learning tool. It is not submitted and does not directly receive points. Formal assessment methods and permitted resources are defined by the official learning and assessment policy and course announcements.
 
-- [ ] English course notes
-- [ ] Terminology guide
-- [ ] Slides
-- [ ] Examples and exercises
-- [ ] Assignment brief and rubric
-- [ ] Pre-course and post-course surveys
+## Corresponding Chinese Track
+
+- [中文班入口](../zh/README.md)

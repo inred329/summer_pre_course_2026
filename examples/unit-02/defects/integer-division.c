@@ -5,6 +5,6 @@ int main(void) {
     int count = 2;
     double average = total / count;
 
-    printf("Average: %.1f\n", average);
+    printf("Average: %.2f\n", average);
     return 0;
 }
