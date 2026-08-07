@@ -8,11 +8,18 @@ from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[1]
 
-# Constitution 1.x references are intentionally retained only where the old audit
-# is being preserved or where the active audit explicitly records its history.
+# Constitution 1.x references are intentionally retained only where an old review
+# is explicitly historicalized, where the active audit records migration history,
+# or where the governance index identifies an old review as historical.
 FORMER_CONSTITUTION_ALLOWED = {
     Path("design/12-constitution-compliance-review.en.md"),
     Path("design/12-constitution-compliance-review.zh-TW.md"),
+    Path("design/README.en.md"),
+    Path("design/README.zh-TW.md"),
+    Path("materials/reviews/materials-constitution-review.en.md"),
+    Path("materials/reviews/materials-constitution-review.zh-TW.md"),
+    Path("reviews/constitution-maturity-review.en.md"),
+    Path("reviews/constitution-maturity-review.zh-TW.md"),
     Path("reviews/repository-constitution-2-audit.en.md"),
     Path("reviews/repository-constitution-2-audit.zh-TW.md"),
 }
@@ -25,6 +32,10 @@ ENTRYPOINTS = {
     Path("design/README.zh-TW.md"),
     Path("materials/README.en.md"),
     Path("materials/README.zh-TW.md"),
+    Path("materials/preparatory/README.en.md"),
+    Path("materials/preparatory/README.zh-TW.md"),
+    Path("materials/formal/README.en.md"),
+    Path("materials/formal/README.zh-TW.md"),
     Path("examples/README.md"),
     Path("validation/README.md"),
 }
@@ -61,8 +72,6 @@ def normalize_link_target(source: Path, raw_target: str) -> Path | None:
     if not target:
         return None
 
-    # Optional Markdown title: (path "title"). Paths with literal spaces are
-    # uncommon in this repository; keep the first token when a title is present.
     if " \"" in target or " '" in target:
         target = target.split(" ", 1)[0]
 
@@ -85,7 +94,6 @@ def normalize_link_target(source: Path, raw_target: str) -> Path | None:
     try:
         return resolved.resolve().relative_to(ROOT.resolve())
     except ValueError:
-        # A relative link escaping the repository is not a valid internal link.
         return Path("__OUTSIDE_REPOSITORY__") / target
 
 
@@ -104,7 +112,6 @@ def check_bilingual_pairs(files: list[Path]) -> list[str]:
         if counterpart is not None and counterpart not in rel_files:
             errors.append(f"missing bilingual counterpart: {rel} -> {counterpart}")
 
-    # Compare version metadata when both paired files publish explicit versions.
     checked: set[tuple[Path, Path]] = set()
     for rel in sorted(rel_files):
         if not rel.name.endswith(".en.md"):
