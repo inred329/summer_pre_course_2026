@@ -1,6 +1,6 @@
 # 籌備與執行規劃
 
-版本：1.0.0  
+版本：1.0.1  
 狀態：現行操作導覽  
 最後更新：2026-08-07  
 主要讀者：授課教師、助教、行政與課程維護者  
@@ -10,10 +10,11 @@
 
 本目錄處理「如何把已核定的課程安全、完整地開出來」，而不是重新回答「課程應教什麼」或「學生如何被評量」。
 
-權威來源依用途如下：
+權威／設計來源依用途如下：
 
 - 最高治理原則：[Constitution 2.0](../CONSTITUTION.zh-TW.md)
 - 設計文件分類與權威順序：[教學內容設計區](../design/README.zh-TW.md)
+- 課程設計脈絡：[Product Vision（繁體中文）](../design/01-product-vision.zh-TW.md)、[Product Vision (English)](../design/01-product-vision.en.md)
 - 能力與範圍：[程式設計能力地圖](../design/05-competency-map.zh-TW.md)、[課程範圍邊界](../design/06-scope-boundary.zh-TW.md)
 - 授課節奏：[課程交付地圖](../design/08-delivery-map.zh-TW.md)
 - 評量、參與、作業、最終口試與 AI／工具規則：[學習與評量制度](../design/13-learning-assessment-policy.zh-TW.md)
