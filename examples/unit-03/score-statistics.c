@@ -17,7 +17,7 @@ int main(void) {
     } else {
         printf("Count: %d\n", count);
         printf("Sum: %d\n", sum);
-        printf("Average: %.1f\n", (double) sum / count);
+        printf("Average: %.2f\n", (double) sum / count);
     }
 
     return 0;
