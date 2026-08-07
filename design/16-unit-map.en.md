@@ -1,49 +1,42 @@
 # Concept-Driven Unit Map
 
-Version: 0.2.0  
-Status: Complete Unit composition draft  
-Last updated: 2026-08-04  
+Version: 0.2.1  
+Status: Active design standard  
+Governance note: This standard defines Unit identifiers, core questions, concept composition, and core evidence direction. It does not define grading, weekly pacing, or mandatory tool use.  
 Corresponding Chinese version: [Concept 驅動的 Unit Map](16-unit-map.zh-TW.md)
 
 ## Document Purpose
 
-This document composes cross-language programming Concepts from the Concept Tree and Concept Registry into teachable, readable, and traceable Units.
+This document composes stable Concepts from the Concept Tree and Concept Registry into teachable, readable, and traceable Units for the preparatory and connected formal C course.
 
-A Unit is not a chapter label or syntax list. It consists of:
+A Unit consists of:
 
-1. One student-understandable core question.
-2. One primary Concept dependency chain.
-3. A limited number of newly introduced Concepts.
-4. Existing Concepts that are deepened or reused.
-5. At least one prediction, tracing, testing, debugging, or verification activity.
-6. Corresponding C-language tools and syntax.
-7. One brief post-Unit concept-explanation activity.
+1. one student-understandable core question;
+2. one coherent primary Concept chain or cluster;
+3. a controlled number of newly introduced Concepts;
+4. existing Concepts that are deepened or reused;
+5. at least one prediction, tracing, testing, debugging, modification, or verification activity;
+6. concrete C mappings whose technical boundaries are explicit;
+7. a core completion/evidence direction independent of optional external tools.
 
-This document defines the Unit skeleton only. It does not determine weekly pacing or replace final student-facing materials.
+A Unit is not automatically one class meeting or one week. Delivery slices are planned separately.
 
-## Role of AI
+## Constitution 2.0 Alignment
 
-AI is not a standalone Unit and is not the subject of the materials.
+- Unit structure is derived from concepts, dependencies, scope, and capability evidence rather than syntax chapter order alone.
+- Student-facing materials may be longer or shorter than this skeleton but must preserve the core question, technical contracts, and capability direction.
+- AI and other external assistance are optional by default. No Unit requires an AI conversation, AI explanation, AI log, fixed prompt, or non-use declaration for core completion.
+- If optional external assistance is actually used, the learner remains responsible for understanding and technically verifying any adopted result.
+- Concrete toolchain/runtime claims must identify the target environment and must not present common implementation models as C-language guarantees.
 
-At the end of each Unit, students complete only one brief activity: explain the Unit's core Concept to an AI in their own words and use the conversation to check whether their understanding is clear.
+## Composition Markers
 
-This activity:
-
-- Provides no fixed prompt.
-- Requires no submitted conversation record.
-- Requires no specific AI tool.
-- Does not replace prediction, implementation, testing, debugging, or verification.
-- Does not require AI to provide the answer or program first.
-
-The central principle is: **students explain to AI instead of first asking AI to explain for them.**
-
-## Unit Composition Markers
-
-- `N`: Concept introduced for the first time in this Unit.
+- `N`: Concept introduced in this Unit.
 - `D`: Concept deepened in this Unit.
 - `R`: Concept reused in this Unit.
 - `P`: Preparatory-course scope.
 - `F`: Formal-course scope.
+- `X`: Optional/conditional external-assistance activity; never part of universal completion.
 
 ---
 
@@ -51,150 +44,141 @@ The central principle is: **students explain to AI instead of first asking AI to
 
 ## P-U01 — How Does Program Text Become an Execution Result?
 
-Core question: **How does human-readable program text become behavior that a computer actually executes?**
+Core question: **How does human-readable program text become behavior that a computer can execute in the specified environment?**
 
 Primary Concept chain:
 
 ```text
 CT-C01 Problem
 → CT-C02 Requirement
-→ CT-C03 Algorithm
+→ CT-C03 Algorithm / Design Procedure
 → CT-C04 Program
 → CT-C05 Source Code
-→ CT-C06 Translation
-→ CT-C07 Compiler
-→ CT-C08 Executable
+→ CT-C06 C Translation
+→ CT-C07 C Implementation / Compiler Tool
+→ CT-C08 Executable / Loadable Program Representation
 → CT-C09 Execution
 → CT-X02 Output
-→ CT-E01 Expected Result
+→ CT-E01 Expected Result / Property
+→ CT-E04 Verification
 ```
 
 Concept use:
 
-- `N`: Problem, Requirement, Program, Source Code, Translation, Compiler, Executable, Execution, Output, Expected Result
-- `D`: Algorithm
-- `R`: None
+- `N`: Problem, Requirement, Program, Source Code, C Translation, C Implementation/Compiler Tool, Executable/Loadable Representation, Execution, Output, Expected Result/Property, Diagnostic
+- `D`: Algorithm/Design Procedure
+- `R`: none
 
-C-language mapping:
+C mapping and technical boundary:
 
-- Minimal `main` program
-- `#include <stdio.h>`
-- `printf`
-- GCC/Clang compilation command
-- Executable and terminal execution
-- `return 0`
+- minimal `main` program;
+- `#include <stdio.h>`, `printf`, and return status;
+- the actual GCC/Clang or other specified build command for the course environment;
+- observed diagnostics and produced artifacts;
+- explicit note that preprocessing/compilation/code generation/assembly/linking may be exposed differently by different implementations.
 
-Students must experience:
+Core evidence:
 
-- Predicting output before execution
-- Distinguishing compilation from execution
-- Producing and diagnosing one compile error
-- Comparing edited source run without recompilation against the recompiled version
-
-Post-Unit concept explanation:
-
-> Explain to an AI the relationship among source code, compiler, executable, and execution.
+- predict output before execution;
+- distinguish source text, translation/build, produced program representation, and execution;
+- reproduce and diagnose one translation/build error;
+- explain why editing source does not change an already-built program until it is rebuilt;
+- compare expected and actual evidence.
 
 ---
 
-## P-U02 — How Does a Program Remember Data and Change State?
+## P-U02 — How Does a Program Represent Data and Change State?
 
-Core question: **How does a program preserve current data and produce a new state after each execution step?**
+Core question: **How does a program represent current data and produce a new state after each relevant execution step?**
 
-Primary Concept chain:
+Primary chain:
 
 ```text
 CT-I01 Data
 → CT-I02 Value
 → CT-I04 Type
+→ CT-M04 Object / Storage
 → CT-S01 State
-→ CT-S03 Variable
+→ CT-S03 Variable / Named Object
 → CT-S06 Initialization
 → CT-S07 Assignment
-→ CT-S08 Update
+→ CT-S02 State Change
 → CT-I07 Expression
 → CT-I09 Evaluation
+→ CT-E12 Trace
 ```
 
 Concept use:
 
-- `N`: Data, Value, Type, State, Variable, Initialization, Assignment, Update, Expression, Evaluation
-- `D`: Expected Result, Output
+- `N`: Data, Value, Type, Object/Storage, State, Variable/Named Object, Initialization, Assignment, State Change, Expression, Evaluation, Trace
+- `D`: Expected Result/Property, Output
 - `R`: Program, Execution
 
-C-language mapping:
+C mapping:
 
-- `int`, `double`, and `char`
-- Variable declaration and initialization
-- Assignment operator
-- Arithmetic operators
-- `scanf` and `printf`
-- Initial observation of integer division and type conversion
+- `int`, `double`, `char`;
+- declaration and initialization;
+- assignment and arithmetic expressions;
+- basic standard input/output with format/type matching;
+- introductory integer-division and conversion observations.
 
-Students must experience:
+Core evidence:
 
-- Building variable-state tables
-- Tracing old and new values line by line
-- Predicting expression results
-- Comparing integer and floating-point representation
-- Diagnosing uninitialized, type-mismatch, or incorrect-format cases
-
-Post-Unit concept explanation:
-
-> Explain to an AI the relationship among variable, value, type, and state.
+- build state tables;
+- trace old/new values line by line;
+- predict expression results before running;
+- identify invalid/uninitialized-state assumptions and input/format problems;
+- compare integer and floating behavior only within clearly stated value ranges.
 
 ---
 
-## P-U03 — How Does a Program Select and Repeat?
+## P-U03 — How Does a Program Select and Repeat Reliably?
 
-Core question: **When different situations require different actions, or one action must repeat, how does a program determine the next step?**
+Core question: **When different situations require different actions, or work must repeat, how does a program decide the next step and know when to stop?**
 
-Primary Concept chain:
+Primary chain:
 
 ```text
 CT-F01 Sequence
 → CT-F02 Condition
-→ CT-F03 Decision
+→ CT-F03 Selection / Decision
 → CT-F05 Repetition
 → CT-F06 Iteration
 → CT-F07 Loop Condition
 → CT-F08 Boundary
-→ CT-F11 Infinite Execution
+→ CT-F11 Nontermination
+→ CT-E03 Testing
+→ CT-E10 Regression Verification
 ```
 
 Concept use:
 
-- `N`: Sequence, Condition, Decision, Repetition, Iteration, Loop Condition, Boundary, Infinite Execution
-- `D`: Expression, Evaluation, State Change, Update
-- `R`: Input, Output, Expected Result
+- `N`: Sequence, Condition, Selection/Decision, Repetition, Iteration, Loop Condition, Boundary, Nontermination
+- `D`: Expression, Evaluation, State Change, Update, Testing
+- `R`: Input, Output, Expected Result/Property
 
-C-language mapping:
+C mapping:
 
-- Relational and logical operators
-- `if` and `else`
-- `while` and `for`
-- `break` and `continue` as extension mappings
-- Counters, accumulators, and sentinels
+- relational/logical operators;
+- `if`, `else`, `while`, `for`;
+- `break`/`continue` only where they support the stated control purpose;
+- counters, accumulators, and sentinel/end conditions.
 
-Students must experience:
+Core evidence:
 
-- Predicting branch paths
-- Tracing loop state iteration by iteration
-- Comparing `<` and `<=` boundary behavior
-- Diagnosing infinite loops and off-by-one errors
-- Running regression checks after a requirement change
-
-Post-Unit concept explanation:
-
-> Explain to an AI the difference between decision and repetition and how both control program flow.
+- predict branch paths;
+- trace loop state iteration by iteration;
+- compare boundary choices such as `<` vs `<=`;
+- diagnose nontermination and off-by-one defects;
+- change a requirement and rerun relevant regression checks.
 
 ---
 
-## P-U04 — How Can a Large Problem Be Divided into Understandable Work?
+## P-U04 — How Can a Larger Problem Be Divided into Understandable Work?
 
-Core question: **When a program grows longer, how can responsibilities be separated so each part can be understood, tested, and modified?**
+Core question: **When a program grows, how can responsibilities be separated so each part can be understood, tested, and modified?**
 
-Primary Concept chain:
+Primary chain:
 
 ```text
 CT-A01 Decomposition
@@ -214,351 +198,239 @@ Concept use:
 
 - `N`: Decomposition, Responsibility, Function, Interface, Parameter, Argument, Return Value, Call
 - `D`: Test Case, Testing, Verification, Requirement
-- `R`: State, Decision, Repetition, Expected Result
+- `R`: State, Selection, Repetition, Expected Result/Property
 
-C-language mapping:
+C mapping:
 
-- Function declaration, definition, and call
-- Parameters and return values
-- Local variables
-- Function prototypes
-- Small integrated program
+- function declaration/prototype, definition, and call;
+- parameters and return values;
+- local objects and basic scope;
+- small integrated program with caller-side tests.
 
-Students must experience:
+Core evidence:
 
-- Writing a one-sentence function responsibility
-- Predicting parameters and return values
-- Tracing state before and after a call
-- Designing normal, boundary, and regression cases for a function
-- Comparing different function decompositions
+- state a one-sentence function responsibility;
+- predict arguments, parameters, and return values;
+- trace relevant state before/during/after a call;
+- design normal, boundary, invalid, or failure cases as appropriate;
+- compare alternative decompositions and modify a requirement.
 
-Post-Unit concept explanation:
-
-> Explain to an AI why functions help decompose problems and what roles parameters and return values play.
+Optional `X` extension: if a learner chooses to consult AI or another assistant, verify any adopted suggestion using the same core testing/trace evidence. Skipping the extension changes no core completion requirement.
 
 ---
 
 # Formal-Course Units
 
-The formal course does not reset the preparatory course. Preparatory Concepts continue to deepen and combine with new Concepts.
+The formal course deepens preparatory Concepts rather than resetting them. Student-facing formal materials F-U01–F-U12 are the implementation of these Unit skeletons and may contain additional verified detail.
 
 ## F-U01 — Why Do Representation, Type, and Operations Affect Results?
 
-Core question: **Why can the same value or operation produce different outcomes because of representation and type?**
+Core question: **Why can the same mathematical idea produce different program results because of representation, type, and operation rules?**
 
-Primary Concepts: Representation, Type, Operator, Evaluation, Conversion, and Format.
+Primary Concepts: CT-I03 Representation, CT-I04 Type, CT-I08 Operator, CT-I09 Evaluation, CT-I10 Conversion, CT-X04 Format, CT-E01 Expected Result/Property.
 
-Deepened: Value, Expression, Expected Result, and Testing.
+C mapping:
 
-C mapping: integer ranges, binary representation, MSB, LSB, floating-point error, character encoding, implicit and explicit conversion, and formatted output.
+- integer ranges using `<limits.h>` rather than assumed bit widths;
+- binary examples with explicitly stated widths when used;
+- MSB/LSB as representation-position concepts only when the representation is specified;
+- floating-point approximation and `<float.h>`/target observations;
+- character representation and conversions;
+- formatted I/O with correct specifiers.
 
-Students must experience:
+Core evidence:
 
-- Comparing decimal and binary representation
-- Identifying the positions and meanings of MSB and LSB
-- Predicting integer and floating-point results
-- Observing differences caused by conversion and formatting
-- Verifying type assumptions with boundary values
-
-Post-Unit concept explanation:
-
-> Explain to an AI what MSB and LSB are and how they differ.
+- predict type/conversion outcomes inside stated contracts;
+- distinguish mathematical expectation from representable-domain behavior;
+- test boundary values and formatting assumptions;
+- identify where a claim is standard-guaranteed versus implementation-specific.
 
 ---
 
-## F-U02 — How Can Reliable Multi-Branch and Repetitive Flows Be Built?
+## F-U02 — How Can Complex Control Flow Remain Explainable and Testable?
 
-Core question: **When conditions, boundaries, and repetition rules become complex, how can correctness still be demonstrated?**
+Core question: **When conditions, boundaries, and repetition become more complex, what evidence supports correctness?**
 
-Primary Concepts: Branch, Nested Control, Sentinel, and Invariant.
+Primary Concepts: CT-F03 Selection, CT-F05 Repetition, CT-F09 Sentinel/End Condition, CT-F10 Nested Control, CT-S11 Invariant, CT-E03 Testing, CT-E10 Regression Verification.
 
-Deepened: Decision, Repetition, Boundary, State Change, and Verification.
+C mapping: `switch`, nested control, compound conditions, sentinel/end-condition loops, loop invariants as reasoning tools.
 
-C mapping: `switch`, nested control, compound conditions, sentinel loops, and loop invariants.
-
-Students must experience:
-
-- Drawing compound control paths
-- Describing an initial loop invariant
-- Comparing sentinel designs
-- Finding boundary and path omissions
-- Re-verifying after changing the flow
-
-Post-Unit concept explanation:
-
-> Explain to an AI the relationship among sentinel, loop condition, and boundary.
+Core evidence: draw/trace paths, identify missing/overlapping cases, state an appropriate invariant, test boundaries, and reverify after requirement changes.
 
 ---
 
 ## F-U03 — How Does Data Form an Ordered Collection?
 
-Core question: **When multiple related values must be stored and processed together, how are they organized, located, and traversed?**
+Core question: **When multiple related values must be stored and processed together, how are they organized, indexed, and kept within valid bounds?**
 
-Primary Concepts: Collection, Object, Layout, Boundary, Iteration, and Memory Safety.
+Primary Concepts: CT-I11 Collection, CT-M04 Object/Storage, CT-M05 Layout, CT-F08 Boundary, CT-F06 Iteration, CT-M15 Memory Safety; Composite CT-K01 Array.
 
-Composite Concept: `CT-K01 Array`.
+C mapping: one-dimensional arrays, indexes, explicit length/capacity contracts, traversal, arrays passed to functions, introductory multidimensional arrays when in scope.
 
-C mapping: one-dimensional arrays, indexes, length, traversal, out-of-bounds access, and arrays as function parameters.
-
-Students must experience:
-
-- Drawing relationships between array elements and indexes
-- Predicting traversal order
-- Comparing valid and invalid indexes
-- Diagnosing out-of-bounds and off-by-one errors
-- Retesting after changing array length
-
-Post-Unit concept explanation:
-
-> Explain to an AI the relationship among array, index, length, and boundary.
+Core evidence: trace element/index relationships, test valid and invalid bounds, diagnose out-of-bounds/off-by-one defects, modify length/capacity requirements, and reverify.
 
 ---
 
-## F-U04 — How Is Text Represented and Processed as Data?
+## F-U04 — How Is Text Represented and Processed as C Data?
 
-Core question: **How does a computer store text as data, and how does it know where the text ends?**
+Core question: **How does C represent a string, how is its end determined, and what capacity/boundary conditions make operations valid?**
 
-Primary Concepts: Representation, Collection, Layout, Sentinel, Buffer, and Format.
+Primary Concepts: CT-I03 Representation, CT-K01 Array, CT-K02 String, CT-F09 Sentinel/End Condition, CT-X05 Buffer, CT-X04 Format, CT-M15 Memory Safety.
 
-Composite Concept: `CT-K02 String`.
+C mapping: `char` arrays, null terminator, string literals, `fgets`, selected `<string.h>` functions, explicit capacity/length contracts.
 
-C mapping: `char` arrays, null terminator, string literals, `fgets`, string functions, and buffer safety.
-
-Students must experience:
-
-- Drawing string layout in an array
-- Explaining the role of the null terminator
-- Comparing character count and array capacity
-- Diagnosing missing terminators and insufficient buffers
-- Verifying string processing with input cases
-
-Post-Unit concept explanation:
-
-> Explain to an AI the difference between a character array and a C string and why the null terminator matters.
+Core evidence: distinguish character arrays from valid strings, trace terminator/capacity state, test input boundaries, diagnose unterminated/insufficient-buffer cases, and account for byte-vs-character limits when discussing multibyte encodings.
 
 ---
 
-## F-U05 — How Does a Function Call Create a New Execution Environment?
+## F-U05 — How Does a Function Call Create Temporary Execution State?
 
-Core question: **During a function call, how are parameters, local state, and unfinished work preserved?**
+Core question: **During nested or recursive calls, how do parameters, local objects, control return, scope, and lifetime relate?**
 
-Primary Concepts: Call Stack, Scope, Lifetime, Stack Storage, and Recursion.
+Primary Concepts: CT-A09 Call, CT-A10 Activation Model, CT-S09 Scope, CT-S10 Lifetime, CT-M10 Storage Duration, CT-M11 Automatic Storage, CT-A11 Recursion.
 
-Deepened: Function, Call, Parameter, Return Value, and Invariant.
+C mapping: automatic local objects, nested calls, recursion, base/termination conditions.
 
-C mapping: automatic local variables, call frames, recursion, base cases, and the concept of stack overflow.
+Core evidence:
 
-Students must experience:
-
-- Drawing a function call stack
-- Tracing parameters and local variables
-- Comparing scope and lifetime
-- Identifying a recursive base case
-- Diagnosing infinite recursion
-
-Post-Unit concept explanation:
-
-> Explain to an AI the relationship among call stack, scope, and lifetime.
+- trace an implementation-neutral activation model;
+- distinguish scope from lifetime;
+- reason about recursive progress/termination;
+- diagnose invalid returned addresses or nonterminating recursion;
+- relate a physical call stack/stack overflow only to the target implementation when that model is actually used.
 
 ---
 
-## F-U06 — How Can Data Be Manipulated Indirectly Through Addresses?
+## F-U06 — How Can Data Be Accessed Indirectly Through Pointers?
 
-Core question: **How can one value refer to another object and use its address to access or modify it?**
+Core question: **How can a pointer designate another object, and what conditions make indirect access valid?**
 
-Primary Concepts: Address, Pointer, Indirection, Aliasing, Null Reference, Lifetime, and Memory Safety.
+Primary Concepts: CT-M03 Address, CT-M06 Pointer, CT-M07 Indirection/Dereference, CT-M08 Aliasing, CT-M09 Null Pointer, CT-S10 Lifetime, CT-M15 Memory Safety.
 
-C mapping: `&`, `*`, pointer parameters, null pointers, and limited pointer arithmetic.
+C mapping: `&`, `*`, pointer parameters, null pointer values, array/pointer relationships and limited pointer arithmetic within valid array-object rules.
 
-Students must experience:
-
-- Drawing relationships among objects, addresses, and pointers
-- Predicting dereference results
-- Comparing a pointer with the object it points to
-- Observing shared modification caused by aliasing
-- Diagnosing null, dangling, and invalid dereference cases
-
-Post-Unit concept explanation:
-
-> Explain to an AI the relationship among address, pointer, dereference, and pointed-to object.
+Core evidence: draw pointer/object relationships, predict alias effects, identify dereference preconditions, and diagnose null, dangling, one-past misuse, and invalid access.
 
 ---
 
-## F-U07 — How Can One Data Object Contain Different Fields?
+## F-U07 — How Can One Entity Contain Different Fields?
 
-Core question: **When one entity contains several different kinds of data, how can they be combined into one meaningful object?**
+Core question: **When one entity contains several different kinds of data, how can those fields be modeled as one meaningful record?**
 
-Primary Concepts: Collection, Object, Layout, Type, and Interface.
+Primary Concepts: CT-I11 Collection, CT-M04 Object/Storage, CT-M05 Layout, CT-I04 Type, CT-A04 Interface; Composite CT-K03 Structure/Record.
 
-Composite Concept: `CT-K03 Structure`.
+C mapping: `struct`, member access, initialization/assignment, pointers to structures, nested structures, arrays of structures, `typedef` where it improves interface clarity.
 
-C mapping: `struct`, member access, nested structures, structure assignment, and `typedef`.
-
-Students must experience:
-
-- Identifying data fields from requirements
-- Comparing separate variables with one structure
-- Observing member layout
-- Passing and modifying structures
-- Designing valid-data conditions for a structure
-
-Post-Unit concept explanation:
-
-> Explain to an AI how a structure combines fields of different types into one meaningful object.
+Core evidence: derive fields from requirements, compare separate variables vs a record, distinguish semantic fields from implementation padding/layout, modify structures through clear interfaces, and test validity constraints.
 
 ---
 
-## F-U08 — How Does a Program Obtain and Release Space During Execution?
+## F-U08 — How Does a Program Manage Storage Whose Size or Lifetime Is Decided at Runtime?
 
-Core question: **When data size or lifetime cannot be fixed in advance, how does a program manage storage?**
+Core question: **How can storage be acquired, resized, owned, and released safely when requirements are not fixed at translation time?**
 
-Primary Concepts: Dynamic Allocation, Ownership, Lifetime, Pointer, and Memory Safety.
+Primary Concepts: CT-M13 Allocated Storage/Dynamic Allocation, CT-M14 Ownership/Release Responsibility, CT-S10 Lifetime, CT-M06 Pointer, CT-M15 Memory Safety.
 
-C mapping: `malloc`, `calloc`, `realloc`, `free`, memory leaks, dangling pointers, and double free.
+C mapping: `malloc`, `calloc`, `realloc`, `free`, overflow-safe size reasoning, allocation failure, leak/dangling/double-free prevention.
 
-Students must experience:
-
-- Drawing allocation, use, and release flow
-- Determining resource ownership
-- Checking allocation failure
-- Diagnosing leaks, dangling pointers, and double free
-- Re-verifying after changing capacity requirements
-
-Post-Unit concept explanation:
-
-> Explain to an AI the relationship among dynamic memory, ownership, lifetime, and `free`.
+Core evidence: draw allocate-use-resize-release paths, preserve the original allocation on `realloc` failure, identify ownership/release responsibility, test failure paths, and diagnose lifetime errors.
 
 ---
 
 ## F-U09 — How Does a Program Interact with Files and Persistent Data?
 
-Core question: **When data must remain after a program ends, how does the program read, write, and detect errors?**
+Core question: **When data must persist beyond one execution, how does a program read/write it while distinguishing normal end-of-input from errors and malformed data?**
 
-Primary Concepts: Stream, File, End of Input, Format, Buffer, Protocol, and Error Channel.
+Primary Concepts: CT-X03 Stream, CT-X06 File, CT-X07 End of Input, CT-X04 Format, CT-X05 Buffer, CT-X10 Protocol, CT-X08 Error State; Composite CT-K04 File I/O.
 
-Composite Concept: `CT-K04 File I/O`.
+C mapping: `FILE *`, `fopen`, `fclose`, text I/O, return-value checks, `feof`/`ferror` only according to API semantics, transactional loading where partial failure matters.
 
-C mapping: `FILE *`, `fopen`, `fclose`, text-file I/O, EOF, and checking function return values.
-
-Students must experience:
-
-- Distinguishing a stream from a file
-- Checking file-open and read/write results
-- Tracing read position and EOF
-- Diagnosing format and file errors
-- Verifying resource closure and persisted data
-
-Post-Unit concept explanation:
-
-> Explain to an AI the relationship among stream, file, EOF, and error checking.
+Core evidence: check open/read/write/close states, distinguish EOF from error, test malformed/missing data, preserve invariants on failed load, and verify persisted results.
 
 ---
 
 ## F-U10 — How Can a Program Be Divided into Independently Maintainable Modules?
 
-Core question: **How can interface and implementation be separated so different program parts can be understood, compiled, and replaced independently?**
+Core question: **How can interface and implementation be separated so program parts can be understood, translated, linked, tested, and replaced with controlled dependencies?**
 
-Primary Concepts: Module, Interface, Implementation, Translation, Compiler, and Responsibility.
+Primary Concepts: CT-A12 Module, CT-A04 Interface, CT-A05 Implementation, CT-C06 C Translation, CT-A02 Responsibility, CT-E14 Documentation; Composite CT-K05 Modular Programming.
 
-Composite Concept: `CT-K05 Modular Programming`.
+C mapping: `.h`/`.c`, declarations vs definitions, include guards, direct standard-library dependencies, separate translation, linkage where applicable, compile-vs-link diagnostics.
 
-C mapping: `.h`, `.c`, include guards, separate compilation, and linking.
-
-Students must experience:
-
-- Distinguishing interface from implementation
-- Creating a header and source file
-- Tracing separate compilation and linking
-- Diagnosing declaration, definition, and linker errors
-- Replacing an implementation without changing the client program
-
-Post-Unit concept explanation:
-
-> Explain to an AI the relationship among module, interface, implementation, and linking.
+Core evidence: design an interface, split a source file, build all required translation units, diagnose declaration/definition/link errors, and replace an implementation without changing a valid client contract.
 
 ---
 
-## F-U11 — How Can Programs Be Proven, Diagnosed, and Improved Systematically?
+## F-U11 — How Can Programs Be Tested, Diagnosed, and Improved Systematically?
 
-Core question: **What evidence beyond correct output is needed before a program can be trusted?**
+Core question: **What evidence beyond one correct output is needed before a program or technical claim should be trusted?**
 
-Primary Concepts: Testing, Verification, Validation, Debugging, Error Diagnosis, Regression, Refactoring, Code Reading, and Code Review.
+Primary Concepts: CT-E01 Expected Result/Property, CT-E02 Test Case, CT-E03 Testing, CT-E04 Verification, CT-E05 Validation, CT-E06 Debugging, CT-E10 Regression Verification, CT-E11 Code Reading, CT-E13 Refactoring, CT-E17 Evidence, CT-E18 Judgment.
 
-C mapping: test tables, reproducing errors, narrowing scope, regression after correction, comparing programs, and refactoring.
+C mapping/activity: test tables/harnesses, diagnostics, defect reproduction and narrowing, behavior-preserving refactoring, compiler warnings and other tools where appropriate.
 
-Students must experience:
+Core evidence: define expectations first, design normal/boundary/invalid/failure cases, narrow a fault through evidence, perform regression verification, and explain the limits of resulting confidence.
 
-- Writing expected results first
-- Designing normal, boundary, and error cases
-- Reproducing and narrowing a problem
-- Running regression after correction
-- Comparing behavior before and after refactoring
-
-Post-Unit concept explanation:
-
-> Explain to an AI the differences among testing, verification, validation, and debugging.
+Optional `X` extension: when external assistance is actually used, apply CT-E16/19/20 conditionally and verify adopted claims. No external-assistance artifact is required from non-users.
 
 ---
 
-## F-U12 — How Can a Program Integrate Concepts Across the Course?
+## F-U12 — How Can Concepts Across the Course Be Integrated into One Verifiable Program?
 
-Core question: **How can requirements, data, control, functions, memory, interaction, and engineering be integrated into one verifiable program?**
+Core question: **How can requirements, data, control, functions, memory/lifetime, interaction, modules, and verification be integrated without losing clear responsibilities or evidence?**
 
-Primary Concepts: Requirement, Algorithm, Decomposition, Module, Protocol, Testing, Validation, and Maintenance.
+Primary Concepts: CT-C02 Requirement, CT-C03 Algorithm/Design, CT-A01 Decomposition, CT-A12 Module, CT-X10 Protocol, CT-E03 Testing, CT-E05 Validation, CT-E10 Regression Verification, CT-E18 Judgment.
 
-This Unit does not introduce a large amount of new syntax. It requires students to integrate, modify, diagnose, verify, and explain.
+This Unit introduces little new syntax. It integrates existing capabilities through requirement clarification, architecture/data-flow decisions, incremental implementation, failure handling, change impact, testing, diagnosis, and explanation.
 
-Students must experience:
+Core evidence:
 
-- Converting requirements into observable behavior
-- Building data, control-flow, and module designs
-- Implementing a minimum executable version incrementally
-- Creating tests and regression cases
-- Handling requirement changes
-- Explaining design decisions and verification evidence
-
-Post-Unit concept explanation:
-
-> Explain to an AI how your integrated program connects requirements, data, control, functions, memory, and testing.
+- convert requirements into observable behavior and technical contracts;
+- design data/control/module responsibilities;
+- build a minimal working slice incrementally;
+- create and run relevant normal/boundary/invalid/failure/regression cases;
+- handle a changed requirement without breaking unaffected behavior;
+- explain design decisions, assumptions, limitations, and verification evidence.
 
 ---
 
-## Relationship Between Units and Lessons
+## Relationship Between Units and Delivery
 
-A Unit is not equal to one class meeting. A Lesson is a delivery slice of a Unit.
+A Unit is a capability/concept skeleton, not a fixed class meeting.
 
-The same Unit may:
+- The Chinese preparatory track may deliver a Unit in one longer block.
+- The English preparatory track may use more delivery slices and language scaffolds.
+- Formal Units may span more than one week depending on the approved delivery plan.
+- A delivery slice may adapt examples and pacing but may not silently change the Unit's core question, technical standard, or core evidence expectation.
 
-- Be taught in a longer integrated block in the Chinese-taught class.
-- Be split into more Lessons in the English-taught class with terminology, reading, and communication scaffolds.
-- Be deepened across several weeks in the formal course.
+## Unit Set
 
-A Lesson must not change the Unit's core question, Concept chain, or capability standards.
+Current approved skeleton:
 
-## Complete Quantity Conclusion
+- Preparatory course: P-U01 through P-U04.
+- Formal course: F-U01 through F-U12.
+- Total: 16 Unit identifiers.
 
-Current recommendation:
+This count is a maintained design decision rather than a constitutional constant. Any merge/split requires updates to Concept Registry references, scope/competency traceability, material paths, both language versions, and the active audit.
 
-- Preparatory course: 4 Units.
-- Formal course: 12 Units.
-- Total: 16 Unit skeletons.
+## Maintenance Rules
 
-AI is not assigned a separate Unit. It appears only as a low-weight, brief post-Unit concept-explanation activity.
+1. Keep both language versions substantively equivalent.
+2. Keep Unit identifiers stable unless a documented migration is performed.
+3. Check Concept Registry dependencies and competency/scope standards when changing core Unit content.
+4. Keep AI/external-assistance activities directly skippable unless an explicitly approved conditional activity targets tool judgment itself.
+5. Verify concrete C/toolchain/runtime statements against the stated standard and target environment.
+6. Ensure corresponding student materials remain readable, technically testable, and free of stale Unit requirements.
+7. Record substantive changes in the repository-wide active audit.
 
-This number is not constitutionally fixed. Units may later be merged or split according to Concept boundaries, classroom trials, and available hours, but week count must not replace Concept-based derivation.
-
-## Next Steps
-
-1. Check whether each Unit has a complete Concept dependency chain.
-2. Confirm that the number of new Concepts in each Unit is suitable for beginners.
-3. Compare the map with current Preparatory Units 1–4 and decide what to retain, split, merge, or rewrite.
-4. Create bilingual student-material outlines for all 16 Units.
-5. Begin with P-U01 as an independently readable official student text.
-6. Only then divide Units into Lessons for the Chinese-taught, English-taught, and formal courses.
-
-## Navigation
+## Related Documents
 
 - [Programming Concept Tree](14-programming-concept-tree.en.md)
 - [Programming Concept Registry](15-programming-concept-registry.en.md)
+- [Programming Competency Map](05-competency-map.en.md)
+- [Course Scope Boundary](06-scope-boundary.en.md)
+- [Course Delivery Map](08-delivery-map.en.md)
+- [Formal Materials Index](../materials/formal/README.en.md)
+- [Preparatory Materials Index](../materials/preparatory/README.en.md)
 - [Instructional Design Workspace](README.en.md)
 - [繁體中文版](16-unit-map.zh-TW.md)
