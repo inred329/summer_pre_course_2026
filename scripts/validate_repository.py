@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
 """Repository-wide structural validation for Constitution 2.0 maintenance.
 
-This script intentionally checks properties that can be validated mechanically:
+Mechanically checks:
 - local Markdown links resolve;
-- bilingual Markdown pairs exist and, when version metadata is present, use the same version;
-- obsolete Constitution 1.x references occur only in explicitly historical/audit records;
-- every tracked C translation unit can be compiled by a selected compiler in C17 mode.
+- bilingual Markdown pairs exist and paired version metadata matches;
+- obsolete Constitution 1.x references occur only in historical/audit records;
+- ordinary C17 translation units compile with the selected compiler.
 
-It does not attempt to replace human review of substantive bilingual equivalence,
+Intentional defect sources are not treated as ordinary reference programs. Their
+specific expectations are documented in `examples/COMPILE-MANIFEST.md` and, for
+validation fixtures, in `validation/run_validation.py`.
+
+This script does not replace human review of substantive bilingual equivalence,
 student readability, assessment policy, or technical pedagogy.
 """
 
@@ -22,7 +26,8 @@ from pathlib import Path
 from urllib.parse import unquote
 
 
-LINK_RE = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
+LINK_RE = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
+FENCE_RE = re.compile(r"```.*?```", re.DOTALL)
 VERSION_EN_RE = re.compile(r"^Version:\s*([^\s]+)", re.MULTILINE)
 VERSION_ZH_RE = re.compile(r"^版本[：:]\s*([^\s]+)", re.MULTILINE)
 OLD_CONSTITUTION_RE = re.compile(
@@ -40,21 +45,46 @@ def relative(path: Path, root: Path) -> str:
 
 
 def markdown_files(root: Path) -> list[Path]:
-    return sorted(p for p in root.rglob("*.md") if ".git" not in p.parts)
+    return sorted(
+        p
+        for p in root.rglob("*.md")
+        if ".git" not in p.parts and ".github" not in p.parts
+    )
+
+
+def strip_fenced_code(text: str) -> str:
+    return FENCE_RE.sub("", text)
 
 
 def check_links(root: Path, files: list[Path]) -> list[str]:
     errors: list[str] = []
+    root_resolved = root.resolve()
     for path in files:
-        text = path.read_text(encoding="utf-8")
+        text = strip_fenced_code(path.read_text(encoding="utf-8"))
         for match in LINK_RE.finditer(text):
             raw = match.group(1).strip()
-            if raw.startswith(("http://", "https://", "mailto:", "#")):
+            lower = raw.lower()
+            if lower.startswith(("http://", "https://", "mailto:", "tel:", "data:")):
                 continue
-            target = raw.split(' "', 1)[0].split("#", 1)[0]
+            if raw.startswith("#"):
+                continue
+
+            target = raw.split(' "', 1)[0].split(" '", 1)[0]
+            target = target.strip("<>").split("#", 1)[0].split("?", 1)[0]
             if not target:
                 continue
-            resolved = (path.parent / unquote(target)).resolve()
+
+            if target.startswith("/"):
+                resolved = (root / unquote(target.lstrip("/"))).resolve()
+            else:
+                resolved = (path.parent / unquote(target)).resolve()
+
+            try:
+                resolved.relative_to(root_resolved)
+            except ValueError:
+                errors.append(f"link escapes repository: {relative(path, root)} -> {raw}")
+                continue
+
             if not resolved.exists():
                 errors.append(f"broken link: {relative(path, root)} -> {raw}")
     return errors
@@ -106,17 +136,24 @@ def check_old_constitution_references(root: Path, files: list[Path]) -> list[str
         rel = relative(path, root)
         if rel.startswith(HISTORICAL_PREFIXES):
             continue
-        text = path.read_text(encoding="utf-8")
+        text = strip_fenced_code(path.read_text(encoding="utf-8"))
         if OLD_CONSTITUTION_RE.search(text):
             errors.append(f"obsolete Constitution 1.x reference outside history/audit: {rel}")
     return errors
+
+
+def is_intentional_defect(path: Path, root: Path) -> bool:
+    rel_parts = path.relative_to(root).parts
+    return "defects" in rel_parts or "expected_fail" in rel_parts
 
 
 def c_translation_units(root: Path) -> list[Path]:
     return sorted(
         p
         for p in root.rglob("*.c")
-        if ".git" not in p.parts and not any(part.startswith("build") for part in p.parts)
+        if ".git" not in p.parts
+        and not any(part.startswith("build") for part in p.parts)
+        and not is_intentional_defect(p, root)
     )
 
 
@@ -135,6 +172,7 @@ def compile_translation_units(root: Path, compiler: str) -> list[str]:
                 "-Wall",
                 "-Wextra",
                 "-Wpedantic",
+                "-Werror",
                 "-c",
                 str(source),
                 "-o",
@@ -168,7 +206,9 @@ def main() -> int:
     errors.extend(check_bilingual_versions(root, files))
     errors.extend(check_old_constitution_references(root, files))
 
+    units: list[Path] = []
     if not args.skip_c:
+        units = c_translation_units(root)
         compilers = [args.compiler] if args.compiler else ["gcc", "clang"]
         for compiler in compilers:
             try:
@@ -189,9 +229,10 @@ def main() -> int:
             print(f"- {item}", file=sys.stderr)
         return 1
 
+    c_summary: str | int = len(units) if not args.skip_c else "C checks skipped"
     print(
         f"repository validation passed: {len(files)} Markdown files, "
-        f"{len(c_translation_units(root)) if not args.skip_c else 'C checks skipped'} C translation units"
+        f"{c_summary} ordinary C translation units"
     )
     return 0
 
