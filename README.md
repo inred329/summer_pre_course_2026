@@ -26,6 +26,7 @@ The Chinese-taught and English-taught tracks use different pacing while preservi
 - [教材與活動資源（繁體中文）](materials/README.zh-TW.md)
 - [Materials and Activity Resources (English)](materials/README.en.md)
 - [C17 程式範例與缺陷案例](examples/README.md)
+- [籌備與執行規劃](planning/README.md)
 
 ### 課程設計與維護｜Course Design and Maintenance
 
@@ -35,6 +36,8 @@ The Chinese-taught and English-taught tracks use different pacing while preservi
 - [Instructional Design Workspace (English)](design/README.en.md)
 - [Constitution 2.0 全庫審查（繁體中文）](reviews/repository-constitution-2-audit.zh-TW.md)
 - [Repository Audit Against Constitution 2.0 (English)](reviews/repository-constitution-2-audit.en.md)
+- [課程籌備與開課檢查清單](planning/checklist.md)
+- [Repository / CI 技術驗證](validation/README.md)
 
 ## 課程核心
 
