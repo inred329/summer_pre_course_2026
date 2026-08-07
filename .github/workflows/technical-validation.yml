@@ -4,15 +4,28 @@ on:
   pull_request:
   push:
     branches:
+      - main
       - agent/complete-remaining-15-units
+      - agent/constitution-2-repository-audit
+
+permissions:
+  contents: read
 
 jobs:
-  validate:
+  validate-c17:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         compiler: [gcc, clang]
     steps:
       - uses: actions/checkout@v4
       - name: Run C17 validation
         run: python3 validation/run_validation.py --compiler ${{ matrix.compiler }}
+
+  validate-materials:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check bilingual pairs, internal links, and former Constitution references
+        run: python3 validation/check_materials.py
