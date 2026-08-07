@@ -1,6 +1,6 @@
 # Repository-Wide Constitution 2.0 Compliance Audit
 
-Version: 1.7.0  
+Version: 1.8.0  
 Status: Active audit record  
 Last updated: 2026-08-07  
 Authoritative basis: `CONSTITUTION.en.md` 2.0.0  
@@ -28,15 +28,17 @@ Priorities: P0 immediate, P1 high, P2 medium, P3 general improvement.
 | `materials/README.*`, `materials/TEMPLATE.*` | Role-based index / authoring guide | Students, instructors, maintainers | C → A | P1 | Mixed audiences, copied policy, fixed AI chapter, and premature completion claims | Rewritten as role-based navigation and purpose-driven authoring guidance | Complete |
 | `materials/instructor/session-guides.*` | Instructor Guide | Instructors, TAs | A | P1 | Executable pacing, misconceptions, fallbacks, fairness supports, and concise records | Retained; `design/13` remains authoritative | Reviewed |
 | `materials/formal/README.*`, `materials/formal/unit-01*` through `unit-12*` | Student Material | Students | B → A | P1 | AI in core paths and multiple technical-contract gaps | AI made directly skippable; value, input, lifetime, allocation, stream, dependency, overflow, and failure contracts strengthened | Complete |
-| `design/README.*` | Governance index / guide | All roles | C → A | P2 | Listed all design files as equally "official," duplicated policy text, and contained obsolete development next steps | Rewritten with authority order, governance roles, maintenance workflow, and current navigation | Complete |
+| `design/README.*` | Governance index / guide | All roles | C → A | P2 | Listed all design files as equally official, duplicated policy text, and contained obsolete next steps | Rewritten with authority order, governance roles, maintenance workflow, and current navigation | Complete |
 | `design/01-product-vision.*` | Revisable planning model | Course designers and maintainers | C → A | P1 | Claimed governing authority and made AI use part of universal success evidence | Reclassified as planning context; external-assistance verification made conditional; AI non-use explicitly neutral | Complete |
-| `design/02-requirements-map.*` | Revisable planning and traceability model | Course designers and maintainers | C → A | P1 | Presented later documents as controlled by this requirements baseline; defined responsible AI collaboration and AI literacy as universal requirements; required AI records; grouped AI with P0 cross-cutting capabilities; retained stale sequential-stage navigation | Reclassified as non-governing planning model; Constitution and official policy precedence stated; external-assistance verification made conditional; AI use, records, and non-use declarations made non-mandatory; priority table and maintenance navigation aligned | Complete |
+| `design/02-requirements-map.*` | Revisable planning and traceability model | Course designers and maintainers | C → A | P1 | Presented later documents as controlled by this requirements baseline; defined AI literacy and AI records as universal requirements; retained stale sequential navigation | Reclassified as non-governing planning model; higher-authority precedence stated; external-assistance verification made conditional; mandatory AI records removed; maintenance navigation aligned | Complete |
+| `design/03-programming-domain-model.*` | Revisable planning model | Course designers and maintainers | C → A | P1 | Embedded AI as a core programming domain, required transparent AI records, had bilingual metadata drift, and described a physical build pipeline too categorically | Reframed AI as optional external assistance; made disclosure contextual; synchronized version/status; added implementation-neutral toolchain caveats and corrected pointer/storage wording | Complete |
+| `design/04-programming-language-knowledge-graph.*` | Revisable planning and traceability model | Course designers and maintainers | C → A | P1 | Treated AI judgment/verification as universal cross-cutting dependency, required an AI record path, used stale draft/stage navigation, and over-specified preprocessing/assembly/linking artifacts | Added conditional dependency type; made the external-assistance branch optional; removed universal record requirements; synchronized metadata; replaced stage navigation; clarified conceptual versus implementation-specific build stages and runtime models | Complete |
 
 ## 3. Governing Decisions
 
 ### 3.1 AI Must Not Become Implicitly Mandatory
 
-AI may be offered as an extension, but it must not become mandatory through placement in the core sequence, completion checklist, fixed template, requirements baseline, competency field, or assessment field. All preparatory and formal Units now use directly skippable optional extensions. AI non-use does not affect completion, participation, or assessment. Design planning models may describe verification responsibilities only conditionally when optional external assistance is actually adopted.
+AI may be offered as an extension, but it must not become mandatory through placement in a core sequence, completion checklist, fixed template, requirements baseline, domain model, dependency graph, competency field, or assessment field. AI non-use does not affect completion, participation, or assessment. Planning models may describe verification responsibilities only conditionally when optional external assistance is actually adopted.
 
 ### 3.2 Assessment Has One Authoritative Source
 
@@ -44,13 +46,17 @@ AI may be offered as an extension, but it must not become mandatory through plac
 
 ### 3.3 Design Documents Do Not Share Equal Authority
 
-The design workspace now follows this authority order: Constitution, official policy, approved design standards, planning and traceability models, implementation guides and materials, then historical records. Lower-level files may not override higher-level sources.
+The design workspace follows this authority order: Constitution, official policy, approved design standards, planning and traceability models, implementation guides and materials, then historical records. Lower-level files may not override higher-level sources.
 
 ### 3.4 Student Materials Must State Technical Contracts
 
-Materials must state value ranges, input states, termination conditions, lifetimes, dereference ranges, allocation sizes, ownership, failure preservation, stream states, module dependencies, compile/link stages, and undefined behavior where relevant. Successful compilation or one correct output cannot replace those contracts.
+Materials must state relevant value ranges, input states, termination conditions, lifetimes, dereference preconditions, allocation sizes, ownership, failure preservation, stream states, module dependencies, compile/link distinctions, and undefined behavior. Successful compilation or one correct output cannot replace those contracts.
 
-### 3.5 Earlier Audits Are Historical
+### 3.5 Conceptual Models Must Not Be Mistaken for Implementation Guarantees
+
+Design diagrams may simplify language-toolchain or runtime responsibilities, but they must mark implementation-dependent details. The C standard does not require a fixed physical pipeline of standalone preprocessor, compiler, assembler, and linker programs, nor one specific runtime representation such as a physical call stack. Concrete materials must identify and verify the target compiler and environment when those details matter.
+
+### 3.6 Earlier Audits Are Historical
 
 Earlier reviews record decisions under a particular date and constitutional version. Current decisions follow Constitution 2.0 and this active audit.
 
@@ -78,17 +84,19 @@ No P0/P1 issue requiring the materials to be withdrawn was found in this batch. 
 - Historical record: `design/12-constitution-compliance-review.*`.
 - Governance index: `design/README.*`.
 
-`design/01-product-vision.*` and `design/02-requirements-map.*` now match this classification. The next design-governance batch must apply the recorded corrections for `design/03–04` and continue inspecting the remaining individual files for duplicated normative claims, stale metadata, and bilingual equivalence.
+`design/01–04` now match this classification and the optional-AI policy. The next design-governance batch must continue with `design/05–11` and `design/14–17`, checking each bilingual pair for duplicated normative claims, stale metadata, stale next-step language, tool-specific assumptions, and substantive equivalence.
 
 ## 6. Next Audit Scope
 
-### P1: Recorded Design Corrections
-
-Apply the existing paired findings for `design/03–04`, including mandatory AI collaboration embedded in domain/knowledge architecture, transparent-record requirements, stale status text, bilingual metadata differences, and conceptual build-pipeline wording that requires clearer implementation caveats.
-
 ### P2: Individual Design Documents
 
-Review `design/05–11` and `14–17` for duplicated policy statements, conflicting authority claims, obsolete status text, stale next steps, and bilingual equivalence.
+Review `design/05–11` and `design/14–17` individually for:
+
+- conflicting authority claims or duplicated policy;
+- mandatory AI/tool requirements that are not authorized by the official policy;
+- stale draft/status or sequential “next stage” language;
+- bilingual version/status/content mismatches;
+- technical claims that confuse conceptual models with C-standard or implementation guarantees.
 
 ### P2: Automated Technical and Navigation Checks
 
@@ -99,4 +107,4 @@ Review `design/05–11` and `14–17` for duplicated policy statements, conflict
 
 ## 7. Current Conclusion
 
-All identified P0 issues have been corrected. Preparatory materials and formal Units F-U01 through F-U12 have completed bilingual review, and the paired P1 findings in `design/01–02` are now resolved. Recorded P1 corrections remain in `design/03–04`, and the repository-wide audit is not complete. Individual design-document cleanup, audit-matrix expansion, and automated validation remain, so PR #10 stays in draft.
+All identified P0 issues have been corrected. Preparatory materials and formal Units F-U01 through F-U12 have completed bilingual review, and the paired P1 findings in `design/01–04` are now resolved and committed. The repository-wide audit is not complete: `design/05–11`, `design/14–17`, and automated navigation/technical validation remain, so PR #10 stays in draft.
