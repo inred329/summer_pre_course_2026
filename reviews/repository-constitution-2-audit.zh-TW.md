@@ -5,95 +5,84 @@
 最後更新：2026-08-07  
 權威基準：`CONSTITUTION.zh-TW.md` 2.0.0  
 主要讀者：課程設計者、授課教師與維護者  
-規範效力：本文件只記錄審查結果與驗證結果，不自行建立新規範
+規範效力：本文件只記錄審查與驗證結果，不自行建立新規範
 
-## 一、審查目的與判定方式
+## 一、目的與判定
 
-本審查記錄 PR #10 所提出 repository 快照依 Constitution 2.0 完成的文件層級、主要讀者、權威角色、雙語等值、學生閱讀品質、技術可驗證性，以及 AI 與評量規則一致性檢查。
+本審查依 Constitution 2.0 檢查治理層級、權威來源、評量與 AI 規則、學生教材可讀性、教師文件邊界、雙語實質等值及技術可驗證性。
 
-符合性判定：A 符合、B 小幅修正、C 結構性修正、D 不符合、H 歷史化。  
-優先級：P0 立即修正、P1 高優先、P2 中優先、P3 一般改善。
+判定：A 符合、B 小幅修正、C 結構性修正、D 不符合、H 歷史化。優先級：P0 立即、P1 高、P2 中、P3 一般改善。「已完成」表示已識別問題已修正並重新檢查，不排除未來 P3 教學或文字改善。
 
-「已完成」表示已識別的問題已修正並重新檢查，不代表該文件未來不再接受文字、節奏或教學設計上的改善。
+## 二、完成審查矩陣
 
-## 二、已完成審查矩陣
+| 範圍 | 治理角色 | 優先級 | 主要發現與修正 | 狀態 |
+|---|---|---:|---|---|
+| `README.md`、`classes/*/README.md` | 導覽／教材入口 | P0 | 移除重複政策、舊 AI 要求與過時 TBD；改為現行角色與班別入口 | A／完成 |
+| `design/13-learning-assessment-policy.*` | 唯一正式評量政策 | P0 | 移除普遍 AI 紀錄與 AI 口試能力要求；AI 預設選用，未使用不構成缺失 | A／完成 |
+| `design/12-constitution-compliance-review.*` | 歷史紀錄 | P0 | Constitution 1.2.0 審查明確歷史化，不再作現行依據 | H／完成 |
+| `materials/preparatory/ASSESSMENT-NOTE.*` | 遷移說明 | P0 | 移除自稱優先政策的效力，只保留遷移說明 | A／完成 |
+| P-U01–P-U04 中英文教材 | 學生教材 | P1 | AI 從核心路徑移為可直接跳過的選用延伸；補強可讀性與技術契約 | A／完成 |
+| F-U01–F-U12 中英文教材 | 學生教材 | P1 | 移除核心路徑中的 AI 必做暗示；補值域、輸入、生命週期、配置、stream、依賴、溢位、失敗與 UB 邊界 | A／完成 |
+| `materials/assignments/*` | 學習／評量實作資源 | P1 | 作業不繳交、不直接計分；rubric 只在實際採用 AI 時檢查相關責任 | A／完成 |
+| `materials/README.*`、`materials/TEMPLATE.*` | 導覽／作者指南 | P1 | 分離讀者角色、移除複製政策與固定 AI 章節 | A／完成 |
+| `materials/instructor/session-guides.*` | 教師執行指南 | P1 | 保留節奏、常見錯誤、備援與公平支架；不得覆蓋 `design/13` | A／已審查 |
+| `design/README.*` | 治理索引 | P2 | 建立 Constitution → 正式政策 → 設計標準 → 規劃模型 → 指南／教材 → 歷史紀錄的權威順序 | A／完成 |
+| `design/01–04` 中英文 pair | 可修訂規劃／追蹤模型 | P1 | 移除上位／控制基準宣稱、普遍 AI 依賴與紀錄；修正工具鏈與 runtime 過度實體化 | A／完成 |
+| `design/05–06` 中英文 pair | 設計標準 | P1 | 能力與範圍不以 AI 使用為最低門檻；外部協助證據採條件式 | A／完成 |
+| `design/07–10` 中英文 pair | 可修訂規劃／追蹤模型 | P1/P2 | 驗收、delivery、risk、traceability 不得把選用工具轉成隱性必做或監控要求 | A／完成 |
+| `design/11` 中英文 pair | 術語設計標準 | P2 | 統一治理、null pointer、storage duration、stream、verification 與外部協助術語 | A／完成 |
+| `design/14–16` 中英文 pair | 設計標準 | P1/P2 | 外部協助排除於核心先備；修正 C／runtime 術語；Unit 核心證據不依 AI | A／完成 |
+| `design/17` 中英文 pair | 可修訂規劃／追蹤模型 | P1 | 教材大綱改為工具無關核心證據＋可直接跳過的選用外部協助模式 | A／完成 |
+| Repository 導覽／雙語結構 | 機械驗證 | P2 | 中英配對、版本、內部連結、舊 Constitution 引用與孤立 Markdown 已自動檢查 | A／完成 |
+| `examples/`、validation fixtures | 技術驗證 | P2 | 正確範例與刻意缺陷已分類；建立 compile manifest、runtime／defect 驗證 | A／完成 |
+| `.github/workflows/*validation*` | CI 驗證 | P2 | 文件／治理、GCC／Clang C17 與範例驗證已可重複執行 | A／完成 |
 
-| Path | Governance Level | Primary Audience | Rating | Priority | Findings | Action | Status |
-|---|---|---|---|---|---|---|---|
-| `README.md` | Guide / routing entry | 學生、教師、維護者 | C → A | P0 | 重複評量政策、進度報告與舊 AI 要求 | 重寫為三角色路由入口 | 已完成 |
-| `classes/zh/README.md`、`classes/en/README.md` | Material entry | 學生 | D → A | P0 | 早期 TBD 草案與現行課程不符 | 改寫為現行 4×3 與 5×2 小時入口 | 已完成 |
-| `design/13-learning-assessment-policy.*` | Official Policy | 學生與教師 | D → A | P0 | 強制 AI 前置成果、摘要、紀錄與普遍 AI 口試能力 | AI 改為選用；未使用不構成缺失 | 已完成 |
-| `design/12-constitution-compliance-review.*` | Historical Record | 維護者 | D → H | P0 | 以 Constitution 1.2.0 為現行基準 | 歷史化並加入過時警告 | 已完成 |
-| `materials/preparatory/ASSESSMENT-NOTE.*` | Migration Note | 維護者 | C → A | P0 | 自稱正式優先規則並複製評量政策 | 取消規範效力，只保留遷移說明 | 已完成 |
-| `materials/preparatory/unit-01*` 至 `unit-04*` | Student Material | 學生 | B → A | P1 | AI 位於核心主線，形成隱性必做 | 改為可直接跳過的選用延伸 | 已完成 |
-| `materials/assignments/*` | Student resources / assessment implementation | 學生、教師 | B → A | P1 | 索引與 rubric 文字可能暗示 AI 為必做 | 作業維持不繳交、不計分；AI 筆記為選用；rubric 只在實際使用時檢查 | 已完成 |
-| `materials/README.*`、`materials/TEMPLATE.*` | Role-based index / authoring guide | 學生、教師、維護者 | C → A | P1 | 混合讀者、複製政策、固定 AI 章節與過早完成宣告 | 改寫為角色導覽與目的導向教材寫作指南 | 已完成 |
-| `materials/instructor/session-guides.*` | Instructor Guide | 教師、助教 | A | P1 | 需要可執行節奏、常見錯誤、備援、公平支架與精簡紀錄，但不能自行成為政策 | 保留為執行指南；評量仍以 `design/13` 為權威 | 已審查 |
-| `materials/formal/README.*`、`materials/formal/unit-01*` 至 `unit-12*` | Student Material | 學生 | B → A | P1 | AI 位於核心路徑，且多處技術契約不足 | AI 改為可直接跳過；補強值域、輸入、生命週期、配置、stream、依賴、溢位與失敗契約 | 已完成 |
-| `design/README.*` | Governance index / guide | 所有角色 | C → A | P2 | 將全部設計文件列為同等正式、重複政策文字，且下一步已過時 | 重寫權威順序、治理角色、維護流程與現行導覽 | 已完成 |
-| `design/01-product-vision.*` | 可修訂的規劃模型 | 設計者、維護者 | C → A | P1 | 自稱上位依據，並把 AI 使用列為所有學生的成功證據 | 改為規劃脈絡；明定上位來源優先；外部協助驗證改為條件式；未使用 AI 不構成缺失 | 已完成 |
-| `design/02-requirements-map.*` | 可修訂的規劃與追蹤模型 | 設計者、維護者 | C → A | P1 | 自稱控制基準；把 AI 素養／紀錄列為普遍需求；保留過時線性導覽 | 改為非治理規劃模型；明定上位來源優先；AI 要求改為條件式；移除過時導覽 | 已完成 |
-| `design/03-programming-domain-model.*` | 可修訂的規劃模型 | 設計者、維護者 | C → A | P1 | 把 AI 嵌入核心領域；要求普遍揭露；metadata 漂移；建置流程寫得過於實體化 | 外部協助改為選用；揭露改為情境式；同步雙語 metadata；加入 implementation-neutral 工具鏈與 pointer/storage 邊界 | 已完成 |
-| `design/04-programming-language-knowledge-graph.*` | 可修訂的規劃與追蹤模型 | 設計者、維護者 | C → A | P1 | 把 AI 判斷當普遍依賴；要求普遍紀錄；保留草案導覽；過度具體化建置階段 | 新增條件式依賴；外部協助分支改為選用；紀錄改為情境式；修正 metadata、導覽與工具鏈例外 | 已完成 |
-| `design/05-competency-map.*` | 設計標準 | 設計者、維護者 | B → A | P1 | 需要明確政策邊界與條件式外部協助證據 | 明定治理邊界；EV-AI／PC-A 只在實際使用協助時適用；核心能力不要求 AI | 已完成 |
-| `design/06-scope-boundary.*` | 設計標準 | 設計者、維護者 | B → A | P1 | 範圍模型需要明確選用狀態，避免工具使用變成隱性最低交付 | 使用 SB-X 條件式／選用；最低交付不包含 AI；範圍與成熟度不依工具使用決定 | 已完成 |
-| `design/07-acceptance-model.*` | 可修訂的規劃與追蹤模型 | 設計者、教師 | B → A | P1 | 候選證據可能被誤認為正式評量政策或普遍工具證據 | 明定正式政策權威；外部協助證據為條件式；不要求 AI／未使用聲明 | 已完成 |
-| `design/08-delivery-map.*` | 可修訂的規劃模型 | 設計者、教師 | B → A | P1 | 活動位置可能讓選用工具實質變成必做 | 工具活動改為可直接跳過；共同基線不包含工具使用；政策細節回歸 `design/13` | 已完成 |
-| `design/09-risk-register.*` | 可修訂的規劃與追蹤模型 | 設計者、教師、維護者 | B → A | P2 | 工具誤用風險控制可能轉成強制監控／紀錄 | 以能力證據與驗證處理風險，同時保留選用性、尊嚴與政策權威 | 已完成 |
-| `design/10-traceability-matrix.*` | 可修訂的規劃與追蹤模型 | 設計者、維護者 | B → A | P2 | AI 追蹤可能變成普遍依賴路徑 | 外部協助追蹤改為條件式；核心鏈不依賴 AI；明定權威順序 | 已完成 |
-| `design/11-terminology-glossary.*` | 設計標準 | 作者、翻譯者、維護者 | B → A | P2 | 術語需補治理角色與精確 C／工具鏈邊界 | 統一治理、Null Pointer、storage duration、stream、verification 與選用外部協助術語 | 已完成 |
-| `design/14-programming-concept-tree.*` | 設計標準 | 設計者、維護者 | B → A | P2 | 概念盤點需分離穩定概念、工具選擇與實作慣例 | 外部協助不列核心先備；補強工具鏈／runtime 實作例外與概念邊界 | 已完成 |
-| `design/15-programming-concept-registry.*` | 設計標準 | 設計者、維護者 | C → A | P1 | 草案 metadata、本地重定義成熟度、把 AI-assisted programming 列核心、術語與工具鏈假設衝突 | 啟用為設計標準；成熟度／範圍回歸權威標準；外部協助 Concept 改 X 條件式；修正 C 術語與 runtime 邊界 | 已完成 |
-| `design/16-unit-map.*` | 設計標準 | 設計者、維護者 | C → A | P1 | 每個 Unit 原本都要求課後向 AI 解釋，且 compiler／call-stack 文字過於實體化 | 核心證據改為不依外部工具；移除完成條件中的 AI 對話／log／prompt／未使用聲明；工具鏈與 activation model 改為 implementation-neutral | 已完成 |
-| `design/17-student-material-outlines.*` | 可修訂的規劃與追蹤模型 | 教材作者、維護者 | C → A | P1 | 每份大綱原本都把 AI 當課後對話對象；舊技術模型可能重新引入 AI 必做與實作 folklore | 改為工具無關的核心反思／證據、可直接跳過的選用外部協助模式，並為各 Unit 補明確技術契約 | 已完成 |
-| Repository navigation / bilingual structure | Mechanical validation | 維護者 | B → A | P2 | 中英配對、連結、孤立文件與舊引用需要全庫驗證 | 自動檢查已建立並掃描 114 份 Markdown；未發現孤立／未引用 Markdown 候選 | 已完成 |
-| `examples/` 與 C validation fixtures | Technical verification | 教師、維護者 | B → A | P2 | 正確範例與刻意缺陷需要明確且可重現的分類 | 建立 compile manifest、runtime／defect 驗證，以及 GCC／Clang 驗證 | 已完成 |
-| `.github/workflows/*validation*` | CI verification | 維護者 | B → A | P2 | 驗證結果需要可重複執行的 repository checks | 文件／治理、技術驗證與範例驗證 workflow 已啟用，且在所審查 PR 快照全部通過 | 已完成 |
+以上矩陣涵蓋本次 Constitution 2.0 審查中的既有文件區域；各 `design/01–17` 雖在表中依治理角色分組，均已逐份完成中英文審查。
 
 ## 三、主要裁決
 
-### 1. AI 活動不得形成隱性必做
+### 1. AI 不得形成隱性必做
 
-AI 可以作為延伸工具，但不得因位於核心章節、完成清單、固定模板、需求基準、領域模型、知識依賴圖、能力欄位、範圍狀態、Unit 骨架、教材大綱或評量欄位而成為隱性必做。不使用 AI 不影響完成、參與或評量。只有在學生實際採用選用外部協助時，才條件式產生理解與技術驗證責任。
+AI 可作選用延伸，但不得因位於核心章節、完成清單、模板、需求、能力、範圍、Unit 骨架、教材大綱或評量欄位而變成必做。不使用 AI 不影響完成、參與或評量。只有實際採用外部協助時，才產生相應的理解與技術驗證責任。
 
-### 2. 評量規則維持單一權威來源
+### 2. 評量只有一個權威來源
 
-`design/13-learning-assessment-policy.*` 是正式評量制度的唯一權威來源。README、作業包、rubric、模板、教師指南、設計標準與規劃模型只能提供導覽、追蹤、定義或執行方式。
+`design/13-learning-assessment-policy.*` 是正式評量制度唯一權威來源。README、作業包、rubric、模板、教師指南、設計標準與規劃模型只能提供導覽、追蹤、定義或執行方式。
 
-### 3. 設計文件不具有相同權威
+### 3. 低層文件不得覆蓋高層來源
 
-權威順序為 Constitution → 正式學習與評量制度 → 已核准設計標準 → 規劃與追蹤模型 → 執行指南與教材 → 歷史紀錄。低層級文件不得覆蓋高層級來源。
+權威順序為 Constitution → 正式學習與評量制度 → 已核准設計標準 → 規劃與追蹤模型 → 執行指南與教材 → 歷史紀錄。
 
-### 4. 學生教材必須說清楚技術契約
+### 4. 技術敘述必須可驗證
 
-在相關情境中，教材必須說明值域、輸入狀態、終止條件、生命週期、解參照前提、配置大小、ownership／釋放責任、失敗保留、stream 狀態、模組依賴、compile/link 差異與 undefined-behavior 邊界。成功編譯或單一正確輸出不能取代這些契約。
+相關教材必須說明必要的值域、輸入狀態、終止條件、生命週期、解參照前提、配置大小、ownership／釋放責任、失敗保留、stream 狀態、模組依賴、compile/link 差異與 undefined-behavior 邊界。成功編譯或單一正確輸出不能取代技術契約。
 
-### 5. 概念模型不得誤寫成實作保證
+### 5. 概念模型不是實作保證
 
-C 標準不要求固定存在獨立的 preprocessor、compiler、assembler、linker、object file、executable file 等實體階段，也不要求單一實體 call-stack／heap 表示。當指令、產物、配置或 runtime 行為重要時，具體教材必須指出並驗證目標實作環境。
-
-### 6. 舊審查屬歷史紀錄
-
-較早審查只記錄特定日期與 Constitution 版本下的決策。現行決策依 Constitution 2.0 與目前權威來源判定。
+C 標準不要求固定的實體 preprocessor／compiler／assembler／linker 流程，也不要求單一實體 call-stack／heap 表示。當指令、產物、配置或 runtime 行為重要時，教材必須指出並驗證目標實作環境。
 
 ## 四、人工審查涵蓋範圍
 
-Constitution 2.0 逐份文件審查已涵蓋：
+逐份人工審查已涵蓋 P-U01–P-U04、F-U01–F-U12 的中英文教材，作業／rubric、教材索引／模板、教師指南、`design/01–17` 全部雙語 pair，以及 repository／治理入口與歷史紀錄邊界。
 
-- 中文與英文前導學生教材 P-U01 至 P-U04；
-- 中文與英文正式學生教材 F-U01 至 F-U12；
-- 作業／rubric 資源、教材索引／模板與教師 session guidance；
-- `design/01–17` 全部雙語 pair；
-- repository／治理入口與歷史審查文件邊界。
-
-人工審查檢查權威邊界、評量與 AI 規則、學生教材可讀性、教師文件邊界、雙語實質等值與技術敘述。未來課堂使用仍可能產生 P3 文字或節奏改善；除非新發現實質衝突，否則不因此重開已完成的 P0/P1 審查。
+人工審查檢查權威來源、評量與 AI 規則、學生可讀性、教師文件邊界、雙語實質等值與技術敘述。未來課堂使用仍可能產生 P3 文字或節奏改善；除非發現實質衝突，否則不因此重開已完成的 P0/P1 審查。
 
 ## 五、自動化與技術驗證紀錄
 
-針對本 2.0.0 矩陣更新前的 PR #10 審查快照：
+在本 2.0.0 矩陣更新前的 PR #10 審查快照中：
 
-- `scripts/validate_repository.py --skip-c` 掃描 114 份 Markdown 並通過。
-- GCC repository validation 掃描 114 份 Markdown 與 8 個一般 C translation units 並通過。
-- Clang repository validation 掃描 114 份 Markdown 與 8 個一般 C translation units 並通過。
-- `validation/check_materials.py` 檢查 114 份 Markdown，未發現孤立／未引用 Markdown 候選，navigation／bilingual／former-Constitution 檢查通過。
-- `validation/run_validation.py
+- `scripts/validate_repository.py --skip-c`：114 份 Markdown，通過。
+- GCC repository validation：114 份 Markdown、8 個一般 C translation units，通過。
+- Clang repository validation：114 份 Markdown、8 個一般 C translation units，通過。
+- `validation/check_materials.py`：114 份 Markdown；未發現孤立／未引用 Markdown 候選；navigation／bilingual／former-Constitution 檢查通過。
+- `validation/run_validation.py`：GCC 與 Clang 均通過。
+- `examples/verify.sh`：GCC 13.3.0 與 Clang 18.1.3 均通過，包含 `missing-return.c` 的 diagnostic-only 契約。
+- GitHub Actions 的 `Technical Validation`、`Repository validation`、`Verify C17 examples` 在該審查快照均成功完成。
+
+自動檢查驗證結構與可執行技術契約，不取代上述人工內容審查。
+
+## 六、目前結論
+
+PR #10 範圍內的全庫 Constitution 2.0 審查已完成。所有本輪識別的 P0/P1 已修復；雙語審查矩陣已涵蓋審查區域；學生教材、設計文件、導覽與技術驗證均已完成相應檢查。
+
+因此 PR #10 可進入正式 review，而非維持 draft-only audit 狀態。後續 reviewer 或 CI 新發現應記為新的 finding；P2/P3 編輯或課堂改善可持續進行，但不與本次完成快照矛盾。
