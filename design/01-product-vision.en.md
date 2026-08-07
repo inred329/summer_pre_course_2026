@@ -1,6 +1,6 @@
 # Instructional Product Vision
 
-Version: 0.1.1  
+Version: 0.1.2  
 Status: Revisable planning model  
 Corresponding Chinese version: `01-product-vision.zh-TW.md`
 
@@ -8,7 +8,7 @@ Corresponding Chinese version: `01-product-vision.zh-TW.md`
 
 This document defines the educational problem, target audience, core value, and definition of success shared by the 2026 Summer C Programming Preparatory Course and the subsequent 16-week formal course.
 
-It provides planning context for the requirements map, competency map, scope boundaries, delivery plan, and teaching-material design. It must remain consistent with the Constitution, the official learning and assessment policy, and approved design standards.
+It provides planning context for the requirements map, competency map, scope boundaries, delivery plan, and teaching-material design. It is not an authoritative policy source and does not override the Constitution, the official learning and assessment policy, or approved design standards. Where any conflict exists, those higher-authority sources govern and this planning model must be revised accordingly.
 
 ## 1. Educational Problem to Solve
 
@@ -112,7 +112,7 @@ Evidence of success must include at least the following:
 5. Students can read and modify existing programs rather than only starting from a blank file.
 6. Students can design tests and explain why results should be trusted.
 7. Students can use error messages and observed behavior to locate problems.
-8. When students adopt AI or another external suggestion, they can identify the adopted assistance and explain how they verified it; non-use does not affect success.
+8. Students remain responsible for the correctness of work they submit. If they choose to adopt AI or another external suggestion, they can explain the adopted result and how they technically verified it; students who do not use such assistance satisfy this criterion through their own reasoning and verification.
 9. The Chinese-taught and English-taught classes meet the same standards for shared core capabilities.
 10. Other instructors or teaching assistants can understand, deliver, and maintain the materials.
 
