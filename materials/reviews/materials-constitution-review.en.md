@@ -1,53 +1,52 @@
-# Preparatory Materials Constitution Review
+# Preparatory Materials Constitution Review — Historical Record
 
-Version: 0.1.0  
-Status: Official review record  
-Last updated: 2026-08-03  
-Major change summary: Reviewed all preparatory units, assignments, rubrics, AI records, and instructor guidance against the bilingual Course Constitution.  
-Corresponding Chinese version: [前導教材憲法遵循審查](materials-constitution-review.zh-TW.md)
+Version: 0.2.0  
+Status: Historical review record — superseded  
+Last updated: 2026-08-07  
+Historical baseline: `CONSTITUTION.en.md` / `CONSTITUTION.zh-TW.md` 1.2.0  
+Normative force: None  
+Corresponding Chinese version: [前導教材憲法遵循審查—歷史紀錄](materials-constitution-review.zh-TW.md)
 
-## Scope
+> **Superseded:** This file records a review performed on 2026-08-03 under Constitution 1.2.0. It is preserved only as historical evidence. It must not be used to infer current assessment, AI/tool-use, material-structure, or release requirements. Current decisions follow Constitution 2.0, the official learning/assessment policy, and the active repository audit.
 
-This review covers the material template, Units 1–4, the assignment pack, shared rubric, AI-use log, grading guide, and materials indexes.
+## Historical Scope
 
-## Baseline
+The original review examined the preparatory material template, Units 1–4, assignment resources, rubrics, AI-related records, instructor guidance, and material indexes as they existed at that time.
 
-- `CONSTITUTION.zh-TW.md` version 1.2.0
-- `CONSTITUTION.en.md` version 1.2.0
+## Historical Findings
 
-## Results
+The review recorded passes for bilingual pairing, navigation, terminology, C17 examples, visual/trace support, cognitive-load control, testing/debugging, multiple reasonable solutions, track equivalence, and version/change metadata.
 
-| Requirement | Result |
-|---|---|
-| Bilingual substantive equivalence | Pass |
-| Clear purpose, prerequisites, tools, tasks, and completion criteria | Pass |
-| Navigation from the repository root | Pass |
-| Approved terminology | Pass |
-| Consistent unit and assignment structure | Pass |
-| Equivalent C17 code and test data | Pass |
-| Purposeful diagrams and trace tables | Pass |
-| Cognitive-load control and explicit deferral | Pass |
-| Prediction, tracing, testing, modification, debugging, and explanation | Pass |
-| Specific AI permissions, prohibitions, records, and verification | Pass |
-| Equal core standards across both language tracks | Pass |
-| Capability-targeted remediation | Pass |
-| Version, date, change summary, and paired-language links | Pass |
+It also recorded one correction to the integrated assignment: removing the lowest of three scores should not imply that arrays are required; three independent score variables are sufficient at the preparatory stage.
 
-## Correction Made
+## Why This Review Is No Longer Current
 
-The integrated assignment was clarified so that removing the lowest of three scores does not imply use of arrays. Students may use three separate variables and compute the new average from the total minus the minimum. Arrays and untaught data structures are not required.
+Several assumptions used by the 1.2.0 review were deliberately changed by Constitution 2.0 and the current official policy, including:
 
-## Remaining Pre-Delivery Tasks
+- universal AI permission/prohibition/record fields;
+- AI-use logs or retained AI artifacts as general expectations;
+- fixed material structures applied too broadly;
+- assessment wording that was later centralized in `design/13-learning-assessment-policy.*`;
+- pre-delivery claims made before the current repository-wide technical validation existed.
 
-- Compile all short C17 examples in the selected classroom environment before release.
-- Add equivalent assignment dates to both language versions when the class calendar is finalized.
-- Prepare bilingual versions of instructor-provided defective programs and sample AI suggestions.
+The old “all current materials conform and may serve as the official baseline” conclusion is therefore historical only.
 
-## Conclusion
+## Current Sources
 
-The current preparatory materials and assignment documents conform to the Course Constitution and may serve as the official baseline for classroom-ready versions.
+Use these instead for current decisions:
+
+- [Course Constitution](../../CONSTITUTION.en.md)
+- [Official Learning and Assessment Policy](../../design/13-learning-assessment-policy.en.md)
+- [Active Constitution 2.0 Repository Audit](../../reviews/repository-constitution-2-audit.en.md)
+- [Materials Index](../README.en.md)
+- [C17 Example Verification](../../examples/README.md)
+
+## Historical Preservation Rule
+
+When this record conflicts with a current source, do not edit the historical conclusion into a new policy. Follow the current higher-authority source and, when useful, record the migration in the active audit.
 
 ## Navigation
 
 - [Materials Index](../README.en.md)
+- [Active Constitution 2.0 Audit](../../reviews/repository-constitution-2-audit.en.md)
 - [繁體中文版](materials-constitution-review.zh-TW.md)
