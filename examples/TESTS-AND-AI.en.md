@@ -1,13 +1,16 @@
-# C17 Example Tests and Incorrect AI Suggestions
+# C17 Example Test Plans and Optional Incorrect-Suggestion Review
 
-Version: 0.1.0  
-Status: Official teaching resource  
-Last updated: 2026-08-03  
-Corresponding Chinese version: [C17 範例測試與錯誤 AI 建議](TESTS-AND-AI.zh-TW.md)
+Version: 0.2.0  
+Status: Instructor resource  
+Last updated: 2026-08-07  
+Governance note: This resource does not create assessment or AI/tool-use requirements. The official learning and assessment policy remains authoritative.  
+Corresponding Chinese version: [C17 範例測試計畫與選用錯誤建議審查](TESTS-AND-AI.zh-TW.md)
 
 ## Document Purpose
 
-For instructors and teaching assistants using `examples/`. Require prediction before compilation, execution, comparison, and explanation.
+This resource helps instructors and teaching assistants verify the examples under `examples/` and plan prediction, tracing, diagnosis, correction, and regression activities.
+
+Students should establish an expected result or technical hypothesis before observing a compiler/runtime result. AI-specific review is an optional extension only; the same core activity can be completed by reviewing a deliberately incorrect statement supplied by the instructor.
 
 ## Unit 1
 
@@ -21,54 +24,62 @@ Hello, C!
 
 ### `unit-01/defects/missing-semicolon.c`
 
-Expected: compilation fails and the program does not run. Compiler wording may differ, but it should identify a missing `;` near `printf`.
+Expected: C translation/build fails, so no newly built program should be executed. A conforming implementation must diagnose the constraint violation, but diagnostic wording and the reported source location can differ; do not require one exact “missing semicolon” message.
 
-Incorrect AI suggestion:
+Optional incorrect-suggestion review:
 
-> This is a runtime error. Run the program first to see the complete message.
+> This is a runtime error. Run the newly built program first to see the complete message.
 
-Reject it because compilation failure prevents a new executable from running.
+Reject the claim because the source does not successfully translate/build into the intended new program.
 
 ## Unit 2
 
 ### `unit-02/average.c`
 
-| Input | Expected Output |
-|---|---|
-| `5 2` | `Average: 2.50` |
-| `0 3` | `Average: 0.00` |
-| `5 0` | `Count must be positive` |
+Input contract: two decimal integers; `count` must be greater than zero.
+
+| Input | Expected Output | Exit direction |
+|---|---|---|
+| `5 2` | `Average: 2.50` | success |
+| `0 3` | `Average: 0.00` | success |
+| `5 0` | `Count must be positive` | failure |
+| `5 -2` | `Count must be positive` | failure |
+| non-integer input | `Invalid input` | failure |
 
 ### `unit-02/defects/integer-division.c`
 
-For input `5 2`, the incorrect result may be `2.00`. Integer division occurs before conversion to `double`.
+The program is expected to compile, but it prints `Average: 2.00` because integer division occurs before conversion to `double`.
 
-Incorrect AI suggestion:
+Optional incorrect-suggestion review:
 
-> Change the output format to `%.2f` and the result will become 2.50.
+> Change only the output format to `%.2f` and the mathematical result will become 2.50.
 
-Reject it because formatting cannot repair an already completed integer division.
+Reject the claim: formatting changes presentation, not the already-computed integer-division result.
 
 ## Unit 3
 
 ### `unit-03/score-statistics.c`
+
+Input contract: whitespace-separated decimal integers. `-1` is the sentinel; scores from 0 through 100 are accepted; other integer scores are ignored.
 
 | Input Sequence | Expected Result |
 |---|---|
 | `80 90 -1` | count 2, sum 170, average 85.00 |
 | `0 100 -1` | count 2, sum 100, average 50.00 |
 | `-1` | `No valid score` |
-| `120 80 -1` | Ignore 120 and count only 80 |
+| `120 80 -1` | ignore 120; count 1, sum 80, average 80.00 |
+
+If a non-integer token is supplied, the current example stops scanning and reports the statistics accumulated so far. Treat that as part of the example's stated input contract rather than silently assuming recovery from malformed input.
 
 ### `unit-03/defects/infinite-loop.c`
 
-Expected: the loop does not terminate because the control variable is not updated.
+Expected: the source compiles, but once executed the loop does not terminate because `value` is never updated. Prefer static tracing for the core diagnosis. If an instructor demonstrates execution, use an environment-level timeout or manual interruption; CI must not run this program without a timeout.
 
-Incorrect AI suggestion:
+Optional incorrect-suggestion review:
 
 > Replace `while` with `if` to fix it.
 
-Students should identify that this changes the requirement and does not repair repeated execution with termination.
+Reject the claim because it changes repeated-execution semantics rather than repairing progress toward the loop's termination condition.
 
 ## Unit 4
 
@@ -79,25 +90,30 @@ Students should identify that this changes the requirement and does not repair r
 | `3 8 5` | `Maximum: 8` |
 | `9 9 1` | `Maximum: 9` |
 | `-3 -8 -5` | `Maximum: -3` |
+| malformed input | `Invalid input` |
 
 ### `unit-04/defects/missing-return.c`
 
-Expected: the compiler should warn that a non-`void` function may not return a value; observed results are not trustworthy.
+The defect is reaching the closing `}` of a value-returning function without returning a value, while the caller uses the function-call result. Under C17, that execution has undefined behavior. Common compilers with warning options usually diagnose the suspicious control path, but this source is not a portable “must fail compilation” test and one exact warning is not required.
 
-Incorrect AI suggestion:
+Do not execute this defect in automated verification as if its observed value were meaningful. The safe activity is to identify the contract violation, add the required return, and then test the corrected function.
 
-> If the current test output is correct, there is no need to add `return`.
+Optional incorrect-suggestion review:
 
-Reject it because the function contract requires every reachable path to provide a return value.
+> If one observed run prints the expected maximum, there is no need to add `return`.
+
+Reject the claim because one observation cannot justify behavior whose language-level preconditions have already been violated.
 
 ## Teaching Rules
 
-- Defect files are not correct examples.
-- Let students predict before revealing whether an AI suggestion is wrong.
-- After correction, rerun normal, boundary, and necessary exceptional cases.
-- Do not penalize a different reasonable solution.
+- Files under `defects/` are intentionally wrong and must not be presented as correct reference solutions.
+- Prediction and technical reasoning come before optional external-suggestion review.
+- After a correction, rerun relevant normal, boundary, invalid, and failure cases.
+- Do not penalize a different solution merely for being different when it satisfies the same contract and evidence expectations.
+- Do not require AI use, AI logs, fixed prompts, or non-use declarations for these examples.
 
 ## Navigation
 
 - [Examples Index](README.md)
+- [Compile Manifest](COMPILE-MANIFEST.md)
 - [繁體中文版](TESTS-AND-AI.zh-TW.md)
