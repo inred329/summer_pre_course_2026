@@ -1,17 +1,21 @@
 # Formal Course Student Materials
 
-Version: 1.2.0  
+Version: 1.3.0  
 Status: Complete bilingual student-material set  
 Last updated: 2026-08-09  
 Corresponding Chinese version: [正式課程學生教材](README.zh-TW.md)
 
 ## Formal-course students start here
 
-The formal course now starts with F-U00. F-U00 does not require you to take the preparatory path first; it separates the roles of source code, compiler, Build, executable, Run, and Debug that the formal course will keep using.
+If you are entering the formal course directly, start with F-U00. It does not require you to take the preparatory path first; it separates the roles of source code, compiler, Build, executable, Run, and Debug that the formal course will keep using.
 
 **[Start F-U00: What Actually Happens After You Press Run?](unit-00-build-run-ide.en.md)**
 
-The preparatory Units remain available for foundation review, not as a required reading path for formal-course students. If variables and state, conditions and loops, or basic functions and parameters feel unfamiliar, return to the relevant preparatory Unit only when you need it.
+If you just completed P-U00 through P-U04 in this repository, you do not need to immediately repeat F-U00. P-U00 already built a fuller beginner-facing tool model, so P-U04 can lead directly to F-U01.
+
+**[After the preparatory course, continue with F-U01: Why Do Representation, Type, and Operations Affect Results?](unit-01-representation-types.en.md)**
+
+The other preparatory Units remain available for foundation review, not as a fixed required reading path. If variables and state, conditions and loops, or basic functions and parameters feel unfamiliar, return to the relevant preparatory Unit only when you need it.
 
 ## Units
 
@@ -33,7 +37,7 @@ The preparatory Units remain available for foundation review, not as a required 
 
 ## Reading order
 
-Read F-U00 through F-U12 in order. Each Unit ends with a link to the next one, so after starting F-U00 you can follow the learning path forward without returning to the repository home page or opening internal course documents to find the next step.
+If you enter the formal course directly, read F-U00 through F-U12 in order. If you just completed P-U00 through P-U04, begin at F-U01 instead. Each Unit ends with a link to the next one, so after entering at the correct starting point you can follow the learning path forward without returning to the repository home page or opening internal course documents to find the next step.
 
 The formal course uses these basic capabilities:
 
@@ -53,5 +57,6 @@ AI use is not part of the core completion standard. Any AI activity explicitly m
 ## Navigation
 
 - [Student entry](../STUDENT-START.en.md)
-- [Start F-U00](unit-00-build-run-ide.en.md)
+- [Entering formal directly: start F-U00](unit-00-build-run-ide.en.md)
+- [After preparatory: start F-U01](unit-01-representation-types.en.md)
 - [繁體中文版](README.zh-TW.md)
