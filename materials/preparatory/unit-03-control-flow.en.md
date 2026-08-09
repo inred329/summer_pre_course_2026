@@ -1,40 +1,102 @@
 # Preparatory Unit P-U03: How Does a Program Select and Repeat?
 
-Version: 1.0.2  
+Version: 1.1.0  
 Status: Official student material  
-Last updated: 2026-08-06  
+Last updated: 2026-08-09  
 Corresponding Chinese version: [前導單元 P-U03：程式如何選擇與重複？](unit-03-control-flow.zh-TW.md)
 
-## Purpose and Completion Standard
+The previous Unit deliberately left one problem unresolved.
 
-This is a student chapter for independent reading, practice, and review. Completing it means you can turn a requirement into conditions, predict branch and loop paths, diagnose boundary and termination problems, and use tests to show that control flow satisfies the requirement.
+Suppose the program reads an original score of `98` and then adds a bonus of `5`. Plain arithmetic gives:
 
-The activities do not need to be submitted. Keep your predictions, traces, programs, tests, and corrections. AI is not required to complete this chapter. The optional AI extension may be skipped without affecting completion, participation, or assessment.
+```text
+103
+```
 
-## What Question Does This Chapter Answer?
+But the requirement says that the final score may not exceed 100.
 
-Program state does not always change in the same way. Sometimes different situations require different paths. Sometimes work must repeat until a condition is no longer true.
+What is missing is not another kind of addition. The program needs a way to **make a decision**: only when the result is above 100 should it be changed to 100; otherwise, the original result should remain.
 
-> When different situations require different actions, or one action must repeat, how does a program determine the next step?
-
-After completing this chapter, you should be able to:
-
-1. Turn requirements into evaluable conditions.
-2. Predict `if`/`else` execution paths.
-3. Explain a loop's initial state, continuation condition, work, and update.
-4. Diagnose off-by-one errors and infinite loops.
-5. Check input success before evaluating conditions.
-6. Verify control flow with normal, boundary, and invalid cases.
-
-Prerequisite: you can trace variable state, build basic expressions, and write an expected result before execution.
+This chapter begins with that need. First the program will learn to choose a path. Then we will handle another common control problem: when the same work must happen many times, how does the program decide whether to continue?
 
 ---
 
-## 1. Predict the Branch First
+## 1. Let the Program Choose a Path for the First Time
+
+Start with the most direct correction:
 
 ```c
-int score = 60;
+int score = 98;
+int bonus = 5;
+int final_score = score + bonus;
 
+if (final_score > 100) {
+    final_score = 100;
+}
+
+printf("Final score: %d\n", final_score);
+```
+
+Do not treat `if` as syntax to memorize yet. Read it first as a sentence:
+
+> If `final_score > 100` is true, change `final_score` to 100.
+
+With `score = 98` and `bonus = 5`, `final_score` first becomes 103. The condition is then true, so the state changes once more to 100.
+
+Now change the starting values to:
+
+```c
+int score = 80;
+int bonus = 5;
+```
+
+`final_score` first becomes 85. This time `final_score > 100` is false, so the assignment inside the braces does not run and the result remains 85.
+
+That is the basic role of a branch: **use the current state to decide whether some work should happen.**
+
+---
+
+## 2. What Exactly Is a Condition?
+
+In:
+
+```c
+if (final_score > 100)
+```
+
+the expression that actually makes the decision is:
+
+```c
+final_score > 100
+```
+
+It evaluates to either true or false.
+
+Before running anything, inspect these three values:
+
+| `final_score` | `final_score > 100` | Change it to 100? |
+|---:|---|---|
+| 99 | false | No |
+| 100 | false | No |
+| 101 | true | Yes |
+
+The most informative value here is 100. The requirement says “at most 100,” so 100 itself should be preserved. Only a value greater than 100 needs correction.
+
+This is why boundary values deserve special attention. Many condition defects do not appear at ordinary values such as 50 or 80; they appear exactly where the rule changes from one case to another.
+
+---
+
+## 3. When Both Paths Need Different Work
+
+Some requirements are not simply “do one extra thing if a condition is true.” Instead, two situations require two different actions.
+
+For example:
+
+> Print `Pass` for a score of 60 or above; otherwise print `Try again`.
+
+That can be written as:
+
+```c
 if (score >= 60) {
     printf("Pass\n");
 } else {
@@ -42,56 +104,32 @@ if (score >= 60) {
 }
 ```
 
-Before running it, answer:
-
-1. What is the result of `score >= 60`?
-2. Which block runs?
-3. What changes if `score` becomes 59?
-4. Why is 60 an important test value?
-
----
-
-## 2. Conditions and Branches
-
-A condition is an expression that evaluates to true or false. A branch selects a path from that result.
+Think of it as a fork in the path:
 
 ```mermaid
 flowchart TD
-    S[Current State] --> Q{Condition true?}
-    Q -->|Yes| A[Execute A]
-    Q -->|No| B[Execute B]
+    S[Current score] --> Q{score >= 60 ?}
+    Q -->|Yes| A[Print Pass]
+    Q -->|No| B[Print Try again]
     A --> E[Continue]
     B --> E
 ```
 
-Minimal example:
+For scores 59, 60, and 61, walk through the diagram yourself before running the program.
+
+Pay special attention to 60:
 
 ```c
-#include <stdio.h>
-
-int main(void) {
-    int score;
-
-    if (scanf("%d", &score) != 1) {
-        fprintf(stderr, "Invalid input\n");
-        return 1;
-    }
-
-    if (score >= 60) {
-        printf("Pass\n");
-    } else {
-        printf("Try again\n");
-    }
-
-    return 0;
-}
+score >= 60
 ```
 
-Test `59`, `60`, and `61`. Write each expected path and output before running. Also test a nonnumeric input and confirm that no branch uses an invalid `score` value.
+includes equality, so 60 follows the `Pass` path.
 
 ---
 
-## 3. Relational and Logical Operators
+## 4. Common Ways to Compare Values
+
+Conditions often begin with comparisons. You do not need to memorize the whole table at once; use it when a requirement needs one of these relationships.
 
 | Meaning | C form |
 |---|---|
@@ -102,95 +140,208 @@ Test `59`, `60`, and `61`. Write each expected path and output before running. A
 | less than | `<` |
 | less than or equal | `<=` |
 
-Logical combinations:
+One difference is worth deliberately noticing early:
 
 ```c
-age >= 18 && age <= 65
+score = 60;
+```
+
+is assignment: it stores 60 in `score`.
+
+```c
+score == 60
+```
+
+is comparison: it asks whether `score` equals 60.
+
+They differ by only one `=`, but they play completely different roles.
+
+---
+
+## 5. When One Comparison Is Not Enough
+
+Suppose a valid score must be between 0 and 100. We want to say:
+
+> `score` is at least 0 and at most 100.
+
+In C:
+
+```c
+score >= 0 && score <= 100
+```
+
+`&&` means that both sides must be true.
+
+If instead we want to describe an invalid value—below 0 or above 100—we can write:
+
+```c
 score < 0 || score > 100
+```
+
+`||` means that at least one side is true.
+
+You may also see:
+
+```c
 !is_valid
 ```
 
-Do not confuse assignment `=` with comparison `==`.
+`!` reverses a true/false interpretation.
+
+It is usually easier to understand the requirement as a sentence first and then read the symbols than to memorize the symbols without a situation attached to them.
 
 ---
 
-## 4. A Loop Is More Than Repeated Syntax
+## 6. Now Read the Input Check Properly
 
-A loop repeatedly changes state until its continuation condition becomes false.
-
-```mermaid
-flowchart TD
-    I[Initial State] --> Q{Continue?}
-    Q -->|Yes| W[Do Work]
-    W --> U[Update State]
-    U --> Q
-    Q -->|No| E[End]
-```
-
-Four elements:
-
-1. Initial state
-2. Continuation condition
-3. Work performed each time
-4. Update
-
----
-
-## 5. Minimal Loop Example
+The previous Unit already used this pattern:
 
 ```c
-#include <stdio.h>
+int score;
 
-int main(void) {
-    int i = 1;
-    int sum = 0;
-
-    while (i <= 5) {
-        sum = sum + i;
-        i = i + 1;
-    }
-
-    printf("%d\n", sum);
-    return 0;
+if (scanf("%d", &score) != 1) {
+    printf("Invalid input\n");
+    return 1;
 }
 ```
 
-Expected output:
+At that point, you only needed to know its purpose: confirm that input succeeded before using the value. Now we can read the choice it makes.
+
+When `scanf` successfully reads one integer, the call reports one successful conversion. Therefore:
+
+```c
+scanf("%d", &score) != 1
+```
+
+is false, and the error-handling block is skipped.
+
+If the input cannot be read as an integer, the condition is true. The program prints `Invalid input` and then ends with `return 1;` instead of continuing with a `score` value that was never successfully obtained.
+
+Why `scanf` needs `&score` will be explained more fully when pointers are introduced. For now, it is enough to know that this is the form `scanf` needs in order to place the integer it reads into `score`.
+
+---
+
+## 7. Branch Order Can Change the Result
+
+Consider:
+
+```c
+if (score >= 60) {
+    printf("Pass\n");
+} else if (score >= 90) {
+    printf("Excellent\n");
+}
+```
+
+With a score of 95, you might expect `Excellent`. But the first condition, `score >= 60`, is already true. The program chooses that path, so the later `else if` is never checked.
+
+If the requirement is:
+
+- 90 or above: `Excellent`
+- 60 through 89: `Pass`
+- otherwise: `Try again`
+
+then ask the stricter question first:
+
+```c
+if (score >= 90) {
+    printf("Excellent\n");
+} else if (score >= 60) {
+    printf("Pass\n");
+} else {
+    printf("Try again\n");
+}
+```
+
+The important idea is not how to format an `else if`. It is that **an earlier condition may already claim some states**, preventing later branches from ever seeing them.
+
+When several branches are involved, choose a few representative values and ask, one condition at a time: “Where does this value become true for the first time?” That is often more revealing than staring at the code as a whole.
+
+---
+
+## 8. Control Flow Is Not Only About Choosing
+
+A branch answers “which path should happen this time?” Another kind of problem appears when the same work must repeat.
+
+For example:
+
+> Add 1, 2, 3, 4, and 5.
+
+You could write:
+
+```c
+sum = 1 + 2 + 3 + 4 + 5;
+```
+
+But if the requirement changes to 1 through 100, or 1 through a user-provided `n`, this form is no longer practical.
+
+The repeated pattern is really:
+
+```text
+add the current i into sum
+move i forward
+then decide whether to continue
+```
+
+That is the problem a loop solves.
+
+---
+
+## 9. Use `while` to See the Four Parts of a Loop
+
+```c
+int i = 1;
+int sum = 0;
+
+while (i <= 5) {
+    sum = sum + i;
+    i = i + 1;
+}
+
+printf("%d\n", sum);
+```
+
+The expected output is:
 
 ```text
 15
 ```
 
-Trace:
+When reading a loop, repeatedly ask four questions:
 
-| Iteration | `i` before test | Condition | `sum` after work | `i` after update |
-|---:|---:|---|---:|---:|
-| 1 | 1 | true | 1 | 2 |
-| 2 | 2 | true | 3 | 3 |
-| 3 | 3 | true | 6 | 4 |
-| 4 | 4 | true | 10 | 5 |
-| 5 | 5 | true | 15 | 6 |
-| End | 6 | false | 15 | 6 |
+1. What is the initial state?
+2. Under what condition should the loop continue?
+3. What work happens in each iteration?
+4. What update moves the program toward stopping?
 
----
+In this example, those parts are:
 
-## 6. `for` and `while`
+```text
+i = 1, sum = 0
 
-The same work can be written as:
+continue while i <= 5
 
-```c
-int sum = 0;
+sum = sum + i
 
-for (int i = 1; i <= 5; i = i + 1) {
-    sum = sum + i;
-}
+i = i + 1
 ```
 
-A `for` loop places initialization, condition, and update together. A `while` loop often emphasizes the continuation condition. You should be able to identify the four loop elements in either form.
+Expanding the repeated work into state changes gives:
+
+| `i` before this test | `i <= 5` | `sum` after the work | `i` after the update |
+|---:|---|---:|---:|
+| 1 | true | 1 | 2 |
+| 2 | true | 3 | 3 |
+| 3 | true | 6 | 4 |
+| 4 | true | 10 | 5 |
+| 5 | true | 15 | 6 |
+| 6 | false | no more work | 6 |
+
+A trace table is not meant to create extra paperwork. It turns “many repetitions” back into a sequence of state changes that you already know how to follow.
 
 ---
 
-## 7. Error Case One: Off-by-One
+## 10. How Can a Loop Be Off by One?
 
 Change:
 
@@ -204,13 +355,23 @@ to:
 i < 5
 ```
 
-The result becomes `10`. Do not stop at saying “5 is missing.” Identify that the iteration where `i == 5` is skipped.
+and predict the result.
 
-Use boundary values `4`, `5`, and `6` to inspect the condition.
+When `i` reaches 5, the condition is already false, so the iteration that should add 5 never happens. The final sum becomes 10.
+
+A defect that performs one iteration too many or too few is commonly called an off-by-one error.
+
+The name matters less than a useful diagnostic question:
+
+> When the boundary value is reached, should that iteration happen or not?
+
+For this example, substitute `i = 4`, `5`, and `6` into the condition. The difference between `<= 5` and `< 5` becomes much easier to see.
 
 ---
 
-## 8. Error Case Two: Infinite Loop
+## 11. Why Do Some Loops Never Stop?
+
+Now consider:
 
 ```c
 int i = 1;
@@ -220,115 +381,134 @@ while (i <= 5) {
 }
 ```
 
-`i` never changes, so the condition remains true.
+`i` begins at 1, so the condition is true. After printing 1, `i` is still 1. The next test is true again, and the same thing continues.
 
-Diagnosis:
+The problem is not that `while` itself is dangerous. The state controlling the loop never changes in a direction that can make the condition false.
 
-1. Identify variables used by the continuation condition.
-2. Check whether they change in the loop.
-3. Confirm that the direction of change can eventually make the condition false.
-4. Restore the update and test with a small range.
+When a loop appears not to terminate, inspect the variables used by its continuation condition, ask whether they change inside the loop, and then ask whether those changes can actually make the condition false one day.
+
+After restoring:
+
+```c
+i = i + 1;
+```
+
+trace a small range such as 1 through 5 again. Small inputs are safer and clearer for this kind of diagnosis than immediately trying a large range.
 
 ---
 
-## 9. Error Case Three: A Broader Condition Hides a Later One
+## 12. `for` Expresses the Same Idea in Another Form
+
+The same summation can be written as:
 
 ```c
-if (score >= 60) {
-    printf("Pass\n");
-} else if (score >= 90) {
-    printf("Excellent\n");
+int sum = 0;
+
+for (int i = 1; i <= 5; i = i + 1) {
+    sum = sum + i;
 }
 ```
 
-For input 95, the first condition is already true, so the second branch can never be selected.
+A `for` loop places initialization, continuation condition, and update together. A `while` loop often makes “continue while this condition remains true” more visually prominent.
 
-Correction: test the stricter condition first.
+There is no need yet to decide which is more advanced. What matters is that, in either form, you can identify the initial state, continuation condition, work, and update.
 
-```c
-if (score >= 90) {
-    printf("Excellent\n");
-} else if (score >= 60) {
-    printf("Pass\n");
-} else {
-    printf("Try again\n");
-}
+---
+
+## 13. Try It: Start with a Choice
+
+Write a program that reads an age and follows this rule:
+
+```text
+below 18 → Minor
+18 or above → Adult
 ```
 
----
+Do not begin with a large collection of inputs. Choose three informative values first: 17, 18, and 19.
 
-## 10. Guided Practice
-
-### Age Classification
-
-Read an age. Print `Minor` when it is below 18; otherwise print `Adult`.
-
-Create tests for `17`, `18`, `19`, and invalid input first.
-
-### Counter
-
-Print 1 through 5. Write the four loop elements before choosing `while` or `for`.
+Before execution, write down what the condition becomes for each value and which path should be taken. Then run the program and compare. Finally, try a nonnumeric input and confirm that failed input is not used to classify an age.
 
 ---
 
-## 11. Independent Practice: Range Sum
+## 14. Try It Again: Add from 1 through `n`
 
-Read a positive integer `n` and print the sum from 1 through `n`.
+Now write a program that reads a positive integer `n` and prints the sum from 1 through `n`.
 
-Requirements:
+Begin with two small expectations:
 
-- `n = 5` expects 15.
-- `n = 1` expects 1.
-- `n <= 0` prints `Invalid input`.
-- Nonnumeric input is rejected before the loop.
-- Build an iteration trace.
+```text
+n = 1 → 1
+n = 5 → 15
+```
+
+If `n <= 0`, the requirement says to print:
+
+```text
+Invalid input
+```
+
+Nonnumeric input must also be rejected before the loop begins.
+
+After the first working version, choose one input and trace the state iteration by iteration. If the output is wrong, do not immediately change the condition at random. Find the first iteration where the actual state begins to differ from what you predicted.
 
 ---
 
-## 12. Requirement Modification
+## 15. Change the Requirement: Add Only Even Numbers
 
-The original program sums 1 through `n`. Change it to sum only even numbers.
+The original “sum from 1 through `n`” requirement now becomes:
 
-Update expected results first:
+> Add only the even numbers in the range.
 
-| `n` | Expected result |
+Update the expected results before editing the program:
+
+| `n` | Expected sum |
 |---:|---:|
 | 1 | 0 |
 | 5 | 6 |
 | 6 | 12 |
 
-Identify where the new condition belongs, modify the program, and preserve both invalid-value and invalid-format tests.
+Then ask: does the loop still need to move to the next `i`? At what point should the new “is this value even?” decision happen?
+
+After modifying the program, test the new behavior, but also repeat `n = 1`, an invalid numeric value, and a nonnumeric input. The change should not accidentally remove protections that previously worked.
 
 ---
 
-## 13. Optional Extension: Use AI to Check Your Explanation
+## 16. Optional: Use AI to Challenge Your Control-Flow Explanation
 
-This section is optional. You may skip it without affecting completion of the chapter.
+If you want one extra exercise, first answer without any tool:
 
-You may explain in your own words:
+> How does a branch use state to choose a path? How does a loop use state updates to decide whether another iteration should happen?
 
-> How does a condition select a path? How does a loop use state updates to decide whether to continue?
+You may then give your explanation to an AI system and ask it to point out anything unclear. This section is completely optional. No fixed prompt is required, and no conversation needs to be saved or submitted.
 
-No fixed prompt is required, and the conversation does not need to be saved or submitted. An AI response may be incomplete or incorrect. If it conflicts with a trace table, boundary test, or reproducible result, judge it again using evidence.
-
----
-
-## 14. Self-Check
-
-- I can translate a requirement into a condition.
-- I can predict an `if`/`else` path.
-- I can check input success before evaluating a condition.
-- I can identify the four loop elements.
-- I can trace loop state one iteration at a time.
-- I can diagnose off-by-one errors and infinite loops.
-- I can design normal, boundary, and invalid cases.
-- I can run regression tests after a requirement change.
+If an AI explanation conflicts with a path you traced, a state table, a boundary test, or a reproducible result, return to that evidence and judge the explanation again.
 
 ---
 
-## 15. Chapter Summary
+## 17. After Reading, Try to Answer without Looking Back
 
-Conditions select paths from the current state. Loops repeatedly perform work and update state until a condition becomes false. Reliable control flow requires validated input, path prediction, state tracing, boundary tests, and termination reasoning. The next Unit divides larger work into functions with clear responsibilities.
+- Why does `final_score > 100`, rather than `final_score >= 100`, match an “at most 100” requirement?
+- What is the difference between `=` and `==`?
+- Why do 59, 60, and 61 reveal more about a pass/fail boundary than testing only 80?
+- Why can the order of several `if`/`else if` branches make a later branch unreachable?
+- What four parts should you be able to identify in a loop?
+- At which iteration does the difference between `i < 5` and `i <= 5` matter?
+- How can you reason about whether a loop can eventually stop?
+- Why should a variable not be used in a condition after its input operation failed?
+
+If one answer is difficult to explain, return to the corresponding small program and walk through it with a concrete value.
+
+---
+
+## 18. Chapter Closing
+
+The previous Unit gave the program state. This Unit added another layer: a program can inspect that state, choose different work, and repeatedly update state to decide whether more work should happen.
+
+The core of a branch is not the braces; it is deciding which condition represents which situation in the requirement. The core of a loop is not repeated syntax; it is understanding what state keeps the loop going and what update can eventually make it stop.
+
+At this point, we can write programs that store data, change state, choose paths, and repeat work. As those programs grow, however, putting every responsibility inside `main` quickly becomes difficult to read, modify, and verify.
+
+The next Unit addresses that problem by dividing larger work into functions with names, inputs, results, and clear responsibilities.
 
 ## Navigation
 
