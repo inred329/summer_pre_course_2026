@@ -1,31 +1,23 @@
 # Formal Unit F-U02: How Can Reliable Multi-Branch and Repetitive Flows Be Built?
 
-Version: 1.0.2  
+Version: 1.1.0  
 Status: Official student material  
-Last updated: 2026-08-06  
+Last updated: 2026-08-09  
 Corresponding Chinese version: [正式單元 F-U02：如何建立可靠的多分支與重複流程？](unit-02-complex-control-flow.zh-TW.md)
 
-## Purpose and Completion Standard
+F-U01 showed that the same program can behave differently when types, representations, or the timing of operations change.
 
-This chapter is for independent reading, practice, and review. Completing it means you can design multi-branch and nested flows, explain the roles of sentinels and invariants, and use path, boundary, input-status, and termination tests to show that a flow is reliable.
+Now take one more step. Once a program does more than compute one result and begins choosing different paths from its data, a new question appears:
 
-AI use is not part of the core completion standard. Not using AI does not affect chapter completion, classroom participation, or assessment; the AI activity near the end is a skippable optional extension.
+> When conditions multiply, branches become nested, and the amount of input is not known in advance, how can we know that every important path is reliable?
 
-## Core Question
-
-> When conditions, boundaries, and repetition rules become complex, how can correctness still be demonstrated?
-
-After completing this chapter, you should be able to:
-
-1. Compare `if` chains and `switch`.
-2. Trace nested conditions and loops.
-3. Use a sentinel without confusing it with EOF or invalid input.
-4. State a simple loop invariant.
-5. Verify paths, boundaries, input failures, and termination systematically.
+This Unit is not just about adding more `if` statements and loop syntax. We will keep returning to three questions: **What paths are possible? Under what conditions does each path happen? What evidence would show that we did not miss an important case?**
 
 ---
 
-## 1. Predict a Multi-Branch Flow
+## 1. Start with a Grade Rule That Looks Simple
+
+Consider this program:
 
 ```c
 int score = 85;
@@ -41,29 +33,71 @@ if (score >= 90) {
 }
 ```
 
-Write which conditions are tested, where evaluation stops, and what is printed.
+Do not run it yet. Trace from the first condition downward:
 
----
+1. `85 >= 90` is false, so evaluation continues.
+2. `85 >= 80` is true, so the program prints `B`.
+3. Once one branch is selected, the remaining `else if` conditions are not tested.
 
-## 2. Branch Order Is Part of the Rule
+The important idea is not merely that you can write `else if`. It is that **the order of the branches is part of the rule itself.**
 
-In an `if`/`else if` chain, the first true condition selects the path. Stricter or more specific conditions usually belong first.
+For example:
 
-```mermaid
-flowchart TD
-    Q1{score >= 90?} -->|Yes| A[A]
-    Q1 -->|No| Q2{score >= 80?}
-    Q2 -->|Yes| B[B]
-    Q2 -->|No| Q3{score >= 70?}
-    Q3 -->|Yes| C[C]
-    Q3 -->|No| D[D]
+```c
+if (score >= 70) {
+    printf("C or above\n");
+} else if (score >= 90) {
+    printf("A\n");
+}
 ```
 
-Tests should cover each branch and each boundary.
+For `95`, the first condition is already true, so the `score >= 90` branch can never be reached.
+
+The program can compile and every condition is legal C, yet the rule has still been arranged incorrectly.
 
 ---
 
-## 3. `switch` for Discrete Choices
+## 2. Boundary Values Expose Branch Rules Quickly
+
+Suppose the grading rule is:
+
+- 90 and above: A
+- 80 through 89: B
+- 70 through 79: C
+- otherwise: D
+
+Testing only `85` is far from enough.
+
+At minimum, look at values like these:
+
+| `score` | Expected result | Why it matters |
+|---:|---|---|
+| 69 | D | just below C |
+| 70 | C | start of C |
+| 79 | C | just before B |
+| 80 | B | start of B |
+| 89 | B | just before A |
+| 90 | A | start of A |
+
+These numbers are not arbitrary. They sit next to the points where the rule changes, so they quickly reveal mistakes such as `>` versus `>=`, incorrect branch order, or a missing range.
+
+When you meet a multi-branch rule, ask:
+
+> At which values does the rule change, and where do the value just before the boundary, the boundary itself, and the value just after it go?
+
+---
+
+## 3. `switch` Is Another Way to Choose a Path, but for a Different Kind of Problem
+
+Now suppose the program is not classifying a numeric range. It is handling a menu:
+
+```text
+1 = Add
+2 = Delete
+anything else = Unknown
+```
+
+For this kind of discrete choice from one value, you can use:
 
 ```c
 switch (command) {
@@ -78,13 +112,28 @@ switch (command) {
 }
 ```
 
-`switch` fits discrete choices from one integer-like value. Range conditions such as `score >= 60` still fit `if` better.
+`switch` fits discrete choices from an integer-like or enumeration value. Range conditions such as `score >= 90` still fit `if` better.
 
-Missing `break` may cause fall-through. Intentional fall-through should be clearly explained.
+There is another piece of control flow here that is easy to overlook: `break`.
+
+If you write:
+
+```c
+case 1:
+    printf("One\n");
+case 2:
+    printf("Two\n");
+```
+
+then when `command == 1`, execution continues from `case 1` into `case 2`. This is called **fall-through**.
+
+Fall-through is not automatically a syntax error. Sometimes it is intentional. But if the requirement says one command should perform only one action, forgetting `break` is a logic error. When fall-through is intentional, the reason should also be obvious to the reader.
 
 ---
 
-## 4. Trace Nested Flow in Layers
+## 4. Nested Conditions Mean More Path Combinations, Not Merely More `if` Statements
+
+Consider a member-discount rule:
 
 ```c
 if (is_member) {
@@ -98,7 +147,7 @@ if (is_member) {
 }
 ```
 
-Path table:
+Instead of reading only the indentation, translate it into paths:
 
 | `is_member` | `amount` | Expected discount |
 |---|---:|---:|
@@ -106,13 +155,27 @@ Path table:
 | true | 999 | 0.10 |
 | true | 1000 | 0.15 |
 
-Do not test only the most common path.
+The first row reveals something useful: when `is_member` is false, `amount >= 1000` does not need to be checked to determine the discount at all.
+
+So when conditions are nested, a path table often works better than staring at braces. It shows which combinations can actually reach a result.
+
+This matters for testing too: **the goal is to test reachable paths, not simply to make every individual `if` true once.**
 
 ---
 
-## 5. Sentinel-Controlled Input Must Also Check Read Status
+## 5. When the Same Decision Must Repeat, the Problem Moves from Branches into Loops
 
-A sentinel is data with a special meaning. EOF and invalid text are not the sentinel.
+So far, every example has processed one item.
+
+Now suppose you want to keep reading integers and add them, but you do not know how many values will arrive. Repeating `scanf` five times is clearly not a real solution; the process itself must repeat.
+
+First define a protocol:
+
+> The user enters `-1` to mean “the data is finished.”
+
+A special value used this way is called a **sentinel**.
+
+Here is a complete example:
 
 ```c
 #include <stdio.h>
@@ -140,43 +203,37 @@ int main(void) {
 }
 ```
 
-`-1` is a sentinel and is not included in the sum. The loop stops safely on conversion failure or EOF instead of reusing an old value. Choose a sentinel that cannot be valid data, or use another protocol.
+Trace three different situations.
 
----
+### Case A: the sentinel is reached normally
 
-## 6. Loop Invariant
-
-For the sum program:
-
-> At the start of each successful iteration, `sum` equals the total of all previously read non-sentinel values.
-
-Use it to ask:
-
-1. Is it true initially?
-2. Does one valid iteration preserve it?
-3. Does reaching the sentinel establish the required result?
-4. What state is guaranteed when reading fails before the sentinel?
-
----
-
-## 7. Error Cases and Classification
-
-### Missing `break`
-
-```c
-case 1:
-    printf("One\n");
-case 2:
-    printf("Two\n");
+```text
+5 8 2 -1
 ```
 
-This compiles and falls through at runtime. It is a logic error when the requirement expected only one action.
+`5`, `8`, and `2` are added to `sum`. `-1` means “stop” and is not part of the sum.
 
-### Sentinel Included in the Sum
+### Case B: EOF arrives first
 
-If data is processed before the sentinel check, `-1` may be counted. This is a logic/order error.
+If the input source ends before `-1` appears, `scanf` cannot successfully read another integer. That is not the sentinel; it means there is no more input available from the source.
 
-### Unchecked Input in a Sentinel Loop
+### Case C: invalid text appears
+
+```text
+5 8 hello
+```
+
+`hello` cannot be converted according to `%d`, so the conversion fails. That is not a sentinel and it is not EOF either.
+
+Therefore:
+
+> **A sentinel is valid data with a special meaning; EOF means the input source has ended; invalid text means the requested conversion failed. They are three different states.**
+
+---
+
+## 6. Why Should the Loop Condition Check the Result of `scanf` Directly?
+
+You may have seen code like this:
 
 ```c
 scanf("%d", &value);
@@ -186,69 +243,205 @@ while (value != -1) {
 }
 ```
 
-If the first conversion fails, `value` is indeterminate and reading it is undefined behavior. If a later conversion fails, the previous value may be processed repeatedly. Control the loop with the read result.
+It looks shorter, but it throws away an important piece of information: **Did this read actually succeed?**
 
-### Missing Nested Combination
+If the first conversion fails, `value` does not receive a valid integer from that input. If a later conversion fails, the previous value may remain in the variable and can be processed again by mistake.
 
-Testing only `true/true` does not establish false paths and boundaries. This is insufficient evidence rather than a compiler defect.
+A reliable input loop therefore often makes “the read succeeded” part of the condition that permits the value to be used:
 
----
+```c
+while (scanf("%d", &value) == 1) {
+    /* value is used only after a successful read */
+}
+```
 
-## 8. Guided Practice
-
-Build a menu: 1 query, 2 modify, 0 exit, otherwise `Invalid`. Check `scanf` before using `command`, and list all discrete paths before using `switch`.
-
-Build the member-discount example after completing its path table.
-
----
-
-## 9. Independent Practice: Unknown-Length Average
-
-Read scores from 0 through 100 until `-1`, then display count and average.
-
-Required tests:
-
-- one value then sentinel
-- several values
-- immediate sentinel
-- boundaries 0 and 100
-- invalid text
-- EOF before sentinel
-- out-of-range numeric input
-
-Do not divide by zero when there is no data. State whether out-of-range values are rejected, ignored, or terminate the program.
+This is the same principle established in the preparatory course: **check that input succeeded before using the value.**
 
 ---
 
-## 10. Requirement Modification
+## 7. Loop Invariant: Find One Fact That Every Iteration Must Preserve
 
-New rule: ignore numeric values outside 0–100 without terminating. Update the invariant, count logic, error messages, and test table, then run regression tests. Invalid text and EOF remain separate from out-of-range numeric data.
+A loop is harder to verify than one `if` partly because the same code may run many times.
+
+Instead of trying to reason about all iterations at once, identify one fact that should remain true at the same point in every iteration.
+
+For the sum program, after a value has been read successfully and before the current value is processed, we can state:
+
+> `sum` equals the total of all previously accepted, non-sentinel inputs.
+
+This kind of statement is called a **loop invariant**.
+
+Do not rush to memorize the definition. Use the invariant to answer three questions:
+
+1. **Is it true before the work begins?** With no accepted values yet, `sum == 0`.
+2. **Does one normal iteration preserve it?** After the current value is added, it becomes part of the previously accepted data seen by the next iteration.
+3. **Does it give the required result when the sentinel appears?** The sentinel is not added, so the current `sum` is exactly the total of all valid data.
+
+If you can explain those three steps, you are no longer saying only that “the loop seems to work.” You are explaining why its state stays correct as repetition continues.
 
 ---
 
-## 11. Optional Extension: Use AI to Check Your Explanation
+## 8. Put Each Error Back into the Rule It Breaks
 
-You may skip this activity. Not using AI does not affect chapter completion, classroom participation, or assessment. When you choose to use AI, first explain in your own words:
+Now several common errors no longer need to become another list to memorize.
 
-> Why does branch order matter? How are a sentinel, EOF, invalid input, and a loop invariant different?
+### The sentinel is included in the sum
 
-No fixed prompt, saved or submitted conversation, or non-use declaration is required. If an AI response conflicts with a path table, read-result rule, trace, or reproducible result, judge it again using evidence.
+If the program performs:
+
+```c
+sum += value;
+```
+
+before checking `value == -1`, then the sentinel has already contaminated `sum`. That breaks the invariant that `sum` contains only non-sentinel values.
+
+### `break` is missing
+
+If the menu requirement permits one action per command, fall-through lets one path accidentally continue into another path.
+
+### Only the easiest nested path is tested
+
+Testing only `true/true` does not establish that the false path or the 999/1000 boundary is correct. This is not a compiler defect; the evidence is simply incomplete.
+
+### A stale value is used after an input failure
+
+That breaks the assumption that the `value` processed in each iteration came from a successful read. The root problem is not the `while` statement itself; the data was never validated before entering the processing path.
+
+Debugging becomes much easier when you can name the rule that has been broken instead of merely naming an error category.
 
 ---
 
-## 12. Self-Check
+## 9. Two Small Exercises: Make the Paths Visible First
 
-- I can choose between `if` and `switch`.
-- I can trace nested paths.
-- I can distinguish a sentinel from EOF and invalid input.
-- I can state a simple invariant.
-- I check input success before using a value.
-- I can test every branch and important boundary.
-- I can diagnose fall-through, incorrect counting, and stale-input loops.
+### Exercise A: a discrete menu
 
-## 13. Chapter Summary
+Build this menu:
 
-Complex control flow is still built from conditions, state, and updates. Reliability comes from clear branch order, complete path tables, suitable sentinels, checked input, preserved invariants, and tests that cover boundaries, failure, and termination. The next Unit organizes many same-type values into arrays.
+```text
+1 = Query
+2 = Modify
+0 = Exit
+anything else = Invalid
+```
+
+Before writing the `switch`, list the four classes of possible paths. Check that `scanf` succeeded before using `command`.
+
+After it works, deliberately remove one `break`, predict which input will perform one extra action, and then verify the prediction.
+
+### Exercise B: member discount
+
+Reuse the member-discount rule from earlier, but do not add more code yet.
+
+First answer:
+
+- Does a non-member need the `amount >= 1000` test to determine the discount?
+- Where does `amount == 999` go?
+- Where does `amount == 1000` go?
+
+Once you can answer all three from the path table, implement the program.
+
+---
+
+## 10. Independent Practice: How Do You Average an Unknown Number of Scores?
+
+Now turn the sentinel sum into a fuller problem.
+
+Keep reading scores from `0` through `100`. Use `-1` to mean that input is finished. At the end, display:
+
+- the number of valid scores
+- the average of the valid scores
+
+Before writing the entire program, define:
+
+> What do `count` and `sum` mean at the start of each iteration?
+
+Then trace at least these cases:
+
+| Input situation | Risk to observe |
+|---|---|
+| one value then `-1` | basic counting and averaging |
+| several values then `-1` | repeated updates stay consistent |
+| immediate `-1` | `count == 0`, so division by zero must be avoided |
+| `0` and `100` | valid range boundaries |
+| invalid text | must not be mistaken for the sentinel |
+| EOF before sentinel | must be distinguished from normal termination |
+| out-of-range number | requirement not yet defined; a decision is needed |
+
+The last row deliberately leaves a specification question open. If the program reads `120`, should it reject the value, ignore it, or terminate?
+
+The program should not silently invent a requirement that was never stated.
+
+---
+
+## 11. Change the Requirement: Ignore Out-of-Range Values
+
+Now complete the missing rule:
+
+> Ignore ordinary numeric values below 0 or above 100, but keep `-1` as the sentinel. Invalid text and EOF still follow their original handling.
+
+Notice that `-1` is also below 0, so the order of checks now matters.
+
+If you write this first:
+
+```c
+if (value < 0 || value > 100) {
+    continue;
+}
+```
+
+then `-1` is classified as “ignore” before it can be recognized as the termination signal. The program will never receive the intended stop command.
+
+So the sentinel must be recognized before the ordinary range check.
+
+After the change, answer again:
+
+- Has the invariant for `sum` changed?
+- Exactly when does `count` increase?
+- Which paths do `-1`, `120`, `hello`, and EOF follow?
+- Do all of the previously correct cases still pass?
+
+This is a small regression test: adding a new rule must not accidentally break behavior that was already correct.
+
+---
+
+## 12. Optional: Let AI Challenge Your Path Explanation
+
+You may skip this section completely.
+
+Without using any tool first, explain:
+
+> Why can branch order change the result? What do `-1`, EOF, invalid text, and a loop invariant each mean?
+
+If you want one more check, give your explanation to an AI tool and ask it to identify places where you may have confused data, input status, or loop guarantees. No fixed prompt is required, and you do not need to save or submit the conversation.
+
+If the AI response conflicts with a path table, `scanf` return rules, an actual trace, or a reproducible result, return to that evidence and judge again.
+
+---
+
+## 13. Before Leaving This Unit, Make Sure You Can Actually Trace the Paths
+
+Return to the programs in this chapter and answer directly from the code rather than from memorized definitions:
+
+- Why can changing the order of an `if`/`else if` chain change program behavior?
+- Why do 79, 80, 89, and 90 verify the grade rule better than testing only 85?
+- When does `switch` fit the problem, and when does `if` still fit better?
+- Why should nested conditions be understood through reachable combinations rather than by simply counting `if` statements?
+- Why are a sentinel, EOF, and invalid input three different things?
+- Why should `scanf` success be checked before `value` is used?
+- Can you state the sum loop invariant in your own words and explain how it is initialized, preserved, and used to establish the result?
+- When the requirement changes to ignore out-of-range values, why does the position of the `-1` check become important?
+
+If one answer is only a sentence you memorized, return to the corresponding example, change an input, predict the path, and trace it again.
+
+---
+
+## 14. Chapter Wrap-Up
+
+F-U01 asked how one value is represented, interpreted, and operated on. This Unit moved the question forward: **Which path does that value make the program take, and is that path reliable?**
+
+Reliable multi-branch flow comes from correct condition order and boundary tests. Nested logic must be understood through paths that can actually be reached. Repetitive input needs both a termination rule and a preserved record of whether reading succeeded. A loop invariant gives us a way to explain how state remains correct across iteration after iteration.
+
+The next Unit changes the scale of the data itself. We can now process one value after another reliably, but if five, fifty, or five hundred values must all be kept at the same time, naming them `score1`, `score2`, `score3`, and so on quickly becomes unmanageable. That is the problem arrays are designed to solve.
 
 ## Navigation
 
