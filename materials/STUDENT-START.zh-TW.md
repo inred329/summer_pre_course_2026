@@ -6,31 +6,29 @@
 
 ## 如果你現在上的是前導課程
 
-前導課程從 P-U01 開始，依序讀到 P-U04。
+前導課程從 P-U00 開始，先認識 compiler、IDE、Build、Run 與 Debug 各自在做什麼，再依序進入 P-U01～P-U04。
 
-**[從 P-U01：程式如何從文字變成執行結果？開始](preparatory/unit-01-execution.zh-TW.md)**
+**[從 P-U00：寫好的 C 程式，怎麼真的跑起來？開始](preparatory/unit-00-compiler-ide.zh-TW.md)**
 
 閱讀順序：
 
-P-U01 → P-U02 → P-U03 → P-U04
-
-前導課程會先建立執行、資料與狀態、控制流程，以及函數拆解問題的基本模型。
+P-U00 → P-U01 → P-U02 → P-U03 → P-U04
 
 ## 如果你現在上的是正式課程
 
-正式課程可以直接從 F-U01 開始。你不需要先重新閱讀前導課程，除非老師另有安排，或你自己想回頭補一個不熟悉的基礎概念。
+正式課程也從自己的 F-U00 開始。你不需要先重新閱讀前導課程；F-U00 會用正式班需要的深度，把 source、compiler、Build、executable、Run 與 Debug 的角色先拆清楚。
 
-**[從 F-U01：表示、型別與運算為什麼會影響結果？開始](formal/unit-01-representation-types.zh-TW.md)**
+**[從 F-U00：按下 Run 之後，到底發生了什麼？開始](formal/unit-00-build-run-ide.zh-TW.md)**
 
 閱讀順序：
 
-F-U01 → F-U02 → F-U03 → F-U04 → F-U05 → F-U06 → F-U07 → F-U08 → F-U09 → F-U10 → F-U11 → F-U12
+F-U00 → F-U01 → F-U02 → F-U03 → F-U04 → F-U05 → F-U06 → F-U07 → F-U08 → F-U09 → F-U10 → F-U11 → F-U12
 
-如果你想先看十二個 Unit 的完整列表，可以打開：[正式課程學生教材索引](formal/README.zh-TW.md)。
+如果你想先看正式課程的完整列表，可以打開：[正式課程學生教材索引](formal/README.zh-TW.md)。
 
 ## 閱讀時怎麼走
 
-每個 Unit 的最後都有「下一單元」連結。正常情況下，從第一個 Unit 開始一路往下讀即可，不需要回到 repository 首頁尋找下一份文件。
+每個 Unit 的最後都有「下一單元」連結。正常情況下，從 U00 開始一路往下讀即可，不需要回到 repository 首頁尋找下一份文件。
 
 如果老師另外指定作業、評量規則或補充資料，再依老師提供的連結開啟即可；那些文件不需要在開始學習之前先讀完。
 
