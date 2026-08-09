@@ -1,6 +1,6 @@
 # Preparatory Unit P-U00: How Does the C Code You Write Actually Start Running?
 
-Version: 1.0.0  
+Version: 1.1.0  
 Status: Student material  
 Last updated: 2026-08-09  
 Corresponding Chinese version: [前導單元 P-U00：寫好的 C 程式，怎麼真的跑起來？](unit-00-compiler-ide.zh-TW.md)
@@ -13,8 +13,8 @@ This Unit is not about memorizing tool names or button locations. The important 
 
 ```text
 C source code you write
-→ a compiler reads the source code
-→ an executable program is produced
+→ compilation and build tools process the source
+→ a runnable program is produced
 → the operating system starts it
 → the program runs and produces observable results
 ```
@@ -66,9 +66,9 @@ are not the same event.
 
 ## 2. What does a compiler do?
 
-C source code is human-readable text written according to C language rules. Before it can run as a program, compilation tools must process it.
+C source code is human-readable text written according to C language rules. Before it can run as a program, compilation and build tools must process it.
 
-If your environment uses GCC, you may compile from a terminal with:
+If your environment uses GCC, you may build from a terminal with:
 
 ```text
 gcc hello.c -o hello
@@ -76,25 +76,25 @@ gcc hello.c -o hello
 
 Different operating systems, compilers, or classroom environments may use a different command. If your instructor provides another command, use that one. The important point here is not memorizing `gcc`; it is understanding the role of this step.
 
-After a successful compilation, a runnable result appears. Depending on the system, it might be named `hello`, `hello.exe`, or be placed by the development environment inside a build directory.
+In this tiny one-file example, that command performs the work needed to produce a runnable result. After it succeeds, you may see `hello`, `hello.exe`, or a file placed by the development environment inside a build directory.
 
-For now, picture the process like this:
+For now, picture the important relationship like this:
 
 ```text
 hello.c
   │
-  │ compiler
+  │ compiler / build tools
   ▼
 executable
 ```
 
-This process is called **compilation**.
+If the source code does not satisfy the C rules the tools require, for example because a semicolon is missing, this Build may fail and no corresponding new executable is produced.
 
-If the source code does not satisfy the C rules that the compiler requires, for example because a semicolon is missing, the compiler may fail to produce a new executable.
+When programs later contain multiple source files, Build will contain more detailed stages. You do not need all of them yet.
 
 ---
 
-## 3. Compile and Run are two different actions
+## 3. Compile/Build and Run are different actions
 
 Now run the program that was produced.
 
@@ -116,10 +116,10 @@ You should see:
 Hello, C!
 ```
 
-Two different things happened:
+Two different kinds of work happened:
 
 ```text
-Compile
+Build
 hello.c → executable
 
 Run
@@ -128,14 +128,14 @@ executable → running program → output
 
 So:
 
-- Compile transforms source code into a runnable result.
+- Build or compile-related work turns the current source into the latest runnable result.
 - Run starts an executable that already exists.
 
 Later, when you see Build, Run, and Debug controls, do not immediately treat all of them as “make the program run.” Ask instead: **which stage is happening now?**
 
 ---
 
-## 4. An important experiment: edit the source, but do not compile again yet
+## 4. An important experiment: edit the source, but do not Build again yet
 
 Change the source code to:
 
@@ -150,7 +150,7 @@ int main(void) {
 
 Save `hello.c`.
 
-Now do not compile again. Run the executable from the previous compilation.
+Now do not Build again. Run the executable from the previous Build.
 
 Before you do it, predict whether you will see:
 
@@ -164,7 +164,7 @@ or:
 Goodbye, C!
 ```
 
-If you are still running the executable produced by the earlier compilation, you will see the old result:
+If you are still running the executable produced by the earlier Build, you will see the old result:
 
 ```text
 Hello, C!
@@ -179,7 +179,7 @@ but you ran the executable produced earlier
 
 They are not the same file.
 
-Compile again and then run again. Now you should see:
+Build again and then run again. Now you should see:
 
 ```text
 Goodbye, C!
@@ -187,7 +187,7 @@ Goodbye, C!
 
 This experiment will stay useful later. Whenever you think “I changed the code, so why did the result not change?”, one of your first questions should be:
 
-> Did I really rebuild or recompile? Am I running the newest executable?
+> Did I really rebuild? Am I running the newest executable?
 
 ---
 
@@ -216,9 +216,9 @@ IDE = compiler
 
 A better model is:
 
-> The IDE integrates editing, building, running, debugging, and other development work. The actual C compilation is still performed by a compiler and related tools.
+> The IDE integrates editing, building, running, debugging, and other development work. The C source is still processed by a compiler and related build tools.
 
-That is also why an editor may be able to open a `.c` file even when the computer does not yet have a usable C compiler installed.
+That is also why an editor may be able to open a `.c` file even when the computer does not yet have a usable C development toolchain installed.
 
 ---
 
@@ -226,9 +226,9 @@ That is also why an editor may be able to open a `.c` file even when the compute
 
 With a tiny one-file program such as `hello.c`, you can initially think of Build as “do the work needed to turn the current source into the latest runnable result.”
 
-For a very small program, the most visible part of that work is compilation.
+For a very small program, the most visible work is compilation-related processing.
 
-Later, when a program grows and is split across multiple files, one Build may involve more than one compilation step. A later formal-course Unit on modular programming will separate compilation and linking more carefully.
+Later, when a program grows and is split across multiple files, one Build may involve more than a single compilation action. A later formal-course Unit on modular programming will separate compilation and linking more carefully.
 
 For now, keep this model:
 
@@ -249,26 +249,23 @@ Run normally aims to let the program execute directly.
 
 Debug mode gives you a way to stop during execution and inspect what is happening.
 
-For example, IDEs commonly provide a **breakpoint**. You can place a breakpoint on a line so execution pauses there.
-
-Imagine a later program contains:
+We do not need variables yet. Consider only two output statements:
 
 ```c
-int a = 5;
-int b = 2;
-int sum = a + b;
+printf("First\n");
+printf("Second\n");
 ```
 
-A debugger can pause around one of these lines so you can inspect the current values of `a`, `b`, and `sum`.
+If you place a **breakpoint** on the second line, a debugger can pause before that line executes. At that moment you can observe that the first line has already produced output while the second one has not.
 
-You do not need to learn every debugger feature now. Just keep this distinction:
+That is enough to see the difference between Debug and an ordinary Run:
 
 ```text
-Run: let the program execute normally
-Debug: pause, step through execution, and inspect state
+Run: let the program execute directly
+Debug: pause during execution, move step by step, and observe what is happening
 ```
 
-Later Units will place the debugger inside a more complete testing and debugging process.
+You do not need every debugger feature now. After we learn data and program state, inspecting variables will become much more meaningful. The formal course will later place the debugger inside a complete testing and debugging process.
 
 ---
 
@@ -285,7 +282,7 @@ int main(void) {
 }
 ```
 
-It may compile successfully and run successfully.
+It may Build successfully and Run successfully.
 
 But suppose the requirement is:
 
@@ -298,9 +295,9 @@ Then the program is still wrong.
 Throughout the course, we will keep separating these questions:
 
 ```text
-Can the compiler accept the source code?
+Did the tools accept and successfully build the program?
 ↓
-Can the program start and run?
+Was the program actually started and executed?
 ↓
 Does the observed result satisfy the requirement?
 ```
@@ -328,9 +325,9 @@ This time, do not treat the process as one button press. At each step, try to sa
 
 1. Which source file am I editing?
 2. When did I save it?
-3. When did I build or compile?
+3. When did I Build?
 4. What was produced or updated after the Build succeeded?
-5. Which program am I actually running?
+5. Which program am I actually Running?
 6. Does the output match what I predicted?
 
 If you are using an IDE, also locate the editor, terminal, Build, Run, and Debug features.
@@ -343,13 +340,13 @@ Do not memorize definitions. Use your `hello.c` experiment to answer:
 
 - Are `hello.c` and the executable the same file?
 - Why does editing `hello.c` not automatically change an old executable?
-- What does Compile do, and what does Run do?
+- What do Build and Run each do?
 - Why are an IDE and a compiler not the same thing?
 - Why does a successful Build not prove that the result satisfies the requirement?
 - What is the difference between Run and Debug?
 - If you edit the source but still see old output, what should you check first?
 
-If any answer feels like a sentence you memorized, repeat the “edit without recompiling” experiment and explain what happened from the files you actually used.
+If any answer feels like a sentence you memorized, repeat the “edit without rebuilding” experiment and explain what happened from the files you actually used.
 
 ---
 
@@ -357,12 +354,12 @@ If any answer feels like a sentence you memorized, repeat the “edit without re
 
 We now know that a C program is not simply “text plus a magic Run button.”
 
-You have a source file; a compiler processes it; Build produces the latest runnable result; Run actually starts the program; and an IDE integrates these actions into one environment.
+You have a source file; Build uses a compiler and related tools to create the latest runnable result; Run actually starts the program; and an IDE integrates these actions into one environment.
 
 The next Unit moves the focus away from the tools themselves and asks: **once the program really starts running, how do the statements in `main` become the result we observe?**
 
 ## Navigation
 
-- [Next Unit P-U01: How Does Program Text Become an Execution Result?](unit-01-execution.en.md)
+- [Next Unit P-U01: Once a Program Starts Running, How Do Statements Become Results?](unit-01-execution.en.md)
 - [Preparatory Student Materials Index](../README.en.md)
 - [繁體中文版](unit-00-compiler-ide.zh-TW.md)
