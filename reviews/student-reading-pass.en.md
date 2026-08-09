@@ -1,6 +1,6 @@
 # Student Reading Pass
 
-Version: 0.8.0  
+Version: 0.9.0  
 Last updated: 2026-08-09  
 Corresponding Chinese version: [學生閱讀體驗審查](student-reading-pass.zh-TW.md)
 
@@ -20,7 +20,8 @@ Read every student-facing Unit from a learner's point of view and check opening 
 | F-U02 | Complete | Complete | First pass complete | Used “a value selects a path” to connect branches, boundaries, sentinel, EOF, invariant, and requirement change. |
 | F-U03 | Complete | Complete | First pass complete | Created the need for arrays from retaining many values; unified index, length, initialization, and bounds; deferred the full pointer model. |
 | F-U04 | Complete | Complete | First pass complete | Built one path from character array to `\0`, capacity, complete-line input, leftover input, and safe traversal; corrected the C explanation of a three-element `"cat"` initializer; avoided requiring the full pointer model before F-U06. |
-| F-U05–F-U12 | Pending | Pending | Not started | — |
+| F-U05 | Complete | Complete | First pass complete | Entered from familiar function calls and asked what state belongs to each call, then connected call frames, waiting relationships, scope/lifetime, recursion termination, result range, and iteration; kept call stack as a reasoning model rather than a mandated physical layout. |
+| F-U06–F-U12 | Pending | Pending | Not started | — |
 
 ## Important Reading Decisions in This Batch
 
@@ -29,6 +30,10 @@ The original F-U04 topics were individually useful, but a learner arriving from 
 The explanation of `char word[3] = "cat";` was also corrected. In C, this can initialize three character elements, but no element remains for the terminating `\0`; the result is therefore not a reliable C string. That is different from saying that a compiler must reject the declaration.
 
 The `read_line` and string-comparison sections now avoid requiring the learner to understand the complete pointer model. Array-parameter adjustment, array-expression conversion, and pointer details are explicitly deferred to F-U06. The end of F-U04 uses the function calls already seen throughout the course to create the motivation for F-U05's call-stack and recursion model.
+
+After an end-to-end reading, F-U05 did not require another large structural rewrite. It already opens from familiar calls such as `sum_array`, `max_array`, `strlen`, and `strcmp`, asks where unfinished work and per-call state live, and then uses `square` and nested calls to establish that every call owns distinct execution state. Scope/lifetime, recursion, base cases, progress toward termination, factorial, and string recursion arrive only after that concrete call model, so learners are not asked to memorize abstract terms before seeing why they matter.
+
+This pass specifically confirmed that call frame and call stack remain presented as execution-tracing models rather than as a fixed physical arrangement guaranteed by the C standard. It also confirms that F-U05 only previews why object lifetime will matter for pointer safety; the full address/pointer model stays in F-U06. The chapter closes by returning to the deliberately postponed question “how does C represent a place?”, which gives the next Unit a direct narrative entry.
 
 ## Completion Condition
 
