@@ -1,73 +1,110 @@
 # 正式單元 F-U08：程式如何在執行期間取得與釋放空間？
 
-版本：1.0.2  
+版本：1.2.0  
 狀態：正式學生教材  
-最後更新：2026-08-06  
+最後更新：2026-08-09  
 對應英文版本：[Formal Unit F-U08: How Does a Program Obtain and Release Space During Execution?](unit-08-dynamic-memory.en.md)
 
-## 文件用途與完成標準
+F-U07 的學生資料可以先寫成：
 
-本章供學生獨立閱讀、練習與複習。完成本章代表你能使用 `malloc`、`calloc`、`realloc` 與 `free` 管理動態空間，能說明所有權與生命週期、避免配置大小計算溢位，並能診斷 memory leak、dangling pointer 與 double free。
+```c
+Student students[10];
+```
 
-AI 使用不屬於本章完成標準。接近章末的 AI 選用延伸可直接跳過，不影響完成、課堂參與或評量。
+這個設計很清楚，但它也把一個決定寫死了：最多 10 筆。
 
-## 核心問題
+現在把需求改成：
 
-> 當資料大小或生命週期無法預先固定時，程式如何管理儲存空間？
+> 程式啟動後才知道要保存幾筆資料，而且之後還可能增加。
 
-完成本章後，你應能：
+這時真正改變的不是「我們要學一個比較進階的函式」，而是**空間的大小與生命週期開始由程式自己管理**。
 
-1. 區分自動儲存與動態配置。
-2. 在計算配置大小前驗證元素數量。
-3. 配置、檢查、使用與釋放空間。
-4. 說明所有權與釋放責任。
-5. 在 `realloc` 失敗時保留原區塊。
-6. 診斷常見生命週期錯誤。
+程式要回答：需要多少空間？大小算得安全嗎？配置失敗怎麼辦？誰負責最後釋放？空間成長後舊指標還有效嗎？
+
+這些問題合起來，就是動態配置與 ownership 的主線。
 
 ---
 
-## 1. 為什麼需要動態配置？
+## 1. 固定陣列先告訴我們：什麼時候其實不需要動態配置
+
+如果需求真的就是最多 100 個整數：
 
 ```c
 int values[100];
 ```
 
-固定陣列要求容量在執行工作前決定。若資料筆數由使用者輸入，或物件必須跨越目前函數生命週期，就可能需要動態空間。
+那固定陣列通常更簡單。
 
-動態配置不一定比固定陣列更好。它同時帶來失敗處理、所有權、生命週期與釋放責任。只有在需求真的需要執行期間決定大小或生命週期時才使用。
-
----
-
-## 2. 配置模型
+動態配置適合的是「大小直到執行時才知道」的情況。例如已經取得元素數量 `count` 後：
 
 ```c
 int *values = malloc(count * sizeof *values);
 ```
 
+可以先畫成：
+
 ```text
-values ─────► 動態配置區塊
-              count 個 int
+values ─────► 動態配置的區塊
+              count 個 int 的空間
 ```
 
-`malloc` 接受以 byte 為單位的大小。成功時回傳具有適當 alignment 的區塊起始位址；無法滿足要求時回傳 `NULL`。
+這裡最重要的第一件事是：`malloc` 接受的是 **byte 數**，不是元素數量。
 
-配置前必須先回答兩個問題：
-
-1. 元素數量是否符合程式需求？
-2. `count * sizeof *values` 是否能由 `size_t` 表示？
+所以：
 
 ```c
+count * sizeof *values
+```
+
+代表：
+
+```text
+元素數量 × 每個元素需要的 byte 數
+```
+
+如果 `count` 還沒有被驗證，就不應該急著做這個乘法。
+
+---
+
+## 2. 先驗證元素數量，再驗證 byte 大小
+
+假設數量來自輸入：
+
+```c
+int n;
+
+if (scanf("%d", &n) != 1 || n <= 0) {
+    fprintf(stderr, "Invalid size\n");
+    return 1;
+}
+
+size_t count = (size_t)n;
+```
+
+現在 `count` 是正數，但還有第二個問題：
+
+> `count * sizeof *values` 能不能由 `size_t` 表示？
+
+在乘法以前檢查：
+
+```c
+#include <stdint.h>
+
 if (count > SIZE_MAX / sizeof *values) {
     fprintf(stderr, "Requested size is too large\n");
     return 1;
 }
 ```
 
-必須在乘法發生前檢查。若 byte 數計算發生 wraparound，程式可能取得比後續假設更小的區塊。
+這和 F-U01 的邊界原則相同：**先證明運算結果可表示，再做運算。**
+
+如果 byte 數先發生無號回繞，後面的 `malloc` 就算回傳非 `NULL`，也可能只得到一塊比程式以為的小得多的空間。
+
+所以「元素數量合理」和「配置大小能安全算出來」是兩個不同檢查。
 
 ---
 
-## 3. 完整生命週期
+## 3. 第一次完整追蹤：配置、使用、釋放
 
 ```c
 #include <stdint.h>
@@ -77,17 +114,13 @@ if (count > SIZE_MAX / sizeof *values) {
 int main(void) {
     int n;
 
-    if (scanf("%d", &n) != 1) {
-        fprintf(stderr, "Invalid input\n");
-        return 1;
-    }
-
-    if (n <= 0) {
-        fprintf(stderr, "Size must be positive\n");
+    if (scanf("%d", &n) != 1 || n <= 0) {
+        fprintf(stderr, "Invalid size\n");
         return 1;
     }
 
     size_t count = (size_t)n;
+
     if (count > SIZE_MAX / sizeof(int)) {
         fprintf(stderr, "Requested size is too large\n");
         return 1;
@@ -109,217 +142,442 @@ int main(void) {
 }
 ```
 
-流程：
+先不要背函式名稱，把生命週期讀成：
 
 ```text
-讀取並驗證元素數量
-→ 驗證 byte 大小計算
+取得元素數量
+→ 驗證需求
+→ 驗證 byte 大小
 → 配置
-→ 檢查配置結果
-→ 在界限內初始化／使用
-→ 恰好釋放一次
-→ 所有指向該物件的指標都停止使用
+→ 檢查配置是否成功
+→ 在容量內使用
+→ 釋放
+→ 停止使用那個配置物件
 ```
 
-輸入檢查是程式契約的一部分。若 `scanf` 失敗，`n` 就沒有可供後續判斷使用的有效值。
-
-大小檢查保護的是配置契約。配置失敗與大小乘法溢位是不同問題，不應混為一談。
+這裡至少有三種不同失敗：輸入不合法、大小算不安全、配置要求無法被滿足。它們不應該被混成同一種「malloc 出問題」。
 
 ---
 
-## 4. `calloc`
+## 4. `free` 結束配置物件的生命週期，不會自動修好所有指標
+
+配置成功後：
+
+```text
+values ─────► [ allocation ]
+```
+
+執行：
 
 ```c
-int *values = calloc(count, sizeof *values);
+free(values);
 ```
 
-`calloc` 接受元素數量與每個元素大小。它要嘛配置足以容納乘積的空間，要嘛失敗；成功時也會把配置的 bytes 清為零。
+之後，那個配置物件的生命週期已經結束，所以不能再：
 
-應把它理解成 zeroed storage，而不是所有可能 C 型別的通用語意初始化保證。對本課程使用的整數陣列而言，全零位元表示整數零。
+```c
+printf("%d\n", values[0]);
+```
 
-即使使用 `calloc`，程式仍須確認 `count` 符合需求，並檢查回傳指標。
+把 owner 變數設成：
+
+```c
+values = NULL;
+```
+
+可以避免自己之後又透過 `values` 誤用舊位置。
+
+但如果之前還有另一個 alias：
+
+```c
+int *first = values;
+```
+
+那麼 `values = NULL` 不會神奇地把 `first` 也改成 `NULL`。
+
+因此真正的規則是：
+
+> 配置一旦被釋放，所有曾經指向它的路徑都必須停止把它當成活著的物件。
+
+這正是 F-U05 的 lifetime 與 F-U06 的 dangling pointer 在動態配置中的版本。
 
 ---
 
-## 5. 所有權
+## 5. Ownership 是「最後由誰負責 `free`？」
 
-所有權回答：誰負責釋放這塊空間？
+假設有函數：
 
 ```c
 int *create_values(size_t count);
 ```
 
-若函數回傳新配置空間，介面應說明：
+如果它成功配置新空間並回傳指標，介面就需要說清楚：
 
-- 呼叫者是否取得所有權
-- 最終由哪一方呼叫 `free`
-- `NULL` 是否表示失敗
-- 是否還有其他 alias 存在
+> 呼叫者是否從現在開始擁有這塊配置，並負責最後的 `free`？
 
-避免兩個模組都以為對方會釋放，或兩者都釋放同一區塊。
+**Ownership（所有權）不是 C 關鍵字。**它是一條設計規則，用來避免兩個相反錯誤：
 
-釋放後只把其中一個指標設為 `NULL`，不會同步更新其他 alias。所有曾指向該物件的指標都不能再用來解參照、當作有效物件位址比較，或再次 `free`。
+```text
+A 以為 B 會 free
+B 以為 A 會 free
+→ memory leak
+```
+
+以及：
+
+```text
+A 覺得自己要 free
+B 也覺得自己要 free
+→ double free
+```
+
+所以看到動態配置指標時，除了「它指到哪裡」，再多問一句：
+
+> 誰負責讓這個生命週期正確結束？
 
 ---
 
-## 6. `realloc`
-
-`realloc` 成功時可能回傳原位址，也可能把物件移到新位址。成功後不得再使用舊指標值。對非零大小要求而言，若 `realloc` 失敗，原配置仍然有效且內容不變。
-
-先驗證新的元素數量與 byte 大小：
+## 6. `calloc` 只是另一種建立配置的方式
 
 ```c
-if (new_count == 0 || new_count > SIZE_MAX / sizeof *values) {
-    /* 處理無效或不支援的容量 */
+int *values = calloc(count, sizeof *values);
+```
+
+和 `malloc` 相比，`calloc` 把元素數量與元素大小分成兩個參數，成功時還會把配置區塊的 bytes 清成零。
+
+對本章的 `int` 陣列，這會得到初始值為 0 的元素。
+
+但不要把它背成「`calloc` 會替所有型別做正確的預設初始化」。它直接保證的是配置 storage 並把 bytes 清零。
+
+不論用 `malloc` 或 `calloc`，下面三件事都沒有消失：
+
+- 輸入與大小仍要符合需求。
+- 回傳值仍要檢查。
+- ownership 與最後的釋放責任仍要清楚。
+
+---
+
+## 7. 容量成長時，先保住原 owner
+
+假設目前：
+
+```c
+int *values;
+size_t capacity;
+```
+
+現在需要改成 `new_capacity` 個元素。
+
+先確認新大小可接受：
+
+```c
+if (new_capacity == 0 ||
+    new_capacity > SIZE_MAX / sizeof *values) {
+    return 0;
 }
 ```
 
-再保留原指標，直到確認成功：
+再使用 `realloc`：
 
 ```c
-int *temporary = realloc(values, new_count * sizeof *values);
+int *temporary = realloc(values,
+                         new_capacity * sizeof *values);
+
 if (temporary == NULL) {
-    /* values 仍擁有原區塊 */
     return 0;
 }
 
 values = temporary;
+capacity = new_capacity;
 ```
 
-避免直接指定：
+為什麼不直接寫：
 
 ```c
-values = realloc(values, new_count * sizeof *values); /* 不安全模式 */
+values = realloc(values,
+                 new_capacity * sizeof *values);
 ```
 
-若失敗，直接指定可能覆蓋唯一的原位址，造成 memory leak。
+因為對非零大小而言，`realloc` 失敗時，原配置仍然存在。如果直接覆蓋唯一 owner，失敗後 `values` 會變成 `NULL`，程式卻失去找到原配置的最後一條路，形成 leak。
 
-本課程把容量變成零視為獨立操作：明確呼叫 `free(values)`，再把 owner 指標設成 `NULL`。不要依賴 `realloc(pointer, 0)` 在不同實作間可能不同的行為。
+所以 temporary 的作用很簡單：
+
+> 在新配置確定成功以前，不破壞舊配置的 owner。
 
 ---
 
-## 7. 錯誤案例
+## 8. `realloc` 成功也可能讓舊 alias 失效
 
-### Memory Leak
+成功的 `realloc` 可能原地調整，也可能搬到新的位置。
 
-配置後失去最後一個位址，或不再需要區塊後沒有任何負責的 owner 釋放它。
+所以成功後必須以它回傳的新指標為準。
 
-### Use After Free 與 Dangling Pointer
+假設成長以前有：
 
-```c
-free(values);
-printf("%d\n", values[0]);
+```text
+values ───► [ old allocation ]
+first  ───► [ old allocation 的第一個元素 ]
 ```
 
-物件生命週期在 `free` 時結束，之後不能再解參照。指向同一物件的其他 alias 也同樣成為 dangling pointer。
+如果 `realloc` 搬移：
 
-### Double Free
-
-```c
-free(values);
-free(values);
+```text
+values ───► [ new allocation ]
+first  ───► [ 舊位置，不能假設仍有效 ]
 ```
 
-同一區塊不可重複釋放。釋放後立即把 owner 指標設為 `NULL`，可降低部分風險，因為 `free(NULL)` 是允許的；但這不會修復其他 dangling alias，也不能取代所有權設計。
+因此可成長容器比固定陣列多一個問題：
 
-### 錯誤配置型別大小
+> 哪些指標是 owner？哪些只是暫時 alias，而且可能在成長後失效？
 
-```c
-malloc(count * sizeof(int *))
-```
-
-若要配置 `int` 元素，應使用 `sizeof *values`，讓表示式與指標目標型別維持一致。
-
-### 配置大小溢位
-
-```c
-malloc(count * sizeof *values)
-```
-
-只有在先確認下列條件後，這個表示式才安全：
-
-```c
-count <= SIZE_MAX / sizeof *values
-```
-
-即使 `malloc` 回傳非 `NULL`，也不能證明未檢查的乘法代表了原本想要的大小。
+本課程把容量 0 當成明確的「清空」操作：直接 `free` 並更新 owner 狀態，不依賴 `realloc(pointer, 0)` 的特殊情況。
 
 ---
 
-## 8. 引導練習
+## 9. 常見錯誤其實都可以回到三個問題
 
-1. 動態配置 `n` 個整數並計算總和，同時避免配置大小乘法溢位。
-2. 畫出配置前、配置後與釋放後的 owner 指標與 alias。
-3. 將固定容量陣列改成由已驗證輸入決定大小。
-4. 說明配置失敗時哪些敘述會執行，以及為什麼不能再存取元素。
+### Memory leak
 
----
+配置還活著，但最後一條負責釋放它的路徑失去了。
 
-## 9. 自主練習：可成長整數清單
+### Use after free
 
-從容量 4 開始讀入整數；滿時把容量加倍。輸入 `-1` 結束。
+配置生命週期已結束，卻仍透過舊指標存取。
 
-追蹤：
+### Double free
 
-- `size` 與 `capacity`
-- invariant：`size <= capacity`
-- 容量加倍以及換算 byte 數是否可表示
-- 成長成功前後的位址
-- `realloc` 失敗時原區塊仍有效
-- 最終負責一次 `free` 的 owner
+同一個已經結束生命週期的配置又被交給 `free`。
 
-只有在重新配置成功後，才能更新 `capacity`。
+### 配置太小
 
----
+程式以為自己有 `count` 個元素，但真正配置的 byte 數不足，例如大小公式寫錯或乘法先發生回繞。
 
-## 10. 需求修改
+與其分開死背名稱，不如一直回到：
 
-新增函數：
-
-```c
-int append_value(int **values, size_t *size, size_t *capacity, int value);
+```text
+這塊配置現在還活著嗎？
+誰擁有它？
+真正的容量足以支援下一次存取嗎？
 ```
 
-請定義：
+---
 
-- 呼叫前後的所有權
-- 成功／失敗回傳規則
-- 哪些輸出參數可能改變
-- `size` 與 `capacity` 的 invariant
-- 容量成長時的 overflow 處理
-- 失敗時原資料是否仍有效
+## 10. 先做一個可成長整數清單
 
-一個清楚的失敗契約是：函數回報失敗時，原指標、`size`、`capacity` 與既有元素仍然有效且不變。
+需求：
+
+- 初始 `capacity = 4`。
+- 使用者持續輸入整數。
+- `-1` 表示結束。
+- 當 `size == capacity` 時容量加倍。
+
+整個過程維持：
+
+```text
+size <= capacity
+```
+
+成長以前先確認：
+
+```c
+if (capacity > SIZE_MAX / 2) {
+    /* capacity * 2 無法安全表示 */
+}
+
+size_t new_capacity = capacity * 2;
+
+if (new_capacity > SIZE_MAX / sizeof *values) {
+    /* byte 大小無法安全表示 */
+}
+```
+
+然後才透過 temporary 做 `realloc`。
+
+只有成長成功後才更新 `values` 與 `capacity`。如果失敗，舊資料、舊 `size`、舊 `capacity` 都應保持可用。
+
+這個「失敗時舊狀態仍然完整」的目標，下一節會變成函數介面的核心契約。
 
 ---
 
-## 11. 選用延伸：評估 AI 解釋
+## 11. 為什麼 `append_value` 需要 `int **values`？
 
-本節可直接跳過。AI 不是必要工具，也不要求固定 Prompt、保存對話、留下筆記、繳交內容或聲明未使用。
+我們希望把 append 包成函數：
 
-若你選擇使用 AI，先用自己的話解釋：
+```c
+int append_value(int **values,
+                 size_t *size,
+                 size_t *capacity,
+                 int value);
+```
 
-> 動態配置、所有權、生命週期、配置大小計算與 `free` 之間有什麼關係？為什麼 `realloc` 常需要暫存指標？
+第一次看到 `int **` 很容易像突然多了一層符號。先不要背它，回到 F-U06 的規則：
 
-再以配置圖、C 函式庫契約、編譯器診斷、測試，以及可用時的記憶體檢查工具評估回應。不要因為說法看起來有自信就直接接受。
+> 如果函數要修改呼叫者的一個物件，就把那個物件的位置交給函數。
+
+這次函數想修改的物件，不是一個 `int`，而是呼叫者的 **owner pointer**：
+
+```c
+int *values;
+```
+
+`values` 本身是一個指標物件。它也有自己的位址：
+
+```c
+&values
+```
+
+而 `&values` 的型別就是 `int **`。
+
+可以畫成：
+
+```text
+append_value 的參數 values
+          │
+          v
+呼叫者的 owner pointer ─────► 動態配置
+        int *
+```
+
+因此在 `append_value` 裡：
+
+- `values`：指向呼叫者的 owner pointer。
+- `*values`：就是呼叫者目前保存的那個 `int *` owner 值。
+- 如果 `realloc` 回傳新位置，修改 `*values` 就能把新的 owner 指標交回呼叫者。
+
+`size_t *size` 與 `size_t *capacity` 也是同一個理由：函數成功後要修改呼叫者的 metadata。
+
+所以 `**` 不是另一套魔法；它只是「這次要修改的物件剛好本身是一個指標」。
 
 ---
 
-## 12. 自我檢核
+## 12. Append 的重點不是 `realloc`，而是失敗時不要破壞舊狀態
 
-- 我能驗證輸入並拒絕不支援的元素數量。
-- 我能在進行配置大小乘法前先檢查是否可表示。
-- 我能在存取元素前檢查配置失敗。
-- 我能把每次成功配置配對到一個釋放責任。
-- 我能說明所有權與 alias 的影響。
-- 我不會透過任何指標在 `free` 後繼續使用物件。
-- 我能診斷 leak、use after free、dangling pointer 與 double free。
-- 我能在 `realloc` 失敗時保留原區塊與 metadata。
-- 我能說明為什麼零容量處理與一般成長分開。
+先定義契約：
 
-## 13. 本章摘要
+> 如果 `append_value` 回傳失敗，呼叫者原本的 `*values`、`*size`、`*capacity` 與所有既有元素都仍然有效且不變。
 
-動態記憶體讓程式在執行期間決定大小與生命週期，但也把大小計算、所有權與釋放責任交給程式設計者。可靠管理需要驗證元素數量、防止 byte 大小溢位、檢查配置結果、定義所有權、恰好釋放一次，並在之後停止所有使用。安全成長會在 `realloc` 成功前保留原物件。下一章將把資料寫入檔案，使其在程式結束後仍可保存。
+操作順序因此可以讀成：
+
+```text
+驗證參數與 size <= capacity
+→ 還有空間：直接寫入
+→ 需要成長：先安全算新 capacity 與 byte 數
+→ temporary = realloc(...)
+→ 失敗：原狀態不動
+→ 成功：提交新的 owner/capacity
+→ 寫入新值
+→ 最後增加 size
+```
+
+下面是一個骨架：
+
+```c
+#include <stdint.h>
+#include <stdlib.h>
+
+int append_value(int **values,
+                 size_t *size,
+                 size_t *capacity,
+                 int value) {
+    if (values == NULL || size == NULL || capacity == NULL) {
+        return 0;
+    }
+
+    if (*size > *capacity) {
+        return 0;
+    }
+
+    if (*capacity > 0 && *values == NULL) {
+        return 0;
+    }
+
+    if (*size == *capacity) {
+        size_t new_capacity;
+
+        if (*capacity == 0) {
+            new_capacity = 4;
+        } else {
+            if (*capacity > SIZE_MAX / 2) {
+                return 0;
+            }
+            new_capacity = *capacity * 2;
+        }
+
+        if (new_capacity > SIZE_MAX / sizeof **values) {
+            return 0;
+        }
+
+        int *temporary = realloc(*values,
+                                 new_capacity * sizeof **values);
+        if (temporary == NULL) {
+            return 0;
+        }
+
+        *values = temporary;
+        *capacity = new_capacity;
+    }
+
+    (*values)[*size] = value;
+    (*size)++;
+    return 1;
+}
+```
+
+閱讀這段程式時不要從 `**` 開始。先一路問：
+
+> 哪一個狀態可能失敗？失敗以前哪些舊狀態必須保住？成功後哪些資料才可以一起更新？
+
+這會比背一套 `realloc` 模板更容易移植到其他問題。
+
+---
+
+## 13. 選做：讓 AI 挑戰你的 ownership 圖
+
+這一節完全可以跳過。
+
+先自己畫四個時刻：
+
+```text
+配置前
+配置後
+realloc 成功搬移後
+free 後
+```
+
+每一張圖都標出 owner、alias 與仍然活著的配置物件。
+
+如果你想多做一次檢查，可以讓 AI 指出哪個轉換最容易產生 leak、dangling alias 或 double free。你不需要固定 Prompt，也不需要保存或繳交對話。
+
+如果它的說法和 `malloc`／`realloc`／`free` 契約、你的配置圖或記憶體檢查工具衝突，就回到可驗證證據重新判斷。
+
+---
+
+## 14. 離開這個 Unit 前，確認你能追蹤整個生命週期
+
+直接回答：
+
+- 為什麼元素數量合法，仍要另外檢查 byte 大小乘法？
+- `malloc` 回傳 `NULL` 和大小計算溢位為什麼是不同問題？
+- `free(values)` 之後，為什麼其他 alias 不會因 `values = NULL` 自動變安全？
+- ownership 主要避免哪兩個相反錯誤？
+- 為什麼 `realloc` 通常先存進 temporary？
+- `realloc` 成功搬移後，舊 alias 有什麼風險？
+- 為什麼修改呼叫者的 `int *values` 需要把 `&values` 傳入 `int **` 參數？
+- `append_value` 的「失敗時原狀態不變」為什麼讓呼叫端更容易推理？
+
+如果某題只剩函式名稱或星號數量，重新畫 owner pointer、它自己的位址與配置物件，再走一次生命週期。
+
+---
+
+## 15. 本章收尾
+
+F-U07 讓我們把一筆資料組成 `Student`；F-U08 再讓「要保存幾筆」不必在寫程式時就固定。
+
+代價是責任也跟著增加：**配置以前要安全算大小，配置後要知道誰擁有，成長時要保住舊狀態，釋放後所有路徑都必須停止使用。**
+
+而 `int **` 只是這條主線自然多出的一層：當函數需要修改的「呼叫者物件」本身就是一個指標時，我們就把那個指標物件的位置交給函數。
+
+下一個 Unit 會處理另一種「超過目前執行生命週期」的需求。動態記憶體只能活在程式這次執行期間；如果資料希望程式結束後仍存在，就必須寫到檔案，並面對開啟、讀寫、格式、失敗與部分更新的問題。
 
 ## 導覽
 
