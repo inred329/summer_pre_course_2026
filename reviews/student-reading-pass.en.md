@@ -1,6 +1,6 @@
 # Student Reading Pass
 
-Version: 0.3.0  
+Version: 0.4.0  
 Last updated: 2026-08-09  
 Corresponding Chinese version: [學生閱讀體驗審查](student-reading-pass.zh-TW.md)
 
@@ -25,7 +25,7 @@ Each Unit is checked for:
 | P-U01 Program execution path | Complete | Complete | First pass complete | Reworked the opening and transitions; reduced governance language; turned checklist-like activities into an experimental narrative; simplified the optional AI note; strengthened the edit → compile → run → observe thread; improved the bridge to the next Unit. |
 | P-U02 Data, types, and state | Complete | Complete | First pass complete | Connected directly from P-U01; used changing `score` state as the narrative spine; framed `if` and `&score` as previews rather than prerequisites; removed the conceptual jump that asked students to implement the 100-point cap before learning conditions, and turned that failure into the bridge to P-U03. |
 | P-U03 Control flow | Complete | Complete | First pass complete | Connected directly to P-U02's unresolved `98 + 5 = 103` case and used the 100-point cap to motivate `if`; turned conditions, boundaries, branch order, input checks, and loops into one control-flow narrative; reframed off-by-one, nontermination, and practice around reasoning about state. |
-| P-U04 Functions and integration | Pending | Pending | Not started | — |
+| P-U04 Functions and integration | Complete | Complete | First pass complete | Continued directly from P-U03's “everything in `main`” problem; introduced functions through simple parameters, arguments, calls, and return values before interface contracts; removed premature pointer-output/`NULL`/`INT_MAX` machinery from the core path; used bounded score examples and a score reporter to connect responsibility separation, direct function tests, requirement changes, and the transition to F-U01. |
 | F-U01–F-U12 | Pending | Pending | Not started | — |
 
 ## P-U01 Reading Observation
@@ -45,6 +45,12 @@ After the first pass, P-U02 grows directly from P-U01’s fixed output into the 
 The original version again placed purpose, completion, record-keeping, and AI-policy language before the first control-flow problem. Although the technical topics were present, conditions, operators, loop elements, defect cases, and exercises appeared mostly as parallel sections rather than as a continuation of the unresolved 100-point-cap problem at the end of P-U02. That made the chapter easier to read as a new list of syntax than as the next step in one learning story.
 
 After the first pass, P-U03 begins directly with the failed `98 + 5 = 103` requirement and uses `if (final_score > 100)` to solve a problem the learner already has reason to understand. Values 99, 100, and 101 then establish boundary reasoning before the chapter expands to `else`, comparisons and logical combinations, successful-input checks, and branch ordering. Loops are introduced from the repeated need to add 1 through 5 and repeatedly return to state, condition, work, and update. Off-by-one and infinite-loop cases are now diagnosed through “which iteration disappeared?” and “does the controlling state move toward termination?” The closing section creates the next need naturally: once every responsibility is placed inside `main`, the program becomes harder to read, change, and verify, leading into P-U04.
+
+## P-U04 Reading Observation
+
+The original version had a strong responsibility-separation goal, but the first full function example immediately required `int *result`, `NULL`, `INT_MAX`, `INT_MIN`, signed-overflow checks, status returns, and output-through-pointer behavior. Those are valuable formal-course topics, but at this point the preparatory sequence had not yet established pointers or integer-boundary machinery. As a result, the reader had to absorb several advanced interface ideas before the simpler question “what is a function call and where does its result go?” had been made comfortable. The chapter also began with document-purpose and completion language instead of continuing the problem created at the end of P-U03.
+
+After the first pass, P-U04 begins exactly where P-U03 stops: `main` can now store, choose, and repeat, but becomes difficult to read when every responsibility stays inside it. `max_of_two` establishes function name, parameters, arguments, call flow, and a direct return value with one small trace. Interface contracts are then introduced through deliberately bounded score inputs, so the text can discuss caller guarantees without forcing pointer outputs or overflow-preservation machinery into the preparatory core. A three-score reporter becomes the integration story: input and validation stay visible in `main`, while average calculation and pass/fail judgment become separately named and directly testable functions. The chapter closes by showing that the preparatory sequence is complete and creating the next formal-course question: the `int`, `double`, arithmetic, and input operations already used all depend on deeper representation and boundary rules, leading naturally into F-U01.
 
 ## Completion Condition
 
