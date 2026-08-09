@@ -8,15 +8,17 @@
 
 直接從第一個 Unit 開始：
 
-**[P-U01：程式如何從文字變成執行結果？](../../materials/preparatory/unit-01-execution.zh-TW.md)**
+**[P-U00：寫好的 C 程式，怎麼真的跑起來？](../../materials/preparatory/unit-00-compiler-ide.zh-TW.md)**
 
-閱讀順序：P-U01 → P-U02 → P-U03 → P-U04
+閱讀順序：P-U00 → P-U01 → P-U02 → P-U03 → P-U04
+
+P-U00 先把 compiler、IDE、Build、Run 與 Debug 的角色拆清楚，再進入後面的執行、資料、控制流程與函數。
 
 ## 如果你現在上的是正式課程
 
-正式課程不是從這個前導班頁面開始，也不需要先重讀 P-U01～P-U04。
+正式課程不是從這個前導班頁面開始，也不需要先重讀 P-U00～P-U04。
 
-**[正式課程從 F-U01 開始](../../materials/formal/unit-01-representation-types.zh-TW.md)**
+**[正式課程從 F-U00 開始](../../materials/formal/unit-00-build-run-ide.zh-TW.md)**
 
 也可以回到統一的 [學生入口](../../materials/STUDENT-START.zh-TW.md) 選擇課程。
 
