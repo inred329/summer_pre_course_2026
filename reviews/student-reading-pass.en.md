@@ -1,78 +1,35 @@
 # Student Reading Pass
 
-Version: 0.7.0  
+Version: 0.8.0  
 Last updated: 2026-08-09  
 Corresponding Chinese version: [學生閱讀體驗審查](student-reading-pass.zh-TW.md)
 
 ## Purpose
 
-This record tracks the actual reading experience of student-facing materials. The pass is not primarily a governance or compliance review. Each Unit is read from beginning to end to see whether a student can follow its story, concepts, and activities without unnecessary friction.
-
-Each Unit is checked for:
-
-- whether the opening quickly establishes a useful question or motivation;
-- whether concepts and terms appear when they are needed and have enough preparation;
-- whether sections connect through a natural learning sequence;
-- whether examples, defect cases, and exercises improve understanding instead of adding mechanical checklists;
-- whether internal governance, assessment, or document-boundary language intrudes on the student reading path;
-- whether the ending creates a natural bridge to the next Unit;
-- whether the Chinese and English versions preserve the same learning path and technical meaning.
+Read every student-facing Unit from a learner's point of view and check opening motivation, concept timing, section transitions, whether examples actually support understanding, whether internal governance language intrudes on the reading path, Unit-to-Unit continuity, and substantive bilingual equivalence.
 
 ## Progress
 
 | Unit | Chinese | English | Status | Main work |
 |---|---|---|---|---|
-| P-U01 Program execution path | Complete | Complete | First pass complete | Reworked the opening and transitions; reduced governance language; turned checklist-like activities into an experimental narrative; simplified the optional AI note; strengthened the edit → compile → run → observe thread; improved the bridge to the next Unit. |
-| P-U02 Data, types, and state | Complete | Complete | First pass complete | Connected directly from P-U01; used changing `score` state as the narrative spine; framed `if` and `&score` as previews rather than prerequisites; removed the conceptual jump that asked students to implement the 100-point cap before learning conditions, and turned that failure into the bridge to P-U03. |
-| P-U03 Control flow | Complete | Complete | First pass complete | Connected directly to P-U02's unresolved `98 + 5 = 103` case and used the 100-point cap to motivate `if`; turned conditions, boundaries, branch order, input checks, and loops into one control-flow narrative; reframed off-by-one, nontermination, and practice around reasoning about state. |
-| P-U04 Functions and integration | Complete | Complete | First pass complete | Continued directly from P-U03's “everything in `main`” problem; introduced functions through simple parameters, arguments, calls, and return values before interface contracts; removed premature pointer-output/`NULL`/`INT_MAX` machinery from the core path; used bounded score examples and a score reporter to connect responsibility separation, direct function tests, requirement changes, and the transition to F-U01. |
-| F-U01 Representation, types, and operations | Complete | Complete | First pass complete | Continued directly from the `int`/`double` work in P-U04; used the surprising result of `double result = 5 / 2` to create motivation; connected value, representation, type, format contracts, floating-point approximation, and integer boundaries into one “how data is interpreted” narrative; reframed defect cases through a defined-vs-undefined diagnostic model; integrated the ideas in a representation/division reporter and bridged to F-U02. |
-| F-U02 Complex control flow | Complete | Complete | First pass complete | Continued from F-U01's value-and-rule model; used grade classification to make “branch order is part of the rule” concrete, then expanded through boundaries, `switch`, and nested paths; introduced sentinel, EOF, input failure, and loop invariant through an unknown-length sum instead of as parallel vocabulary; reframed defects as broken path/state rules; integrated the chapter through unknown-length averaging and a requirement change before bridging to F-U03. |
-| F-U03 Arrays | Complete | Complete | First pass complete | Continued from F-U02's one-value-at-a-time flow by creating the need to retain many values simultaneously; connected element, index, length, traversal, and bounds through one score-array story; removed premature `int *result`/`NULL` output-parameter machinery before the pointer model exists, using a `length > 0` precondition and direct return instead; tied input validation, provable accumulation range, and requirement modification into one score-analysis task; bridged to F-U04's character arrays and terminator rule. |
-| F-U04–F-U12 | Pending | Pending | Not started | — |
+| P-U01 | Complete | Complete | First pass complete | Replaced governance-style opening with one `hello.c` experiment connecting compilation, execution, defects, and change. |
+| P-U02 | Complete | Complete | First pass complete | Used changing `score` state as the narrative spine and demoted next-Unit concepts to previews. |
+| P-U03 | Complete | Complete | First pass complete | Continued directly from the 100-point-cap failure and built control flow through boundaries, state, and termination. |
+| P-U04 | Complete | Complete | First pass complete | Established function calls and direct returns before output pointers and `NULL`. |
+| F-U01 | Complete | Complete | First pass complete | Used the surprising `5 / 2` result to connect representation, type, formatting, approximation, boundaries, and undefined behavior. |
+| F-U02 | Complete | Complete | First pass complete | Used “a value selects a path” to connect branches, boundaries, sentinel, EOF, invariant, and requirement change. |
+| F-U03 | Complete | Complete | First pass complete | Created the need for arrays from retaining many values; unified index, length, initialization, and bounds; deferred the full pointer model. |
+| F-U04 | Complete | Complete | First pass complete | Built one path from character array to `\0`, capacity, complete-line input, leftover input, and safe traversal; corrected the C explanation of a three-element `"cat"` initializer; avoided requiring the full pointer model before F-U06. |
+| F-U05–F-U12 | Pending | Pending | Not started | — |
 
-## P-U01 Reading Observation
+## Important Reading Decisions in This Batch
 
-The original version was technically complete, but it opened with “Document Purpose and Completion Standard,” submission guidance, and AI policy before the student encountered the first programming question. Several later sections also used constraints, record-keeping suggestions, and test-table language that made the chapter feel closer to an operating specification than a continuous learning story.
+The original F-U04 topics were individually useful, but a learner arriving from arrays first met specification-style completion language and then had to absorb `fgets`, newline removal, truncation, string-library calls, and pointer semantics in quick succession. The revised Unit begins directly from F-U03's character-array model and asks one question first: “How does text know where it ends?” Capacity, terminator, complete logical line, leftover input, and traversal then appear as consequences of that question.
 
-After the first pass, P-U01 begins directly with the question of what actually happens after a C text file is saved. The chapter now keeps returning to the same `hello.c` experiment and connects prediction, real execution, deliberate defects, and requirement changes into one narrative. The Chinese and English versions preserve equivalent section order, questions, experiments, and closing transition.
+The explanation of `char word[3] = "cat";` was also corrected. In C, this can initialize three character elements, but no element remains for the terminating `\0`; the result is therefore not a reliable C string. That is different from saying that a compiler must reject the declaration.
 
-## P-U02 Reading Observation
-
-The original version also began with completion standards, record-keeping instructions, and AI policy before reaching the learner’s real question of how a running program keeps data. More importantly, it introduced `if` before control flow had been taught and later required students to implement a “maximum score of 100” rule, forcing them to use the next Unit’s central concept before it had been established.
-
-After the first pass, P-U02 grows directly from P-U01’s fixed output into the question of what remains inside a running program. The statement `score = score + 5` now anchors value, type, variable, assignment, and state. The input example still keeps the safe success check, but clearly tells students that `if` and `&score` only need to be understood by purpose for now. The former immediate implementation of the 100-point cap is now an intentionally unresolved requirement: students see `98 + 5` produce `103`, which creates a natural need for “choosing different paths” and leads directly into P-U03.
-
-## P-U03 Reading Observation
-
-The original version again placed purpose, completion, record-keeping, and AI-policy language before the first control-flow problem. Although the technical topics were present, conditions, operators, loop elements, defect cases, and exercises appeared mostly as parallel sections rather than as a continuation of the unresolved 100-point-cap problem at the end of P-U02. That made the chapter easier to read as a new list of syntax than as the next step in one learning story.
-
-After the first pass, P-U03 begins directly with the failed `98 + 5 = 103` requirement and uses `if (final_score > 100)` to solve a problem the learner already has reason to understand. Values 99, 100, and 101 then establish boundary reasoning before the chapter expands to `else`, comparisons and logical combinations, successful-input checks, and branch ordering. Loops are introduced from the repeated need to add 1 through 5 and repeatedly return to state, condition, work, and update. Off-by-one and infinite-loop cases are now diagnosed through “which iteration disappeared?” and “does the controlling state move toward termination?” The closing section creates the next need naturally: once every responsibility is placed inside `main`, the program becomes harder to read, change, and verify, leading into P-U04.
-
-## P-U04 Reading Observation
-
-The original version had a strong responsibility-separation goal, but the first full function example immediately required `int *result`, `NULL`, `INT_MAX`, `INT_MIN`, signed-overflow checks, status returns, and output-through-pointer behavior. Those are valuable formal-course topics, but at this point the preparatory sequence had not yet established pointers or integer-boundary machinery. As a result, the reader had to absorb several advanced interface ideas before the simpler question “what is a function call and where does its result go?” had been made comfortable. The chapter also began with document-purpose and completion language instead of continuing the problem created at the end of P-U03.
-
-After the first pass, P-U04 begins exactly where P-U03 stops: `main` can now store, choose, and repeat, but becomes difficult to read when every responsibility stays inside it. `max_of_two` establishes function name, parameters, arguments, call flow, and a direct return value with one small trace. Interface contracts are then introduced through deliberately bounded score inputs, so the text can discuss caller guarantees without forcing pointer outputs or overflow-preservation machinery into the preparatory core. A three-score reporter becomes the integration story: input and validation stay visible in `main`, while average calculation and pass/fail judgment become separately named and directly testable functions. The chapter closes by showing that the preparatory sequence is complete and creating the next formal-course question: the `int`, `double`, arithmetic, and input operations already used all depend on deeper representation and boundary rules, leading naturally into F-U01.
-
-## F-U01 Reading Observation
-
-The original version already covered bits, MSB/LSB, types, integer division, floating-point approximation, overflow, characters, and format mismatch correctly, but the reading path still followed a specification-like structure: “Purpose and Completion Standard → Core Question → capability list → parallel topic sections → error cases → exercises.” A learner arriving from P-U04 first met completion language and abstract outcomes instead of immediately seeing why familiar `int` and `double` operations were worth revisiting. Format mismatch, floating-point comparison, and signed overflow also appeared as separate facts rather than as parts of a shared model for distinguishing “defined behavior that does not match the requirement” from “behavior the language no longer defines.”
-
-After the first pass, F-U01 connects directly to P-U04 and opens with the concrete surprise that `double result = 5 / 2;` produces `2.0`. The learner gets a question first, then follows one sequence: “value → representation → type → operation timing → format contract → approximation → boundaries.” MSB and LSB are introduced first through unsigned binary position and weight so the learner does not prematurely memorize “MSB means sign bit.” `printf` formats are brought into the type-contract story instead of appearing only as an isolated defect. The floating-point section explicitly separates “calculated approximations usually need requirement-driven tolerances” from exact sentinels such as a deliberately entered `0.0`, avoiding the oversimplified rule “never use `==` with floating point.” Integer boundaries establish the safe order “check first, then operate,” and the chapter collects signed overflow, unsigned modular arithmetic, integer division, and format mismatch into a defined-vs-undefined diagnostic table. A final `unsigned int`/`double` reporter integrates input formats, decimal/hexadecimal presentation, division, zero-divisor handling, and boundary tests before handing the reader naturally to F-U02, where several conditions and states begin to interact.
-
-## F-U02 Reading Observation
-
-The original version's individual topics were technically sound, but the reading path still felt like a parallel sequence: “Purpose and Completion Standard → capability list → multi-branch flow → `switch` → nesting → sentinel → invariant → error cases → exercises.” A learner arriving from F-U01 did not immediately see the bridge from “values are interpreted by rules” to “values now decide which path is taken.” Sentinel, EOF, invalid input, and invariant also arrived in quick succession, which made them easy to experience as a vocabulary bundle instead of parts of one input-flow problem.
-
-After the first pass, F-U02 extends F-U01's value-and-rule story into “a value selects a path.” Grade classification first makes it visible that the order of an `if`/`else if` chain is part of the rule; 69/70, 79/80, and 89/90 then establish boundary-driven testing. `switch` is introduced comparatively as a tool for discrete choices, and nested conditions are read through reachable path combinations. Only then does the chapter move from one-item decisions to an unknown-length sum, which naturally creates the need for repetition and a sentinel. Three concrete input paths distinguish sentinel, EOF, and invalid text. The loop invariant is not introduced as a definition to memorize; initialization, preservation, and termination show it as “a fact every iteration must keep true.” Defect cases are then diagnosed by the path or state rule they break. The closing average problem and “ignore out-of-range values” requirement change bring ordering, sentinel handling, invariant reasoning, and regression testing back together in one problem, before creating the next need: arrays for retaining many same-type values at once.
-
-## F-U03 Reading Observation
-
-The original array fundamentals were clear, but the chapter still opened with completion language and a capability list instead of directly continuing the limitation left by F-U02's one-value-at-a-time processing. The larger conceptual jump appeared in `max_array`: immediately after establishing arrays, indexes, and length, students were asked to understand `int *result`, `NULL`, output parameters, and null-pointer contracts even though the full pointer model is not established until F-U06. Out-of-bounds access, uninitialized elements, and empty collections also appeared more as separate defect categories than as parts of one model for deciding whether an element may legally be read.
-
-After the first pass, F-U03 begins with a direct change to F-U02's problem: if many values must remain available for repeated analysis, `sum` and `count` are no longer enough. A five-score index diagram introduces array, element, index, and length before the already-familiar loop-control variable becomes the current array position, making the `i < length` boundary rule feel necessary rather than arbitrary. Out-of-bounds and uninitialized access are unified as two different requirements: “is the position legal?” and “does that legal position actually contain valid data?” The function section keeps the useful array-plus-length interface but explicitly defers the pointer mechanics of array parameters to F-U06. `max_array` now returns the maximum directly with a `length > 0` precondition handled by the caller, so output pointers and `NULL` no longer interrupt the array model. A ten-score analyzer, provable accumulation range, and “drop one lowest score” requirement change then tie input validation, traversal, boundaries, and re-analysis into one story, before the next Unit turns the same model toward character arrays and string termination.
+The `read_line` and string-comparison sections now avoid requiring the learner to understand the complete pointer model. Array-parameter adjustment, array-expression conversion, and pointer details are explicitly deferred to F-U06. The end of F-U04 uses the function calls already seen throughout the course to create the motivation for F-U05's call-stack and recursion model.
 
 ## Completion Condition
 
-The Student Reading Pass is complete only after P-U01–P-U04 and F-U01–F-U12 have all been read end to end, major reading barriers have been corrected, and students can understand the materials without relying on design, review, or other internal documents.
+The Student Reading Pass is complete only after P-U01–P-U04 and F-U01–F-U12 have all been read end to end, major reading barriers have been corrected, and students can understand the material without depending on internal design or review documents.
