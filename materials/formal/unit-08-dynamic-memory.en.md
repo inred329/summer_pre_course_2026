@@ -1,52 +1,58 @@
 # Formal Unit F-U08: How Does a Program Obtain and Release Space During Execution?
 
-Version: 1.1.0  
+Version: 1.2.0  
 Status: Official student material  
 Last updated: 2026-08-09  
 Corresponding Chinese version: [正式單元 F-U08：程式如何在執行期間取得與釋放空間？](unit-08-dynamic-memory.zh-TW.md)
 
-F-U07's `Student students[10]` makes one assumption explicit: at most ten records will be stored.
+F-U07 could store student records like this:
+
+```c
+Student students[10];
+```
+
+The design is clear, but it also fixes one decision in the source code: at most ten records.
 
 Now change the requirement:
 
-> What if the user tells us how many records are needed only after the program starts, and the required capacity may grow later?
+> The number of records is known only after the program starts, and the required capacity may grow later.
 
-A fixed array may no longer fit the problem. The program needs to obtain an appropriately sized block of storage **during execution**, use it, and explicitly release it when the object is no longer needed.
+What changes is not merely that we need a “more advanced function.” The important change is that **the program now takes responsibility for the size and lifetime of the storage it uses**.
 
-That is dynamic allocation.
+It must answer: How much space is needed? Can that size be calculated safely? What happens when allocation fails? Who eventually releases the storage? If the allocation moves while growing, are old pointers still valid?
 
-Dynamic memory is not “better because it is more advanced.” It transfers responsibilities to the program: size calculation, allocation failure, ownership, release timing, and making sure no path keeps using an object after release.
+Those questions form the main path through dynamic allocation and ownership.
 
 ---
 
-## 1. Start with a Runtime-Selected Element Count
+## 1. A Fixed Array First Shows When Dynamic Allocation Is Not Needed
 
-A fixed version is simple:
+If the real requirement is simply “at most 100 integers,” then:
 
 ```c
 int values[100];
 ```
 
-If 100 is really part of the requirement, this may be exactly the right design.
+may be the simplest design.
 
-If the count is known only during execution, storage can be requested later:
+Dynamic allocation is useful when the required size is known only during execution. Once an element count `count` is available, storage can be requested with:
 
 ```c
 int *values = malloc(count * sizeof *values);
 ```
 
-Conceptually:
+Draw it first:
 
 ```text
 values ─────► dynamically allocated block
               space for count int elements
 ```
 
-`malloc` receives a number of **bytes**, not a number of elements.
+The first detail to keep visible is that `malloc` receives a **byte count**, not an element count.
 
 So:
 
-```text
+```c
 count * sizeof *values
 ```
 
@@ -56,58 +62,49 @@ means:
 number of elements × bytes per element
 ```
 
+If `count` has not been validated yet, that multiplication should not happen yet either.
+
 ---
 
-## 2. Before Allocation, Validate Both the Count and the Byte Calculation
+## 2. Validate the Element Count, Then Validate the Byte Count
 
 Suppose the count comes from input:
 
 ```c
 int n;
 
-if (scanf("%d", &n) != 1) {
-    fprintf(stderr, "Invalid input\n");
+if (scanf("%d", &n) != 1 || n <= 0) {
+    fprintf(stderr, "Invalid size\n");
     return 1;
 }
 
-if (n <= 0) {
-    fprintf(stderr, "Size must be positive\n");
-    return 1;
-}
-```
-
-Only then convert to `size_t`:
-
-```c
 size_t count = (size_t)n;
 ```
 
-Do not assume that:
+Now `count` is positive, but a second question remains:
 
-```c
-count * sizeof(int)
-```
-
-is always representable as `size_t`.
+> Can `count * sizeof *values` be represented by `size_t`?
 
 Check before multiplying:
 
 ```c
 #include <stdint.h>
 
-if (count > SIZE_MAX / sizeof(int)) {
+if (count > SIZE_MAX / sizeof *values) {
     fprintf(stderr, "Requested size is too large\n");
     return 1;
 }
 ```
 
-This is the same boundary principle as F-U01: **prove the operation is representable before performing it.**
+This is the same boundary principle used in F-U01: **prove that an operation is representable before performing it.**
 
-If the unsigned byte count wraps first, even a later non-`NULL` result from `malloc` may describe a block far smaller than the program assumes.
+If the byte count wraps first, a later non-`NULL` result from `malloc` may still describe a block much smaller than the program assumes.
+
+So “the element count is valid” and “the allocation size can be calculated safely” are two separate checks.
 
 ---
 
-## 3. Trace One Complete Allocate → Use → Release Lifetime
+## 3. Trace One Complete Lifetime: Allocate, Use, Release
 
 ```c
 #include <stdint.h>
@@ -145,58 +142,64 @@ int main(void) {
 }
 ```
 
-Read the path as:
+Do not memorize the function names first. Read the lifetime instead:
 
 ```text
 obtain element count
 → validate the requirement
 → validate byte size
-→ malloc
-→ check the result
-→ use within bounds
-→ free
+→ allocate
+→ check allocation success
+→ use within capacity
+→ release
 → stop using the released object
 ```
 
-Three failures are different:
-
-1. the input count is invalid;
-2. the required byte count cannot be computed safely;
-3. the requested size is valid but the allocation still cannot be satisfied.
+There are at least three different failures here: invalid input, unsafe size calculation, and a valid allocation request that cannot be satisfied. They should not all be collapsed into “malloc failed.”
 
 ---
 
-## 4. `free` Ends the Lifetime of the Allocated Object
+## 4. `free` Ends the Allocated Object's Lifetime; It Does Not Repair Every Pointer
 
-After successful allocation, `values` points to a dynamically allocated object.
+After a successful allocation:
 
-When:
+```text
+values ─────► [ allocation ]
+```
+
+After:
 
 ```c
 free(values);
 ```
 
-executes, that allocated object's lifetime ends.
-
-So this must not follow:
+the allocated object's lifetime has ended, so this is no longer valid:
 
 ```c
 printf("%d\n", values[0]);
 ```
 
-That is use after free.
-
-Setting the owner variable to:
+Changing the owner variable to:
 
 ```c
 values = NULL;
 ```
 
-can help prevent accidental reuse through that variable, but other aliases do **not** automatically become null.
+can help prevent accidental reuse through `values` itself.
 
-The real rule is:
+But suppose another alias was saved earlier:
 
-> Once the allocated object is released, every route that used to identify it must stop treating it as a live object.
+```c
+int *first = values;
+```
+
+Setting `values = NULL` does not magically set `first` to `NULL` too.
+
+The real rule is therefore:
+
+> Once an allocation is released, every route that used to identify it must stop treating it as a live object.
+
+This is the dynamic-allocation version of the lifetime and dangling-pointer ideas from F-U05 and F-U06.
 
 ---
 
@@ -208,19 +211,19 @@ Suppose a function has this interface:
 int *create_values(size_t count);
 ```
 
-If it allocates a new block and returns a pointer, the interface should answer:
+If it allocates a new block and returns the pointer, the interface should say:
 
-> Does the caller now own this allocation and therefore become responsible for the eventual `free`?
+> Does the caller now own that allocation and therefore become responsible for the eventual `free`?
 
-**Ownership** is not a C keyword. It is a design rule used to avoid two opposite failures:
+**Ownership is not a C keyword.** It is a design rule that avoids two opposite mistakes:
 
 ```text
 A expects B to free
 B expects A to free
-→ leak
+→ memory leak
 ```
 
-or:
+and:
 
 ```text
 A believes it must free
@@ -228,35 +231,33 @@ B also believes it must free
 → double free
 ```
 
-Whenever a dynamically allocated pointer crosses an interface, ask not only “what does it point to?” but also:
+So when a dynamically allocated pointer crosses an interface, ask not only “what does it point to?” but also:
 
-> Who is responsible for the final release?
+> Who is responsible for ending this lifetime correctly?
 
 ---
 
-## 6. `calloc` Allocates and Zeroes the Storage Bytes
+## 6. `calloc` Is Another Way to Create an Allocation
 
 ```c
 int *values = calloc(count, sizeof *values);
 ```
 
-`calloc` receives an element count and element size. On success it provides the requested storage and initializes its bytes to zero.
+Unlike `malloc`, `calloc` receives the element count and element size separately. On success, it also zeroes the bytes in the allocated block.
 
-For the integer arrays used here, that gives initial integer values of zero.
+For the `int` arrays used in this Unit, the initial integer values are therefore zero.
 
-Do not generalize this into:
+Do not generalize that into “`calloc` performs the correct semantic default initialization for every C type.” Its direct guarantee is allocated storage whose bytes are zeroed.
 
-> `calloc` performs the correct semantic default initialization for every possible C type.
+Whether you use `malloc` or `calloc`, three responsibilities remain:
 
-Its direct guarantee is allocated storage with zeroed bytes. You still must:
-
-- validate that `count` makes sense for the requirement;
-- check the returned pointer;
-- define ownership and eventual release.
+- input and size must satisfy the requirement;
+- the returned pointer must be checked;
+- ownership and eventual release must be clear.
 
 ---
 
-## 7. When Capacity Grows, Do Not Overwrite the Only Owner with `realloc`
+## 7. When Capacity Grows, Preserve the Old Owner Until Success Is Known
 
 Suppose the program currently has:
 
@@ -265,129 +266,142 @@ int *values;
 size_t capacity;
 ```
 
-and needs `new_count` elements.
+and now needs `new_capacity` elements.
 
-Validate the new capacity first:
+Validate the requested size first:
 
 ```c
-if (new_count == 0 ||
-    new_count > SIZE_MAX / sizeof *values) {
-    /* unsupported capacity */
+if (new_capacity == 0 ||
+    new_capacity > SIZE_MAX / sizeof *values) {
+    return 0;
 }
 ```
 
-Then preserve the original pointer until success is known:
+Then use `realloc` through a temporary pointer:
 
 ```c
 int *temporary = realloc(values,
-                         new_count * sizeof *values);
+                         new_capacity * sizeof *values);
 
 if (temporary == NULL) {
-    /* values still owns the original allocation */
     return 0;
 }
 
 values = temporary;
+capacity = new_capacity;
 ```
 
-Why use `temporary`?
-
-For a nonzero requested size, failed `realloc` leaves the original allocation intact. We do not want to overwrite the only pointer that still owns it.
-
-This pattern is dangerous:
+Why not write this directly?
 
 ```c
 values = realloc(values,
-                 new_count * sizeof *values);
+                 new_capacity * sizeof *values);
 ```
 
-If reallocation fails, `values` becomes `NULL` while the old allocation still exists, potentially losing the final owner pointer and creating a leak.
+For a nonzero requested size, failed `realloc` leaves the old allocation alive. If the only owner pointer is overwritten directly, `values` becomes `NULL` while the old allocation still exists, and the program may lose its final route to that object.
+
+So the purpose of `temporary` is simple:
+
+> Do not destroy the old owner before the new allocation is known to be usable.
 
 ---
 
-## 8. Successful `realloc` May Move the Object
+## 8. Successful `realloc` Can Still Invalidate Old Aliases
 
-A successful reallocation may:
+A successful `realloc` may resize in place or move the allocation to another location.
 
-- resize the allocation in place; or
-- move the object and return a different address.
+After success, the returned pointer is the current allocation pointer.
 
-After success, use the returned pointer as the current allocation.
+Suppose the state before growth is:
 
-Any other alias that still identifies a location in the old allocation cannot be assumed to remain valid after a move.
+```text
+values ───► [ old allocation ]
+first  ───► [ first element of old allocation ]
+```
 
-That gives growable arrays another design question:
+If `realloc` moves the allocation:
 
-> Which pointer is the owner during growth, and which external aliases might be invalidated if the allocation moves?
+```text
+values ───► [ new allocation ]
+first  ───► [ old location; cannot be assumed valid ]
+```
 
-This course also treats zero capacity as a separate operation: explicitly `free(values)` and update owner state rather than relying on special `realloc(pointer, 0)` behavior.
+A growable container therefore has one more question than a fixed array:
+
+> Which pointer owns the allocation, and which pointers are only temporary aliases that may be invalidated by growth?
+
+This course treats capacity zero as an explicit “clear” operation: call `free` and update the owner state rather than depending on special `realloc(pointer, 0)` behavior.
 
 ---
 
-## 9. Four Common Defects All Break Lifetime, Ownership, or Capacity
+## 9. Common Defects Reduce to Three Questions
 
 ### Memory leak
 
-The allocation is still alive, but the program has lost the final responsible route that could release it.
+The allocation is still alive, but the final route responsible for releasing it has been lost.
 
 ### Use after free
 
-The object's lifetime has ended, but code still accesses it through an old pointer.
+The allocation's lifetime has ended, but code still accesses it through an old pointer.
 
 ### Double free
 
-The same allocation is passed to `free` again after its lifetime already ended.
+The same allocation is passed to `free` again after its lifetime has already ended.
 
 ### Allocation too small
 
-The element-size calculation is wrong, or `count * sizeof *values` wraps before being checked. Later traversal then assumes more elements than the real block can hold.
+The program believes it owns space for `count` elements, but the actual byte allocation is smaller because the size formula was wrong or multiplication wrapped first.
 
-Instead of memorizing four isolated labels, keep three questions visible:
+Instead of memorizing four disconnected labels, keep returning to:
 
 ```text
 Is this allocation still alive?
 Who owns it?
-Does the actual capacity support the access about to occur?
+Does the real capacity support the next access?
 ```
 
 ---
 
-## 10. Independent Practice: Build a Growable Integer List
+## 10. First Build a Growable Integer List
 
 Requirements:
 
-- begin with `capacity = 4`;
+- start with `capacity = 4`;
 - keep reading integers;
 - `-1` means stop;
 - when `size == capacity`, double the capacity.
 
-Maintain the invariant:
+Maintain:
 
 ```text
 size <= capacity
 ```
 
-Before each growth, prove:
-
-1. `capacity * 2` itself is representable;
-2. the new element capacity can be converted to a representable byte count;
-3. the original owner and metadata are not destroyed before `realloc` succeeds.
-
-Update:
+Before growth, check:
 
 ```c
-capacity = new_capacity;
+if (capacity > SIZE_MAX / 2) {
+    /* capacity * 2 cannot be represented safely */
+}
+
+size_t new_capacity = capacity * 2;
+
+if (new_capacity > SIZE_MAX / sizeof *values) {
+    /* byte size cannot be represented safely */
+}
 ```
 
-only after successful reallocation.
+Only then attempt `realloc` through a temporary pointer.
 
-If growth fails, the old data, `size`, and `capacity` should remain usable so the caller can choose whether to stop, retry, or preserve the partial result.
+Update `values` and `capacity` only after growth succeeds. If growth fails, the old data, `size`, and `capacity` should remain usable.
+
+That “old state remains intact on failure” goal becomes the core function contract in the next section.
 
 ---
 
-## 11. Change the Requirement: Put Append Behind a Function Interface
+## 11. Why Does `append_value` Need `int **values`?
 
-Now introduce:
+Now wrap append behind a function:
 
 ```c
 int append_value(int **values,
@@ -396,33 +410,132 @@ int append_value(int **values,
                  int value);
 ```
 
-This interface is more complex because the function may need to change not only an element but also the owner's pointer itself after `realloc`.
+The first `int **` can look like a new layer of punctuation. Do not memorize it first. Return to the F-U06 rule:
 
-Define failure before writing the implementation:
+> If a function must modify an object owned by its caller, give the function the location of that object.
 
-> If `append_value` reports failure, the caller's original `*values`, `*size`, `*capacity`, and all existing elements remain valid and unchanged.
+This time, the caller-owned object that may change is itself an **owner pointer**:
 
-That contract suggests the operation order:
-
-```text
-validate parameters and invariant
-→ if space remains, write directly
-→ if growth is needed, calculate new capacity and bytes safely
-→ realloc through a temporary pointer
-→ only after success commit new pointer/capacity
-→ write value
-→ increment size last
+```c
+int *values;
 ```
 
-This is an important design pattern: **perform work that may fail first, then commit the new state only after success is known.**
+That pointer object has an address too:
+
+```c
+&values
+```
+
+and the type of `&values` is `int **`.
+
+Draw it:
+
+```text
+append_value parameter values
+          │
+          v
+caller's owner pointer ─────► dynamic allocation
+        int *
+```
+
+Inside `append_value`:
+
+- `values` points to the caller's owner-pointer object;
+- `*values` is the caller's current `int *` owner value;
+- if `realloc` returns a new location, assigning to `*values` updates the owner's pointer in the caller.
+
+`size_t *size` and `size_t *capacity` follow the same idea: the function may update those metadata objects after success.
+
+So `**` is not a separate kind of magic. It appears because **the caller-owned object we need to modify happens to be a pointer itself**.
 
 ---
 
-## 12. Optional: Let AI Challenge Your Ownership Diagram
+## 12. The Important Append Rule Is “Do Not Damage the Old State on Failure”
+
+Define the contract before the implementation:
+
+> If `append_value` reports failure, the caller's original `*values`, `*size`, `*capacity`, and all existing elements remain valid and unchanged.
+
+That contract suggests this operation order:
+
+```text
+validate parameters and size <= capacity
+→ space remains: write directly
+→ growth needed: calculate new capacity and byte size safely
+→ temporary = realloc(...)
+→ failure: leave old state untouched
+→ success: commit new owner/capacity
+→ write the new value
+→ increment size last
+```
+
+A concrete implementation is:
+
+```c
+#include <stdint.h>
+#include <stdlib.h>
+
+int append_value(int **values,
+                 size_t *size,
+                 size_t *capacity,
+                 int value) {
+    if (values == NULL || size == NULL || capacity == NULL) {
+        return 0;
+    }
+
+    if (*size > *capacity) {
+        return 0;
+    }
+
+    if (*capacity > 0 && *values == NULL) {
+        return 0;
+    }
+
+    if (*size == *capacity) {
+        size_t new_capacity;
+
+        if (*capacity == 0) {
+            new_capacity = 4;
+        } else {
+            if (*capacity > SIZE_MAX / 2) {
+                return 0;
+            }
+            new_capacity = *capacity * 2;
+        }
+
+        if (new_capacity > SIZE_MAX / sizeof **values) {
+            return 0;
+        }
+
+        int *temporary = realloc(*values,
+                                 new_capacity * sizeof **values);
+        if (temporary == NULL) {
+            return 0;
+        }
+
+        *values = temporary;
+        *capacity = new_capacity;
+    }
+
+    (*values)[*size] = value;
+    (*size)++;
+    return 1;
+}
+```
+
+When reading this code, do not begin by counting stars. Keep asking:
+
+> Which operation may fail? Which old state must remain intact until that failure is no longer possible? Which values can be committed together after success?
+
+That reasoning is more reusable than memorizing one `realloc` pattern.
+
+---
+
+## 13. Optional: Let AI Challenge Your Ownership Diagram
 
 You may skip this section completely.
 
-First draw owner and alias relationships at four moments:
+First draw four moments:
 
 ```text
 before allocation
@@ -431,13 +544,15 @@ after realloc succeeds by moving
 after free
 ```
 
+Mark the owner, aliases, and the allocation that is still alive in each diagram.
+
 If you want another check, ask an AI tool which transition is most likely to create a leak, dangling alias, or double free and why. No fixed prompt is required, and you do not need to save or submit the conversation.
 
-If the explanation conflicts with the `malloc`/`realloc`/`free` contracts, your allocation diagram, or a memory-checking tool, return to that evidence.
+If the explanation conflicts with the `malloc`/`realloc`/`free` contracts, your allocation diagram, or a memory-checking tool, return to the verifiable evidence.
 
 ---
 
-## 13. Before Leaving This Unit, Make Sure You Can Trace the Entire Lifetime
+## 14. Before Leaving This Unit, Make Sure You Can Trace the Whole Lifetime
 
 Answer directly:
 
@@ -445,22 +560,24 @@ Answer directly:
 - Why are `malloc` returning `NULL` and allocation-size overflow different failures?
 - After `free(values)`, why does `values = NULL` not automatically make other aliases safe?
 - Which two opposite failures is ownership mainly trying to prevent?
-- Why is `realloc` commonly assigned to a temporary pointer first?
-- What risk do old aliases face when successful `realloc` moves the allocation?
-- Why can a growable list update `capacity` only after growth succeeds?
+- Why is `realloc` usually stored in a temporary pointer first?
+- What risk do old aliases face if successful `realloc` moves the allocation?
+- Why does modifying the caller's `int *values` require passing `&values` to an `int **` parameter?
 - Why does an “unchanged on failure” contract make `append_value` easier for its caller to reason about?
 
-If an answer has collapsed into a function name, redraw the owner arrow and the allocated object's lifetime.
+If an answer has collapsed into a function name or a number of `*` symbols, redraw the owner pointer, the address of that pointer object, and the allocation itself.
 
 ---
 
-## 14. Chapter Wrap-Up
+## 15. Chapter Wrap-Up
 
 F-U07 let us organize one record as a `Student`. F-U08 removes the assumption that the number of records must be fixed when the program is written.
 
 The cost is additional responsibility: **calculate size safely before allocation, know who owns the result, preserve the old state while growth can still fail, and stop every route from using the object after release.**
 
-The next Unit addresses a different kind of “lifetime beyond the current execution.” Dynamic memory exists only while the program runs. If data must still exist after the program exits, it has to be written to a file, bringing new questions about opening, reading, writing, formats, failures, and partial updates.
+The `int **` in `append_value` is a natural extra layer in that same story: when the caller-owned object that a function must modify is itself a pointer, the function receives the address of that pointer object.
+
+The next Unit addresses a different kind of lifetime beyond the current execution. Dynamic memory exists only while the program runs. If data must still exist after the program exits, it must be written to a file, bringing new questions about opening, reading, writing, formats, failures, and partial updates.
 
 ## Navigation
 
