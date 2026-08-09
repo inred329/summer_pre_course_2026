@@ -1,22 +1,23 @@
 # 正式課程學生教材
 
-版本：1.1.0  
+版本：1.2.0  
 狀態：完整雙語學生教材集  
 最後更新：2026-08-09  
 對應英文版本：[Formal Course Student Materials](README.en.md)
 
 ## 正式班從這裡開始
 
-如果你現在上的是正式課程，可以直接從 F-U01 開始，不需要先把前導課程 P-U01～P-U04 重新讀完。
+正式課程現在從 F-U00 開始。F-U00 不要求你先走前導課程，而是先把 source、compiler、Build、executable、Run、Debug 這些正式課程會反覆使用的工具角色拆清楚。
 
-**[開始 F-U01：表示、型別與運算為什麼會影響結果？](unit-01-representation-types.zh-TW.md)**
+**[開始 F-U00：按下 Run 之後，到底發生了什麼？](unit-00-build-run-ide.zh-TW.md)**
 
-前導 Unit 是補充基礎的入口，不是正式班學生的必經閱讀路徑。如果你對編譯、變數與狀態、條件與迴圈、函數與參數等基礎概念不熟悉，可以再依需要回到前導教材複習。
+前導 Unit 仍然是補充基礎的入口，不是正式班學生的必經閱讀路徑。如果你對變數與狀態、條件與迴圈、函數與參數等基礎概念不熟悉，可以再依需要回到前導教材複習。
 
 ## Unit 導覽
 
 | Unit | 中文教材 | English | 核心重點 |
 |---|---|---|---|
+| F-U00 | [按下 Run 之後，到底發生了什麼？](unit-00-build-run-ide.zh-TW.md) | [What Actually Happens After You Press Run?](unit-00-build-run-ide.en.md) | source、compiler、IDE、Build、Run、Debug、舊 executable |
 | F-U01 | [表示、型別與運算](unit-01-representation-types.zh-TW.md) | [Representation, Types, and Operations](unit-01-representation-types.en.md) | 二進位表示、MSB／LSB、範圍、轉換、格式化輸出 |
 | F-U02 | [複雜控制流程](unit-02-complex-control-flow.zh-TW.md) | [Complex Control Flow](unit-02-complex-control-flow.en.md) | 分支、sentinel、invariant、邊界 |
 | F-U03 | [陣列](unit-03-arrays.zh-TW.md) | [Arrays](unit-03-arrays.en.md) | 集合、索引、走訪、邊界 |
@@ -32,16 +33,16 @@
 
 ## 閱讀順序
 
-請依 F-U01 至 F-U12 的順序閱讀。每個 Unit 結尾都有「下一單元」連結，因此開始 F-U01 後可以沿著教材一路往下，不需要回到 repository 首頁或其他內部文件尋找下一步。
+請依 F-U00 至 F-U12 的順序閱讀。每個 Unit 結尾都有「下一單元」連結，因此開始 F-U00 後可以沿著教材一路往下，不需要回到 repository 首頁或其他內部文件尋找下一步。
 
 正式課程會使用以下基礎能力：
 
-- 能編譯並執行簡單 C 程式
+- 能編輯、Build 並執行簡單 C 程式，並知道 IDE 不等於 compiler
 - 能追蹤變數和值的改變
 - 能閱讀基本條件與迴圈
 - 能理解函數、參數與回傳值的基本角色
 
-如果其中某項不熟悉，再回到前導課程對應 Unit 複習即可，不需要把前導課程當成正式課程的固定前置閱讀清單。
+如果後三項其中某項不熟悉，再回到前導課程對應 Unit 複習即可，不需要把整套前導課程當成正式課程的固定前置閱讀清單。
 
 ## 完成一個 Unit 時
 
@@ -52,5 +53,5 @@ AI 使用不是核心完成條件。教材中標示為選做的 AI 活動可以�
 ## 導覽
 
 - [學生入口](../STUDENT-START.zh-TW.md)
-- [開始 F-U01](unit-01-representation-types.zh-TW.md)
+- [開始 F-U00](unit-00-build-run-ide.zh-TW.md)
 - [English version](README.en.md)
