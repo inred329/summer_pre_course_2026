@@ -9,18 +9,18 @@ This repository contains both student learning materials and course-maintenance 
 ### 繁體中文
 
 - **[學生入口：選擇前導課程或正式課程](materials/STUDENT-START.zh-TW.md)**
-- [前導課程：從 P-U01 開始](materials/preparatory/unit-01-execution.zh-TW.md)
-- **[正式課程：從 F-U01 開始](materials/formal/unit-01-representation-types.zh-TW.md)**
+- [前導課程：從 P-U00 開始](materials/preparatory/unit-00-compiler-ide.zh-TW.md)
+- **[正式課程：從 F-U00 開始](materials/formal/unit-00-build-run-ide.zh-TW.md)**
 
 ### English
 
 - **[Student entry: choose the preparatory or formal course](materials/STUDENT-START.en.md)**
-- [Preparatory course: start with P-U01](materials/preparatory/unit-01-execution.en.md)
-- **[Formal course: start with F-U01](materials/formal/unit-01-representation-types.en.md)**
+- [Preparatory course: start with P-U00](materials/preparatory/unit-00-compiler-ide.en.md)
+- **[Formal course: start with F-U00](materials/formal/unit-00-build-run-ide.en.md)**
 
-正式班可以直接從 F-U01 開始。前導 P-U01～P-U04 是另一條學習路徑；正式班學生只有在需要複習基礎時才需要回去查看。
+前導課程從 P-U00 建立 compiler、IDE、Build、Run 與 Debug 的基本模型，再進入 P-U01～P-U04。正式班則有自己的 F-U00，不需要先走前導課程；F-U00 會先把開發工具的角色拆清楚，再直接進入 F-U01。
 
-Formal-course students may start directly at F-U01. P-U01 through P-U04 form a separate preparatory path and are only needed for review when a formal-course student wants to revisit a foundation.
+The preparatory course begins with P-U00 to establish the basic roles of the compiler, IDE, Build, Run, and Debug before P-U01 through P-U04. The formal course has its own F-U00 and does not require the preparatory path; F-U00 separates the development-tool roles before moving directly into F-U01.
 
 每個 Unit 的結尾都有下一單元連結。從第一個 Unit 開始後，可以沿著教材一路讀下去，不需要回到 repository 首頁尋找下一份文件。
 
