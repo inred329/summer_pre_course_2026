@@ -28,10 +28,10 @@ Formal-course students do not need to read the Course Constitution, design docum
 
 ## 教師｜Instructors
 
+- [教師與教材維護資源（繁體中文）](materials/INTERNAL-RESOURCES.zh-TW.md)
+- [Instructor and Material-Maintenance Resources (English)](materials/INTERNAL-RESOURCES.en.md)
 - [教師執行指引（繁體中文）](materials/instructor/session-guides.zh-TW.md)
 - [Instructor Implementation Guide (English)](materials/instructor/session-guides.en.md)
-- [教材與活動資源目錄（繁體中文）](materials/README.zh-TW.md)
-- [Materials and Activity Resource Directory (English)](materials/README.en.md)
 - [C17 程式範例與缺陷案例](examples/README.md)
 - [籌備與執行規劃](planning/README.md)
 
