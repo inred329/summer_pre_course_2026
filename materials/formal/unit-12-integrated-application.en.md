@@ -1,78 +1,68 @@
-# Formal Unit F-U12: How Can Concepts Across the Course Be Integrated into One Application?
+# Formal Unit F-U12: How Can the Whole Course Be Integrated into One Maintainable Program?
 
-Version: 1.0.2  
+Version: 1.1.0  
 Status: Official student material  
-Last updated: 2026-08-07  
-Corresponding Chinese version: [正式單元 F-U12：如何完成跨 Concept 的整合程式？](unit-12-integrated-application.zh-TW.md)
+Last updated: 2026-08-09  
+Corresponding Chinese version: [正式單元 F-U12：如何把整門課整合成一個可維護的程式？](unit-12-integrated-application.zh-TW.md)
 
-## Document Purpose and Completion Standard
+The first eleven formal Units deliberately separated problems. We first studied values and types, then control flow, arrays, strings, function calls, pointers, structures, dynamic memory, files, modules, and testing.
 
-This chapter is written for students who have completed the earlier Units. It guides the integration of requirements, data modeling, functions, dynamic memory, files, modules, testing, debugging, and explanation into one maintainable C application.
+Real programs do not present those concepts one chapter at a time.
 
-Completing the Unit means you can design and implement a small integrated program, explain its decomposition and data flow, test normal and boundary behavior, modify a requirement, and justify the resulting changes with evidence.
+Even a small “score-record manager” can require all of these at once:
 
-No submission is required by this material. Keep your design, program, tests, defects, and explanations for review and discussion. AI is not a completion requirement. Choosing not to use AI does not affect Unit completion, classroom participation, or assessment. The AI activity near the end is a directly skippable optional extension.
+```text
+Student structure
+StudentList growable array
+pointers and ownership
+file format
+module interfaces
+failure handling
+boundary and regression tests
+```
 
----
+The final Unit is not about adding the largest possible number of features. It asks a different question:
 
-## Core Question
-
-> How can requirements, data, control flow, functions, memory, files, modules, and engineering evidence be integrated into one program?
-
-After this Unit, you should be able to:
-
-1. Convert a small user need into explicit requirements and testable outcomes.
-2. Design a data model and divide responsibilities among modules and functions.
-3. Use dynamic storage and files responsibly when the requirement needs them.
-4. Define nullability, ownership, capacity, empty-collection, and load policies.
-5. Build the application incrementally instead of writing everything at once.
-6. Test, diagnose, modify, and explain the integrated result.
-
-Prerequisites: all earlier preparatory and formal Units.
+> When many Concepts operate at the same time, can we still explain where the data lives, who may modify it, which states are valid, where each operation may fail, and what evidence tells us that a change did not break the program?
 
 ---
 
-## 1. Integrated Application Scenario
+## 1. Before Writing a Menu, Write the Behavior the User Can Actually Observe
 
-Build a small score-record manager.
+We will build a small score-record manager.
 
-Required behavior:
+Version 1 requirements:
 
 1. Add a student record containing an ID, name, and score.
-2. List all records.
+2. Display all current records.
 3. Find a record by ID.
 4. Calculate the average score.
 5. Save records to a text file.
 6. Load records from a text file.
-7. Reject scores outside 0–100.
-8. Report invalid input, allocation failure, and file-format failure distinctly.
+7. Accept scores only from 0 through 100.
+8. Distinguish invalid input, allocation failure, and file-format failure.
 
-The goal is not to maximize features. The goal is to integrate Concepts while keeping responsibilities understandable and testable.
+Before writing functions, connect several requirements to observable evidence:
 
----
-
-## 2. Begin with Requirements, Not Code
-
-Before implementation, define observable outcomes.
-
-| Requirement | Example evidence |
+| Requirement | What can we observe? |
 |---|---|
-| Add a valid record | Count increases and the record appears in the list |
-| Reject an invalid score | Count does not increase and a specific failure is reported |
-| Calculate average | Result matches a hand-calculated example |
-| Empty average | Function reports that no average exists and does not divide by zero |
-| Save data | File contents match the in-memory records and close succeeds |
-| Load data | A new run reconstructs the same records according to the load policy |
+| Add a valid record | `count` increases and the record really appears in the list |
+| Reject an invalid score | the list stays unchanged and the caller receives failure |
+| Average | result matches a hand-calculated example |
+| Empty-list average | report “no result” without dividing by zero |
+| Save | file contents follow the format and writing/close succeed |
+| Load | rebuild data according to an explicit policy; on failure the old state is predictable |
 
-A feature is not complete merely because a function exists. Its required behavior must be observable.
+The existence of a function does not prove that a requirement is complete. Required behavior must be observable and testable.
 
 ---
 
-## 3. Data Model and Invariant
+## 2. Decide What the Data Looks Like Before Designing the Operations
+
+Reuse the F-U07 record model:
 
 ```c
 #include <stddef.h>
-#include <stdlib.h>
 
 #define NAME_SIZE 50
 
@@ -81,7 +71,11 @@ typedef struct {
     char name[NAME_SIZE];
     int score;
 } Student;
+```
 
+Now place records in a growable collection:
+
+```c
 typedef struct {
     Student *items;
     size_t count;
@@ -89,72 +83,37 @@ typedef struct {
 } StudentList;
 ```
 
-Invariant:
+Draw it:
 
 ```text
-0 <= count <= capacity
-capacity == 0 implies items == NULL
-capacity > 0 implies items points to capacity Student objects
-items[0] through items[count - 1] are initialized records
+StudentList
+├── items ─────► dynamically allocated Student array
+├── count       number of currently valid records
+└── capacity    number of Student elements the allocation can hold
 ```
 
-Use `size_t` for object counts and allocation sizes. Do not mix signed negative values into capacity calculations.
+These three fields cannot change independently without rules.
 
----
-
-## 4. Responsibility Decomposition
-
-```c
-int list_init(StudentList *list);
-void list_destroy(StudentList *list);
-int list_add(StudentList *list, const Student *student);
-const Student *list_find_by_id(const StudentList *list, int id);
-int list_average(const StudentList *list, double *average);
-int list_save(const StudentList *list, const char *path);
-int list_load_replace(StudentList *list, const char *path);
-```
-
-Possible module structure:
+State the invariant first:
 
 ```text
-student.h / student.c
-    record validation and bounded name handling
-
-student_list.h / student_list.c
-    collection ownership, search, add, average, destroy
-
-storage.h / storage.c
-    file protocol, save, and transactional load
-
-main.c
-    checked user input and application flow
+count <= capacity
+when capacity == 0, items == NULL
+when capacity > 0, items identifies storage for at least capacity Student elements
+items[0] ... items[count - 1] are valid initialized records
 ```
 
-Each interface must state nullability, modified objects, ownership, success/failure, and failure-state guarantees.
+From this point on, every operation should ask:
+
+> Does the invariant still hold after success? What about after failure?
 
 ---
 
-## 5. Visual Architecture
-
-```mermaid
-flowchart LR
-    U[User Requirement] --> M[main.c Interaction]
-    M --> L[StudentList Operations]
-    L --> H[Heap Storage]
-    M --> S[Storage Module]
-    S --> F[Text File]
-    T[Test Cases] --> M
-    T --> L
-    T --> S
-```
-
-`main` coordinates work; it should not manipulate list capacity or heap ownership directly.
-
----
-
-## 6. Safe Initialization and Destruction
+## 3. First Milestone: Only an Empty List and Destruction
 
 ```c
+#include <stdlib.h>
+
 int list_init(StudentList *list) {
     if (list == NULL) {
         return 0;
@@ -178,14 +137,26 @@ void list_destroy(StudentList *list) {
 }
 ```
 
-After `list_destroy`, the list returns to the empty invariant and may be initialized or destroyed again safely.
+Do not rush to add records yet.
+
+First verify:
+
+```text
+Does init establish the empty invariant?
+Does destroy restore the empty invariant?
+Is destroying an empty list safe?
+Is the policy for a NULL list explicit?
+```
+
+If the smallest lifetime is already unclear, adding more features only makes ownership harder to trace.
 
 ---
 
-## 7. Example: Adding a Record Safely
+## 4. Second Milestone: Add One Record Without Damaging the Old State on Failure
 
 ```c
 #include <stdint.h>
+#include <stdlib.h>
 
 int list_add(StudentList *list, const Student *student) {
     if (list == NULL || student == NULL) {
@@ -197,14 +168,22 @@ int list_add(StudentList *list, const Student *student) {
     }
 
     if (list->count > list->capacity) {
-        return 0; /* invariant already broken */
+        return 0;  /* invariant was already broken on entry */
     }
 
     if (list->count == list->capacity) {
-        size_t new_capacity = list->capacity == 0 ? 4 : list->capacity * 2;
+        size_t new_capacity;
 
-        if (new_capacity < list->capacity ||
-            new_capacity > SIZE_MAX / sizeof *list->items) {
+        if (list->capacity == 0) {
+            new_capacity = 4;
+        } else {
+            if (list->capacity > SIZE_MAX / 2) {
+                return 0;
+            }
+            new_capacity = list->capacity * 2;
+        }
+
+        if (new_capacity > SIZE_MAX / sizeof *list->items) {
             return 0;
         }
 
@@ -227,13 +206,39 @@ int list_add(StudentList *list, const Student *student) {
 }
 ```
 
-Failure leaves `items`, `count`, and `capacity` unchanged except when the incoming list already violated its invariant. The temporary pointer preserves the old allocation on `realloc` failure. The arithmetic checks prevent capacity and byte-size wraparound.
+This code mixes ideas from several Units, but it can still be read in order:
 
-The `Student` record itself must already contain a terminated name. A checked record initializer or setter from F-U07 should enforce that contract.
+```text
+pointer parameters valid?             F-U06
+Student contents valid?               F-U07
+count/capacity invariant?             F-U03 + F-U08
+capacity arithmetic safe?             F-U01 + F-U08
+realloc preserves the old owner?      F-U08
+structure-value copy?                 F-U07
+increment count only after success?   F-U02 + invariant reasoning
+```
+
+The most important contract is:
+
+> If the incoming list satisfies the invariant and `list_add` reports failure, the old list contents, `items`, `count`, and `capacity` remain usable and unchanged.
+
+Potentially failing growth work happens before the new metadata and element are committed.
 
 ---
 
-## 8. Empty-Collection Average Contract
+## 5. Third Milestone: Use Fixed Test Data for Search and Average First
+
+Do not add keyboard input and files immediately.
+
+Create two already validated records directly in the test program and exercise:
+
+```text
+list_add
+list_find_by_id
+list_average
+```
+
+An average interface can be:
 
 ```c
 int list_average(const StudentList *list, double *average) {
@@ -251,15 +256,24 @@ int list_average(const StudentList *list, double *average) {
 }
 ```
 
-Each score is constrained to 0–100. Accumulating in `double` avoids signed-integer sum overflow. Extremely large collections can still be affected by floating-point precision, so a production interface should define a maximum record count and acceptable error and verify that contract with tests.
+The empty-collection contract is explicit:
 
-Empty lists return failure and do not write the output. They never divide by zero.
+```text
+count == 0
+→ there is no average result
+→ report failure
+→ do not modify *average
+```
+
+Do not divide by zero first and then inspect what the platform happened to produce.
+
+Scores are constrained to 0–100, and accumulation uses `double` so that many scores are not first summed in `int` and exposed to signed-integer overflow. A real product that permits extremely large collections should still define an acceptable record-count range and floating-point error policy.
 
 ---
 
-## 9. State and Ownership Trace
+## 6. Trace One Growth Operation and Make Sure Ownership Never Disappears
 
-Before adding the first record:
+Initial state:
 
 ```text
 items = NULL
@@ -267,165 +281,334 @@ count = 0
 capacity = 0
 ```
 
-After successful growth:
+When storage is first needed:
 
 ```text
-items -> heap block for 4 Student objects
+items ─────► [ Student ][ Student ][ Student ][ Student ]
 count = 0
 capacity = 4
 ```
 
-After copying one record:
+After adding one record:
 
 ```text
-items[0] = the new Student
+items ─────► [ valid ][ unused ][ unused ][ unused ]
 count = 1
 capacity = 4
 ```
 
-At shutdown, `list_destroy` releases the list-owned block and restores the empty invariant.
+Later, growth to 8 may cause `realloc` to move the allocation:
+
+```text
+old location X
+new location Y ──► [ storage for 8 Student elements ]
+```
+
+`StudentList.items` is therefore the owner. `main` should not keep a long-lived pointer to one element and then assume it remains valid after the list grows.
+
+This is what makes cross-Concept integration difficult. “Find one student” is simple in isolation, but once the collection may move, F-U06 alias lifetime and F-U08 `realloc` rules affect the design together.
 
 ---
 
-## 10. File Format and Load Policy
+## 7. Fourth Milestone: Draw the Module Boundaries
 
-A simple text format may be:
+One reasonable first version is:
+
+```text
+student.h / student.c
+    create and validate Student records
+    bounded name handling
+
+student_list.h / student_list.c
+    list ownership
+    add / find / average / destroy
+
+storage.h / storage.c
+    file protocol
+    save / transactional load
+
+main.c
+    user input
+    call modules
+    display results
+```
+
+`main.c` should not reach into the list and write:
+
+```c
+list.capacity *= 2;
+list.items = realloc(...);
+```
+
+because that bypasses the `student_list` module that owns the invariant.
+
+A module boundary answers:
+
+> Who is allowed to modify which state, and which module is responsible for preserving each rule?
+
+---
+
+## 8. Fifth Milestone: Define the File Protocol Before Implementing Save/Load
+
+A first format might be:
 
 ```text
 1001,Alice,80
 1002,Bob,95
 ```
 
-Define whether names may contain commas, whether blank lines are allowed, and how malformed or out-of-range records are reported.
+Answer before implementing the parser:
 
-Use a transactional replace policy:
+- May a name contain commas?
+- Are blank lines accepted?
+- May IDs repeat?
+- Is a final line without a newline accepted?
+- What happens to the whole load when a score or field is malformed?
 
-1. Load and validate into a temporary `StudentList`.
-2. On any failure, destroy the temporary list and leave the original list unchanged.
-3. On complete success, destroy the original list and move the temporary list into it.
+This Unit uses **transactional replace**:
 
-This prevents a malformed file or allocation failure from leaving a partially replaced collection.
+```text
+create an empty temporary list
+→ parse, validate, and add every file record to temporary
+→ any failure: destroy temporary; leave the original list completely unchanged
+→ complete success: destroy the old list and transfer temporary ownership to the real list
+```
 
-Every successful `fopen` path must call `fclose`, and save success requires checking both writes and close.
+That makes the failure contract for `list_load_replace` easy to state:
 
----
+> If it reports failure, the caller's original data still exists unchanged.
 
-## 11. Integrated Test Plan
+After ownership is transferred, the temporary object must be reset to an empty state so that it does not later destroy the same allocation again.
 
-| Area | Test |
-|---|---|
-| Nullability | Null list, record, path, and output pointers |
-| Add | Add one valid record |
-| Boundary | Scores 0 and 100 |
-| Invalid | Scores -1 and 101; unterminated/overlong name rejected by record initializer |
-| Growth | Add beyond initial capacity and preserve earlier records |
-| Capacity arithmetic | Simulated or reasoned near-`SIZE_MAX` growth failure leaves state unchanged |
-| Average | Hand calculation; one record; empty list failure |
-| Search | Existing and missing IDs; duplicate-ID policy |
-| Save/load | Round trip and final line without newline |
-| Malformed file | Invalid field count, score, ID, or overlong name |
-| Transaction | Failed load leaves original list unchanged |
-| Regression | Rerun all earlier tests after module split or requirement change |
-
-Expected results should be written before execution.
+Save success must likewise mean that required writes succeeded and the final `fclose` did not report failure.
 
 ---
 
-## 12. Typical Integrated Defects and Classification
+## 9. Sixth Milestone: Add Interactive Input Only Now
 
-### Losing the Old Pointer during `realloc`
+At this point, core data operations can already be verified independently with fixed test data.
+
+`main` can now handle:
+
+```text
+read command
+→ check that reading succeeded
+→ read Student fields
+→ validate them
+→ call list / storage APIs
+→ display a message based on the returned result
+```
+
+Do not place parsing, validation, `realloc`, file-format rules, and UI logic into one enormous `switch`.
+
+Every `scanf` or `fgets` follows the same earlier rule: **confirm that the read succeeded and that complete required input was obtained before using its output.**
+
+A simple text menu is enough. This Unit does not need a decorative UI to demonstrate integration.
+
+---
+
+## 10. Layer the Integrated Tests by Responsibility
+
+### Student layer
+
+- 0 and 100 are valid scores.
+- -1 and 101 fail.
+- name-capacity boundary.
+- overlong or unterminated input rejected according to the setter contract.
+
+### StudentList layer
+
+- empty list.
+- first insertion.
+- earlier records remain correct after growth beyond initial capacity.
+- existing and missing ID.
+- duplicate-ID policy.
+- empty average fails without modifying the output.
+- simulated/reasoned capacity-limit failure leaves state unchanged.
+
+### Storage layer
+
+- normal round trip.
+- missing file.
+- malformed format.
+- overlong record.
+- final line without newline.
+- failure in the middle of load leaves the official list unchanged.
+- write/close failure policy during save.
+
+### Integration/regression layer
+
+- one complete scenario from add → save → reload → search.
+- rerun all cases after module refactoring.
+- after a requirement change, run both new cases and old cases whose behavior should not change.
+
+Write the expected result before executing each test.
+
+---
+
+## 11. Integrated Bugs: Identify Which Rule Each One Breaks
+
+### Overwriting the `realloc` owner directly
 
 ```c
 list->items = realloc(list->items, new_size);
 ```
 
-On failure, the only pointer to the old block may be lost, causing a memory leak and state loss.
+Failure may lose the old allocation's owner. This is an ownership/failure-state defect.
 
-### Capacity Multiplication Overflow
+### Incrementing `count` before success
 
-```c
-size_t new_capacity = list->capacity * 2;
+If allocation or copying later fails, `count` already claims that a nonexistent record is valid. This is an invariant defect.
+
+### Modifying the real list while a load is only half complete
+
+If line six is malformed after five records were already replaced, a transactional-replace contract has been broken. This is a transaction defect.
+
+### Putting the storage parser in `main`
+
+The program may still work, but another front end that needs loading must duplicate the same rules. This is a module-boundary defect.
+
+### Testing only the new feature
+
+The new requirement appears to work, but old round-trip, empty-list, or capacity-boundary behavior may have been damaged. This is an evidence gap.
+
+These defects come from different earlier Units, but the integrated application lets us locate all of them on one system model.
+
+---
+
+## 12. Independent Integration Practice: Complete Version 1 of the Manager
+
+Work in small commits or milestones:
+
+```text
+1. Student validation
+2. empty StudentList lifecycle
+3. add fixed records
+4. find / average
+5. growth boundary
+6. module split
+7. save
+8. transactional load
+9. interactive input
+10. integrated regression tests
 ```
 
-Unsigned wraparound is defined, but allocating the wrapped smaller size and then writing according to the larger logical capacity causes out-of-bounds access. Check before multiplication.
+Keep the program in a state that can compile, be tested, and be explained after every step.
 
-### Incrementing Count before Success
-
-If `count` changes before validation, growth, and copy succeed, the invariant becomes false. This is a state-consistency logic defect.
-
-### Empty Average
-
-Dividing by `list->count` when it is zero is invalid. For floating arithmetic it may produce a non-finite result depending on the environment, but it violates this interface contract; for integer arithmetic it would be undefined behavior.
-
-### Saving but Never Checking `fclose`
-
-A successful `fprintf` call alone does not guarantee that all buffered data reached storage.
-
-### Loading into Existing Data without a Policy
-
-Appending, replacing, and rejecting are different requirements. Partial replacement after a failure is a transactional defect.
+If one step fails, do not add two more features at the same time. Use the F-U11 workflow to find the first mismatch first.
 
 ---
 
-## 13. Guided Integration Activity
-
-Implement only these features first:
-
-1. initialize an empty list
-2. add two fixed, validated records
-3. list them
-4. calculate the average through a checked output interface
-5. destroy the list
-
-Before adding files or user input, verify the invariant after every operation and run null, empty, boundary, and allocation-failure reasoning tests.
-
----
-
-## 14. Independent Integrated Practice
-
-Complete the score-record manager with explicit requirements, diagrams, a working incremental history, checked interfaces, normal/boundary/invalid/regression tests, one documented defect, transactional save/load behavior, and one requirement modification.
-
-A simple numbered terminal menu is sufficient. Every `scanf` or `fgets` result must be checked before using input.
-
----
-
-## 15. Requirement Modification
+## 13. Final Requirement Change: Each Student Has Multiple Scores
 
 New requirement:
 
-> Each student may have several scores, and the program displays that student’s average.
+> Each student may have zero or more scores and can display an individual average.
 
-Before coding, identify changes to the data model, nested ownership, allocation limits, file format, interfaces, empty-score behavior, tests, and migration of old files.
+Do not simply add `int scores[100]` to `Student` and declare the problem solved.
+
+First analyze the consequences.
+
+### Data model
+
+Is the number of scores fixed? Is a dynamic array required?
+
+### Nested ownership
+
+If every `Student` owns its own dynamically allocated score array:
+
+```text
+StudentList owns Student array
+each Student owns score array
+```
+
+then copying `Student` can no longer rely blindly on structure assignment. That would copy only the pointer value and could create shared ownership and double-free risk.
+
+### Empty scores
+
+The average of zero scores should report “no result,” not divide by zero.
+
+### File format
+
+The old one-score-per-record format is no longer sufficient. How are multiple scores represented, and how will old files be migrated?
+
+### Module interface
+
+Which new operations must become public? What are the ownership-transfer rules?
+
+### Tests
+
+Add at least: zero scores, one score, multiple scores, growth failure, deep copy/release, old-file migration, and transactional load.
+
+This modification deliberately has no single supplied answer. The real test is whether you can see, **before changing code**, how a data-model change propagates through ownership, file protocol, API design, and the test plan.
 
 ---
 
-## 16. Optional Extension: Use AI to Check the Integration Explanation
+## 14. Optional: Let AI Challenge Your Integration Diagram
 
-This section may be skipped directly. It is not part of Unit completion, the core self-check, classroom participation, or assessment. If you choose to use AI, first explain in your own words how requirements, invariants, nullability, capacity arithmetic, ownership, files, modules, and testing cooperate in the application, then ask the AI to identify a missing constraint or counterexample.
+You may skip this section completely.
 
-No fixed prompt, saved conversation, submission, or non-use declaration is required. AI responses may omit constraints or assume a different design. Compare every suggestion with your actual interfaces, type limits, diagrams, tests, and reproducible program behavior; adoption remains governed by your engineering evidence.
+First, without any tool, draw:
+
+```text
+user
+→ main
+→ Student / StudentList
+→ dynamic storage
+→ storage module
+→ file
+```
+
+Mark ownership, failure points, and which tests can observe each result.
+
+If you want another check, ask an AI tool to find one failure path or ownership transfer missing from your diagram. No fixed prompt is required, and you do not need to save or submit the conversation.
+
+If its suggestion conflicts with the actual function contracts, type ranges, file protocol, memory lifetime, or reproducible tests, return to the engineering evidence.
 
 ---
 
-## 17. Self-Check
+## 15. Before Leaving the Formal-Course Materials, Explain Why This Program Deserves Trust
 
-- I can explain the application’s requirements and acceptance evidence.
-- I can state and preserve the list invariant.
-- I can explain ownership and nullability.
-- I check capacity arithmetic before allocation.
-- I define empty average and load transaction behavior.
-- I can reproduce and diagnose an integrated defect.
-- I can support claims with tests and observable evidence.
+Do not merely show that the program runs.
+
+Explain:
+
+- How do user requirements become observable acceptance behavior?
+- What is the `StudentList` invariant, and which functions preserve it?
+- Who owns each dynamic allocation? When is ownership transferred? When is it freed?
+- Why does `realloc` failure not damage the old list?
+- How is the empty-list average defined?
+- Why does load use a temporary list, and what is the official state after failure?
+- Which details remain inside modules, and which rules are public contracts?
+- What boundary, invalid-input, transaction, and regression evidence do you have?
+- When “one Student has several scores” is introduced, which old assumptions stop being true?
+
+If one answer is only “because the program works now,” return to the corresponding Unit model and add evidence.
 
 ---
 
-## 18. Unit Summary
+## 16. Formal-Course Wrap-Up
 
-An integrated application is a coordinated system of requirements, data, responsibilities, memory, files, and evidence. Reliable integration requires explicit invariants, checked interfaces, safe capacity arithmetic, transactional file loading, and regression tests that protect behavior during change.
+This course used C not to build the longest possible syntax list, but to practice a reasoning process that transfers to other programs and tools:
+
+```text
+state the requirement clearly
+→ build a data/state model
+→ define interfaces and failure behavior
+→ check boundaries and preconditions before operations
+→ trace ownership / lifetime / invariants
+→ divide a large problem into independently verifiable responsibilities
+→ support conclusions with tests, reproducible failures, and regression evidence
+→ when requirements change, revisit the assumptions they affect
+```
+
+If you can take an unfamiliar C program, identify its data, control flow, lifetimes, interface assumptions, and failure paths, then design experiments that test your own reasoning, you have moved beyond memorizing function names.
+
+That is the capability this material is meant to leave with you.
 
 ## Navigation
 
-- [Formal Course Materials Index](README.en.md)
-- [Previous Unit: Testing and Debugging](unit-11-testing-debugging.en.md)
+- [Previous Unit: Testing, Diagnosis, and Improvement](unit-11-testing-debugging.en.md)
+- [Formal-Course Index](README.en.md)
 - [Materials Index](../README.en.md)
 - [繁體中文版](unit-12-integrated-application.zh-TW.md)
