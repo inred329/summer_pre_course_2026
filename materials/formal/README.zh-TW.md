@@ -1,17 +1,21 @@
 # 正式課程學生教材
 
-版本：1.2.0  
+版本：1.3.0  
 狀態：完整雙語學生教材集  
 最後更新：2026-08-09  
 對應英文版本：[Formal Course Student Materials](README.en.md)
 
 ## 正式班從這裡開始
 
-正式課程現在從 F-U00 開始。F-U00 不要求你先走前導課程，而是先把 source、compiler、Build、executable、Run、Debug 這些正式課程會反覆使用的工具角色拆清楚。
+如果你是直接進入正式課程，從 F-U00 開始。F-U00 不要求你先走前導課程，而是先把 source、compiler、Build、executable、Run、Debug 這些正式課程會反覆使用的工具角色拆清楚。
 
 **[開始 F-U00：按下 Run 之後，到底發生了什麼？](unit-00-build-run-ide.zh-TW.md)**
 
-前導 Unit 仍然是補充基礎的入口，不是正式班學生的必經閱讀路徑。如果你對變數與狀態、條件與迴圈、函數與參數等基礎概念不熟悉，可以再依需要回到前導教材複習。
+如果你剛完成本 repository 的 P-U00～P-U04，則不需要立刻再讀一次 F-U00；P-U00 已經建立過更完整的初學者工具模型，可以從 P-U04 直接接 F-U01。
+
+**[完成前導後直接進 F-U01：表示、型別與運算為什麼會影響結果？](unit-01-representation-types.zh-TW.md)**
+
+其他前導 Unit 仍然是補充基礎的入口，不是正式班學生的固定必經閱讀路徑。如果你對變數與狀態、條件與迴圈、函數與參數等基礎概念不熟悉，可以再依需要回到前導教材複習。
 
 ## Unit 導覽
 
@@ -33,7 +37,7 @@
 
 ## 閱讀順序
 
-請依 F-U00 至 F-U12 的順序閱讀。每個 Unit 結尾都有「下一單元」連結，因此開始 F-U00 後可以沿著教材一路往下，不需要回到 repository 首頁或其他內部文件尋找下一步。
+直接進正式班時，請依 F-U00 至 F-U12 的順序閱讀；如果剛完成 P-U00～P-U04，則從 F-U01 開始即可。每個 Unit 結尾都有「下一單元」連結，所以進入你的起點後可以沿著教材一路往下，不需要回到 repository 首頁或其他內部文件尋找下一步。
 
 正式課程會使用以下基礎能力：
 
@@ -53,5 +57,6 @@ AI 使用不是核心完成條件。教材中標示為選做的 AI 活動可以�
 ## 導覽
 
 - [學生入口](../STUDENT-START.zh-TW.md)
-- [開始 F-U00](unit-00-build-run-ide.zh-TW.md)
+- [直接進正式班：開始 F-U00](unit-00-build-run-ide.zh-TW.md)
+- [剛完成前導：開始 F-U01](unit-01-representation-types.zh-TW.md)
 - [English version](README.en.md)
