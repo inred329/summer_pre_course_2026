@@ -1,34 +1,45 @@
 # 2026 程式設計課程｜前導與正式課程｜2026 Programming Course: Preparatory and Formal
 
-本倉庫包含 2026 大專暑期 C 語言前導課程，以及與其銜接的正式程式設計課程設計、教材、教師文件、評量政策與技術範例。
+本倉庫同時保存學生教材，以及教師、課程設計與維護文件。學生不需要從整個 repository 的文件結構開始找教材；請直接使用下方的學生入口。
 
-This repository contains the design, learning materials, instructor resources, assessment policy, and technical examples for the 2026 Summer C Programming Preparatory Course and its connected formal programming course.
+This repository contains both student learning materials and documents for instructors, course design, and maintenance. Students do not need to navigate the full repository structure before learning; use the student entry points below.
 
-中文班與英文班採不同授課節奏，但維持相同的核心能力、技術深度與評量標準。
+## 學生從這裡開始｜Students Start Here
 
-The Chinese-taught and English-taught tracks use different pacing while preserving the same core capabilities, technical depth, and assessment standards.
+### 繁體中文
 
-## 從這裡開始｜Start Here
+- **[學生入口：先選前導課程或正式課程](materials/STUDENT-START.zh-TW.md)**
+- [前導課程：直接從 P-U01 開始](materials/preparatory/unit-01-execution.zh-TW.md)
+- **[正式課程：直接從 F-U01 開始](materials/formal/unit-01-representation-types.zh-TW.md)**
+- [正式課程 F-U01～F-U12 完整索引](materials/formal/README.zh-TW.md)
 
-### 學生｜Students
+### English
 
-- [教材與學習活動（繁體中文）](materials/README.zh-TW.md)
-- [Materials and Learning Activities (English)](materials/README.en.md)
-- [中文班入口](classes/zh/README.md)
-- [English Track Entry](classes/en/README.md)
-- [正式學習與評量制度（繁體中文）](design/13-learning-assessment-policy.zh-TW.md)
-- [Official Learning and Assessment Policy (English)](design/13-learning-assessment-policy.en.md)
+- **[Student entry: choose the preparatory or formal course](materials/STUDENT-START.en.md)**
+- [Preparatory course: start directly with P-U01](materials/preparatory/unit-01-execution.en.md)
+- **[Formal course: start directly with F-U01](materials/formal/unit-01-representation-types.en.md)**
+- [Formal course F-U01–F-U12 index](materials/formal/README.en.md)
 
-### 教師｜Instructors
+正式班學生不需要先閱讀課程憲法、課程設計文件、審查紀錄或教師文件，也不需要先重讀前導課程；除非老師另有安排，正式班可直接從 F-U01 開始。
+
+Formal-course students do not need to read the Course Constitution, design documents, review records, or instructor documents first, and they do not need to reread the preparatory course. Unless the instructor gives different directions, the formal course starts directly at F-U01.
+
+---
+
+## 教師｜Instructors
 
 - [教師執行指引（繁體中文）](materials/instructor/session-guides.zh-TW.md)
 - [Instructor Implementation Guide (English)](materials/instructor/session-guides.en.md)
-- [教材與活動資源（繁體中文）](materials/README.zh-TW.md)
-- [Materials and Activity Resources (English)](materials/README.en.md)
+- [教材與活動資源目錄（繁體中文）](materials/README.zh-TW.md)
+- [Materials and Activity Resource Directory (English)](materials/README.en.md)
 - [C17 程式範例與缺陷案例](examples/README.md)
 - [籌備與執行規劃](planning/README.md)
 
-### 課程設計與維護｜Course Design and Maintenance
+## 課程設計與維護｜Course Design and Maintenance
+
+以下文件不是學生開始學習前的必讀內容。
+
+The following documents are not prerequisites for students to begin learning.
 
 - [課程憲法（繁體中文）](CONSTITUTION.zh-TW.md)
 - [Course Constitution (English)](CONSTITUTION.en.md)
@@ -39,12 +50,8 @@ The Chinese-taught and English-taught tracks use different pacing while preservi
 - [課程籌備與開課檢查清單](planning/checklist.md)
 - [Repository / CI 技術驗證](validation/README.md)
 
-## 課程核心
+## 課程核心｜Course Core
 
 本課程以學生建立正確、可驗證且可遷移的理解與能力為最高目的。課程先建立問題脈絡、概念與心智模型，再介紹語法與工具；正確輸出、成功編譯或通過 Online Judge 都不能單獨證明完整能力。
 
 The course prioritizes correct, verifiable, and transferable understanding and capability. It establishes problem context, concepts, and mental models before syntax and tools; correct output, successful compilation, or passing an Online Judge cannot independently prove full capability.
-
-完整規範以 [課程憲法（繁體中文）](CONSTITUTION.zh-TW.md)、[Course Constitution (English)](CONSTITUTION.en.md) 及正式雙語政策文件為準。本 README 僅提供入口與簡要定位，不重複定義政策。
-
-The complete rules are defined by the [Course Constitution (Traditional Chinese)](CONSTITUTION.zh-TW.md), [Course Constitution (English)](CONSTITUTION.en.md), and the authoritative bilingual policy documents. This README provides navigation and a concise orientation only; it does not redefine policy.
