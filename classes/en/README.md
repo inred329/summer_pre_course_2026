@@ -14,13 +14,17 @@ Reading order: P-U00 → P-U01 → P-U02 → P-U03 → P-U04
 
 P-U00 first separates the roles of the compiler, IDE, Build, Run, and Debug before the later Units move into execution, data, control flow, and functions.
 
-## If you are taking the formal course
+## If you later enter the formal course
 
-The formal course does not begin from this preparatory-track page, and you do not need to reread P-U00 through P-U04 first.
+If you did not complete this preparatory sequence, start the formal course with F-U00:
 
 **[Start the formal course with F-U00](../../materials/formal/unit-00-build-run-ide.en.md)**
 
-You can also return to the shared [Student Start page](../../materials/STUDENT-START.en.md) to choose your course.
+If you just completed P-U00 through P-U04, P-U00 has already built the tool model, so you do not need to immediately repeat F-U00. Continue directly with:
+
+**[After preparatory, continue with F-U01](../../materials/formal/unit-01-representation-types.en.md)**
+
+You can also return to the shared [Student Start page](../../materials/STUDENT-START.en.md) to see both valid formal-course entry paths.
 
 ## How learning works
 
