@@ -1,74 +1,68 @@
-# 正式單元 F-U12：如何完成跨 Concept 的整合程式？
+# 正式單元 F-U12：如何把整門課整合成一個可維護的程式？
 
-版本：1.0.2  
+版本：1.1.0  
 狀態：正式學生教材  
-最後更新：2026-08-07  
-對應英文版本：[Formal Unit F-U12: How Can Concepts Across the Course Be Integrated into One Application?](unit-12-integrated-application.en.md)
+最後更新：2026-08-09  
+對應英文版本：[Formal Unit F-U12: How Can the Whole Course Be Integrated into One Maintainable Program?](unit-12-integrated-application.en.md)
 
-## 文件用途與完成標準
+前十一個正式 Unit 一直在刻意拆問題：先理解值與型別，再處理控制流程、陣列、字串、函數呼叫、指標、結構、動態記憶體、檔案、模組與測試。
 
-本章供已完成前面 Unit 的學生獨立閱讀、實作與複習。它引導你把需求、資料模型、函數、動態記憶體、檔案、模組、測試、除錯與說明整合成一個可維護的 C 應用程式。
+真實程式不會把這些 Concept 分章出現。
 
-完成本章代表你能設計並實作小型整合程式，說明責任分解與資料流，測試正常與邊界行為，修改需求，並以證據說明修改結果。
+一個看似簡單的「成績紀錄管理器」就可能同時需要：
 
-本章活動不需繳交；請自行保留設計、程式、測試、缺陷與說明，供複習與討論。AI 不是本章的完成條件；不使用 AI 不影響本章完成、課堂參與或評量。文末 AI 活動是可直接跳過的選用延伸。
+```text
+Student 結構
+StudentList 動態陣列
+指標與 ownership
+檔案格式
+模組介面
+錯誤處理
+邊界與回歸測試
+```
 
----
+最後一個 Unit 的目標不是塞進最多功能，而是回答：
 
-## 核心問題
-
-> 如何把需求、資料、控制流程、函數、記憶體、檔案、模組與工程證據整合成一個程式？
-
-完成本章後，你應能：
-
-1. 把小型使用者需求轉成明確需求與可測試結果。
-2. 設計資料模型並分配模組與函數責任。
-3. 在需求需要時安全使用動態空間與檔案。
-4. 定義 nullability、ownership、capacity、空集合與載入政策。
-5. 逐步建立程式，而不是一次完成所有功能。
-6. 測試、診斷、修改並說明整合成果。
-
-前置知識：所有前導與正式 Unit。
+> 當很多 Concept 同時存在時，我們能不能仍然清楚說明資料在哪裡、誰負責修改、什麼狀態才有效、哪一步可能失敗，以及用什麼證據確認程式沒有被改壞？
 
 ---
 
-## 1. 綜合案例：成績紀錄管理器
+## 1. 先不要寫選單，先寫使用者真正看得到的行為
 
-需求：
+我們要做一個小型成績紀錄管理器。
+
+第一版需求：
 
 1. 新增包含學號、姓名與成績的學生紀錄。
-2. 顯示所有紀錄。
+2. 顯示目前所有紀錄。
 3. 依學號查詢。
 4. 計算平均成績。
 5. 儲存到文字檔。
 6. 從文字檔載入。
-7. 拒絕 0～100 以外的成績。
-8. 區分無效輸入、配置失敗與檔案格式錯誤。
+7. 成績只允許 0～100。
+8. 無效輸入、配置失敗與檔案格式失敗要能被區分。
 
-重點不是功能越多越好，而是每個 Concept 的責任都清楚、可測試、可修改。
+在寫函數以前，先替幾條需求寫可觀察證據：
 
----
-
-## 2. 先定義可觀察需求
-
-| 需求 | 範例證據 |
+| 需求 | 可以觀察什麼？ |
 |---|---|
-| 新增有效紀錄 | 筆數增加且列表出現該紀錄 |
-| 拒絕無效成績 | 筆數不增加並回報具體失敗 |
-| 計算平均 | 與手算案例一致 |
-| 空集合平均 | 回報沒有平均，不除以零 |
-| 儲存資料 | 檔案內容與記憶體一致，且關閉成功 |
-| 載入資料 | 依載入政策重建相同紀錄 |
+| 新增有效紀錄 | `count` 增加，而且列表中真的出現該紀錄 |
+| 拒絕無效成績 | 清單不變，呼叫者得到失敗 |
+| 平均 | 和手算結果一致 |
+| 空集合平均 | 回報「沒有結果」，不除以零 |
+| 儲存 | 檔案內容符合格式，而且寫入／關閉成功 |
+| 載入 | 依明確政策重建資料；失敗時原資料狀態可預測 |
 
-函數存在不代表功能完成；需求行為必須可觀察。
+一個函數存在，不代表一項需求已完成。需求要能被實際觀察與測試。
 
 ---
 
-## 3. 資料模型與 invariant
+## 2. 先決定資料長什麼樣，再談操作
+
+沿用 F-U07：
 
 ```c
 #include <stddef.h>
-#include <stdlib.h>
 
 #define NAME_SIZE 50
 
@@ -77,7 +71,11 @@ typedef struct {
     char name[NAME_SIZE];
     int score;
 } Student;
+```
 
+現在再建立一個可成長集合：
+
+```c
 typedef struct {
     Student *items;
     size_t count;
@@ -85,72 +83,37 @@ typedef struct {
 } StudentList;
 ```
 
-Invariant：
+畫圖：
 
 ```text
-0 <= count <= capacity
+StudentList
+├── items ─────► 動態配置的 Student 陣列
+├── count       已經有效的紀錄數
+└── capacity    目前實際可容納的元素數
+```
+
+這三個欄位不能各自隨便變。
+
+我們先寫出 invariant：
+
+```text
+count <= capacity
 capacity == 0 時 items == NULL
-capacity > 0 時 items 指向 capacity 個 Student 的空間
-items[0] 到 items[count - 1] 都是已初始化紀錄
+capacity > 0 時 items 指向至少 capacity 個 Student 的配置
+items[0] ... items[count - 1] 都是有效、已初始化紀錄
 ```
 
-物件數與配置大小使用 `size_t`，避免把負數混入容量運算。
+從現在開始，每個操作都要問：
+
+> 成功後 invariant 還成立嗎？失敗後呢？
 
 ---
 
-## 4. 責任分解
+## 3. 第一個里程碑：只有「空清單」和「釋放」
 
 ```c
-int list_init(StudentList *list);
-void list_destroy(StudentList *list);
-int list_add(StudentList *list, const Student *student);
-const Student *list_find_by_id(const StudentList *list, int id);
-int list_average(const StudentList *list, double *average);
-int list_save(const StudentList *list, const char *path);
-int list_load_replace(StudentList *list, const char *path);
-```
+#include <stdlib.h>
 
-模組可能分為：
-
-```text
-student.h / student.c
-    紀錄驗證與有界姓名處理
-
-student_list.h / student_list.c
-    集合所有權、查詢、新增、平均、釋放
-
-storage.h / storage.c
-    檔案格式、儲存與 transactional load
-
-main.c
-    檢查輸入並協調流程
-```
-
-每個介面都要說明是否允許 `NULL`、會修改哪些物件、所有權、成功／失敗與失敗時狀態。
-
----
-
-## 5. 架構圖
-
-```mermaid
-flowchart LR
-    U[使用者需求] --> M[main.c 互動]
-    M --> L[StudentList 操作]
-    L --> H[Heap 空間]
-    M --> S[Storage 模組]
-    S --> F[文字檔]
-    T[測試案例] --> M
-    T --> L
-    T --> S
-```
-
-`main` 負責協調，不應直接修改容量或 heap 所有權。
-
----
-
-## 6. 安全初始化與釋放
-
-```c
 int list_init(StudentList *list) {
     if (list == NULL) {
         return 0;
@@ -174,14 +137,26 @@ void list_destroy(StudentList *list) {
 }
 ```
 
-`list_destroy` 後回到空集合 invariant，可以再次初始化或安全地重複 destroy。
+先不要急著新增資料。
+
+先驗證：
+
+```text
+init 後是不是空 invariant？
+destroy 後是不是又回到空 invariant？
+空清單 destroy 是否安全？
+NULL list 的政策是否明確？
+```
+
+如果最小生命週期都說不清楚，加入更多功能只會讓 ownership 更難追。
 
 ---
 
-## 7. 安全新增紀錄
+## 4. 第二個里程碑：新增一筆資料，而且失敗不能破壞舊狀態
 
 ```c
 #include <stdint.h>
+#include <stdlib.h>
 
 int list_add(StudentList *list, const Student *student) {
     if (list == NULL || student == NULL) {
@@ -193,14 +168,22 @@ int list_add(StudentList *list, const Student *student) {
     }
 
     if (list->count > list->capacity) {
-        return 0;
+        return 0;  /* 進來以前 invariant 已經壞了 */
     }
 
     if (list->count == list->capacity) {
-        size_t new_capacity = list->capacity == 0 ? 4 : list->capacity * 2;
+        size_t new_capacity;
 
-        if (new_capacity < list->capacity ||
-            new_capacity > SIZE_MAX / sizeof *list->items) {
+        if (list->capacity == 0) {
+            new_capacity = 4;
+        } else {
+            if (list->capacity > SIZE_MAX / 2) {
+                return 0;
+            }
+            new_capacity = list->capacity * 2;
+        }
+
+        if (new_capacity > SIZE_MAX / sizeof *list->items) {
             return 0;
         }
 
@@ -223,13 +206,39 @@ int list_add(StudentList *list, const Student *student) {
 }
 ```
 
-失敗時 `items`、`count`、`capacity` 保持不變，除非傳入清單原本已破壞 invariant。暫存指標保留 `realloc` 失敗時的舊配置；容量與位元組檢查防止 unsigned wraparound。
+這段看似把很多 Unit 混在一起，其實可以按順序閱讀：
 
-`Student` 本身必須已有終止的姓名字串，應由 F-U07 的 checked initializer／setter 保證。
+```text
+指標參數有效？             F-U06
+Student 內容有效？          F-U07
+count/capacity invariant？  F-U03 + F-U08
+容量乘法安全？              F-U01 + F-U08
+realloc 保留舊 owner？       F-U08
+結構值複製？                 F-U07
+成功後才增加 count？         F-U02 + invariant reasoning
+```
+
+最重要的契約是：
+
+> 只要傳入清單原本符合 invariant，`list_add` 回傳失敗時，原本的清單內容、`items`、`count` 與 `capacity` 都保持可用且不變。
+
+所以可能失敗的成長工作全部先完成，最後才提交新 metadata 與新元素。
 
 ---
 
-## 8. 空集合平均契約
+## 5. 第三個里程碑：先用固定資料做查詢與平均
+
+不要立刻加入鍵盤輸入與檔案。
+
+先在程式裡建立兩筆已驗證資料，測：
+
+```text
+list_add
+list_find_by_id
+list_average
+```
+
+平均介面：
 
 ```c
 int list_average(const StudentList *list, double *average) {
@@ -247,15 +256,24 @@ int list_average(const StudentList *list, double *average) {
 }
 ```
 
-每筆成績限制在 0～100，使用 `double` 累加可避免有號整數總和溢位。非常大的集合仍可能受浮點精度影響，因此實際產品應定義最大紀錄數與可接受誤差，並以測試確認介面承諾。
+這裡的空集合契約很清楚：
 
-空集合回傳失敗且不寫入輸出，不會除以零。
+```text
+count == 0
+→ 沒有平均值
+→ 回傳失敗
+→ 不修改 *average
+```
+
+不是讓程式先除以零，再觀察平台會產生什麼。
+
+每筆成績被限制在 0～100，因此使用 `double` 累加避免先在 `int` 中累加造成有號整數溢位。不過真實產品如果允許極大量紀錄，仍要定義可接受的數量與浮點誤差。
 
 ---
 
-## 9. 狀態與所有權追蹤
+## 6. 追蹤一次成長，確認 ownership 沒有消失
 
-加入第一筆前：
+初始：
 
 ```text
 items = NULL
@@ -263,161 +281,334 @@ count = 0
 capacity = 0
 ```
 
-成功成長後：
+第一次需要空間：
 
 ```text
-items -> 4 個 Student 的 heap block
+items ─────► [ Student ][ Student ][ Student ][ Student ]
 count = 0
 capacity = 4
 ```
 
-複製一筆後：
+加入一筆：
 
 ```text
-items[0] = 新 Student
+items ─────► [ valid ][ unused ][ unused ][ unused ]
 count = 1
 capacity = 4
 ```
 
-結束時由 `list_destroy` 釋放清單持有的空間並恢復空 invariant。
+之後若成長到 8，`realloc` 可能搬移：
+
+```text
+舊位置 X
+新位置 Y ──► [ 8 個 Student 空間 ]
+```
+
+所以 `StudentList.items` 是 owner；`main` 不應保存某個元素的長期指標，然後又在清單成長後假設它仍然有效。
+
+這就是跨 Concept 整合真正困難的地方：單獨看「找學生」很簡單，但一旦集合可搬移，F-U06 的 alias lifetime 和 F-U08 的 realloc 規則會一起影響設計。
 
 ---
 
-## 10. 檔案格式與載入政策
+## 7. 第四個里程碑：替程式畫出模組邊界
 
-簡單格式可為：
+一個合理的第一版：
+
+```text
+student.h / student.c
+    建立與驗證 Student
+    有界姓名處理
+
+student_list.h / student_list.c
+    list ownership
+    add / find / average / destroy
+
+storage.h / storage.c
+    檔案格式
+    save / transactional load
+
+main.c
+    使用者輸入
+    呼叫模組
+    顯示結果
+```
+
+`main.c` 不應直接寫：
+
+```c
+list.capacity *= 2;
+list.items = realloc(...);
+```
+
+因為那會繞過 `student_list` 模組負責維持的 invariant。
+
+模組邊界的意義是：
+
+> 誰有權修改哪一段狀態？哪一組規則由哪個模組負責？
+
+---
+
+## 8. 第五個里程碑：先定義檔案 protocol，再實作 save/load
+
+例如第一版格式：
 
 ```text
 1001,Alice,80
 1002,Bob,95
 ```
 
-需定義姓名是否可含逗號、空白行是否允許，以及錯誤欄位或超出範圍成績如何回報。
+先回答：
 
-採用 transactional replace：
+- 姓名可以包含逗號嗎？
+- 空白行允許嗎？
+- ID 可以重複嗎？
+- 最後一行沒有換行是否接受？
+- 成績或欄位格式錯誤時整份 load 怎麼辦？
 
-1. 載入並驗證到暫存 `StudentList`。
-2. 任一失敗時釋放暫存清單，原清單保持不變。
-3. 全部成功後才釋放原清單並移入暫存資料。
+本章採用 **transactional replace**：
 
-每條成功 `fopen` 路徑都要呼叫 `fclose`；儲存成功必須同時檢查寫入與關閉。
+```text
+建立空的 temporary list
+→ 從檔案逐筆解析／驗證／加入 temporary
+→ 任一失敗：destroy temporary，原 list 完全不變
+→ 全部成功：destroy 原 list，把 temporary 的 ownership 移交給正式 list
+```
 
----
+這讓 `list_load_replace` 的失敗行為很容易說明：
 
-## 11. 整合測試計畫
+> 回傳失敗時，呼叫者原本的資料仍然存在。
 
-| 範圍 | 測試 |
-|---|---|
-| Nullability | 空 list、record、path、output pointer |
-| 新增 | 一筆有效紀錄 |
-| 邊界 | 成績 0 與 100 |
-| 無效 | 成績 -1、101；未終止或過長姓名由 initializer 拒絕 |
-| 成長 | 超過初始容量後舊資料仍完整 |
-| 容量運算 | 接近 `SIZE_MAX` 的成長失敗不改變狀態 |
-| 平均 | 手算、單筆、空集合失敗 |
-| 查詢 | 存在／不存在學號與重複學號政策 |
-| 儲存載入 | round trip 與最後一行無換行 |
-| 錯誤檔案 | 欄位數、成績、學號或姓名錯誤 |
-| Transaction | 載入失敗時原清單不變 |
-| 回歸 | 模組拆分或需求修改後重跑所有測試 |
+Ownership 移交後，temporary 必須被重設成空狀態，避免之後再次 destroy 同一塊配置。
 
-執行前先寫預期結果。
+儲存成功也必須同時代表：需要的寫入都成功，而且最後 `fclose` 沒有回報失敗。
 
 ---
 
-## 12. 整合錯誤案例與分類
+## 9. 第六個里程碑：現在才加入互動式輸入
 
-### `realloc` 遺失舊指標
+到這一步，核心資料操作已能用固定測試資料獨立驗證。
+
+`main` 再負責：
+
+```text
+讀 command
+→ 檢查讀取成功
+→ 讀 Student 欄位
+→ 驗證
+→ 呼叫 list / storage API
+→ 根據回傳結果輸出訊息
+```
+
+不要把解析、驗證、realloc、檔案格式與 UI 全塞進一個巨大 `switch`。
+
+每次 `scanf`／`fgets` 都遵守之前的規則：**確認讀取成功、確認取得完整資料，再使用輸出。**
+
+一個簡單文字選單就足夠；本章不靠花俏 UI 展示整合能力。
+
+---
+
+## 10. 把整合測試按責任分層
+
+### Student 層
+
+- 0、100 合法。
+- -1、101 失敗。
+- 姓名容量邊界。
+- 過長／未終止字串依 setter 契約拒絕。
+
+### StudentList 層
+
+- 空清單。
+- 第一筆加入。
+- 超過初始容量後資料仍完整。
+- 找得到／找不到 ID。
+- 重複 ID 政策。
+- 空平均失敗且不修改 output。
+- 模擬／推理容量極限時狀態不變。
+
+### Storage 層
+
+- 正常 round trip。
+- 檔案不存在。
+- 格式錯誤。
+- 過長紀錄。
+- 最後一行無換行。
+- Load 中途失敗時正式清單保持原狀。
+- Save 的 write／close 失敗政策。
+
+### 整合／回歸層
+
+- 從新增到儲存、重新載入、再查詢的一條完整使用情境。
+- 模組重構後重跑全部案例。
+- 需求修改後，同時跑新案例與不應改變的舊案例。
+
+每一筆測試都先寫預期再執行。
+
+---
+
+## 11. 幾個整合 bug，試著指出它破壞哪一層規則
+
+### 直接覆蓋 `realloc` owner
 
 ```c
 list->items = realloc(list->items, new_size);
 ```
 
-失敗時可能失去舊區塊唯一位址，造成 memory leak 與狀態遺失。
+可能在失敗時失去舊配置 owner。這是 ownership／failure-state defect。
 
-### 容量乘法溢位
+### 成功以前先 `count++`
 
-```c
-size_t new_capacity = list->capacity * 2;
+如果後面配置或複製失敗，`count` 已經宣告一筆不存在的有效元素。這是 invariant defect。
+
+### Load 到一半直接改正式 list
+
+第六行壞掉時前五筆已被替換。若契約說 transactional replace，這是 transaction defect。
+
+### 把 storage parser 寫進 `main`
+
+程式可能還能工作，但第二個前端若也需要載入就得複製規則。這是 module-boundary defect。
+
+### 只修新功能，不跑舊案例
+
+新需求看起來成功，卻不知是否破壞舊 round-trip、空集合或容量邊界。這是 evidence gap。
+
+這些問題來自不同 Unit，但現在都能用同一張應用程式圖定位。
+
+---
+
+## 12. 自主整合練習：完成第一版管理器
+
+建議按 commit／小步驟前進：
+
+```text
+1. Student validation
+2. empty StudentList lifecycle
+3. add fixed records
+4. find / average
+5. growth boundary
+6. module split
+7. save
+8. transactional load
+9. interactive input
+10. integrated regression tests
 ```
 
-Unsigned wraparound 雖有定義，但若依較大的邏輯容量寫入較小區塊，就會越界。必須在乘法前檢查。
+每一步都保持程式在一個可以編譯、測試、解釋的狀態。
 
-### 成功前先增加 count
-
-驗證、成長或複製尚未成功就改變 `count`，會破壞 invariant；這是狀態一致性邏輯錯誤。
-
-### 空集合平均
-
-`count == 0` 時不可除法。浮點除零可能依浮點環境產生非有限值，但仍違反此介面；整數除零則屬未定義行為。
-
-### 只檢查 `fprintf` 不檢查 `fclose`
-
-緩衝資料可能在關閉時才回報失敗。
-
-### 載入既有資料卻沒有政策
-
-Append、replace、reject 是不同需求。失敗後留下部分替換資料是 transaction defect。
+如果某一步出錯，不要再同時加入兩個新功能；先用 F-U11 的方法找到第一個不一致。
 
 ---
 
-## 13. 引導整合活動
+## 13. 最後的需求修改：每位學生有多次成績
 
-先完成：
+新需求：
 
-1. 初始化空清單
-2. 新增兩筆已驗證固定資料
-3. 顯示資料
-4. 透過 checked output 計算平均
-5. 釋放清單
+> 每位學生可有 0 筆以上成績，並可顯示個人平均。
 
-加入檔案與使用者輸入前，逐操作驗證 invariant，並測試 null、空集合、邊界與配置失敗推理。
+不要直接在 `Student` 裡隨便塞 `int scores[100]` 就結束。
 
----
+先分析：
 
-## 14. 自主整合練習
+### 資料模型
 
-完成具有明確需求、圖、增量歷史、checked interface、正常／邊界／無效／回歸測試、一個缺陷診斷、transactional save/load 與一項需求修改的管理器。
+成績數量是否固定？需要動態陣列嗎？
 
-簡單文字選單即可。每個 `scanf` 或 `fgets` 回傳值都要先檢查再使用輸入。
+### Nested ownership
 
----
+如果每個 `Student` 自己擁有一個動態配置成績陣列：
 
-## 15. 需求修改
+```text
+StudentList owns Student array
+each Student owns score array
+```
 
-> 每位學生可有多次成績，並顯示個人平均。
+那麼複製 `Student` 不能再單純依賴結構指定，否則只會複製 pointer value，形成共享 ownership／double-free 風險。
 
-實作前先分析資料模型、巢狀所有權、配置限制、檔案格式、介面、空成績行為、測試與舊檔轉換。
+### 空成績
 
----
+0 筆成績的平均要回報「沒有結果」，不是除以零。
 
-## 16. 選用延伸：使用 AI 檢查整合說明
+### 檔案格式
 
-這一節可直接跳過，不屬於本章完成、自我檢核、課堂參與或評量條件。若你選擇使用 AI，可以先用自己的話說明需求、invariant、nullability、capacity arithmetic、ownership、檔案、模組與測試如何共同支撐應用程式，再請 AI 指出可能遺漏的限制或反例。
+舊的每行一個 score 格式不再夠用。新格式如何表示多筆成績？舊檔怎麼轉換？
 
-不需要固定 Prompt、保存或繳交對話，也不需要未使用聲明。AI 回應若省略限制或假設不同設計，應與實際介面、型別上限、圖、測試與可重現行為比較；是否採納建議，仍由你的工程證據決定。
+### 模組介面
 
----
+哪些新函數需要被公開？Ownership transfer 規則是什麼？
 
-## 17. 自我檢核
+### 測試
 
-- 我能說明需求與驗收證據。
-- 我能寫出並維持 list invariant。
-- 我能說明 ownership 與 nullability。
-- 我會在配置前檢查容量運算。
-- 我能定義空平均與載入 transaction。
-- 我能重現並診斷整合缺陷。
-- 我能以測試與可觀察證據支持結論。
+至少新增：0 筆、1 筆、多筆、成長失敗、深層複製／釋放、舊檔轉換與 transactional load。
+
+這個修改故意不提供唯一答案。真正要驗證的是你能不能在改 code 前先看到**資料模型改變會沿 ownership、file protocol、API 與 test plan 一路傳播。**
 
 ---
 
-## 18. 本章摘要
+## 14. 選做：讓 AI 挑戰你的整合圖
 
-整合程式是需求、資料、責任、記憶體、檔案與證據協調運作的系統。可靠整合需要明確 invariant、checked interface、安全容量運算、transactional load，以及在修改時保護既有行為的回歸測試。
+這一節完全可以跳過。
+
+先不用任何工具，自己畫：
+
+```text
+使用者
+→ main
+→ Student / StudentList
+→ dynamic storage
+→ storage module
+→ file
+```
+
+再標示 ownership、可能失敗的位置與哪些 test 能觀察結果。
+
+如果你想多做一次檢查，可以讓 AI 找一個你圖上漏掉的 failure path 或 ownership transfer。你不需要固定 Prompt，也不需要保存或繳交對話。
+
+AI 建議如果和實際函數契約、型別範圍、檔案 protocol、記憶體生命週期或可重現測試衝突，仍然回到工程證據判斷。
+
+---
+
+## 15. 離開正式課程教材以前，確認你能回答「為什麼這個程式值得信任」
+
+不要只展示程式能跑。
+
+試著完整說明：
+
+- 使用者需求如何變成可觀察驗收行為？
+- `StudentList` invariant 是什麼？哪幾個函數負責維持它？
+- 動態配置的 owner 是誰？何時 transfer？何時 free？
+- `realloc` 失敗為什麼不會破壞舊清單？
+- 空集合平均怎麼定義？
+- Load 為什麼使用 temporary list？失敗時正式狀態是什麼？
+- 哪些細節留在 module 內，哪些是公開契約？
+- 你有哪些 boundary、invalid、transaction 與 regression evidence？
+- 當「一個 Student 有多筆成績」加入時，哪些舊假設不再成立？
+
+如果其中一題只能說「因為程式現在會跑」，就回到對應 Unit 的模型再補證據。
+
+---
+
+## 16. 正式課程收尾
+
+這門課一路使用 C，不是要把語法清單背得最長，而是練習一種可以轉移到其他程式與工具的推理方式：
+
+```text
+先說清楚需求
+→ 建立資料與狀態模型
+→ 定義介面與失敗行為
+→ 在操作以前確認邊界與前提
+→ 追蹤 ownership / lifetime / invariant
+→ 把大問題分成可獨立驗證的責任
+→ 用測試、錯誤重現與回歸證據支持結論
+→ 需求改變時重新檢查受影響的假設
+```
+
+如果你能拿一段沒看過的 C 程式，指出它的資料、控制流程、生命週期、介面假設與失敗路徑，並設計實驗驗證自己的判斷，那就已經超過「會不會背某個函式名稱」。
+
+這也是整套教材真正要留下的能力。
 
 ## 導覽
 
-- [上一單元：測試、驗證與除錯](unit-11-testing-debugging.zh-TW.md)
+- [上一單元：測試、診斷與改善](unit-11-testing-debugging.zh-TW.md)
 - [正式課程索引](README.zh-TW.md)
 - [教材總索引](../README.zh-TW.md)
 - [English version](unit-12-integrated-application.en.md)
