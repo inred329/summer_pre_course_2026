@@ -1,6 +1,6 @@
 # 學生教材索引
 
-版本：2.1.0  
+版本：2.2.0  
 狀態：學生教材入口  
 最後更新：2026-08-09  
 對應英文版本：[Student Materials Index](README.en.md)
@@ -22,7 +22,7 @@
 | Unit | 中文教材 | English | 核心重點 |
 |---|---|---|---|
 | P-U00 | [寫好的 C 程式，怎麼真的跑起來？](preparatory/unit-00-compiler-ide.zh-TW.md) | [How Does the C Code You Write Actually Start Running?](preparatory/unit-00-compiler-ide.en.md) | source、compiler、executable、IDE、Build、Run、Debug |
-| P-U01 | [程式如何從文字變成執行結果？](preparatory/unit-01-execution.zh-TW.md) | [How Does Program Text Become an Execution Result?](preparatory/unit-01-execution.en.md) | 程式執行、預測、輸出與錯誤分類 |
+| P-U01 | [程式開始執行後，敘述怎麼變成結果？](preparatory/unit-01-execution.zh-TW.md) | [Once a Program Starts Running, How Do Statements Become Results?](preparatory/unit-01-execution.en.md) | `main`、順序執行、輸出、prediction、trace |
 | P-U02 | [程式如何記住資料並改變狀態？](preparatory/unit-02-data-state.zh-TW.md) | [How Does a Program Remember Data and Change State?](preparatory/unit-02-data-state.en.md) | 值、型別、變數、狀態追蹤、輸入輸出 |
 | P-U03 | [程式如何選擇與重複？](preparatory/unit-03-control-flow.zh-TW.md) | [How Does a Program Select and Repeat?](preparatory/unit-03-control-flow.en.md) | 條件、迴圈、終止、邊界與診斷 |
 | P-U04 | [如何把大問題拆成可理解的工作？](preparatory/unit-04-functions-integration.zh-TW.md) | [How Can a Large Problem Be Divided into Understandable Work?](preparatory/unit-04-functions-integration.en.md) | 函數責任、介面、測試、修改與回歸 |
