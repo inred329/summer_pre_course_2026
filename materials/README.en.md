@@ -1,6 +1,6 @@
 # Student Materials Index
 
-Version: 2.2.0  
+Version: 2.3.0  
 Status: Student materials entry point  
 Last updated: 2026-08-09  
 Corresponding Chinese version: [學生教材索引](README.zh-TW.md)
@@ -29,15 +29,19 @@ Reading order: P-U00 → P-U01 → P-U02 → P-U03 → P-U04
 
 ### Formal course
 
-If you are taking the formal course, start with F-U00. You do not need to complete the preparatory course first.
+If you are entering the formal course directly, start with F-U00. You do not need to complete the preparatory course first:
 
 **[F-U00: What Actually Happens After You Press Run?](formal/unit-00-build-run-ide.en.md)**
 
 Reading order: F-U00 → F-U01 → F-U02 → F-U03 → F-U04 → F-U05 → F-U06 → F-U07 → F-U08 → F-U09 → F-U10 → F-U11 → F-U12
 
+If you just completed P-U00 through P-U04, P-U00 has already built the tool model, so you can continue directly with F-U01 instead of immediately repeating F-U00:
+
+**[After preparatory, continue with F-U01](formal/unit-01-representation-types.en.md)**
+
 - [Complete F-U00–F-U12 formal-course index](formal/README.en.md)
 
-F-U00 does not make formal-course students repeat the preparatory course. It separates the roles of source code, compiler, Build, Run, and Debug that the formal course will keep using. If another foundation feels unfamiliar later, review only the preparatory Unit you need.
+If another foundation feels unfamiliar during the formal course, review only the preparatory Unit you need.
 
 ## Independent practice
 
@@ -50,7 +54,7 @@ Use these materials when your instructor's course plan calls for them.
 
 ## How to continue through the materials
 
-Each Unit ends with a link to the next Unit. In normal use, start with U00 and continue forward. You do not need to return to the repository home page or read the Course Constitution, design documents, review records, technical validation, or instructor documents in order to understand the student materials.
+Each Unit ends with a link to the next Unit. In normal use, follow the path you are currently on and continue forward. You do not need to return to the repository home page or read the Course Constitution, design documents, review records, technical validation, or instructor documents in order to understand the student materials.
 
 ## Other entry points
 
