@@ -1,6 +1,6 @@
 # Student Materials Index
 
-Version: 2.1.0  
+Version: 2.2.0  
 Status: Student materials entry point  
 Last updated: 2026-08-09  
 Corresponding Chinese version: [學生教材索引](README.zh-TW.md)
@@ -22,7 +22,7 @@ Reading order: P-U00 → P-U01 → P-U02 → P-U03 → P-U04
 | Unit | English | Traditional Chinese | Central focus |
 |---|---|---|---|
 | P-U00 | [How Does the C Code You Write Actually Start Running?](preparatory/unit-00-compiler-ide.en.md) | [寫好的 C 程式，怎麼真的跑起來？](preparatory/unit-00-compiler-ide.zh-TW.md) | source, compiler, executable, IDE, Build, Run, Debug |
-| P-U01 | [How Does Program Text Become an Execution Result?](preparatory/unit-01-execution.en.md) | [程式如何從文字變成執行結果？](preparatory/unit-01-execution.zh-TW.md) | execution, prediction, output, and error classification |
+| P-U01 | [Once a Program Starts Running, How Do Statements Become Results?](preparatory/unit-01-execution.en.md) | [程式開始執行後，敘述怎麼變成結果？](preparatory/unit-01-execution.zh-TW.md) | `main`, sequential execution, output, prediction, tracing |
 | P-U02 | [How Does a Program Remember Data and Change State?](preparatory/unit-02-data-state.en.md) | [程式如何記住資料並改變狀態？](preparatory/unit-02-data-state.zh-TW.md) | values, types, variables, state tracing, and input/output |
 | P-U03 | [How Does a Program Select and Repeat?](preparatory/unit-03-control-flow.en.md) | [程式如何選擇與重複？](preparatory/unit-03-control-flow.zh-TW.md) | conditions, loops, termination, boundaries, and diagnosis |
 | P-U04 | [How Can a Large Problem Be Divided into Understandable Work?](preparatory/unit-04-functions-integration.en.md) | [如何把大問題拆成可理解的工作？](preparatory/unit-04-functions-integration.zh-TW.md) | function responsibility, interfaces, testing, modification, and regression |
