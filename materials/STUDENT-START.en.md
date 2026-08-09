@@ -14,9 +14,9 @@ Reading order:
 
 P-U00 → P-U01 → P-U02 → P-U03 → P-U04
 
-## If you are taking the formal course
+## If you are entering the formal course directly
 
-The formal course also begins with its own F-U00. You do not need to reread the preparatory course first. F-U00 separates source code, compiler, Build, executable, Run, and Debug at the depth needed for the formal course.
+If you have not just completed this preparatory sequence, start the formal course with F-U00. It separates source code, compiler, Build, executable, Run, and Debug at the depth needed for the formal course.
 
 **[Start with F-U00: What Actually Happens After You Press Run?](formal/unit-00-build-run-ide.en.md)**
 
@@ -24,11 +24,21 @@ Reading order:
 
 F-U00 → F-U01 → F-U02 → F-U03 → F-U04 → F-U05 → F-U06 → F-U07 → F-U08 → F-U09 → F-U10 → F-U11 → F-U12
 
+## If you just completed this preparatory course
+
+P-U00 already built a fuller beginner-facing version of the tool model, so you do not need to immediately repeat F-U00.
+
+After P-U04, continue directly with:
+
+**[F-U01: Why Do Representation, Type, and Operations Affect Results?](formal/unit-01-representation-types.en.md)**
+
+If you later want a compact review of the Build/Run/Debug language used in the formal course, you can return to F-U00.
+
 If you want to see the full formal-course list first, open the [Formal Course Student Materials index](formal/README.en.md).
 
 ## How to move through the materials
 
-Each Unit ends with a link to the next Unit. In normal use, start with U00 and keep moving forward; you do not need to return to the repository home page to find the next document.
+Each Unit ends with a link to the next Unit. In normal use, follow the path you are currently on and keep moving forward; you do not need to return to the repository home page to find the next document.
 
 If your instructor separately assigns homework, assessment rules, or supplementary material, follow the link your instructor provides. Those documents do not need to be read before you begin learning.
 
