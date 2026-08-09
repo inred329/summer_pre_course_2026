@@ -1,17 +1,17 @@
 # Formal Course Student Materials
 
-Version: 1.0.2  
+Version: 1.1.0  
 Status: Complete bilingual student-material set  
-Last updated: 2026-08-06  
+Last updated: 2026-08-09  
 Corresponding Chinese version: [正式課程學生教材](README.zh-TW.md)
 
-## Purpose
+## Formal-course students start here
 
-This directory contains the 12 formal-course student Units that follow the four preparatory Units. Each Unit is designed for independent reading, review, experimentation, diagnosis, and explanation.
+If you are taking the formal course now, you may start directly with F-U01. You do not need to reread preparatory Units P-U01 through P-U04 first.
 
-The materials use C as the instructional language while emphasizing transferable programming Concepts. Each Unit builds its main learning path from a core question, mental model, minimal examples, prediction or tracing, reproducible errors, practice, requirement modification, self-check, and summary.
+**[Start F-U01: Why Do Representation, Type, and Operations Affect Results?](unit-01-representation-types.en.md)**
 
-Some Units also provide clearly marked optional AI extensions. These activities may be skipped. Not using AI does not affect Unit completion, classroom participation, or assessment. When a student chooses to use AI, its claims must still be judged through code, compiler behavior, tracing, testing, or other reproducible evidence.
+The preparatory Units are available as foundation review, not as a required reading path for formal-course students. If compilation, variables and state, conditions and loops, or basic functions and parameters feel unfamiliar, return to the relevant preparatory Unit only when you need it.
 
 ## Units
 
@@ -30,32 +30,27 @@ Some Units also provide clearly marked optional AI extensions. These activities 
 | F-U11 | [Testing and Debugging](unit-11-testing-debugging.en.md) | [測試、診斷與改善](unit-11-testing-debugging.zh-TW.md) | testing, verification, validation, debugging, regression, refactoring |
 | F-U12 | [Integrated Application](unit-12-integrated-application.en.md) | [整合應用程式](unit-12-integrated-application.zh-TW.md) | requirements, data model, memory, files, modules, evidence |
 
-## Recommended Reading Order
+## Reading order
 
-Read F-U01 through F-U12 in order. The formal course assumes that the preparatory Units have established:
+Read F-U01 through F-U12 in order. Each Unit ends with a link to the next one, so after starting F-U01 you can follow the learning path forward without returning to the repository home page or opening internal course documents to find the next step.
 
-- source code, compilation, and execution
-- data, values, types, variables, and state
-- conditions, loops, boundaries, and tracing
-- functions, responsibility, parameters, return values, and basic testing
+The formal course uses these basic capabilities:
 
-## Completion Standard
+- compile and run a simple C program
+- trace changes in variables and values
+- read basic conditions and loops
+- understand the basic roles of functions, parameters, and return values
 
-Completing a Unit means more than producing one correct output. Students should be able to:
+If one of these foundations feels unfamiliar, review the corresponding preparatory Unit when needed. The preparatory course is not a fixed prerequisite reading list for the formal-course path.
 
-- explain the central Concept
-- predict or trace behavior
-- implement a minimal case
-- reproduce and diagnose a typical error
-- test normal and boundary behavior
-- modify a requirement and identify affected parts
-- support decisions with observable evidence
+## Completing a Unit
 
-AI use is not part of the core completion standard. Activities are independent practice unless another official course document explicitly states otherwise.
+Completing a Unit means more than producing one correct output. You should gradually be able to explain the central concept, predict or trace behavior, implement a minimal case, reproduce and diagnose a typical error, test normal and boundary behavior, and identify affected parts when a requirement changes.
+
+AI use is not part of the core completion standard. Any AI activity explicitly marked optional may be skipped.
 
 ## Navigation
 
-- [Materials and Activity Resources](../README.en.md)
-- [Preparatory Unit P-U04](../preparatory/unit-04-functions-integration.en.md)
-- [Instructional Design Workspace](../../design/README.en.md)
+- [Student entry](../STUDENT-START.en.md)
+- [Start F-U01](unit-01-representation-types.en.md)
 - [繁體中文版](README.zh-TW.md)

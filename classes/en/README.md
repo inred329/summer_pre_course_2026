@@ -1,22 +1,29 @@
 # English Track Entry
 
-The English-taught track is delivered in English with terminology and learning support appropriate to students' language backgrounds.
+This page remains as the entry for the English-taught preparatory track. Students do not need to begin with policy or maintenance documents.
 
-The track consists of five 2-hour sessions, totaling 10 hours. It preserves the same core capabilities, technical depth, and assessment standards as the Chinese-taught track. Differences in pacing and language support do not lower the common capability standard.
+The English preparatory track consists of five 2-hour sessions, totaling 10 hours, with terminology and learning support appropriate to students' language backgrounds.
 
-## Student Start Here
+## If you are taking the preparatory course
 
-- [Materials and Learning Activities](../../materials/README.en.md)
-- [Independent Homework and Oral Preparation Pack](../../materials/assignments/preparatory-assignments.en.md)
-- [Official Learning and Assessment Policy](../../design/13-learning-assessment-policy.en.md)
-- [Course Constitution](../../CONSTITUTION.en.md)
+Start directly with the first Unit:
 
-## How Learning Works
+**[P-U01: How Does Program Text Become an Execution Result?](../../materials/preparatory/unit-01-execution.en.md)**
 
-The course establishes a problem context, concepts, and mental models before syntax and code. Students build capability through expectation, tracing, implementation, testing, debugging, modification, and explanation.
+Reading order: P-U01 → P-U02 → P-U03 → P-U04
 
-Homework is an independent learning tool. It is not submitted and does not directly receive points. Formal assessment methods and permitted resources are defined by the official learning and assessment policy and course announcements.
+## If you are taking the formal course
 
-## Corresponding Chinese Track
+The formal course does not begin from this preparatory-track page, and you do not need to reread P-U01 through P-U04 first.
+
+**[Start the formal course with F-U01](../../materials/formal/unit-01-representation-types.en.md)**
+
+You can also return to the shared [Student Start page](../../materials/STUDENT-START.en.md) to choose your course.
+
+## How learning works
+
+The course builds understanding through prediction, tracing, implementation, testing, debugging, modification, and explanation. After entering the first Unit, use the “Next Unit” link at the end of each chapter to continue.
+
+## 繁體中文
 
 - [中文班入口](../zh/README.md)

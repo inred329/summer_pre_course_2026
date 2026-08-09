@@ -1,50 +1,31 @@
-# 2026 程式設計課程｜前導與正式課程｜2026 Programming Course: Preparatory and Formal
+# 2026 程式設計課程｜2026 Programming Course
 
-本倉庫包含 2026 大專暑期 C 語言前導課程，以及與其銜接的正式程式設計課程設計、教材、教師文件、評量政策與技術範例。
+這個 repository 同時保存學生教材與課程維護文件。學生不用瀏覽整個檔案結構；請直接選擇你現在上的課程。
 
-This repository contains the design, learning materials, instructor resources, assessment policy, and technical examples for the 2026 Summer C Programming Preparatory Course and its connected formal programming course.
+This repository contains both student learning materials and course-maintenance documents. Students do not need to browse the repository structure; choose the course you are taking now.
 
-中文班與英文班採不同授課節奏，但維持相同的核心能力、技術深度與評量標準。
+## 學生從這裡開始｜Students Start Here
 
-The Chinese-taught and English-taught tracks use different pacing while preserving the same core capabilities, technical depth, and assessment standards.
+### 繁體中文
 
-## 從這裡開始｜Start Here
+- **[學生入口：選擇前導課程或正式課程](materials/STUDENT-START.zh-TW.md)**
+- [前導課程：從 P-U01 開始](materials/preparatory/unit-01-execution.zh-TW.md)
+- **[正式課程：從 F-U01 開始](materials/formal/unit-01-representation-types.zh-TW.md)**
 
-### 學生｜Students
+### English
 
-- [教材與學習活動（繁體中文）](materials/README.zh-TW.md)
-- [Materials and Learning Activities (English)](materials/README.en.md)
-- [中文班入口](classes/zh/README.md)
-- [English Track Entry](classes/en/README.md)
-- [正式學習與評量制度（繁體中文）](design/13-learning-assessment-policy.zh-TW.md)
-- [Official Learning and Assessment Policy (English)](design/13-learning-assessment-policy.en.md)
+- **[Student entry: choose the preparatory or formal course](materials/STUDENT-START.en.md)**
+- [Preparatory course: start with P-U01](materials/preparatory/unit-01-execution.en.md)
+- **[Formal course: start with F-U01](materials/formal/unit-01-representation-types.en.md)**
 
-### 教師｜Instructors
+正式班可以直接從 F-U01 開始。前導 P-U01～P-U04 是另一條學習路徑；正式班學生只有在需要複習基礎時才需要回去查看。
 
-- [教師執行指引（繁體中文）](materials/instructor/session-guides.zh-TW.md)
-- [Instructor Implementation Guide (English)](materials/instructor/session-guides.en.md)
-- [教材與活動資源（繁體中文）](materials/README.zh-TW.md)
-- [Materials and Activity Resources (English)](materials/README.en.md)
-- [C17 程式範例與缺陷案例](examples/README.md)
-- [籌備與執行規劃](planning/README.md)
+Formal-course students may start directly at F-U01. P-U01 through P-U04 form a separate preparatory path and are only needed for review when a formal-course student wants to revisit a foundation.
 
-### 課程設計與維護｜Course Design and Maintenance
+每個 Unit 的結尾都有下一單元連結。從第一個 Unit 開始後，可以沿著教材一路讀下去，不需要回到 repository 首頁尋找下一份文件。
 
-- [課程憲法（繁體中文）](CONSTITUTION.zh-TW.md)
-- [Course Constitution (English)](CONSTITUTION.en.md)
-- [教學內容設計區（繁體中文）](design/README.zh-TW.md)
-- [Instructional Design Workspace (English)](design/README.en.md)
-- [Constitution 2.0 全庫審查（繁體中文）](reviews/repository-constitution-2-audit.zh-TW.md)
-- [Repository Audit Against Constitution 2.0 (English)](reviews/repository-constitution-2-audit.en.md)
-- [課程籌備與開課檢查清單](planning/checklist.md)
-- [Repository / CI 技術驗證](validation/README.md)
+Each Unit ends with a link to the next Unit. After starting the first Unit, you can follow the learning path forward without returning to the repository home page.
 
-## 課程核心
+---
 
-本課程以學生建立正確、可驗證且可遷移的理解與能力為最高目的。課程先建立問題脈絡、概念與心智模型，再介紹語法與工具；正確輸出、成功編譯或通過 Online Judge 都不能單獨證明完整能力。
-
-The course prioritizes correct, verifiable, and transferable understanding and capability. It establishes problem context, concepts, and mental models before syntax and tools; correct output, successful compilation, or passing an Online Judge cannot independently prove full capability.
-
-完整規範以 [課程憲法（繁體中文）](CONSTITUTION.zh-TW.md)、[Course Constitution (English)](CONSTITUTION.en.md) 及正式雙語政策文件為準。本 README 僅提供入口與簡要定位，不重複定義政策。
-
-The complete rules are defined by the [Course Constitution (Traditional Chinese)](CONSTITUTION.zh-TW.md), [Course Constitution (English)](CONSTITUTION.en.md), and the authoritative bilingual policy documents. This README provides navigation and a concise orientation only; it does not redefine policy.
+教師、教材作者與課程維護者請使用：[內部教學與維護資源](materials/INTERNAL-RESOURCES.zh-TW.md)｜[Internal Instructor and Maintenance Resources](materials/INTERNAL-RESOURCES.en.md)
