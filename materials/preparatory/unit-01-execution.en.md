@@ -1,334 +1,249 @@
-# Preparatory Unit P-U01: How Does Program Text Become an Execution Result?
+# Preparatory Unit P-U01: Once a Program Starts Running, How Do Statements Become Results?
 
-Version: 1.1.0  
+Version: 1.2.0  
 Status: Student material  
 Last updated: 2026-08-09  
-Corresponding Chinese version: [前導單元 P-U01：程式如何從文字變成執行結果？](unit-01-execution.zh-TW.md)
+Corresponding Chinese version: [前導單元 P-U01：程式開始執行後，敘述怎麼變成結果？](unit-01-execution.zh-TW.md)
+
+P-U00 separated the tool layer: source files, Build, the compiler, executables, Run, and the IDE all have different roles.
+
+This Unit starts with the next question:
+
+> **Assume the Build succeeded and the newest executable is the one being run. Once the program actually starts, how do the statements inside it become the result we observe?**
+
+We will still use a very small program, but we will not relearn the compiler or Build. The focus now is execution order, prediction, observation, and explanation.
 
 ---
 
-## What Question Does This Chapter Answer?
+## 1. Predict the result from the program text before you run it
 
-The C program you type into an editor begins as nothing more than a text file. Pressing “save” does not make it run automatically, and code that looks correct does not mean the computer has already produced the result you want.
-
-This chapter follows the first important question:
-
-> How does human-readable C source code become behavior that a computer actually executes?
-
-We will begin with a tiny `hello.c` file and walk through the complete path: edit → compile → run → observe. No prior programming experience is required. You only need to be able to create a text file and use a terminal or the development environment selected by the instructor.
-
-By the end, you should be able to:
-
-1. Distinguish source code, a source file, an executable, a running program, and output.
-2. Explain why compilation and execution are different stages.
-3. Create, compile, and run a minimal C program.
-4. Predict a result before execution and compare it with what actually happens.
-5. Decide whether a problem occurs during compilation or after the program has started running.
-6. Explain why source code must be recompiled after it changes.
-
-The activities in this chapter do not need to be submitted. If you want, keep your predictions, errors, and corrections for later review. There is also a completely optional AI extension near the end; skipping it does not affect the chapter.
-
----
-
-## 1. First, Guess What Will Happen
-
-Suppose you create a file named `hello.c` with the following contents:
+Consider:
 
 ```c
 #include <stdio.h>
 
 int main(void) {
-    printf("Hello, C!\n");
+    printf("First\n");
+    printf("Second\n");
     return 0;
 }
 ```
 
-Before looking for the answers, think about four questions:
+Before running it, answer three questions:
 
-1. Does saving `hello.c` immediately display `Hello, C!`?
-2. After you press “compile,” has the program already run?
-3. If compilation fails, has `main` started running?
-4. If you edit the text and then run the old executable without recompiling, will you see the new text or the old text?
+1. Which line of text will appear first?
+2. Can `Second` appear before `First` in this program?
+3. After `return 0;` executes, are there more statements in this `main` that still need to run?
 
-Write down your answers first. Do not worry about being wrong. The value of these predictions is that they let you compare what you expected with what actually happens later.
+Write down your prediction, then Build and Run.
+
+You should see:
+
+```text
+First
+Second
+```
+
+The important part is not merely that two lines appeared. It is whether you could explain the execution order from the program before running it.
 
 ---
 
-## 2. Five Different Things That Often Get Called “the Program”
+## 2. `main` is our starting point for tracing execution
 
-When you are new to programming, the word “program” can easily refer to several different things. Separating them now will make the rest of the chapter much easier to follow.
+For the small programs we are using now, you can initially read:
 
-### 2.1 Source Code
+```c
+int main(void) {
+    ...
+}
+```
 
-Source code is program text that humans can read and edit, for example:
+as the place where the program's main work begins after the program starts running.
+
+We will study functions more fully in P-U04. For now, the important idea is that once this program is started, we can trace forward from the first statement that executes inside `main`.
+
+For example:
+
+```c
+int main(void) {
+    printf("A\n");
+    printf("B\n");
+    printf("C\n");
+    return 0;
+}
+```
+
+At this stage, read it in the most direct way:
+
+```text
+enter main
+→ execute the first printf
+→ execute the second printf
+→ execute the third printf
+→ execute return 0
+→ main ends
+```
+
+After we add conditions and loops, execution will no longer always move straight downward. First we need a clear model of simple sequential execution so that later changes have something to build on.
+
+---
+
+## 3. `printf` gives us an observable action
+
+This statement:
 
 ```c
 printf("Hello, C!\n");
 ```
 
-It describes what you want the computer to do, but it is not yet the behavior being executed by the computer.
+asks the program to send text to standard output.
 
-### 2.2 Source File
-
-A source file stores source code. This chapter uses:
-
-```text
-hello.c
-```
-
-The `.c` extension indicates a C source file.
-
-### 2.3 Compiler
-
-A compiler is a tool. It reads source code, checks some kinds of errors, and attempts to translate the program into a form that the computer can later execute.
-
-This course may use GCC or Clang.
-
-### 2.4 Executable
-
-After successful compilation, you obtain a file that the operating system can start, such as:
-
-```text
-hello
-```
-
-or on Windows:
-
-```text
-hello.exe
-```
-
-The executable and `hello.c` are two different files. This point matters: editing `hello.c` does not automatically change an executable that was already built earlier.
-
-### 2.5 Running Program and Output
-
-The program begins to execute only after the operating system starts the executable. A running program carries out its instructions and may produce output. That output may still be different from what you expected.
-
-Output is only one observable result of execution. It is not the source code, and it is not the executable itself.
-
----
-
-## 3. Connect the Whole Path
-
-Now connect those ideas into one sequence:
-
-```mermaid
-flowchart LR
-    S[hello.c\nSource Code and Source File] --> C[Compiler]
-    C -->|Compilation succeeds| E[hello / hello.exe\nExecutable]
-    C -->|Compilation fails| CE[Compile Error Message]
-    E --> R[Operating System Starts It]
-    R --> P[Program Executes]
-    P --> O[Output or Other Observable Result]
-```
-
-If you ignore the details for a moment and remember only the order, read it like this:
-
-```text
-Source code
-→ Compilation
-→ Executable
-→ Start
-→ Execution
-→ Output
-```
-
-Following this path gives four important conclusions:
-
-- If compilation fails, the new program has not started running.
-- Successful compilation only means an executable was produced; it does not prove that the requirement is satisfied.
-- A program that finishes running still may not have done what you wanted.
-- After source code changes, it must be compiled again before the new contents can appear in a new executable.
-
-Next, we will actually walk through that path.
-
----
-
-## 4. Your First Minimal C Program
-
-```c
-#include <stdio.h>
-
-int main(void) {
-    printf("Hello, C!\n");
-    return 0;
-}
-```
-
-You do not need to memorize all of the syntax yet. For now, treat it as four parts with different jobs.
-
-### `#include <stdio.h>`
-
-This lets the program use standard input and output facilities. The `printf` used in this chapter depends on it.
-
-### `int main(void)`
-
-`main` is the primary function entered after this program begins running. Functions will be studied more fully in a later Unit.
-
-### `printf("Hello, C!\n");`
-
-This asks the program to send text to standard output, which for now is the output you see in the terminal.
-
-The sequence:
+Inside the string:
 
 ```text
 \n
 ```
 
-represents a newline.
+means a newline.
 
-### `return 0;`
+So:
 
-This ends `main`, using `0` to indicate normal completion. For now, it is enough to think of it as “this minimal program ends here.”
+```c
+printf("Hello, ");
+printf("C!\n");
+```
 
----
-
-## 5. Compile Once, Then Run Once
-
-Before running the program, write down what you expect to see:
+normally produces:
 
 ```text
 Hello, C!
 ```
 
-Then create `hello.c` and use the commands for your environment.
+while:
 
-Linux, macOS, or a Unix-like terminal:
-
-```bash
-gcc -std=c17 -Wall -Wextra -pedantic hello.c -o hello
-./hello
+```c
+printf("Hello,\n");
+printf("C!\n");
 ```
 
-Windows PowerShell:
+produces:
 
-```powershell
-gcc -std=c17 -Wall -Wextra -pedantic hello.c -o hello.exe
-.\hello.exe
+```text
+Hello,
+C!
 ```
 
-When using Clang, replace `gcc` with `clang`.
+Predict both results before running them, then compare with what you observe. This becomes a repeated habit throughout the course:
 
-The most important detail here is that the two lines do different jobs.
-
-```bash
-gcc ... hello.c -o hello
+```text
+read the program
+→ form an expectation
+→ run it
+→ compare the actual result
 ```
-
-The first line is **compilation**. It attempts to create an executable named `hello` from `hello.c`.
-
-```bash
-./hello
-```
-
-The second line is **execution**. It asks the operating system to start the executable that was just created.
-
-So “compiled” does not mean “already ran,” and the two steps cannot replace one another.
 
 ---
 
-## 6. Look at the Same Process over Time
+## 4. Turn execution into a trace
 
-Now place the steps in the order in which they happened:
-
-| Step | Event | Is the program running? | Observable result |
-|---|---|---:|---|
-| 1 | Edit and save `hello.c` | No | Source-file contents change |
-| 2 | Run the compile command | No | An executable is created, or a compile error appears |
-| 3 | Run `./hello` or `.\hello.exe` | Yes | The program starts and enters `main` |
-| 4 | Execute `printf` | Yes | `Hello, C!` and a newline are displayed |
-| 5 | Execute `return 0` | About to end | The program ends and control returns to the terminal |
-
-Return to the four predictions from Section 1. Which matched what happened? Which need to change?
-
----
-
-## 7. Deliberately Create Your First Error: Remove a Semicolon
-
-Change the program to:
+For this program:
 
 ```c
 #include <stdio.h>
 
 int main(void) {
-    printf("Hello, C!\n")
+    printf("One\n");
+    printf("Two\n");
     return 0;
 }
 ```
 
-The semicolon at the end of the `printf` line is gone.
+we can write a simple trace:
 
-Before compiling, decide:
+| Order | Statement about to execute | What becomes observable afterward? |
+|---:|---|---|
+| 1 | `printf("One\n");` | `One` appears |
+| 2 | `printf("Two\n");` | `Two` appears next |
+| 3 | `return 0;` | `main` ends |
 
-1. Will the problem appear during compilation or execution?
-2. Will `Hello, C!` be printed?
-3. If the compiler points to one line, is that line always exactly where the defect began?
+A trace is not meant to copy the source code. Its purpose is to make clear which step happens first and what changes after that step.
 
-Now compile and inspect the message. For a problem like this, a useful sequence is:
-
-1. Decide which stage the problem belongs to.
-2. Read the first useful error message.
-3. Inspect the nearby code instead of staring at only one character.
-4. Compare it with the last version that compiled successfully.
-5. Restore the semicolon.
-6. Compile again.
-7. Run again and confirm that the original behavior has returned.
-
-The last step is a **regression check**: after correcting a defect, verify that behavior that should still work continues to work. You will use this habit repeatedly later in the course.
-
-### Why Might the Message Point to the Next Line?
-
-The compiler reads the program progressively. When one line is missing a semicolon, it may not know that the syntax cannot continue until it reaches the next line. A compiler message is therefore best treated as diagnostic evidence, not always as a complete answer.
+Once P-U02 introduces variables, tracing becomes even more useful because we will follow not only output but also data and program state.
 
 ---
 
-## 8. A Second Experiment: Edit the Source but Do Not Recompile
+## 5. For now, read `return 0;` as “this main ends here”
 
-First compile and run the original program successfully:
-
-```text
-Hello, C!
-```
-
-Then change the source code to:
+When you see:
 
 ```c
-printf("Hello, Student!\n");
+return 0;
 ```
 
-Save the file, but do not compile it again yet. Run the old `hello` or `hello.exe` directly.
+we do not yet need the full rules of function return values.
 
-Before you do, guess whether the screen will display:
+In these small programs, read it as:
 
-```text
-Hello, C!
+> `main` ends here, and this execution completes normally.
+
+Therefore:
+
+```c
+int main(void) {
+    printf("Before\n");
+    return 0;
+    printf("After\n");
+}
 ```
 
-or:
+Do not simply count two `printf` statements and assume both outputs appear. Follow the execution: after `return 0;` executes, `main` has ended, so the later `printf` is not part of this normal execution path.
 
-```text
-Hello, Student!
-```
-
-Without recompilation, the operating system still starts the executable that was built earlier, so you will normally see the old output.
-
-Think of the situation this way:
-
-```text
-hello.c (contents have changed)
-
-not recompiled yet
-
-hello.exe (still built from the old contents)
-```
-
-Only after recompilation does the new source code produce a new executable. That is why “I changed the program, but the result did not change” can sometimes mean that the source file was edited correctly but the executable was never rebuilt.
+The point is not to encourage unreachable code. It is to begin separating “text exists in the source file” from “this execution actually reaches that statement.”
 
 ---
 
-## 9. A Program Can Compile Successfully and Still Do the Wrong Thing
+## 6. Keep compile errors separate from execution behavior
 
-Look at this program:
+P-U00 already separated Build from Run. Now use that distinction to read an error.
+
+Suppose a semicolon is missing:
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    printf("Hello\n")
+    return 0;
+}
+```
+
+Ask first:
+
+> Did this new version actually begin executing `main`?
+
+If the Build fails because of a syntax problem, the new version never enters its normal execution flow.
+
+That gives us a useful first classification:
+
+```text
+Did the problem happen during Build?
+or
+did the program Run, but its behavior differ from the expectation?
+```
+
+When a compiler points to one line, treat the location as a diagnostic clue rather than an automatic guarantee that the true cause is exactly on that character. A missing symbol on the previous line may only become obvious when the tool reads the next line.
+
+---
+
+## 7. A program can run and still fail the requirement
+
+Suppose the requirement is:
+
+```text
+Print Hello, C!
+```
+
+but the program is:
 
 ```c
 #include <stdio.h>
@@ -339,172 +254,138 @@ int main(void) {
 }
 ```
 
-It can compile successfully and run to completion. But suppose the requirement is:
+The program may Build. It may Run. Its execution path may be perfectly clear.
+
+It still does not satisfy the requirement.
+
+So when someone says “the program runs,” keep at least these questions separate:
 
 ```text
-Display Hello, C!
+Did the tools successfully build it?
+↓
+Which statements did this execution actually reach?
+↓
+Does the observed result satisfy the requirement?
 ```
 
-The program still does the wrong thing.
-
-So when a program “shows no error,” ask three separate questions.
-
-### Did Compilation Succeed?
-
-The compiler accepted the program and produced an executable.
-
-### Did the Program Finish Running?
-
-The program started and ended without an obvious interruption.
-
-### Did the Result Match the Requirement?
-
-The observed result agrees with the requirement and with the expectation you established beforehand.
-
-These ideas are related, but they are not equivalent.
+P-U00 established the first tool-level distinction. This Unit connects that to execution tracing and requirement comparison.
 
 ---
 
-## 10. Make Your First Change: Put Your Name in the Output
+## 8. Make a change: predict first, then edit
 
-Do not edit the code immediately. First write down what you want to see, for example:
+Start with:
 
-```text
-Hello, Alex!
+```c
+#include <stdio.h>
+
+int main(void) {
+    printf("Hello, C!\n");
+    return 0;
+}
 ```
 
-Then follow the process you just learned:
-
-1. Identify the part of the program that must change.
-2. Modify the text inside the string.
-3. Save the source file.
-4. Compile again.
-5. Run the new executable.
-6. Compare the expected output with the actual output.
-
-When you finish, answer in your own words:
-
-> Why can you not edit `hello.c` and then only run the old `hello.exe`?
-
----
-
-## 11. Try It Yourself: A Two-Line Introduction
-
-Now create a new program that displays:
+Change it so the output is:
 
 ```text
-My name is <your English name>.
-I am learning C.
+Hello, <your English name>!
+Welcome to C.
 ```
 
-Use only things you have already seen:
-
-- one `main` function,
-- one or two `printf` calls,
-- correct line endings.
-
-You do not need input, variables, conditions, or loops yet.
-
-If you want to keep a learning record, the three most useful things are your prediction before execution, the final working program, and one error you encountered together with how you corrected it. Nothing needs to be submitted, but those records are often more useful later than keeping only the final answer.
-
----
-
-## 12. Turn the Earlier Operations into Small Experiments
-
-Each experiment below uses the same `hello.c`. The point is not to complete a table for its own sake. The point is to know what you are trying to observe before you act.
-
-| Experiment | What you do | What you expect to observe |
-|---|---|---|
-| Normal run | Compile and run the original version | `Hello, C!` appears |
-| Remove the newline | Remove the final `\n` | The terminal prompt may appear on the same line |
-| Create a compile error | Remove a semicolon and compile | Compilation fails; no corresponding new version is created |
-| Check after fixing | Restore the semicolon, recompile, and run | Correct output returns |
-| Run the old version | Edit the text but do not recompile | The contents of the old executable still run |
-
-If a result differs from your prediction, do not treat that difference as failure. That difference is exactly what is worth investigating.
-
----
-
-## 13. Change the Requirement One More Time
-
-The requirement now becomes three lines:
-
-```text
-Student: <your English name>
-I am learning C.
-Prediction before execution.
-```
-
-This time, try not to copy the earlier steps mechanically. Walk through the process yourself:
+Do not start by typing immediately. Instead:
 
 1. Write the complete expected output first.
-2. Decide which parts of the original program must change.
-3. Modify the source code.
-4. Compile again.
-5. Run and compare the result.
-6. Run one more time to confirm that the result is reproducible.
+2. Decide how many `printf` statements you need.
+3. Decide where each `\n` belongs.
+4. Edit the program.
+5. Build and Run.
+6. Compare the prediction with the actual result.
 
-You are already practicing a workflow that will appear repeatedly later:
+If the result differs, do not rewrite the entire program first. Follow the execution order through `main` and find the earliest place where the actual behavior stops matching your expectation.
 
-```text
-Understand the requirement
-→ Establish an expectation
-→ Modify the program
-→ Compile
-→ Execute
-→ Compare
-→ Correct
+---
+
+## 9. Run one experiment that changes only the order
+
+First consider:
+
+```c
+printf("A\n");
+printf("B\n");
+printf("C\n");
 ```
 
-The program is tiny now, but this process remains useful as programs become larger.
+Predict the output.
+
+Then swap only the first and third statements:
+
+```c
+printf("C\n");
+printf("B\n");
+printf("A\n");
+```
+
+Predict again.
+
+This is a tiny experiment, but it establishes an idea we will keep using:
+
+> A program's result depends not only on which statements exist, but also on the order in which this execution reaches them.
+
+When P-U03 adds conditions and loops, this question becomes much more interesting.
 
 ---
 
-## 14. Optional: Use AI to Challenge Your Explanation
+## 10. Optional: let AI challenge your execution trace
 
-If you want one more exercise, first answer this question in your own words without looking back at the chapter:
+This section may be skipped completely.
 
-> What is the relationship among source code, a compiler, an executable, and program execution?
+First, without any tool, explain:
 
-Then you may give your explanation to an AI system and ask it to identify anything unclear or incomplete. This section is completely optional. You do not need a fixed prompt, and you do not need to save the conversation.
+```c
+printf("A\n");
+printf("B\n");
+return 0;
+```
 
-An AI response may still be incomplete or incorrect. If it conflicts with the chapter diagram, compiler behavior, or an execution result that you can reproduce, return to the observable evidence and judge the claim again instead of accepting the AI response as the answer.
+Why do we see `A`, then `B`, and then the program ends?
 
----
+If you want one more check, give your trace to an AI and ask it to point out a step that is unclear. You do not need a fixed prompt, and you do not need to save or submit the conversation.
 
-## 15. Try Answering Without Looking Back
-
-Cover the earlier sections for a moment and see whether you can answer these questions:
-
-- What is the relationship between source code and a source file?
-- How is a source file different from an executable?
-- What do compilation and execution each do?
-- Why has the new program not started running when compilation fails?
-- Why must source code be recompiled after it changes?
-- If a semicolon is missing, where would you begin diagnosing the problem?
-- Why does “compiles successfully” still not prove that the program satisfies its requirement?
-
-If one answer does not come easily, return to the matching experiment and try it again. Being able to explain the idea in your own words matters more than remembering the chapter’s wording.
+If the AI's explanation conflicts with behavior you can reproduce by running the program, return to the program and the trace as evidence.
 
 ---
 
-## 16. Wrap-Up
+## 11. Before leaving this Unit, make sure you can really trace
 
-You can now answer the question from the beginning. C source code first exists as text in a source file. A compiler reads that source code and, when successful, creates an executable. The program begins running only after the operating system starts the executable, and execution may then produce output.
+Choose one program from this Unit and answer from the program rather than from memorized wording:
 
-If you remember only four things, keep these:
+- Once the program starts, where do we begin tracing?
+- In these simple programs, in what order do consecutive `printf` statements execute?
+- What does `\n` change?
+- What happens to this `main` after `return 0;` executes?
+- Why should a failed Build be separated from “the program Ran but the result was wrong”?
+- Why does “the program runs” still not prove that the requirement is satisfied?
+- Can you write the expected output before Run and then verify it with the actual result?
 
-1. Compilation and execution are different stages.
-2. When compilation fails, the new program has not started executing.
-3. Source code must be recompiled after it changes.
-4. Neither successful compilation nor completed execution alone proves that the result satisfies the requirement.
-
-The next Unit follows the same story one step further: once a program is running, how does it keep data, and how can that data change as the program works?
+If an answer is uncertain, take two or three `printf` statements, change their order or add/remove `\n`, and repeat prediction → Run → compare.
 
 ---
+
+## 12. Wrap-up: next, let the program remember something
+
+P-U00 showed how source becomes a program that is actually executed. P-U01 moved the focus to what happens after execution begins: enter `main`, follow statements in order, produce output, and use prediction and tracing to explain the result.
+
+So far, these programs mostly “do one thing, then the next thing.”
+
+The next Unit adds a new problem:
+
+> **If a program needs to remember a value and use or change it later, where does that value go?**
+
+That leads us into data, types, variables, and program state.
 
 ## Navigation
 
-- [Materials Index](../README.en.md)
-- [Next Unit: Data, Types, and Program State](unit-02-data-state.en.md)
+- [Previous Unit P-U00: How Does the C Code You Write Actually Start Running?](unit-00-compiler-ide.en.md)
+- [Next Unit P-U02: How Does a Program Remember Data and Change State?](unit-02-data-state.en.md)
+- [Preparatory Student Materials Index](../README.en.md)
 - [繁體中文版](unit-01-execution.zh-TW.md)
