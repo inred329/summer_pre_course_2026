@@ -1,15 +1,101 @@
 # Preparatory Unit P-U00: How Does the C Code You Write Actually Start Running?
 
-Version: 1.2.0  
+Version: 1.3.0  
 Status: Student material  
 Last updated: 2026-08-10  
 Corresponding Chinese version: [前導單元 P-U00：寫好的 C 程式，怎麼真的跑起來？](unit-00-compiler-ide.zh-TW.md)
 
-You may already have seen someone press a green triangle in an IDE and immediately get program output. Or perhaps the first time you opened a development environment, you saw an editor, terminal, Build, Run, and Debug controls all at once and were not sure which parts were actually doing different jobs.
+Before touching C syntax or development tools, it helps to place the course inside a larger picture.
 
-Before learning C syntax, let us make that process clear.
+Suppose someone asks:
 
-This Unit is not about memorizing tool names or button locations. The important thing is to build a path you will keep using later:
+> Decide whether a student's score passes. Scores of 60 or above should display `Pass`; otherwise display `Try again`.
+
+Even if you do not know C yet, you can already begin to organize the problem:
+
+```text
+data: one score
+rule: is the score >= 60?
+result: Pass or Try again
+```
+
+We still have not written any C code, but we are already doing an important part of programming: turning a problem into data, rules, and results that a computer can process step by step.
+
+---
+
+## 0. What Are a Program, a Programming Language, and Programming?
+
+These three terms often appear together, but they are not the same thing.
+
+### Program
+
+For now, think of a **program** as **a clear description of work that a computer can execute**.
+
+It may receive data, apply rules, and produce an observable result. For example:
+
+```text
+read a score
+→ decide whether it reaches 60
+→ display Pass or Try again
+```
+
+A program does not need to be large. Once a task has been described as executable work, we already have a programming problem.
+
+### Programming language
+
+In ordinary language, we might say:
+
+```text
+If the score is at least 60, display Pass.
+```
+
+We could make it more structured:
+
+```text
+if score >= 60
+    print Pass
+else
+    print Try again
+```
+
+Later, in the C language used by this course, you will see something like:
+
+```c
+if (score >= 60) {
+    printf("Pass\n");
+} else {
+    printf("Try again\n");
+}
+```
+
+You do not need to understand this C syntax yet. Notice only one thing: **the same problem can be expressed using a more precise set of rules that programming tools can process.**
+
+A programming language is such a system of expression. This course uses C to practice that process.
+
+### Programming
+
+Programming is more than typing C syntax into a computer. A fuller process looks like:
+
+```text
+understand the problem
+→ decide what data matters
+→ design the rules
+→ express them in a programming language
+→ run the program
+→ observe the result
+→ compare it with the requirement
+→ revise when needed
+```
+
+Writing code is part of programming, but it is not the whole activity. Prediction, tracing, testing, debugging, and requirement changes that appear throughout this course are all part of the same process.
+
+Next, we will express ideas like these in C. Once written down, the first thing we have is **source code**: a textual representation of the program. That creates the next question:
+
+> How does this text become a program that the computer is actually executing?
+
+In class you will likely use an **IDE (Integrated Development Environment)**. It brings editing, Build, Run, Debug, and other development tasks into one working environment. For now, it is enough to treat the IDE as an integrated place where development work happens. After we separate source, Build, executable, and Run, we will return to the IDE and see what each part is doing.
+
+The main path of this Unit is:
 
 ```text
 C source code you write
@@ -18,8 +104,6 @@ C source code you write
 → the operating system starts it
 → the program runs and produces observable results
 ```
-
-An IDE makes these steps easier to operate, but the IDE itself is not another name for the entire process.
 
 ### You can enter the same idea from three different directions
 
@@ -205,7 +289,9 @@ If the earlier flow diagram felt abstract, this experiment gives you another way
 
 ---
 
-## 5. So what is an IDE?
+## 5. Now return to the IDE: what is it actually doing?
+
+Earlier, we used a minimal definition: the IDE is an environment that integrates development work. Now that source, Build, and Run are separate in our model, we can unpack it more precisely.
 
 IDE stands for **Integrated Development Environment**.
 
@@ -358,6 +444,7 @@ If you are using an IDE, locate the editor, terminal, Build, Run, and Debug feat
 
 Try answering from the `hello.c` experiment without repeating the chapter's exact wording:
 
+- How are a program, a programming language, and programming different?
 - Are `hello.c` and the executable the same file?
 - Why does editing `hello.c` not automatically change an old executable?
 - What do Build and Run each do?
@@ -366,15 +453,13 @@ Try answering from the `hello.c` experiment without repeating the chapter's exac
 - What is the difference between Run and Debug?
 - If you edit the source but still see old output, what should you check first?
 
-Some learners make sense of this most easily from a flow diagram; others need to run the stale executable once before the distinction feels real. Either route is fine if you can finally map your own actions back to source → Build → executable → Run.
+Some learners make sense of this most easily from a flow diagram; others need to run the stale executable once before the distinction feels real. Either route is fine if you can finally map your own work back to problem → programming-language expression → source → Build → executable → Run → observed result.
 
 ---
 
 ## 11. Next: start reading a program that is actually running
 
-We now know that a C program is not simply “text plus a magic Run button.”
-
-You have a source file; Build uses a compiler and related tools to create the latest runnable result; Run actually starts the program; and an IDE integrates these actions into one environment.
+We have now moved from “a problem we want to solve” all the way to an executing program: first express the solution as C source code, then Build it into an executable, and finally Run it. The IDE integrates these development tasks into one environment.
 
 The next Unit moves the focus away from the tools themselves and asks: **once the program really starts running, how do the statements in `main` become the result we observe?**
 

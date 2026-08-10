@@ -6,7 +6,7 @@
 
 ## 如果你現在上的是前導課程
 
-前導課程從 P-U00 開始，先認識 compiler、IDE、Build、Run 與 Debug 各自在做什麼，再依序進入 P-U01～P-U04。
+前導課程從 P-U00 開始。它會先回答「什麼是程式、程式語言與程式設計」，再把 source、compiler、IDE、Build、Run 與 Debug 各自在做什麼拆開，之後依序進入 P-U01～P-U04。
 
 **[從 P-U00：寫好的 C 程式，怎麼真的跑起來？開始](preparatory/unit-00-compiler-ide.zh-TW.md)**
 
@@ -16,7 +16,7 @@ P-U00 → P-U01 → P-U02 → P-U03 → P-U04
 
 ## 如果你是直接進入正式課程
 
-如果你沒有先走完這套前導課程，正式課程從 F-U00 開始。F-U00 會用正式班需要的深度，把 source、compiler、Build、executable、Run 與 Debug 的角色先拆清楚。
+如果你沒有先走完這套前導課程，正式課程從 F-U00 開始。F-U00 會先快速對齊 program、programming language、programming 三個角色，再用正式班需要的深度，把 source、compiler、IDE、Build、executable、Run 與 Debug 拆清楚。
 
 **[從 F-U00：按下 Run 之後，到底發生了什麼？開始](formal/unit-00-build-run-ide.zh-TW.md)**
 
@@ -26,7 +26,7 @@ F-U00 → F-U01 → F-U02 → F-U03 → F-U04 → F-U05 → F-U06 → F-U07 → 
 
 ## 如果你剛完成這套前導課程
 
-你已經在 P-U00 建立過比 F-U00 更完整的初學者工具模型，因此不需要立刻再讀一次 F-U00。
+你已經在 P-U00 建立過比 F-U00 更完整的初學者版基礎與工具模型，因此不需要立刻再讀一次 F-U00。
 
 P-U04 結束後可以直接接：
 

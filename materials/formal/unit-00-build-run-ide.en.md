@@ -1,19 +1,29 @@
 # Formal Unit F-U00: What Actually Happens After You Press Run?
 
-Version: 1.0.0  
+Version: 1.1.0  
 Status: Official student material  
-Last updated: 2026-08-09  
+Last updated: 2026-08-10  
 Corresponding Chinese version: [正式單元 F-U00：按下 Run 之後，到底發生了什麼？](unit-00-build-run-ide.zh-TW.md)
 
-You may already have written programs and may already be used to pressing Run, Build, or Debug in an IDE.
+Before the formal course begins, place three easily-confused terms back into their proper roles.
 
-This Unit does not reteach where every button is located. It asks something more important first: when you say “I ran the program,” what different steps actually happened in between?
+## 0. Separate program, programming language, and programming
 
-The formal course will keep using compilers, Build, Run, Debug, tests, and error messages. If all of these words blur into one action in your mind, many later problems will look more mysterious than they really are.
+- **Program**: a clear description of work that a computer can execute. It may receive data, apply rules, and produce an observable result.
+- **Programming language**: a language for expressing data, operations, and control rules precisely. This course uses C.
+- **Programming**: the whole process from understanding a problem and designing a solution through expressing it, running it, testing it, diagnosing it, and modifying it. Writing code is one part of that process, not the whole process.
+
+So the formal course is not simply “more C syntax.” We will keep asking: how does a requirement become an executable solution? Once that solution is expressed in C, how do we know it actually satisfies the requirement? When types, memory, files, and modules are added, does our earlier reasoning still hold?
+
+You have probably already used an **IDE (Integrated Development Environment)**. It integrates editing, Build, Run, Debug, and other development work inside one working environment. For now, treat it as an interface that brings development tasks together. This Unit will unpack the roles behind the buttons instead of teaching one particular IDE's button locations.
+
+You may already have written programs and may already be used to pressing Run, Build, or Debug. The more important question is: when you say “I ran the program,” what different steps actually happened in between?
+
+The formal course will keep using compilers, Build, Run, Debug, tests, and error messages. If all of these words blur into one action, many later problems will look more mysterious than they really are.
 
 So begin with a familiar action:
 
-> When you press Run, what is the IDE actually doing for you?
+> When you press Run, what work is this integrated development environment actually arranging for you?
 
 ---
 
@@ -83,7 +93,7 @@ That question is much easier to investigate than simply saying “the IDE is act
 
 ---
 
-## 3. Do not treat the compiler and the IDE as the same thing
+## 3. The compiler and the IDE have different roles
 
 An IDE provides an integrated development environment.
 
@@ -153,7 +163,7 @@ So every later Unit can use three layers of evidence:
 3. Does the result match the requirement and my prior reasoning?
 ```
 
-These layers provide different evidence. Do not let one stand in for the others.
+These layers provide different evidence and cannot replace one another.
 
 ---
 
@@ -258,6 +268,7 @@ If you can answer those questions, you are less dependent on one specific interf
 
 Without using IDE button names, answer:
 
+- How are a program, a programming language, and programming different?
 - What is the relationship between a source file and an executable?
 - Why are Build and Run different actions?
 - How do the roles of an IDE and a compiler differ?
@@ -272,7 +283,7 @@ If your answer is only “because I press this button,” repeat the old-executa
 
 ## 10. The next problem: the tools can work correctly and the result can still surprise you
 
-At this point, we have separated the tool layer: source, Build, compiler, executable, Run, and Debug have different roles.
+At this point, we have separated programming from operating development tools, and we have also separated the tool layer: source, Build, compiler, executable, Run, and Debug have different roles.
 
 But even when you are certain that:
 

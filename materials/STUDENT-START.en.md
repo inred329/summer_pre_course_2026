@@ -6,7 +6,7 @@ You do not need to read the Course Constitution, instructional-design documents,
 
 ## If you are taking the preparatory course
 
-Start with P-U00. It first separates the roles of the compiler, IDE, Build, Run, and Debug, then continues through P-U01 to P-U04.
+Start with P-U00. It first answers what a program, a programming language, and programming are, then separates the roles of source code, compiler, IDE, Build, Run, and Debug before continuing through P-U01 to P-U04.
 
 **[Start with P-U00: How Does the C Code You Write Actually Start Running?](preparatory/unit-00-compiler-ide.en.md)**
 
@@ -16,7 +16,7 @@ P-U00 → P-U01 → P-U02 → P-U03 → P-U04
 
 ## If you are entering the formal course directly
 
-If you have not just completed this preparatory sequence, start the formal course with F-U00. It separates source code, compiler, Build, executable, Run, and Debug at the depth needed for the formal course.
+If you have not just completed this preparatory sequence, start the formal course with F-U00. It briefly aligns the roles of program, programming language, and programming, then separates source code, compiler, IDE, Build, executable, Run, and Debug at the depth needed for the formal course.
 
 **[Start with F-U00: What Actually Happens After You Press Run?](formal/unit-00-build-run-ide.en.md)**
 
@@ -26,7 +26,7 @@ F-U00 → F-U01 → F-U02 → F-U03 → F-U04 → F-U05 → F-U06 → F-U07 → 
 
 ## If you just completed this preparatory course
 
-P-U00 already built a fuller beginner-facing version of the tool model, so you do not need to immediately repeat F-U00.
+P-U00 already built a fuller beginner-facing version of the programming foundations and tool model, so you do not need to immediately repeat F-U00.
 
 After P-U04, continue directly with:
 
