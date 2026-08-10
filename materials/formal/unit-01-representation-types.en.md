@@ -1,13 +1,13 @@
 # Formal Unit F-U01: Why Do Representation, Type, and Operations Affect Results?
 
-Version: 1.1.0  
+Version: 1.2.0  
 Status: Official student material  
 Last updated: 2026-08-09  
 Corresponding Chinese version: [正式單元 F-U01：表示、型別與運算為什麼會影響結果？](unit-01-representation-types.zh-TW.md)
 
-In the preparatory course, we already used `int`, `double`, arithmetic, and input many times. At that stage, the most important goal was to make data flow, control flow, and function responsibilities clear.
+If you are entering the formal course directly, F-U00 just separated source, Build, compiler, executable, Run, and Debug. If you are continuing from the preparatory course, P-U00 through P-U04 have already given you practice with tools, execution tracing, data, control flow, and functions.
 
-Now look at a very ordinary-looking program:
+Whichever path brought you here, begin with this ordinary-looking program:
 
 ```c
 int a = 5;
@@ -466,7 +466,7 @@ if (scanf("%u %lf", &value, &divisor) != 2) {
 }
 ```
 
-You already saw the `&` syntax in the preparatory course. A full pointer model comes later in the formal course. For now, read it as “give `scanf` the location where it may store the input.”
+You do not need a full understanding of `&` yet. F-U06 will build the formal pointer model. For now, read `&value` and `&divisor` as “give `scanf` the location where it may store the input.” If you came through the preparatory course, you may already have seen this form; if not, you can still continue through this Unit without the full pointer model.
 
 ---
 
@@ -522,7 +522,7 @@ If one answer feels like a sentence you memorized rather than something you unde
 
 ## 15. Closing the Unit
 
-The preparatory course taught us to trace what a program is doing. This Unit adds a deeper question: **once a program has a value, what rules does it use to interpret and operate on that value?**
+Before entering F-U01, we separated “what the program is actually executing” from “what the tools do for us.” This Unit adds a deeper question: **once a program has a value, what rules does it use to interpret and operate on that value?**
 
 A bit pattern needs a representation rule to gain meaning. Type determines available operations and conversions. The moment when an operation happens can change the result. Floating-point data often requires approximate comparison rules. Formatted I/O requires the format to agree with the actual type. Near integer boundaries, we must first ask whether the language still defines the behavior at all.
 
@@ -530,7 +530,8 @@ The next Unit carries these judgments into more complex control flow. When there
 
 ## Navigation
 
-- [Previous Stage: Preparatory Unit P-U04 — Functions and Integration](../preparatory/unit-04-functions-integration.en.md)
+- [Previous Unit for direct formal entry: F-U00 — What Actually Happens After You Press Run?](unit-00-build-run-ide.en.md)
+- [Previous stage when continuing from preparatory: P-U04 — Functions and Integration](../preparatory/unit-04-functions-integration.en.md)
 - [Next Unit: Complex Control Flow](unit-02-complex-control-flow.en.md)
 - [Formal-Course Index](README.en.md)
 - [繁體中文版](unit-01-representation-types.zh-TW.md)

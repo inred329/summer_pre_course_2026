@@ -6,31 +6,39 @@ You do not need to read the Course Constitution, instructional-design documents,
 
 ## If you are taking the preparatory course
 
-Start with P-U01 and continue through P-U04 in order.
+Start with P-U00. It first separates the roles of the compiler, IDE, Build, Run, and Debug, then continues through P-U01 to P-U04.
 
-**[Start with P-U01: How Does Program Text Become an Execution Result?](preparatory/unit-01-execution.en.md)**
-
-Reading order:
-
-P-U01 → P-U02 → P-U03 → P-U04
-
-The preparatory course builds the basic models of execution, data and state, control flow, and using functions to divide a problem into understandable work.
-
-## If you are taking the formal course
-
-You may start the formal course directly at F-U01. You do not need to reread the preparatory course first unless your instructor asks you to, or you choose to review a foundation that feels unfamiliar.
-
-**[Start with F-U01: Why Do Representation, Type, and Operations Affect Results?](formal/unit-01-representation-types.en.md)**
+**[Start with P-U00: How Does the C Code You Write Actually Start Running?](preparatory/unit-00-compiler-ide.en.md)**
 
 Reading order:
 
-F-U01 → F-U02 → F-U03 → F-U04 → F-U05 → F-U06 → F-U07 → F-U08 → F-U09 → F-U10 → F-U11 → F-U12
+P-U00 → P-U01 → P-U02 → P-U03 → P-U04
 
-If you want to see all twelve Units first, open the [Formal Course Student Materials index](formal/README.en.md).
+## If you are entering the formal course directly
+
+If you have not just completed this preparatory sequence, start the formal course with F-U00. It separates source code, compiler, Build, executable, Run, and Debug at the depth needed for the formal course.
+
+**[Start with F-U00: What Actually Happens After You Press Run?](formal/unit-00-build-run-ide.en.md)**
+
+Reading order:
+
+F-U00 → F-U01 → F-U02 → F-U03 → F-U04 → F-U05 → F-U06 → F-U07 → F-U08 → F-U09 → F-U10 → F-U11 → F-U12
+
+## If you just completed this preparatory course
+
+P-U00 already built a fuller beginner-facing version of the tool model, so you do not need to immediately repeat F-U00.
+
+After P-U04, continue directly with:
+
+**[F-U01: Why Do Representation, Type, and Operations Affect Results?](formal/unit-01-representation-types.en.md)**
+
+If you later want a compact review of the Build/Run/Debug language used in the formal course, you can return to F-U00.
+
+If you want to see the full formal-course list first, open the [Formal Course Student Materials index](formal/README.en.md).
 
 ## How to move through the materials
 
-Each Unit ends with a link to the next Unit. In normal use, start with the first Unit and keep moving forward; you do not need to return to the repository home page to find the next document.
+Each Unit ends with a link to the next Unit. In normal use, follow the path you are currently on and keep moving forward; you do not need to return to the repository home page to find the next document.
 
 If your instructor separately assigns homework, assessment rules, or supplementary material, follow the link your instructor provides. Those documents do not need to be read before you begin learning.
 

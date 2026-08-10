@@ -1,13 +1,13 @@
 # Preparatory Unit P-U02: How Does a Program Remember Data and Change State?
 
-Version: 1.1.0  
+Version: 1.2.0  
 Status: Student material  
 Last updated: 2026-08-09  
 Corresponding Chinese version: [前導單元 P-U02：程式如何記住資料並改變狀態？](unit-02-data-state.zh-TW.md)
 
 ## What Question Does This Chapter Answer?
 
-The `hello.c` program from the previous Unit was simple: the program started, printed fixed text, and ended. But as soon as a program needs to work with scores, temperatures, money, or any information that can change, fixed output is no longer enough.
+The previous Unit used very simple programs: enter `main`, execute a few statements in order, print fixed text, and then end. But as soon as a program needs to work with scores, temperatures, money, or any information that can change, fixed output is no longer enough.
 
 A program needs to “remember what it has now,” perform an operation, and then continue with new contents. That is the question this chapter follows:
 
@@ -24,7 +24,7 @@ By the end, you should be able to:
 5. Understand why external input should be treated as usable data only after it succeeds.
 6. Update expected results and tests before changing code when a requirement changes.
 
-If you can already create, compile, and run the minimal C program from the previous Unit, you are ready to begin.
+If you can already trace a minimal C program through the execution order introduced in P-U01, you are ready to begin.
 
 ---
 
@@ -399,7 +399,7 @@ If one answer is difficult to explain, return to the matching program and trace 
 
 ## 14. Wrap-Up
 
-The previous Unit traced how source code becomes a running program. This Unit moved one step inside that running program: it reads current values, computes new results, and uses assignment to change state.
+The previous Unit traced how statements produce observable results after the program starts running. This Unit moved one step further inside: while the program runs, it reads current values, computes new results, and uses assignment to change state.
 
 Variables give names to current values. Types affect how values are represented and operated on. Expressions produce results. Assignments place those results back into a new state. Data read from outside the program should also be confirmed before it becomes part of later computation.
 
@@ -409,7 +409,7 @@ The next Unit begins with that question. Conditions and repetition will let the 
 
 ## Navigation
 
-- [Previous Unit: How Does Program Text Become an Execution Result?](unit-01-execution.en.md)
+- [Previous Unit: Once a Program Starts Running, How Do Statements Become Results?](unit-01-execution.en.md)
 - [Next Unit: How Does a Program Select and Repeat?](unit-03-control-flow.en.md)
 - [Materials Index](../README.en.md)
 - [繁體中文版](unit-02-data-state.zh-TW.md)

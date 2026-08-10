@@ -1,13 +1,13 @@
 # 正式單元 F-U01：表示、型別與運算為什麼會影響結果？
 
-版本：1.1.0  
+版本：1.2.0  
 狀態：正式學生教材  
 最後更新：2026-08-09  
 對應英文版本：[Formal Unit F-U01: Why Do Representation, Type, and Operations Affect Results?](unit-01-representation-types.en.md)
 
-前導課程裡，我們已經用了很多次 `int`、`double`、算術與輸入。當時最重要的是先讓程式的資料流、控制流程與函數責任變得清楚。
+如果你是直接進入正式班，F-U00 剛把 source、Build、compiler、executable、Run 與 Debug 的角色拆清楚；如果你是從前導課程接上來，P-U00～P-U04 已經讓你練過工具操作、執行追蹤、資料、控制流程與函數。
 
-現在先看一段看起來很普通的程式：
+不管你從哪一條路進來，現在都先看一段看起來很普通的程式：
 
 ```c
 int a = 5;
@@ -466,7 +466,7 @@ if (scanf("%u %lf", &value, &divisor) != 2) {
 }
 ```
 
-這裡的 `&` 已經在前導課程看過；正式的指標模型會在後面的 Unit 完整建立。此時先把它讀成「讓 `scanf` 能把輸入寫進這個變數的位置」即可。
+這裡先不用完整理解 `&`。它的正式指標模型會在 F-U06 建立；目前先把 `&value`、`&divisor` 讀成「把變數的位置交給 `scanf`，讓輸入可以寫進去」。如果你走過前導課程，這個寫法可能已經看過；如果沒有，也不影響本 Unit 繼續往下讀。
 
 ---
 
@@ -522,7 +522,7 @@ if (scanf("%u %lf", &value, &divisor) != 2) {
 
 ## 15. 本章收尾
 
-前導課程讓我們先學會追蹤程式在做什麼；這個 Unit 則開始追問更底層的一層：**程式拿到一個值之後，到底用什麼規則解讀與操作它？**
+進入 F-U01 以前，我們已經先把「程式真的在執行什麼」和「工具替我們做了什麼」分開。這個 Unit 再往底層追問一層：**程式拿到一個值之後，到底用什麼規則解讀與操作它？**
 
 同一組位元要搭配表示規則才有意義；型別決定可用的操作與轉換；運算發生的時間點會影響結果；浮點資料常需要用近似的方式判斷；格式化 I/O 必須讓格式與實際型別一致；到了整數邊界附近，更要先確認語言是否仍然對行為有定義。
 
@@ -530,7 +530,8 @@ if (scanf("%u %lf", &value, &divisor) != 2) {
 
 ## 導覽
 
-- [上一階段：前導單元 P-U04——函數與整合](../preparatory/unit-04-functions-integration.zh-TW.md)
+- [直接進正式班的上一單元：F-U00——按下 Run 之後，到底發生了什麼？](unit-00-build-run-ide.zh-TW.md)
+- [從前導銜接的上一階段：P-U04——函數與整合](../preparatory/unit-04-functions-integration.zh-TW.md)
 - [下一單元：複雜控制流程](unit-02-complex-control-flow.zh-TW.md)
 - [正式課程索引](README.zh-TW.md)
 - [English version](unit-01-representation-types.en.md)
