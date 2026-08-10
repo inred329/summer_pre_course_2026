@@ -1,17 +1,17 @@
 # 正式課程學生教材
 
-版本：1.3.0  
+版本：1.4.0  
 狀態：完整雙語學生教材集  
-最後更新：2026-08-09  
+最後更新：2026-08-10  
 對應英文版本：[Formal Course Student Materials](README.en.md)
 
 ## 正式班從這裡開始
 
-如果你是直接進入正式課程，從 F-U00 開始。F-U00 不要求你先走前導課程，而是先把 source、compiler、Build、executable、Run、Debug 這些正式課程會反覆使用的工具角色拆清楚。
+如果你是直接進入正式課程，從 F-U00 開始。F-U00 不要求你先走前導課程，而是先快速對齊「程式、程式語言、程式設計」三個角色，再把 source、compiler、IDE、Build、executable、Run、Debug 這些正式課程會反覆使用的工具角色拆清楚。
 
 **[開始 F-U00：按下 Run 之後，到底發生了什麼？](unit-00-build-run-ide.zh-TW.md)**
 
-如果你剛完成本 repository 的 P-U00～P-U04，則不需要立刻再讀一次 F-U00；P-U00 已經建立過更完整的初學者工具模型，可以從 P-U04 直接接 F-U01。
+如果你剛完成本 repository 的 P-U00～P-U04，則不需要立刻再讀一次 F-U00；P-U00 已經建立過更完整的初學者版程式設計基礎與工具模型，可以從 P-U04 直接接 F-U01。
 
 **[完成前導後直接進 F-U01：表示、型別與運算為什麼會影響結果？](unit-01-representation-types.zh-TW.md)**
 
@@ -21,7 +21,7 @@
 
 | Unit | 中文教材 | English | 核心重點 |
 |---|---|---|---|
-| F-U00 | [按下 Run 之後，到底發生了什麼？](unit-00-build-run-ide.zh-TW.md) | [What Actually Happens After You Press Run?](unit-00-build-run-ide.en.md) | source、compiler、IDE、Build、Run、Debug、舊 executable |
+| F-U00 | [按下 Run 之後，到底發生了什麼？](unit-00-build-run-ide.zh-TW.md) | [What Actually Happens After You Press Run?](unit-00-build-run-ide.en.md) | program／programming language／programming 對齊、source、compiler、IDE、Build、Run、Debug、舊 executable |
 | F-U01 | [表示、型別與運算](unit-01-representation-types.zh-TW.md) | [Representation, Types, and Operations](unit-01-representation-types.en.md) | 二進位表示、MSB／LSB、範圍、轉換、格式化輸出 |
 | F-U02 | [複雜控制流程](unit-02-complex-control-flow.zh-TW.md) | [Complex Control Flow](unit-02-complex-control-flow.en.md) | 分支、sentinel、invariant、邊界 |
 | F-U03 | [陣列](unit-03-arrays.zh-TW.md) | [Arrays](unit-03-arrays.en.md) | 集合、索引、走訪、邊界 |
@@ -41,6 +41,7 @@
 
 正式課程會使用以下基礎能力：
 
+- 能說明程式、程式語言與程式設計不是同一件事，並知道寫 code 只是 programming 的一部分
 - 能編輯、Build 並執行簡單 C 程式，並知道 IDE 不等於 compiler
 - 能追蹤變數和值的改變
 - 能閱讀基本條件與迴圈
