@@ -1,8 +1,8 @@
 # Formal Unit F-U09: How Does a Program Interact with Files and Persistent Data?
 
-Version: 1.1.0  
+Version: 1.2.0  
 Status: Official student material  
-Last updated: 2026-08-09  
+Last updated: 2026-08-10  
 Corresponding Chinese version: [正式單元 F-U09：程式如何與檔案及持久資料互動？](unit-09-files.zh-TW.md)
 
 F-U08 let data obtain storage for as long as the running program needs it, but an object created by `malloc` still belongs to that execution of the program.
@@ -11,7 +11,9 @@ If today's student records must still be available when the program starts again
 
 The simplest example is a file.
 
-> File I/O is more than “move a variable to disk.” The program interacts with a file through a stream, an explicit open mode, an agreed format, and success/failure checks at every important step.
+File I/O is more than “move a variable to disk.” The program first needs a connection through which it can read or write the file. In C standard I/O, that connection together with its current read/write state is treated as a **stream**. For now, think of a stream as “the channel and state the program is currently using to exchange data with some input or output source.” The next section shows how `FILE *` represents that stream.
+
+The program also needs an explicit open mode, an agreed format, and success/failure checks at every important step.
 
 This Unit follows one score record through that complete path.
 
@@ -48,12 +50,21 @@ Read the path as:
 
 ```text
 fopen
-→ obtain a FILE * stream
+→ obtain a FILE * that represents the open stream
 → fprintf writes through the stream
-→ fclose finishes and releases the stream resource
+→ fclose finishes and closes the stream
 ```
 
-`FILE *` is the standard-library interface for stream state. You do not need its internal representation. What matters is that every successful open has a corresponding use-and-close path.
+`FILE *` is the standard-library type through which we operate on a stream. It lets the library preserve state for this open connection, such as the current position and error state; you do not need to know the internal layout of `FILE`.
+
+Keep these two things separate:
+
+```text
+scores.txt        the file itself, which can remain after the program ends
+FILE *file        the object used during this execution to operate on that file stream
+```
+
+Every successful `fopen` therefore needs a corresponding use-and-close path.
 
 ---
 
@@ -69,7 +80,7 @@ Common text modes include:
 
 If the requirement says “add today's records” but the program opens with `"w"`, yesterday's data may disappear before record processing even begins.
 
-So mode is not a minor API detail. It answers a requirement question:
+So the mode is not merely a detail of how a library function is called. It answers a requirement question:
 
 > Is this run reading, replacing, or appending?
 
@@ -191,7 +202,7 @@ if (strchr(line, '\n') == NULL && !feof(file)) {
 
 This detects the common case where no newline has arrived and the stream is not yet at EOF.
 
-A final line that legitimately ends at EOF without a newline is a different case. A real parser must define its own policy:
+A final line that legitimately ends at EOF without a newline is a different case. The code responsible for turning input text into valid records—a **parser**—must define its own policy:
 
 - accept a final non-newline-terminated line?
 - discard an overlong record?
@@ -219,7 +230,7 @@ field 2 = name
 field 3 = average
 ```
 
-That is a simple protocol between the writer and reader.
+That is a simple **protocol**: the writer and reader agree on what each field means and how the data is arranged.
 
 If a name may contain spaces:
 
@@ -229,7 +240,7 @@ If a name may contain spaces:
 
 the old whitespace-separated format is no longer sufficient.
 
-A file does not understand the fields of a `struct` automatically. The writer and reader must agree on a serialization format, and changing that format is a real interface change.
+A file does not understand the fields of a `struct` automatically. The writer and reader must agree on a serialization format, and changing that format is a real change to their shared contract.
 
 ---
 
@@ -400,6 +411,7 @@ If its claim conflicts with function return rules, an actual test file, or a rep
 
 Answer directly:
 
+- How is a stream different from the file itself, and what role does `FILE *` play between them?
 - Why are `"w"` and `"a"` requirement decisions rather than mere syntax choices?
 - Why does successful `fopen` not prove final output success?
 - What do return values `1`, `0`, and `EOF` mean for `fscanf(..., "%d", ...)`?
@@ -409,7 +421,7 @@ Answer directly:
 - Why is “load into temporary state, then commit” easier to reason about than half-modifying official state before failure?
 - Why is the result of `fclose` worth checking?
 
-If the answers collapse into API names, draw the full path from open to close and mark every possible failure point.
+If the answers collapse into function names, draw the full path from open to close and mark the stream together with every possible failure point.
 
 ---
 
@@ -417,7 +429,7 @@ If the answers collapse into API names, draw the full path from open to close an
 
 F-U08 managed object lifetime during one execution. F-U09 extends data lifetime beyond program termination.
 
-Reliable file processing is not merely knowing `fopen` and `fclose`. It preserves the entire path: **choose the right mode, obtain complete records, let read results determine state, obey a format protocol, define partial-failure/commit policy, and check writes and closure.**
+Reliable file processing is not merely knowing `fopen` and `fclose`. It preserves the entire path: **establish and manage the stream, choose the right mode, obtain complete records, let read results determine state, obey a format protocol, define partial-failure/commit policy, and check writes and closure.**
 
 The next Unit addresses the program's own growth. When file I/O, student records, growable arrays, and analysis logic all live in one `.c` file, changing one feature begins to disturb the whole program. We need to separate public interfaces from private implementation and move into modular programming.
 
