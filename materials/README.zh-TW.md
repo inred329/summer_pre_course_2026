@@ -1,8 +1,8 @@
 # 學生教材索引
 
-版本：2.3.0  
+版本：2.4.0  
 狀態：學生教材入口  
-最後更新：2026-08-09  
+最後更新：2026-08-10  
 對應英文版本：[Student Materials Index](README.en.md)
 
 這一頁只收學生學習時需要直接使用的教材。
@@ -21,7 +21,7 @@
 
 | Unit | 中文教材 | English | 核心重點 |
 |---|---|---|---|
-| P-U00 | [寫好的 C 程式，怎麼真的跑起來？](preparatory/unit-00-compiler-ide.zh-TW.md) | [How Does the C Code You Write Actually Start Running?](preparatory/unit-00-compiler-ide.en.md) | source、compiler、executable、IDE、Build、Run、Debug |
+| P-U00 | [寫好的 C 程式，怎麼真的跑起來？](preparatory/unit-00-compiler-ide.zh-TW.md) | [How Does the C Code You Write Actually Start Running?](preparatory/unit-00-compiler-ide.en.md) | 程式、程式語言、程式設計、source、compiler、IDE、Build、Run、Debug |
 | P-U01 | [程式開始執行後，敘述怎麼變成結果？](preparatory/unit-01-execution.zh-TW.md) | [Once a Program Starts Running, How Do Statements Become Results?](preparatory/unit-01-execution.en.md) | `main`、順序執行、輸出、prediction、trace |
 | P-U02 | [程式如何記住資料並改變狀態？](preparatory/unit-02-data-state.zh-TW.md) | [How Does a Program Remember Data and Change State?](preparatory/unit-02-data-state.en.md) | 值、型別、變數、狀態追蹤、輸入輸出 |
 | P-U03 | [程式如何選擇與重複？](preparatory/unit-03-control-flow.zh-TW.md) | [How Does a Program Select and Repeat?](preparatory/unit-03-control-flow.en.md) | 條件、迴圈、終止、邊界與診斷 |
@@ -35,7 +35,9 @@
 
 閱讀順序：F-U00 → F-U01 → F-U02 → F-U03 → F-U04 → F-U05 → F-U06 → F-U07 → F-U08 → F-U09 → F-U10 → F-U11 → F-U12
 
-如果你剛完成 P-U00～P-U04，P-U00 已經建立過工具模型，可以直接從 F-U01 接續，不需要立刻重讀 F-U00：
+F-U00 會先快速對齊「程式、程式語言、程式設計」三個角色，再把 source、compiler、IDE、Build、executable、Run 與 Debug 拆開。
+
+如果你剛完成 P-U00～P-U04，P-U00 已經建立過這些基礎模型，可以直接從 F-U01 接續，不需要立刻重讀 F-U00：
 
 **[完成前導後從 F-U01 繼續](formal/unit-01-representation-types.zh-TW.md)**
 
