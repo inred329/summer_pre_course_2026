@@ -1,17 +1,17 @@
 # Formal Course Student Materials
 
-Version: 1.3.0  
+Version: 1.4.0  
 Status: Complete bilingual student-material set  
-Last updated: 2026-08-09  
+Last updated: 2026-08-10  
 Corresponding Chinese version: [正式課程學生教材](README.zh-TW.md)
 
 ## Formal-course students start here
 
-If you are entering the formal course directly, start with F-U00. It does not require you to take the preparatory path first; it separates the roles of source code, compiler, Build, executable, Run, and Debug that the formal course will keep using.
+If you are entering the formal course directly, start with F-U00. It does not require you to take the preparatory path first. F-U00 briefly aligns the roles of program, programming language, and programming, then separates source code, compiler, IDE, Build, executable, Run, and Debug at the depth the formal course will keep using.
 
 **[Start F-U00: What Actually Happens After You Press Run?](unit-00-build-run-ide.en.md)**
 
-If you just completed P-U00 through P-U04 in this repository, you do not need to immediately repeat F-U00. P-U00 already built a fuller beginner-facing tool model, so P-U04 can lead directly to F-U01.
+If you just completed P-U00 through P-U04 in this repository, you do not need to immediately repeat F-U00. P-U00 already built a fuller beginner-facing version of the programming foundations and tool model, so P-U04 can lead directly to F-U01.
 
 **[After the preparatory course, continue with F-U01: Why Do Representation, Type, and Operations Affect Results?](unit-01-representation-types.en.md)**
 
@@ -21,7 +21,7 @@ The other preparatory Units remain available for foundation review, not as a fix
 
 | Unit | English | Traditional Chinese | Central focus |
 |---|---|---|---|
-| F-U00 | [What Actually Happens After You Press Run?](unit-00-build-run-ide.en.md) | [按下 Run 之後，到底發生了什麼？](unit-00-build-run-ide.zh-TW.md) | source, compiler, IDE, Build, Run, Debug, stale executables |
+| F-U00 | [What Actually Happens After You Press Run?](unit-00-build-run-ide.en.md) | [按下 Run 之後，到底發生了什麼？](unit-00-build-run-ide.zh-TW.md) | program/programming language/programming alignment, source, compiler, IDE, Build, Run, Debug, stale executables |
 | F-U01 | [Representation, Types, and Operations](unit-01-representation-types.en.md) | [表示、型別與運算](unit-01-representation-types.zh-TW.md) | binary representation, MSB/LSB, ranges, conversion, formatted output |
 | F-U02 | [Complex Control Flow](unit-02-complex-control-flow.en.md) | [複雜控制流程](unit-02-complex-control-flow.zh-TW.md) | branches, sentinels, invariants, boundaries |
 | F-U03 | [Arrays](unit-03-arrays.en.md) | [陣列](unit-03-arrays.zh-TW.md) | collections, indexing, traversal, bounds |
@@ -41,6 +41,7 @@ If you enter the formal course directly, read F-U00 through F-U12 in order. If y
 
 The formal course uses these basic capabilities:
 
+- explain that a program, a programming language, and programming are different ideas, and that writing code is one part of programming
 - edit, Build, and run a simple C program while understanding that the IDE is not the compiler
 - trace changes in variables and values
 - read basic conditions and loops
