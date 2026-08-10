@@ -1,8 +1,8 @@
 # Preparatory Unit P-U00: How Does the C Code You Write Actually Start Running?
 
-Version: 1.1.0  
+Version: 1.2.0  
 Status: Student material  
-Last updated: 2026-08-09  
+Last updated: 2026-08-10  
 Corresponding Chinese version: [前導單元 P-U00：寫好的 C 程式，怎麼真的跑起來？](unit-00-compiler-ide.zh-TW.md)
 
 You may already have seen someone press a green triangle in an IDE and immediately get program output. Or perhaps the first time you opened a development environment, you saw an editor, terminal, Build, Run, and Debug controls all at once and were not sure which parts were actually doing different jobs.
@@ -20,6 +20,18 @@ C source code you write
 ```
 
 An IDE makes these steps easier to operate, but the IDE itself is not another name for the entire process.
+
+### You can enter the same idea from three different directions
+
+Different learners first make sense of development tools in different ways. This chapter connects three common entry points to the same model:
+
+- **If the IDE is already familiar to you**: begin with “what work is the IDE doing when I press Run?”
+- **If you prefer visible files and commands**: begin with `hello.c`, a Build command, and the executable that appears afterward.
+- **If tools make the most sense when something goes wrong**: keep the later “I changed the source, but I still see the old result” experiment in mind, then trace which step failed to update.
+
+All three paths return to the same idea: **source, Build, executable, and Run have different roles; an IDE integrates them without turning them into the same thing.**
+
+If one explanation does not click yet, follow another one for a while. The examples below revisit the same process from several directions.
 
 ---
 
@@ -42,7 +54,7 @@ int main(void) {
 }
 ```
 
-Do not press Run yet.
+If your usual habit is to press Run immediately after typing, pause for a moment this time and look only at what exists right now.
 
 At this moment, `hello.c` is a **source file**. The text inside is **source code**.
 
@@ -131,7 +143,7 @@ So:
 - Build or compile-related work turns the current source into the latest runnable result.
 - Run starts an executable that already exists.
 
-Later, when you see Build, Run, and Debug controls, do not immediately treat all of them as “make the program run.” Ask instead: **which stage is happening now?**
+Later, when you see Build, Run, and Debug controls, try asking: **which stage is happening now?** That question is usually more transferable than memorizing one IDE's buttons.
 
 ---
 
@@ -189,6 +201,8 @@ This experiment will stay useful later. Whenever you think “I changed the code
 
 > Did I really rebuild? Am I running the newest executable?
 
+If the earlier flow diagram felt abstract, this experiment gives you another way into it: **editing changes the source text; Build turns the new text into a new executable; Run starts that executable.**
+
 ---
 
 ## 5. So what is an IDE?
@@ -208,10 +222,10 @@ IDE
 
 Different IDEs may arrange these features differently. Their roles matter more than where the buttons happen to be.
 
-Do not treat this as true:
+If you previously pictured the IDE and compiler as one thing, split that model slightly:
 
 ```text
-IDE = compiler
+IDE ≠ compiler
 ```
 
 A better model is:
@@ -219,6 +233,8 @@ A better model is:
 > The IDE integrates editing, building, running, debugging, and other development work. The C source is still processed by a compiler and related build tools.
 
 That is also why an editor may be able to open a `.c` file even when the computer does not yet have a usable C development toolchain installed.
+
+Another way to think about it is: **the IDE is an operating interface; the compiler, debugger, and related tools are some of the tools it organizes or invokes.** The interface may change completely when you switch IDEs, while these underlying roles still exist.
 
 ---
 
@@ -230,7 +246,7 @@ For a very small program, the most visible work is compilation-related processin
 
 Later, when a program grows and is split across multiple files, one Build may involve more than a single compilation action. A later formal-course Unit on modular programming will separate compilation and linking more carefully.
 
-For now, keep this model:
+For now, this model is enough:
 
 ```text
 Edit source
@@ -239,7 +255,7 @@ Edit source
 → Run
 ```
 
-You do not need to memorize every later build detail yet.
+The finer build details will be more meaningful when we actually need multiple source files.
 
 ---
 
@@ -267,9 +283,11 @@ Debug: pause during execution, move step by step, and observe what is happening
 
 You do not need every debugger feature now. After we learn data and program state, inspecting variables will become much more meaningful. The formal course will later place the debugger inside a complete testing and debugging process.
 
+If a playback analogy helps, you can think of Run as letting a video play through, while Debug lets you pause and move forward step by step to see where execution is. The analogy is only about controlling the pace of observation; a debugger is not literally replaying a prerecorded program.
+
 ---
 
-## 8. Do not confuse “Build succeeded” with “the program is correct”
+## 8. A successful Build and a correct program answer different questions
 
 Consider this program:
 
@@ -304,9 +322,11 @@ Does the observed result satisfy the requirement?
 
 None of these questions can replace the others.
 
+From another angle, Build answers something like “can this source form a runnable result?”, while a requirement test asks “is that result actually the one we wanted?” Both matter, but they answer different questions.
+
 ---
 
-## 9. Walk through the full process yourself
+## 9. Walk through the full process
 
 Create:
 
@@ -321,7 +341,7 @@ My name is <your English name>.
 I am learning C.
 ```
 
-This time, do not treat the process as one button press. At each step, try to say what you are doing:
+Besides getting the program to run, try to name what is happening at each step:
 
 1. Which source file am I editing?
 2. When did I save it?
@@ -330,13 +350,13 @@ This time, do not treat the process as one button press. At each step, try to sa
 5. Which program am I actually Running?
 6. Does the output match what I predicted?
 
-If you are using an IDE, also locate the editor, terminal, Build, Run, and Debug features.
+If you are using an IDE, locate the editor, terminal, Build, Run, and Debug features. If you are using a terminal, map the commands you type back onto the same process. The two workflows expose the same underlying model in different ways.
 
 ---
 
-## 10. Before leaving this Unit, answer from the actual experiment
+## 10. Check your understanding through the actual experiment
 
-Do not memorize definitions. Use your `hello.c` experiment to answer:
+Try answering from the `hello.c` experiment without repeating the chapter's exact wording:
 
 - Are `hello.c` and the executable the same file?
 - Why does editing `hello.c` not automatically change an old executable?
@@ -346,7 +366,7 @@ Do not memorize definitions. Use your `hello.c` experiment to answer:
 - What is the difference between Run and Debug?
 - If you edit the source but still see old output, what should you check first?
 
-If any answer feels like a sentence you memorized, repeat the “edit without rebuilding” experiment and explain what happened from the files you actually used.
+Some learners make sense of this most easily from a flow diagram; others need to run the stale executable once before the distinction feels real. Either route is fine if you can finally map your own actions back to source → Build → executable → Run.
 
 ---
 
