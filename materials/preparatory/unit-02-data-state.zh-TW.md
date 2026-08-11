@@ -1,8 +1,8 @@
 # 前導單元 P-U02：程式如何記住資料並改變狀態？
 
-版本：1.2.0  
+版本：1.3.0  
 狀態：學生教材  
-最後更新：2026-08-09  
+最後更新：2026-08-11  
 對應英文版本：[Preparatory Unit P-U02: How Does a Program Remember Data and Change State?](unit-02-data-state.en.md)
 
 ## 這一章要回答什麼？
@@ -72,6 +72,8 @@ char grade = 'A';
 ```
 
 現在只需要先認得三種常見情況：`int` 用來處理整數，`double` 可以表示帶小數的數值，`char` 用來表示一個字元。
+
+如果你會接著好奇：「這些型別最後到底怎麼變成記憶體裡的 bits？」可以讀完全選做的 [P-U02 位元層級資料表示附錄](appendix-bit-level-data-representation.zh-TW.md)。那份附錄會用整數、正負數與二補數、IEEE 754 浮點模型、`char` 與字元編碼來回答這個問題；跳過完全不影響本章與 P-U03。
 
 ### 變數（variable）
 
@@ -403,12 +405,15 @@ scanf("%d %d", &score, &bonus)
 
 變數讓我們為目前值取名字；型別影響值的表示與運算；運算式產生結果；指定把結果放回新的狀態。從外部讀進來的資料，也要先確認成功，才能安全地成為後續計算的一部分。
 
+如果你想在離開 P-U02 前再往下看一層，可以選讀 [資料在位元層級是怎麼表示的？](appendix-bit-level-data-representation.zh-TW.md)，把本章的 `int`、`double`、`char` 接到 binary、二補數、浮點表示與字元編碼。這不是前往 P-U03 的前置要求。
+
 現在還剩下一個剛剛已經遇到的問題：如果 `score` 超過 100，程式要怎麼決定「這次要把它改成 100」，而其他時候保持原本結果？
 
 下一個 Unit 就從這個問題開始，學習條件與重複，讓程式不只會改變狀態，還會決定狀態接下來怎麼改變。
 
 ## 導覽
 
+- [P-U02 選讀附錄：資料在位元層級是怎麼表示的？](appendix-bit-level-data-representation.zh-TW.md)
 - [上一單元：程式開始執行後，敘述怎麼變成結果？](unit-01-execution.zh-TW.md)
 - [下一單元：程式如何選擇與重複？](unit-03-control-flow.zh-TW.md)
 - [教材索引](../README.zh-TW.md)
