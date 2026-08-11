@@ -1,8 +1,8 @@
 # Preparatory Unit P-U02: How Does a Program Remember Data and Change State?
 
-Version: 1.2.0  
+Version: 1.3.0  
 Status: Student material  
-Last updated: 2026-08-09  
+Last updated: 2026-08-11  
 Corresponding Chinese version: [前導單元 P-U02：程式如何記住資料並改變狀態？](unit-02-data-state.zh-TW.md)
 
 ## What Question Does This Chapter Answer?
@@ -72,6 +72,8 @@ char grade = 'A';
 ```
 
 For now, recognize three common cases: `int` is used for integers, `double` can represent values with fractional parts, and `char` represents one character.
+
+If that immediately raises the question “what do these types eventually look like as bits in memory?”, you can read the completely optional [P-U02 bit-level data representation appendix](appendix-bit-level-data-representation.en.md). It covers integers, signed values and two's complement, an IEEE 754 floating-point model, `char`, and character encoding. Skipping it does not affect this Unit or P-U03.
 
 ### Variable
 
@@ -403,12 +405,15 @@ The previous Unit traced how statements produce observable results after the pro
 
 Variables give names to current values. Types affect how values are represented and operated on. Expressions produce results. Assignments place those results back into a new state. Data read from outside the program should also be confirmed before it becomes part of later computation.
 
+If you want to go one layer lower before leaving P-U02, the optional [bit-level data representation appendix](appendix-bit-level-data-representation.en.md) connects this Unit's `int`, `double`, and `char` to binary representation, two's complement, floating-point representation, and character encoding. It is not a prerequisite for P-U03.
+
 One question remains from the requirement we just encountered: if `score` is greater than 100, how can the program decide to replace it with 100 while leaving other results alone?
 
 The next Unit begins with that question. Conditions and repetition will let the program do more than change state—they will let it decide how the state should change next.
 
 ## Navigation
 
+- [P-U02 Optional Appendix: How Is Data Represented at the Bit Level?](appendix-bit-level-data-representation.en.md)
 - [Previous Unit: Once a Program Starts Running, How Do Statements Become Results?](unit-01-execution.en.md)
 - [Next Unit: How Does a Program Select and Repeat?](unit-03-control-flow.en.md)
 - [Materials Index](../README.en.md)

@@ -1,8 +1,8 @@
 # Student Materials Index
 
-Version: 2.4.0  
+Version: 2.5.0  
 Status: Student materials entry point  
-Last updated: 2026-08-10  
+Last updated: 2026-08-11  
 Corresponding Chinese version: [學生教材索引](README.zh-TW.md)
 
 This page contains only materials students need to use directly while learning.
@@ -26,6 +26,11 @@ Reading order: P-U00 → P-U01 → P-U02 → P-U03 → P-U04
 | P-U02 | [How Does a Program Remember Data and Change State?](preparatory/unit-02-data-state.en.md) | [程式如何記住資料並改變狀態？](preparatory/unit-02-data-state.zh-TW.md) | values, types, variables, state tracing, and input/output |
 | P-U03 | [How Does a Program Select and Repeat?](preparatory/unit-03-control-flow.en.md) | [程式如何選擇與重複？](preparatory/unit-03-control-flow.zh-TW.md) | conditions, loops, termination, boundaries, and diagnosis |
 | P-U04 | [How Can a Large Problem Be Divided into Understandable Work?](preparatory/unit-04-functions-integration.en.md) | [如何把大問題拆成可理解的工作？](preparatory/unit-04-functions-integration.zh-TW.md) | function responsibility, interfaces, testing, modification, and regression |
+
+P-U02 also has a completely optional lower-level appendix. If you want to ask how integers, negative values, floating-point values, and characters eventually become bits, read it after the P-U02 type discussion. Skipping it does not affect P-U03:
+
+- [P-U02 Optional Appendix: How Is Data Represented at the Bit Level?](preparatory/appendix-bit-level-data-representation.en.md)
+- [P-U02 選讀附錄：資料在位元層級是怎麼表示的？](preparatory/appendix-bit-level-data-representation.zh-TW.md)
 
 ### Formal course
 

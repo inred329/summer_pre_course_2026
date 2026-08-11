@@ -1,8 +1,8 @@
 # 學生教材索引
 
-版本：2.4.0  
+版本：2.5.0  
 狀態：學生教材入口  
-最後更新：2026-08-10  
+最後更新：2026-08-11  
 對應英文版本：[Student Materials Index](README.en.md)
 
 這一頁只收學生學習時需要直接使用的教材。
@@ -26,6 +26,11 @@
 | P-U02 | [程式如何記住資料並改變狀態？](preparatory/unit-02-data-state.zh-TW.md) | [How Does a Program Remember Data and Change State?](preparatory/unit-02-data-state.en.md) | 值、型別、變數、狀態追蹤、輸入輸出 |
 | P-U03 | [程式如何選擇與重複？](preparatory/unit-03-control-flow.zh-TW.md) | [How Does a Program Select and Repeat?](preparatory/unit-03-control-flow.en.md) | 條件、迴圈、終止、邊界與診斷 |
 | P-U04 | [如何把大問題拆成可理解的工作？](preparatory/unit-04-functions-integration.zh-TW.md) | [How Can a Large Problem Be Divided into Understandable Work?](preparatory/unit-04-functions-integration.en.md) | 函數責任、介面、測試、修改與回歸 |
+
+P-U02 另有一份完全選讀的底層附錄。如果你想追問「整數、負數、浮點數與字元最後是怎麼變成 bits」，可以在讀完 P-U02 的型別概念後再看；跳過不影響 P-U03：
+
+- [P-U02 選讀附錄：資料在位元層級是怎麼表示的？](preparatory/appendix-bit-level-data-representation.zh-TW.md)
+- [P-U02 Optional Appendix: How Is Data Represented at the Bit Level?](preparatory/appendix-bit-level-data-representation.en.md)
 
 ### 正式課程
 
